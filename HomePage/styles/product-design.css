@@ -1,0 +1,130 @@
+.product-viewer {
+  position: relative;
+  background:
+    radial-gradient(circle 470px at 12% 40%, #9b344e54, transparent 100%),
+    radial-gradient(circle 370px at 93% 29%, #e8c3ad29, transparent 100%),
+    #1b191b;
+  padding: 36px 1.4% 30px;
+  min-height: 835px;
+  color: #fff8f0;
+}
+.product-viewer > .eyebrow {
+  font: 600 18px/1.4 var(--sans);
+  letter-spacing: 0.08em;
+  color: #dccfc7;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 4.8%;
+  margin: 0;
+}
+.product-viewer > .eyebrow:before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: #f2b4ad;
+  flex-shrink: 0;
+}
+.product-stage {
+  height: 635px;
+  position: relative;
+  color: #80736b;
+  font: 400 18px/1.5 var(--sans);
+}
+.product-stage > span {
+  transform: translateY(-32px);
+}
+.product-ellipses {
+  width: 97%;
+  height: 170px;
+  left: 1.5%;
+  bottom: 76px;
+  border: 1px solid #c58d8714;
+  border-radius: 50%;
+  background: none;
+}
+.product-ellipses:after {
+  inset: 25px 8%;
+  border: 1px solid #c58d8726;
+  background: radial-gradient(
+    ellipse,
+    #c58d8742 0%,
+    #c58d8714 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+.product-caption {
+  position: relative;
+  max-width: 1200px;
+  padding-top: 10px;
+}
+.product-caption h2 {
+  font:
+    italic 400 36px/49px "Playfair Display",
+    serif;
+  letter-spacing: 0;
+  color: #fff8f0;
+  margin: 0 0 8px;
+}
+.product-caption p {
+  font: italic 400 20px/49px var(--sans);
+  letter-spacing: 0;
+  color: #fff8f0;
+  margin: 0;
+  text-wrap: pretty;
+}
+@media (max-width: 1100px) {
+  .product-viewer {
+    min-height: 700px;
+  }
+  .product-viewer > .eyebrow {
+    font-size: 15px;
+  }
+  .product-stage {
+    height: 490px;
+  }
+  .product-caption p {
+    font-size: 17px;
+    line-height: 31px;
+  }
+  .product-ellipses {
+    height: 140px;
+    bottom: 55px;
+  }
+}
+@media (max-width: 760px) {
+  .product-viewer {
+    padding: 28px 6% 35px;
+    min-height: 0;
+  }
+  .product-viewer > .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding-left: 0;
+    gap: 10px;
+  }
+  .product-viewer > .eyebrow:before {
+    width: 18px;
+  }
+  .product-stage {
+    height: 370px;
+    font-size: 13px;
+  }
+  .product-ellipses {
+    height: 90px;
+    bottom: 50px;
+  }
+  .product-ellipses:after {
+    inset: 14px 8%;
+  }
+  .product-caption h2 {
+    font-size: 28px;
+    line-height: 39px;
+    margin-bottom: 12px;
+  }
+  .product-caption p {
+    font-size: 15px;
+    line-height: 27px;
+  }
+}

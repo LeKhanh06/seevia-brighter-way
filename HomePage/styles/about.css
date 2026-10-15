@@ -1,0 +1,180 @@
+@import "@fontsource/playfair-display/latin-400.css";
+@import "@fontsource/playfair-display/vietnamese-400.css";
+.about.section-pad {
+  background: #1e1e1e;
+  grid-template-columns: minmax(0, 490fr) minmax(0, 608fr);
+  gap: 88px;
+  padding: 0 6% 80px;
+  min-height: 674px;
+  align-items: start;
+}
+.about .belief {
+  min-height: 596px;
+  padding: 44px 48px 48px;
+  background:
+    radial-gradient(circle 380px at -12% 100%, #d0806240, transparent 100%),
+    linear-gradient(110deg, #7a1823, #361c25);
+  isolation: isolate;
+}
+.about .belief:after {
+  width: 520px;
+  height: 520px;
+  left: -55px;
+  top: 345px;
+  bottom: auto;
+  border: 1px solid #dda7aa25;
+  box-shadow: none;
+  z-index: -1;
+}
+.about .belief:before {
+  content: "";
+  position: absolute;
+  width: 630px;
+  height: 630px;
+  left: -110px;
+  top: 290px;
+  border: 1px solid #dda7aa25;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+.about .belief .eyebrow {
+  font: 600 18px/1.3 var(--sans);
+  letter-spacing: 0.1em;
+  color: #f2b4ad;
+}
+.about .belief h2 {
+  font:
+    italic 400 58px/1.3 "Playfair Display",
+    serif;
+  color: #fff8f0;
+  margin: 65px 0 88px;
+}
+.about .belief > div .short-line {
+  width: 52px;
+  height: 1px;
+  background: #f2b4ad80;
+}
+.about .belief > div p {
+  font: 400 15px/1.7 var(--sans);
+  color: #e6c4bd;
+  margin: 23px 0 0;
+}
+.about .about-copy {
+  padding-top: 38px;
+}
+.about .about-copy > .eyebrow {
+  font: 600 18px/1.3 var(--sans);
+  letter-spacing: 0.08em;
+  color: #fff8f0;
+  margin-bottom: 30px;
+}
+.about .about-copy h2 {
+  font:
+    400 44px/59px "Playfair Display",
+    serif;
+  color: #f2b4ad;
+  margin: 0 0 28px;
+  text-wrap: balance;
+}
+.about .about-copy > p:not(.eyebrow) {
+  font: 400 18px/31px var(--sans);
+  color: #d7ada5;
+  margin-bottom: 0;
+}
+.about .about-copy hr {
+  border: 0;
+  border-top: 1px solid #dccfc780;
+  margin: 30px 0;
+}
+.about .about-copy h3 {
+  font: 500 20px/1.5 var(--sans);
+  color: #fff8f0;
+  margin: 0 0 12px;
+}
+.about .about-copy > h3 + p:not(.eyebrow) {
+  color: #b4aca6;
+  font-size: 17px;
+  line-height: 30px;
+}
+.about .about-copy .button {
+  width: 320px;
+  max-width: 100%;
+  min-height: 50px;
+  font-size: 20px;
+  gap: 10px;
+  padding: 10px 20px;
+  background: #fff8f0;
+  color: #7a1823;
+  margin-top: 40px;
+}
+@media (max-width: 1100px) {
+  .about.section-pad {
+    gap: 48px;
+    padding: 0 6% 60px;
+  }
+  .about .belief {
+    padding: 35px;
+    min-height: 580px;
+  }
+  .about .belief .eyebrow,
+  .about .about-copy > .eyebrow {
+    font-size: 14px;
+  }
+  .about .belief h2 {
+    font-size: 48px;
+  }
+  .about .about-copy h2 {
+    font-size: 35px;
+    line-height: 1.4;
+  }
+  .about .about-copy > p:not(.eyebrow) {
+    font-size: 15px;
+    line-height: 27px;
+  }
+  .about .about-copy h3 {
+    font-size: 17px;
+  }
+  .about .about-copy .button {
+    font-size: 17px;
+    width: auto;
+  }
+}
+@media (max-width: 760px) {
+  .about.section-pad {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    padding: 40px 6% 50px;
+  }
+  .about .belief {
+    min-height: 490px;
+    padding: 32px;
+  }
+  .about .belief h2 {
+    font-size: 49px;
+    margin: 45px 0 65px;
+  }
+  .about .belief:before {
+    top: 240px;
+  }
+  .about .belief:after {
+    top: 295px;
+  }
+  .about .about-copy {
+    padding-top: 0;
+  }
+  .about .about-copy h2 {
+    font-size: 34px;
+    line-height: 1.4;
+    margin-bottom: 22px;
+  }
+  .about .about-copy > .eyebrow {
+    margin-bottom: 22px;
+  }
+  .about .about-copy .button {
+    margin-top: 28px;
+  }
+  .about .belief > div p {
+    font-size: 13px;
+  }
+}

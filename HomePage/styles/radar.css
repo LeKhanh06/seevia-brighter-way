@@ -1,0 +1,212 @@
+.radar-section {
+  height: 700px;
+  align-items: center;
+  padding: 70px 5.4%;
+  background-color: #141010;
+  background-image:
+    linear-gradient(#dda7aa09 1px, transparent 1px),
+    linear-gradient(90deg, #dda7aa09 1px, transparent 1px);
+  background-size: 90px 90px;
+  background-position: calc(100% - 310px) calc(50% + 45px);
+  overflow: hidden;
+  isolation: isolate;
+  border-top: 1px solid #7a1823;
+}
+.radar-copy {
+  width: 46%;
+  position: relative;
+  z-index: 2;
+}
+.radar-copy h2 {
+  font:
+    italic 400 85px/100px "Playfair Display",
+    serif;
+  letter-spacing: 0;
+  color: #fff8f0;
+  margin: 0 0 22px;
+}
+.radar-copy h2:after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin-top: 28px;
+  background: linear-gradient(90deg, #d46a7a, #7a1823);
+  opacity: 0.85;
+}
+.radar-section:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, #14101025, transparent 48%),
+    linear-gradient(
+      0deg,
+      #14101050,
+      transparent 12%,
+      transparent 88%,
+      #14101050
+    );
+}
+.radar-copy p {
+  font: 400 17px/29px var(--sans);
+  color: #ddd4cc;
+  max-width: 440px;
+  margin-bottom: 30px;
+}
+.radar-copy .button {
+  font-size: 18px;
+  min-height: 48px;
+  background: #7a1823;
+}
+.radar-field {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.radar-field .radar {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+.radar-trail {
+  position: absolute;
+  inset: 2.5%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 264deg,
+    #a100150a 278deg,
+    #b8122b30 299deg,
+    #cc17345c 321deg,
+    #de28457f 341deg,
+    #ed526994 355deg,
+    #f2b4ad70 359deg,
+    transparent 360deg
+  );
+  mask-image: radial-gradient(
+    circle,
+    #0005 0%,
+    #000b 25%,
+    #000 70%,
+    #000 99.4%,
+    transparent 100%
+  );
+  animation: radar-glide 14s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+@keyframes radar-glide {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 1100px) {
+  .radar-section {
+    height: 580px;
+    padding: 55px 6%;
+    background-position: calc(100% - 180px) calc(50% + 45px);
+  }
+  .radar-copy h2 {
+    font-size: 64px;
+    line-height: 1.2;
+  }
+  .radar-copy p {
+    font-size: 15px;
+    line-height: 26px;
+  }
+  .radar-field {
+    width: 600px;
+    height: 600px;
+    right: -30px;
+  }
+}
+@media (max-width: 760px) {
+  .radar-section {
+    height: auto;
+    min-height: 750px;
+    align-items: start;
+    padding: 50px 6% 390px;
+    background-position: calc(50% + 45px)
+      calc(100% - 15px - min(180px, 46vw) + 90px);
+  }
+  .radar-copy {
+    width: 100%;
+  }
+  .radar-copy h2 {
+    font-size: 52px;
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+  .radar-copy p {
+    max-width: 400px;
+  }
+  .radar-copy .button {
+    font-size: 16px;
+  }
+  .radar-field {
+    width: min(360px, 92vw);
+    height: auto;
+    aspect-ratio: 1;
+    right: 50%;
+    top: auto;
+    bottom: 15px;
+    transform: translateX(50%);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .radar-trail {
+    animation: none;
+    transform: rotate(225deg);
+    will-change: auto;
+  }
+}
+.radar-section {
+  --radar-center-x: calc(100% - 400px);
+  --radar-center-y: 50%;
+}
+.radar-section:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      transparent calc(var(--radar-center-x) - 0.5px),
+      #dda7aa14 calc(var(--radar-center-x) - 0.5px),
+      #dda7aa14 calc(var(--radar-center-x) + 0.5px),
+      transparent calc(var(--radar-center-x) + 0.5px)
+    ),
+    linear-gradient(
+      0deg,
+      transparent calc(100% - var(--radar-center-y) - 0.5px),
+      #dda7aa14 calc(100% - var(--radar-center-y) - 0.5px),
+      #dda7aa14 calc(100% - var(--radar-center-y) + 0.5px),
+      transparent calc(100% - var(--radar-center-y) + 0.5px)
+    );
+}
+@media (max-width: 1100px) {
+  .radar-section {
+    --radar-center-x: calc(100% - 270px);
+  }
+}
+@media (max-width: 760px) {
+  .radar-section {
+    --radar-center-x: 50%;
+    --radar-center-y: calc(100% - 15px - min(180px, 46vw));
+  }
+}

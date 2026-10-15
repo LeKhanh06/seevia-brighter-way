@@ -1,0 +1,65 @@
+.hero-objects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-object {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 15px/1.5 var(--sans);
+  letter-spacing: 0.12em;
+  color: #d46a7a;
+  opacity: var(--visibility, 0);
+  white-space: nowrap;
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  pointer-events: auto;
+  max-width: calc(100% - 12px);
+}
+.hero-object span {
+  font-size: 20px;
+}
+.hero-object:focus-visible {
+  opacity: 1;
+}
+.hero .speech p {
+  min-height: 35px;
+}
+@media (max-width: 760px) {
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .hero-objects {
+    position: relative;
+    inset: auto;
+    order: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    padding: 0 6% 30px;
+  }
+  .hero-object {
+    position: static;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    opacity: 0.85;
+    white-space: normal;
+  }
+  .hero-content {
+    padding-bottom: 30px;
+  }
+  .hero .speech p {
+    min-height: 52px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-object {
+    opacity: 0.85;
+  }
+}

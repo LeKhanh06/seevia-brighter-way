@@ -1,0 +1,57 @@
+.reveal-target {
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.button {
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+.button:hover {
+  transform: translateY(-2px);
+}
+.button:active {
+  transform: translateY(0);
+}
+.button > span {
+  transition: transform 0.2s;
+}
+.button:hover > span {
+  transform: translate(2px, -2px);
+}
+.photo-box {
+  animation: scan-box-in 0.4s ease both;
+}
+@keyframes scan-box-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-target,
+  .button,
+  .button > span {
+    transition: none;
+  }
+  .button:hover,
+  .button:hover > span {
+    transform: none;
+  }
+  .photo-box {
+    animation: none;
+  }
+}

@@ -1,0 +1,329 @@
+.policy-document {
+  background: #f7f3ef;
+  color: #1e1e1e;
+  font:
+    400 14px/1.9 "Be Vietnam Pro",
+    sans-serif;
+}
+.policy-document * {
+  box-sizing: border-box;
+}
+.policy-document a {
+  color: #7a1823;
+  text-underline-offset: 4px;
+}
+.policy-document a:focus-visible,
+.policy-document button:focus-visible {
+  outline: 2px solid #b54a5a;
+  outline-offset: 4px;
+}
+.policy-document .eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  color: #7a1823;
+}
+.policy-hero {
+  padding: 60px max(7%, calc((100% - 1240px) / 2));
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  gap: 50px;
+  background: linear-gradient(110deg, #7a1823, #491b23 55%, #1e1e1e);
+  color: #fff8f0;
+}
+.policy-hero .eyebrow {
+  color: #f2b4ad;
+}
+.policy-hero h1 {
+  font:
+    500 italic clamp(38px, 4.8vw, 62px)/1.3 "Lora",
+    serif;
+  margin: 14px 0 20px;
+}
+.policy-tagline {
+  font-size: 16px;
+  color: #ead6ce;
+  margin: 0;
+}
+.policy-tagline em {
+  color: #f2b4ad;
+}
+.policy-hero aside {
+  align-self: center;
+  border-left: 1px solid #f2b4ad40;
+  padding-left: 28px;
+}
+.draft-badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid #f2b4ad55;
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: #f2b4ad;
+}
+.policy-hero dl {
+  margin: 20px 0;
+}
+.policy-hero dl > div {
+  margin-bottom: 12px;
+}
+.policy-hero dt {
+  font-size: 11px;
+  color: #d4b6af;
+}
+.policy-hero dd {
+  font-size: 13px;
+  margin: 2px 0;
+}
+.print-button {
+  display: inline-flex;
+  gap: 16px;
+  align-items: center;
+  background: none;
+  border: 1px solid #f2b4ad66;
+  border-radius: 22px;
+  color: #fff8f0;
+  padding: 8px 16px;
+  font:
+    500 13px "Be Vietnam Pro",
+    sans-serif;
+  cursor: pointer;
+}
+.scope-note {
+  padding: 20px max(7%, calc((100% - 1240px) / 2));
+  background: #f1ddd6;
+  display: flex;
+  gap: 30px;
+  align-items: baseline;
+}
+.scope-note > span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #7a1823;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.scope-note p {
+  font-size: 12px;
+  margin: 0;
+  color: #635751;
+}
+.policy-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 64px;
+  max-width: 1240px;
+  margin: auto;
+  padding: 50px 0 64px;
+  width: 86%;
+}
+.policy-index {
+  position: sticky;
+  top: 28px;
+  align-self: start;
+}
+.policy-index nav {
+  display: grid;
+  gap: 0;
+}
+.policy-index nav a {
+  display: flex;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid #7a18231c;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #635751;
+}
+.policy-index nav a:hover {
+  color: #7a1823;
+}
+.policy-index nav span {
+  color: #a46c65;
+  font-size: 11px;
+}
+.index-other {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 12px;
+}
+.policy-content {
+  min-width: 0;
+}
+.policy-content > section {
+  border-top: 1px solid #7a182338;
+  padding: 28px 0 20px;
+  scroll-margin-top: 24px;
+}
+.section-number {
+  font:
+    italic 17px "Lora",
+    serif;
+  color: #9b655e;
+}
+.policy-content h2 {
+  font:
+    400 clamp(24px, 2.5vw, 31px)/1.4 "Playfair Display",
+    serif;
+  margin: 8px 0 20px;
+}
+.policy-content p {
+  color: #635751;
+  margin: 0 0 16px;
+}
+.table-wrap {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+.policy-content table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.policy-content th,
+.policy-content td {
+  padding: 14px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #dccfc7;
+}
+.policy-content th {
+  background: #f1ddd6;
+  color: #7a1823;
+  font-weight: 500;
+}
+.policy-content td:first-child {
+  width: 28%;
+  font-weight: 500;
+}
+.policy-sources {
+  padding: 24px;
+  background: #f1ddd66b;
+  margin: 20px 0;
+}
+.policy-sources > a {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.policy-sources p:last-child {
+  font-size: 11px;
+  margin-top: 18px;
+}
+.next-policy {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 24px 0;
+  border-top: 1px solid #7a182340;
+  text-decoration: none;
+}
+.next-policy span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  grid-column: 1;
+}
+.next-policy strong {
+  font:
+    400 26px "Playfair Display",
+    serif;
+  grid-column: 1;
+}
+.next-policy b {
+  grid-column: 2;
+  grid-row: 1/3;
+  font-size: 24px;
+  font-weight: 400;
+  align-self: center;
+}
+@media (max-width: 1000px) {
+  .policy-layout {
+    gap: 32px;
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .policy-hero {
+    padding: 42px 24px;
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .policy-hero aside {
+    border-left: 0;
+    border-top: 1px solid #f2b4ad40;
+    padding: 20px 0 0;
+  }
+  .policy-hero dl {
+    display: flex;
+    gap: 35px;
+  }
+  .policy-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    width: auto;
+    padding: 32px 24px;
+  }
+  .policy-index {
+    position: static;
+  }
+  .policy-index nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 0 18px;
+  }
+  .scope-note {
+    padding: 20px 24px;
+    display: block;
+  }
+  .scope-note p {
+    margin-top: 8px;
+  }
+  .policy-document {
+    font-size: 13px;
+  }
+}
+@media print {
+  .policy-page > .header,
+  .policy-page > .footer,
+  .policy-page > .skip-link,
+  .print-button,
+  .policy-index,
+  .next-policy {
+    display: none !important;
+  }
+  .policy-document,
+  .policy-hero,
+  .scope-note {
+    background: white !important;
+    color: black !important;
+  }
+  .policy-hero {
+    display: block;
+    padding: 0 0 20px;
+  }
+  .policy-hero aside {
+    border: 0;
+    padding: 0;
+  }
+  .policy-layout {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+  .policy-content > section {
+    break-inside: avoid;
+  }
+  .policy-document * {
+    color: black !important;
+    opacity: 1 !important;
+    translate: none !important;
+    animation: none !important;
+  }
+  .policy-sources {
+    background: white;
+  }
+  .policy-hero h1 {
+    font-size: 32px;
+  }
+}
