@@ -2,6 +2,8 @@
 
 **See a brighter way.**
 
+SeeVia — A project developing AI-powered visual assistance glasses within a glasses–app–web ecosystem. Combining computer vision, OCR, and Vietnamese voice interaction, SeeVia aims to help blind and low-vision people in Vietnam access information, live more independently, and connect with their communities.
+
 Website giới thiệu dự án kính trợ lý thị giác SeeVia dành cho người khiếm thị và người suy giảm thị lực tại Việt Nam. Dự án kết hợp nội dung sản phẩm, công nghệ, câu chuyện cộng đồng và kênh liên hệ trong một website song ngữ Việt–Anh.
 
 SeeVia đang trong giai đoạn phát triển bản mẫu. Những tình huống AI trên website là mô phỏng được viết sẵn, không sử dụng camera hoặc mô hình AI trực tiếp.
