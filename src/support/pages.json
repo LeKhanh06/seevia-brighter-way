@@ -1,0 +1,94 @@
+{
+  "home": {
+    "title": "Trang chủ",
+    "href": "/",
+    "aliases": ["trang chủ", "home"],
+    "description": "Tổng quan dự án và các nhóm khả năng hỗ trợ."
+  },
+  "terms": {
+    "title": "Điều khoản sử dụng",
+    "href": "/dieu-khoan-su-dung",
+    "aliases": ["điều khoản", "điều khoản sử dụng"],
+    "description": "Điều khoản sử dụng website và các nội dung mô phỏng."
+  },
+  "information": {
+    "title": "Thông tin sử dụng website",
+    "href": "/thong-tin",
+    "aliases": ["thông tin sử dụng website", "sử dụng website"],
+    "description": "Giải thích biểu mẫu, lưu bản nháp, mô phỏng và việc sử dụng website."
+  },
+  "about": {
+    "title": "Về chúng tôi",
+    "href": "/ve-chung-toi",
+    "aliases": [
+      "về seevia",
+      "giới thiệu",
+      "đội ngũ",
+      "sáng lập",
+      "về chúng tôi",
+      "câu chuyện"
+    ],
+    "description": "Sứ mệnh, câu chuyện và định hướng dự án."
+  },
+  "productPage": {
+    "title": "Sản phẩm",
+    "href": "/san-pham",
+    "aliases": ["sản phẩm", "kính SeeVia", "kính", "tính năng"],
+    "description": "Khám phá các nhóm chức năng và thiết kế định hướng."
+  },
+  "technology": {
+    "title": "Công nghệ",
+    "href": "/cong-nghe",
+    "aliases": [
+      "công nghệ seevia",
+      "công nghệ",
+      "kỹ thuật",
+      "hoạt động",
+      "ocr"
+    ],
+    "description": "Tìm hiểu thị giác máy tính, OCR và tương tác tiếng Việt."
+  },
+  "community": {
+    "title": "Cộng đồng",
+    "href": "/cong-dong",
+    "aliases": ["cộng đồng seevia", "cộng đồng", "hệ sinh thái"],
+    "description": "Câu chuyện và hệ sinh thái hỗ trợ."
+  },
+  "news": {
+    "title": "Tin tức",
+    "href": "/tin-tuc",
+    "aliases": ["tin tức", "bài viết"],
+    "description": "Các bài viết và nguồn tham khảo hiện có."
+  },
+  "partnership": {
+    "title": "Đối tác",
+    "href": "/doi-tac",
+    "aliases": ["đồng hành cùng seevia", "đối tác", "hợp tác", "tài trợ"],
+    "description": "Tìm hiểu các hướng đóng góp và hợp tác."
+  },
+  "contact": {
+    "title": "Liên hệ",
+    "href": "/lien-he",
+    "aliases": [
+      "liên hệ trực tiếp",
+      "liên hệ",
+      "đăng ký",
+      "trải nghiệm",
+      "dùng thử"
+    ],
+    "description": "Mở biểu mẫu liên hệ đội ngũ. Đây không phải live chat."
+  },
+  "privacy": {
+    "title": "Chính sách bảo mật",
+    "href": "/chinh-sach-bao-mat",
+    "aliases": ["chính sách bảo mật", "bảo mật", "riêng tư"],
+    "description": "Thông tin về xử lý dữ liệu trên website."
+  },
+  "faq": {
+    "title": "Câu hỏi thường gặp",
+    "href": "/san-pham#product-faq",
+    "aliases": ["câu hỏi thường gặp", "faq"],
+    "kind": "section",
+    "description": "Xem phần giải đáp trên trang Sản phẩm."
+  }
+}

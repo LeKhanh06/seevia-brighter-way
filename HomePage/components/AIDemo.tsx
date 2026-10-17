@@ -24,22 +24,25 @@ function PhotoScene({ scene }: { scene: (typeof scenarios)[number] }) {
           <>
             <div className="photo-scan" aria-hidden="true" />
             {scene.boxes.map((box) => (
-              <div
-                key={box.label}
-                className={`photo-box ${box.y < 8 ? "photo-box-label-below" : ""} ${scene.id === "surroundings" && box.label === "Trụ cứu hỏa" ? "photo-box-label-bottom" : ""}`}
-                style={{
-                  left: `${box.x}%`,
-                  top: `${box.y}%`,
-                  width: `${box.w}%`,
-                  height: `${box.h}%`,
-                }}
-                aria-hidden="true"
-              >
-                <span>{box.label}</span>
-              </div>
-            ))}
+                <div
+                  key={box.label}
+                  className={`photo-box ${box.y < 8 ? "photo-box-label-below" : ""} ${scene.id === "surroundings" && box.label === "Trụ cứu hỏa" ? "photo-box-label-bottom" : ""}`}
+                  style={{
+                    left: `${box.x}%`,
+                    top: `${box.y}%`,
+                    width: `${box.w}%`,
+                    height: `${box.h}%`,
+                  }}
+                  aria-hidden="true"
+                >
+                  <span>{box.label}</span>
+                </div>
+              ))}
           </>
         )}
+      </div>
+      <div className="simulation-toolbar">
+        <span className="simulation-scene">{scene.title}</span>
       </div>
     </div>
   );
@@ -51,6 +54,9 @@ export default function AIDemo() {
   return (
     <section className="ai-demo section-pad" id="technology">
       <div className="ai-copy">
+        <p className="simulation-index" aria-hidden="true">
+          SEEVIA / VISION LAB <span>0{index + 1} — 03</span>
+        </p>
         <h2 className="eyebrow">MÔ PHỎNG GÓC NHÌN CỦA AI</h2>
         <p className="demo-intro">
           Bạn hãy chọn một tình huống để xem SeeVia thu thập thông tin và phản

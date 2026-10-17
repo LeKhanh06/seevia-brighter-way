@@ -1,0 +1,204 @@
+/* Self-contained hero component. All tokens and rules are locally scoped. */
+.hero.vision-hero {
+  --vision-white: #fafcff;
+  --vision-mist: #f5f7fa;
+  --vision-pink: #e94b87;
+  --vision-blue: #426bff;
+  --vision-blue-text: #3153c4;
+  --vision-sky: #8ed8ff;
+  --vision-chrome: #c9d2e1;
+  --vision-ink: #252b42;
+  --vision-muted: #536078;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  min-height: 740px;
+  padding: 68px 6.5% 72px;
+  overflow: hidden;
+  color: var(--vision-ink);
+  background: radial-gradient(ellipse at 92% 0%, #8ed8ff12, transparent 60%), var(--vision-white);
+  border-bottom: 1px solid var(--vision-chrome);
+}
+.hero.vision-hero:after { display: none; }
+.hero.vision-hero .hero-content {
+  width: auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  z-index: auto;
+}
+#root .hero.vision-hero h1 {
+  max-width: none;
+  font-size: clamp(34px, 3.65vw, 59px);
+  line-height: 1.24;
+  letter-spacing: -.055em;
+  margin-bottom: 34px;
+  color: var(--vision-ink);
+}
+#root .hero.vision-hero h1 em {
+  color: var(--vision-blue-text);
+  font-size: 1.04em;
+}
+.hero.vision-hero .hero-label {
+  font-size: 11px;
+  letter-spacing: .08em;
+  gap: 12px;
+  margin-bottom: 30px;
+  color: var(--vision-blue-text);
+}
+.hero.vision-hero .hero-label:before { background: var(--vision-blue); width: 24px; }
+.hero.vision-hero .speech {
+  max-width: 510px;
+  min-height: 106px;
+  padding: 17px 20px;
+  margin-bottom: 28px;
+  border: 1px solid var(--vision-chrome);
+  border-left: 3px solid var(--vision-blue);
+  border-radius: 0 10px 10px 0;
+  background: linear-gradient(110deg, #ffffff, var(--vision-mist));
+  box-shadow: 0 8px 24px #252b4205;
+}
+.hero.vision-hero .speech[data-selected="true"] { border-left-color: var(--vision-pink); }
+.hero.vision-hero .speech strong { color: var(--vision-blue-text); font-size: 11px; letter-spacing: .1em; }
+.hero.vision-hero .speech p { color: var(--vision-ink); font-size: 15px; line-height: 1.75; min-height: 0; }
+.hero.vision-hero .button {
+  min-height: 48px;
+  font-size: 16px;
+  border-radius: 8px;
+  background: var(--vision-ink);
+  color: var(--vision-white);
+  border-color: var(--vision-ink);
+  box-shadow: 0 8px 18px #252b421a;
+}
+.hero.vision-hero .button:hover { background: var(--vision-blue-text); color: var(--vision-white); border-color: var(--vision-blue-text); }
+.hero.vision-hero .hero-development { font-size: 12px; line-height: 1.8; max-width: 470px; color: var(--vision-muted); margin-top: 23px; }
+.vision-hero .vision-console {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #adbbd0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff, #e1e7ef 26%, #fafcff 48%, #c9d2e1 78%, #f5f7fa);
+  box-shadow: 0 24px 60px #252b4212, inset 0 1px #ffffff;
+}
+.vision-hero .vision-console-header,
+.vision-hero .vision-console-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--vision-muted);
+  font: 400 10px/1.6 var(--font-instrument, monospace);
+}
+.vision-hero .vision-console-header { padding: 3px 4px 14px; }
+.vision-hero .vision-console-header > span:first-child { display: inline-flex; align-items: center; gap: 8px; color: var(--vision-ink); }
+.vision-hero .vision-console-header i { width: 6px; height: 6px; background: var(--vision-pink); border-radius: 50%; }
+.vision-hero .vision-console-footer { padding: 12px 4px 0; font-size: 9px; letter-spacing: .04em; }
+.vision-hero .vision-console-footer > span:last-child { font-variant-numeric: tabular-nums; color: var(--vision-blue-text); }
+.vision-hero .vision-field {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid #b3c1d6;
+  border-radius: 12px;
+  background:
+    linear-gradient(#c9d2e12b 1px, transparent 1px),
+    linear-gradient(90deg, #c9d2e12b 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, #fafcff 0%, #e5edf7 55%, #dce6f3);
+  background-size: 24px 24px, 24px 24px, auto;
+}
+.vision-hero .vision-glow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 40%, #e94b872e, transparent 63%), radial-gradient(circle at 65% 60%, #426bff38, #8ed8ff0d 55%, transparent 73%);
+  transform: translate3d(calc(var(--vision-x, 200px) - 50%), calc(var(--vision-y, 200px) - 50%), 0);
+  transition: transform 180ms cubic-bezier(.2,.65,.3,1);
+  pointer-events: none;
+}
+.vision-hero .vision-map { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; fill: none; stroke: #8c9fb9; stroke-width: .13; }
+.vision-hero .vision-outer-ring { stroke-width: .25; stroke: #5b7599; stroke-dasharray: .25 1.4; }
+.vision-hero .vision-axis { stroke: #526b8d; stroke-width: .3; }
+.vision-hero .vision-corners { stroke: #526b8d; stroke-width: .25; }
+.vision-hero .vision-region { stroke: #8198b6; fill: #fafcff20; stroke-width: .22; }
+.vision-hero .vision-leader { stroke: #9aacc2; stroke-dasharray: .5 .6; }
+.vision-hero .vision-map g[data-active="true"] .vision-leader { stroke: var(--vision-blue); stroke-width: .35; stroke-dasharray: none; }
+.vision-hero .vision-map g[data-active="true"] .vision-region { stroke: var(--vision-blue); fill: #426bff0d; stroke-width: .35; }
+.vision-hero .vision-center { fill: #fafcffe6; stroke: #617c9e; stroke-width: .2; }
+.vision-hero .vision-crosshair { stroke: var(--vision-blue-text); stroke-width: .3; }
+.hero.vision-hero .hero-object.vision-point {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+  min-height: 58px;
+  min-width: 44px;
+  max-width: 94%;
+  margin: 0;
+  padding: 7px;
+  transform: translate(-50%, -14px);
+  opacity: 1;
+  border: 0;
+  border-radius: 8px;
+  color: var(--vision-ink);
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  letter-spacing: 0;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+.hero.vision-hero .vision-point .vision-pin {
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--vision-white);
+  border-radius: 50%;
+  background: var(--vision-blue-text);
+  box-shadow: 0 0 0 1px #3153c4;
+  transition: background-color 160ms, box-shadow 160ms;
+}
+.hero.vision-hero .vision-point .vision-tag {
+  padding: 7px 10px;
+  border: 1px solid #8da0b9;
+  border-radius: 5px;
+  background: #fafcfff5;
+  color: var(--vision-ink);
+  font: 500 11px/1.5 var(--sans);
+  white-space: nowrap;
+  box-shadow: 0 3px 8px #252b4208;
+  transition: border-color 160ms, background-color 160ms, color 160ms;
+}
+.hero.vision-hero .vision-point:hover .vision-tag,
+.hero.vision-hero .vision-point:focus-visible .vision-tag,
+.hero.vision-hero .vision-point[aria-pressed="true"] .vision-tag { color: var(--vision-white); background: var(--vision-blue-text); border-color: var(--vision-blue-text); }
+.hero.vision-hero .vision-point[aria-pressed="true"] .vision-pin { background: var(--vision-pink); box-shadow: 0 0 0 1px #a02453, 0 0 0 5px #e94b871f; }
+.hero.vision-hero .vision-point:focus-visible { outline: 3px solid var(--vision-blue-text); outline-offset: 3px; box-shadow: 0 0 0 3px var(--vision-white); }
+@media (max-width: 1050px) {
+  .hero.vision-hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 48px 6% 54px; min-height: 0; }
+  .hero.vision-hero .hero-content { max-width: 720px; width: 100%; }
+  #root .hero.vision-hero h1 { font-size: clamp(34px, 5.9vw, 55px); }
+  .vision-hero .vision-console { width: 100%; max-width: 560px; justify-self: center; }
+}
+@media (max-width: 480px) {
+  .hero.vision-hero { gap: 32px; padding: 40px 5% 44px; }
+  #root .hero.vision-hero h1 { font-size: clamp(29px, 7.3vw, 36px); margin-bottom: 26px; }
+  .hero.vision-hero .hero-label { font-size: 9px; gap: 8px; letter-spacing: .04em; margin-bottom: 24px; }
+  .hero.vision-hero .hero-label:before { width: 16px; }
+  .hero.vision-hero .speech { padding: 15px; min-height: 112px; }
+  .hero.vision-hero .speech p { font-size: 14px; }
+  .vision-hero .vision-console { padding: 10px; border-radius: 16px; }
+  .vision-hero .vision-console-header { font-size: 9px; }
+  .vision-hero .vision-console-footer { font-size: 8px; }
+  .hero.vision-hero .vision-point .vision-tag { padding: 6px 8px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vision-hero .vision-glow { display: none; }
+  .hero.vision-hero .vision-point .vision-pin,
+  .hero.vision-hero .vision-point .vision-tag { transition: none; }
+}

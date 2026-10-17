@@ -1,3 +1,4 @@
+import { pageRegistry } from "./navigation";
 import React from "react";
 import "@fontsource/be-vietnam-pro/latin-400.css";
 import "@fontsource/be-vietnam-pro/vietnamese-400.css";
@@ -30,33 +31,47 @@ import SiteMotion from "./components/SiteMotion";
 import SiteInformation from "./components/SiteInformation";
 import Policy from "../PolicyPage/Policy";
 import LanguageEffects from "./i18n/LanguageEffects";
+import SeeViaSupport from "./components/SeeViaSupport";
 import "./styles/global.css";
+
+import "./styles/retained-typography.css";
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <SiteMotion />
     <LanguageEffects />
-    {window.location.pathname.replace(/\/$/, "") === "/chinh-sach-bao-mat" ? (
+    {window.location.pathname.replace(/\/$/, "") ===
+    pageRegistry.privacy.href ? (
       <Policy type="privacy" />
-    ) : window.location.pathname.replace(/\/$/, "") === "/dieu-khoan-su-dung" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.terms.href ? (
       <Policy type="terms" />
-    ) : window.location.pathname.replace(/\/$/, "") === "/thong-tin" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.information.href ? (
       <SiteInformation />
-    ) : window.location.pathname.replace(/\/$/, "") === "/lien-he" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.contact.href ? (
       <Contact />
-    ) : window.location.pathname.replace(/\/$/, "") === "/doi-tac" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.partnership.href ? (
       <Partner />
-    ) : window.location.pathname.replace(/\/$/, "") === "/tin-tuc" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.news.href ? (
       <News />
-    ) : window.location.pathname.replace(/\/$/, "") === "/cong-dong" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.community.href ? (
       <Community />
-    ) : window.location.pathname.replace(/\/$/, "") === "/ve-chung-toi" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.about.href ? (
       <About />
-    ) : window.location.pathname.replace(/\/$/, "") === "/cong-nghe" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.technology.href ? (
       <Technology />
-    ) : window.location.pathname.replace(/\/$/, "") === "/san-pham" ? (
+    ) : window.location.pathname.replace(/\/$/, "") ===
+      pageRegistry.productPage.href ? (
       <Product />
     ) : (
       <Home />
     )}
+    <SeeViaSupport />
   </React.StrictMode>,
 );

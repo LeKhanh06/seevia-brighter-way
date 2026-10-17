@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { navigate, type Destination } from "../navigation";
+import { navigate, pageRegistry, type Destination } from "../navigation";
 import "./Header.css";
 import { useLanguage, setLanguage } from "../i18n/language";
 export default function Header({
@@ -78,7 +78,9 @@ export default function Header({
         navigate(to);
       }}
     >
-      {label}
+      {to && Object.hasOwn(pageRegistry, to)
+        ? pageRegistry[to as keyof typeof pageRegistry].title
+        : label}
       {arrow && (
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <path d="M2 30L30 2M7 2H30V25" />

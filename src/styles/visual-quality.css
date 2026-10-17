@@ -1,0 +1,166 @@
+/* Optical Technology quality pass. Static presentation only; no motion overrides. */
+:root {
+  /* Primitives */
+  --sv-white: #fafcff;
+  --sv-pink: #e94b87;
+  --sv-blue: #426bff;
+  --sv-silver: #c9d2e1;
+  --sv-ink: #252b42;
+  --sv-mist: #f5f7fa;
+  --sv-blue-readable: #3153c4;
+  --sv-pink-readable: #a02453;
+  /* Semantic */
+  --sv-surface: var(--sv-white);
+  --sv-surface-secondary: var(--sv-mist);
+  --sv-text: var(--sv-ink);
+  --sv-text-secondary: #536078;
+  --sv-link: var(--sv-blue-readable);
+  --sv-line: var(--sv-silver);
+  --sv-gutter: max(6.5vw, calc((100vw - 1240px) / 2));
+  --sv-section-space: clamp(48px, 6vw, 88px);
+  --sv-body-size: 16px;
+  --sv-small-size: 13px;
+  /* Component roles and compatibility aliases */
+  --sv-panel-shadow: 0 12px 32px #252b420a, inset 0 1px #fff;
+  --sv-panel-radius: 12px;
+  --burgundy: var(--sv-pink-readable);
+  --charcoal: var(--sv-ink);
+  --iris: var(--sv-blue-readable);
+  --midnight: var(--sv-ink);
+  --pearl: var(--sv-white);
+  --color-highlight: var(--sv-silver);
+  --control-active-bg: var(--sv-silver);
+  --control-active-fg: var(--sv-ink);
+  --material-chrome: linear-gradient(125deg, #fff, #e8edf4 45%, #f5f7fa 75%, #dfe5ee);
+  --material-shadow: var(--sv-panel-shadow);
+}
+
+/* One reading axis, without changing section order or grid structure. */
+.section-pad,
+.about-editorial section,
+.pt .pt-section, .pt .pt-hero,
+.ct .ct-hero, .ct .ct-letter, .ct .ct-explore,
+.policy-hero, .scope-note {
+  padding-inline: var(--sv-gutter);
+}
+.section-pad:not(.about), .pt .pt-section,
+.cp-main .cp-section, .np-main .np-section,
+.technology-page .tech-section { padding-block: var(--sv-section-space); }
+.product-page .product-container,
+.technology-page .tech-container { max-width: none; padding-inline: var(--sv-gutter); }
+.cp-main .cp-container, .np-main .np-container {
+  width: calc(100% - var(--sv-gutter) * 2);
+  max-width: 1240px;
+}
+.capabilities { padding-inline: var(--sv-gutter); padding-block: 36px 44px; }
+.capability-grid { gap: 0; }
+.capabilities .capability { padding-inline: 24px; }
+.capabilities .capability:first-child { padding-left: 0; }
+.capabilities .capability:last-child { padding-right: 0; }
+.capabilities .icon-bubble { margin-left: 8px; }
+.experience { gap: clamp(32px, 5vw, 72px); }
+.experience-copy { padding-top: 0; }
+.about.section-pad { padding-top: var(--sv-section-space); gap: clamp(32px, 5vw, 72px); }
+.about .belief { min-height: 0; padding: clamp(28px, 3vw, 44px); }
+.about .belief h2 { margin-block: 32px 40px; }
+.about .about-copy { padding-top: 0; }
+
+/* Hierarchy: display / section / article / prose. Existing font assets only. */
+#root main :is(h1,h2,h3) { text-wrap: balance; }
+#root main h1 { letter-spacing: -.045em; }
+#root main h2 { font-size: clamp(29px, 3.2vw, 46px); line-height: 1.28; letter-spacing: -.035em; }
+#root main h3 { line-height: 1.4; letter-spacing: -.02em; }
+#root main :is(h1,h2) em { font-family: var(--serif); font-weight: 400; }
+#root .capabilities h3 { font-size: clamp(18px, 1.5vw, 23px); min-height: 2.8em; }
+#root .experience h2 { font-size: clamp(32px, 3.7vw, 54px); line-height: 1.3; }
+#root .about .belief h2 { font-size: clamp(30px, 3vw, 44px); }
+#root .about .about-copy h2 { font-size: clamp(29px, 2.8vw, 40px); }
+#root :is(.cp-story-copy,.ab-evidence-story,.np-row) h3 { font-size: clamp(21px, 2vw, 28px); }
+#root :is(.pt-direction,.pt-step,.ab-needs,.ab-principles,.tech-flow-grid) h3 { font-size: clamp(20px, 1.65vw, 25px); }
+#root :is(.pt-hero-copy,.ct-hero-copy,.ab-hero-copy,.ab-direction-copy,.ab-section-heading,.cp-heading,.np-heading) > p:not([class*="eyebrow"]),
+#root :is(.pt-direction,.pt-step,.ab-needs,.ab-principles,.ab-evidence-story,.cp-story-copy,.tech-flow-grid,.tech-processing-grid,.technology-cards) p,
+#root .cp-heading > p:last-child:not(.cp-eyebrow),
+#root .capability p,
+.policy-document .policy-content p {
+  font-size: var(--sv-body-size);
+  line-height: 1.8;
+}
+#root :is(.eyebrow,.ab-eyebrow,.cp-eyebrow,.pt-eyebrow,.ct-eyebrow,.np-eyebrow) {
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: .09em;
+}
+.footer p, .footer a { line-height: 1.8; }
+.ct input, .ct textarea, .ct select, .np-search input { font-size: 16px; }
+
+/* Quiet surfaces; retain all image assets and animated decorative layers. */
+.product-page, .technology-page, .about-editorial, .cp-main, .np-main, .pt, .ct {
+  background-color: var(--sv-surface);
+  color: var(--sv-text);
+}
+.experience, .about .belief, .pt .pt-directory,
+.ct .ct-letter, .np-main .np-feature, .cp-main .cp-understand,
+.about-editorial .ab-evidence {
+  background: linear-gradient(115deg, var(--sv-mist), #edf2fa);
+}
+.about-editorial .ab-why,
+.pt .pt-process, .cp-main .cp-ecosystem,
+.np-main .np-perspective {
+  background: linear-gradient(115deg, var(--sv-ink), #303c59);
+  color: var(--sv-white);
+}
+.about-editorial .ab-why h2,
+.pt .pt-process h2, .cp-main .cp-ecosystem h2,
+.np-main .np-perspective h2 { color: var(--sv-white); }
+.pt .pt-process p, .cp-main .cp-ecosystem p,
+.np-main .np-perspective p,
+.about-editorial .ab-why .ab-section-heading > p,
+.about-editorial .ab-why .ab-needs p { color: #dce3ef; }
+.pt .pt-process h2 em, .cp-main .cp-ecosystem h2 em,
+.np-main .np-perspective h2 em,
+.about-editorial .ab-why .ab-needs h3 { color: #c9d2e1; }
+.np-main :is(.np-note-art,.np-note-control) {
+  background: linear-gradient(135deg, var(--sv-ink), #36486b);
+}
+.ct .ct-explore, .pt .pt-connect, .about-editorial .ab-connect {
+  background: var(--sv-ink);
+}
+.policy-document .policy-hero {
+  background: linear-gradient(115deg, var(--sv-white), #e8edf5);
+  color: var(--sv-ink);
+  border-bottom: 1px solid var(--sv-line);
+}
+.policy-hero :is(.eyebrow,.policy-tagline,.policy-tagline em,dt,.draft-badge,.print-button) { color: var(--sv-text-secondary); }
+.policy-hero .print-button, .policy-hero .draft-badge { border-color: var(--sv-text-secondary); }
+.policy-document a { color: var(--sv-link); }
+.policy-document .scope-note { background: var(--sv-mist); border-bottom: 1px solid var(--sv-line); }
+.policy-document .policy-hero aside { border-color: var(--sv-line); }
+.about .about-copy > .eyebrow { color: var(--sv-link); }
+.about .about-copy :is(h2,h3), .about .about-copy > p:not(.eyebrow) { color: var(--sv-text); }
+.photo-stage, .device-card, .tech-chat { box-shadow: var(--sv-panel-shadow); }
+.tech-flow-grid > *, .tech-processing-grid > *, .pt-direction-grid > *, .pt-steps > * { min-width: 0; }
+.partnership .button-light { background: var(--sv-ink); color: var(--sv-white); }
+.partnership .button-light:hover { background: var(--sv-silver); color: var(--sv-ink); }
+.ct .ct-primary { background: var(--sv-ink) !important; color: var(--sv-white); }
+.ct .ct-primary:hover { background: var(--sv-blue-readable) !important; }
+.policy-hero .print-button:hover { background: var(--sv-silver); color: var(--sv-ink); }
+#root :focus-visible { outline-color: var(--sv-blue-readable); }
+#root :is(.header,.footer,.pt-process,.cp-ecosystem,.np-perspective,.ct-explore,.ab-connect,.pt-connect) :focus-visible {
+  outline-color: var(--sv-white);
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .capabilities .capability { padding-inline: 14px; }
+  #root .capabilities h3 { font-size: 18px; }
+}
+@media (max-width: 760px) {
+  :root { --sv-gutter: 24px; --sv-section-space: 48px; }
+  .capabilities .capability { padding: 20px 0; }
+  #root .capabilities h3 { min-height: 0; }
+  .about .belief h2 { margin-block: 24px 32px; }
+  #root main h2 { font-size: clamp(28px, 7vw, 36px); }
+  .ct .ct-explore { gap: 24px; }
+  .technology-page .tech-flow-grid article { grid-template-columns: 56px minmax(0, 1fr); }
+  .technology-page .tech-flow-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 374px) { :root { --sv-gutter: 18px; } }

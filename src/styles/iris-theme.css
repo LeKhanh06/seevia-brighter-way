@@ -1,0 +1,1127 @@
+/* Digital Rose & Cyan. Static visual identity; existing behavior is preserved. */
+:root {
+  /* Approved primitives. */
+  --signature-pink: #e94b87;
+  --electric-cyan: #6b7cff;
+  --cloud: #fcfaf4;
+  --ocean: #3e3558;
+  --amber: #ddf36a;
+  --ice: #8ed8ff;
+  /* Contrast companions derived from the approved inks. */
+  --ink-on-pink: #261c36;
+  --rose-text: #9c2350;
+  --cyan-text: #006687;
+  --muted-ink: #60566d;
+  /* Semantic roles. */
+  --brand-primary: var(--signature-pink);
+  --brand-secondary: var(--electric-cyan);
+  --brand-surface: var(--cloud);
+  --brand-contrast: var(--ocean);
+  --brand-soft: var(--ice);
+  --brand-accent: var(--amber);
+  --brand-border: #d6cfdf;
+  --hyper-pink: #e94b87;
+  --electric-sky: #6b7cff;
+  --cloud-white: #fcfaf4;
+  --deep-navy: #3e3558;
+  --acid-lime: #ddf36a;
+  --soft-blush: #8ed8ff;
+  --pearl: #fcfaf4;
+  --lavender: #8ed8ff;
+  --iris: #9c2350;
+  --violet: #6b7cff;
+  --midnight: #3e3558;
+  --lime: #ddf36a;
+  --lime-soft: #ffe1a6;
+  --font-editorial: "Lora", Georgia, serif;
+  --font-interface: var(--sans);
+  --font-instrument: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --color-highlight: var(--lime);
+  --control-active-bg: var(--color-highlight);
+  --control-active-fg: var(--midnight);
+  --simulation-surface: var(--midnight);
+  --simulation-border: #6b7cff66;
+  --color-surface: var(--pearl);
+  --color-text: var(--midnight);
+  --color-primary: var(--iris);
+  --color-soft: var(--lavender);
+  --color-muted: #505f75;
+  --color-line: #cbd9e9;
+  /* Compatibility aliases for existing page components. */
+  --burgundy: var(--iris);
+  --charcoal: var(--midnight);
+  --rose: #8ed8ff;
+  --ivory: var(--pearl);
+  --button-bg: var(--color-primary);
+  --button-fg: var(--color-surface);
+}
+body {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+#root main :is(h1, h2, h3) {
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+#root main h1 {
+  line-height: 1.22;
+}
+#root main h2 {
+  line-height: 1.3;
+}
+#root main h3 {
+  letter-spacing: -0.02em;
+}
+.header.header {
+  background: linear-gradient(110deg, #293657, var(--midnight));
+  border-bottom: 1px solid #8ed8ff33;
+}
+.header .extra-menu {
+  background: linear-gradient(145deg, #306075, var(--midnight));
+}
+.button {
+  border-radius: 12px;
+  background: var(--button-bg);
+  color: var(--button-fg);
+}
+.button:hover {
+  background: #991552;
+}
+.button-light {
+  background: var(--pearl);
+  color: var(--iris);
+}
+.button-light:hover {
+  background: var(--lavender);
+}
+.button-outline {
+  background: transparent;
+  color: var(--pearl);
+  border-color: #8ed8ff80;
+}
+.button-outline:hover {
+  background: #f7c6de14;
+}
+.hero {
+  background:
+    radial-gradient(ellipse at 78% 42%, #9c235028, transparent 60%),
+    linear-gradient(115deg, var(--midnight), #1d2332);
+}
+.hero h1 {
+  color: #8ed8ff;
+}
+.hero .light {
+  background: radial-gradient(
+    circle 300px at var(--lx, 66%) var(--ly, 34%),
+    #38bdf85c,
+    #b517652b 48%,
+    #b5176508 75%,
+    transparent
+  );
+}
+.hero .speech {
+  background: linear-gradient(90deg, #8ed8ff08, transparent);
+}
+.hero .hero-object {
+  border-color: #8ed8ff40;
+  background: #3e3558a6;
+  border-radius: 8px;
+}
+.hero .button {
+  background: #8ed8ff;
+  color: var(--midnight);
+  border-color: #8ed8ff;
+}
+.hero .button {
+  background: var(--lime);
+  border-color: var(--lime);
+}
+.hero .button:hover {
+  background: var(--lime-soft);
+  border-color: var(--lime-soft);
+}
+.hero-development {
+  color: #8ed8ff;
+}
+.capabilities {
+  background: var(--pearl);
+}
+.capabilities .capability h3 {
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+.capabilities .icon-bubble {
+  background: var(--lavender);
+  color: var(--iris);
+}
+.capabilities .number {
+  color: #657d87;
+}
+.experience {
+  background: linear-gradient(110deg, var(--pearl), var(--lavender));
+}
+.product-viewer {
+  background:
+    radial-gradient(ellipse at 20% 45%, #9c235050, transparent 65%),
+    radial-gradient(ellipse at 90% 25%, #6b7cff26, transparent 60%),
+    var(--midnight);
+}
+.about.section-pad {
+  background: var(--midnight);
+}
+.about .belief {
+  background:
+    radial-gradient(circle at 15% 90%, #6b7cff35, transparent 65%),
+    linear-gradient(135deg, #9c2350, #26314d);
+}
+.community.section-pad {
+  background: var(--pearl);
+}
+.partnership.section-pad {
+  background: radial-gradient(ellipse at 50% 40%, #5199b8, #293657);
+}
+.footer {
+  background: var(--midnight);
+}
+.radar-section {
+  background-color: #1b202e;
+}
+.radar-copy h2 {
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 500;
+}
+.radar-field .radar {
+  color: var(--violet);
+}
+.radar-field svg :is(circle, path, line) {
+  stroke: #a3d7ee;
+}
+.radar-field svg > circle:nth-last-child(2) {
+  fill: #38bdf81c;
+}
+.radar-field svg > circle:last-child {
+  fill: #a3d7ee;
+}
+:is(.np-action, .cp-action, .ct-action, .pt-action, .ab-action) {
+  border-radius: 12px;
+}
+input,
+textarea,
+select {
+  accent-color: var(--iris);
+}
+:is(a, button, input, textarea, select, summary):focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 4px;
+}
+@media (max-width: 640px) {
+  #root .hero h1 {
+    font-size: clamp(29px, 7.1vw, 42px);
+  }
+  .capabilities .capability h3 {
+    font-size: 21px;
+  }
+}
+
+/* Editorial voice for the story, precise instrumentation for interaction. */
+#root .hero h1 {
+  font-weight: 500;
+  letter-spacing: -0.055em;
+}
+#root .hero h1 em {
+  font: 400 italic 1.04em/1.3 var(--font-editorial);
+  letter-spacing: -0.045em;
+}
+#root
+  :is(
+    .experience,
+    .community,
+    .belief,
+    .ab-hero,
+    .ab-mission,
+    .np-perspective,
+    .cp-understand
+  )
+  h2,
+#root :is(.ab-hero, .cp-hero, .np-hero) h1 {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+#root .belief h2 {
+  font-style: italic;
+}
+#root .experience h2 {
+  font-size: clamp(38px, 4.3vw, 64px);
+}
+.hero .hero-label,
+.eyebrow,
+.photo-topline,
+.chat-heading,
+.chat-process,
+.simulation-index,
+.simulation-scene,
+.capabilities .number {
+  font-family: var(--font-instrument);
+}
+.hero .hero-label {
+  letter-spacing: 0.1em;
+}
+.hero .hero-object:hover,
+.hero .hero-object:focus-visible {
+  border-color: var(--lime);
+}
+.hero .hero-object:hover > span {
+  color: var(--lime);
+}
+.hero .speech {
+  border-left-color: var(--lime);
+}
+.hero .speech strong {
+  color: var(--lime);
+}
+.capabilities .number {
+  font-size: 24px;
+  letter-spacing: -0.05em;
+}
+.capabilities .short-line {
+  background: var(--iris);
+}
+.partnership .button-light {
+  background: var(--lime);
+  color: var(--midnight);
+}
+.partnership .button-light:hover {
+  background: var(--lime-soft);
+}
+.ai-demo.section-pad {
+  background:
+    radial-gradient(ellipse at 95% 0%, #6b7cff2b, transparent 65%),
+    linear-gradient(125deg, var(--pearl), var(--lavender));
+}
+.ai-copy .simulation-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 32px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--iris);
+}
+.simulation-index span {
+  font-variant-numeric: tabular-nums;
+}
+.ai-copy .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ai-copy .tabs button {
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #ffffff70;
+  color: var(--midnight);
+  border: 1px solid #6b7cff66;
+}
+.ai-copy .tabs button[aria-selected="true"] {
+  background: var(--midnight);
+  color: var(--lime);
+  border-color: var(--midnight);
+}
+.ai-copy .speech {
+  background: #ffffff8c;
+  border: 1px solid var(--color-line);
+  border-left: 3px solid var(--iris);
+  border-radius: 0 12px 12px 0;
+  padding: 20px;
+  margin-top: 22px;
+}
+.ai-copy .speech strong {
+  font: 500 11px/1.5 var(--font-instrument);
+  letter-spacing: 0.1em;
+  color: var(--iris);
+}
+.ai-copy .speech p {
+  font-size: 15px;
+  line-height: 1.85;
+}
+.photo-stage {
+  padding: 18px;
+  background: linear-gradient(145deg, #2b354e, var(--simulation-surface));
+  border: 1px solid var(--simulation-border);
+  border-radius: 18px;
+  box-shadow:
+    0 24px 60px #3e355820,
+    inset 0 1px #ffffff18;
+}
+.photo-topline {
+  color: var(--pearl);
+  font-size: 11px;
+  gap: 16px;
+}
+.photo-topline > span {
+  color: var(--lime);
+}
+.photo-wrap {
+  border-radius: 8px;
+  border: 1px solid #6b7cff66;
+}
+.photo-box {
+  border-color: var(--lime);
+  background: #b5f44a08;
+}
+.photo-box span {
+  background: var(--lime);
+  color: var(--midnight);
+  font-family: var(--font-instrument);
+}
+.photo-scan {
+  background: var(--lime);
+  box-shadow: 0 0 18px #b5f44a70;
+}
+.scan-paused .photo-scan {
+  animation-play-state: paused;
+}
+.simulation-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 14px;
+  color: var(--lavender);
+}
+.simulation-scene {
+  font-size: 11px;
+}
+.simulation-toolbar > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.simulation-toolbar button {
+  min-height: 44px;
+  font-size: 11px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #6b7cff70;
+  color: var(--pearl);
+  background: #ffffff08;
+}
+.simulation-toolbar button:hover {
+  background: #38bdf825;
+}
+.simulation-toolbar button[aria-pressed="true"] {
+  border-color: var(--lime);
+}
+.tech-chat {
+  border: 1px solid var(--simulation-border);
+  box-shadow: 0 24px 64px #3e355818;
+}
+.tech-chat .chat-heading {
+  background: var(--midnight);
+  color: var(--pearl);
+  padding: 18px 24px;
+}
+.tech-chat .chat-indicator {
+  background: var(--lime);
+  box-shadow: 0 0 12px #b5f44a40;
+}
+.tech-chat .chat-scenarios button[aria-pressed="true"] {
+  background: var(--midnight);
+  color: var(--lime);
+  border-color: var(--midnight);
+}
+.tech-chat .chat-process .active i,
+.tech-chat .chat-process .complete i {
+  background: var(--lime);
+  border: 1px solid var(--iris);
+}
+.tech-chat .chat-entry.seevia {
+  border-left: 3px solid var(--iris);
+  background: linear-gradient(120deg, var(--lavender), #fcfaf4);
+}
+.tech-chat .tech-chat-options > button {
+  background: var(--midnight);
+  color: var(--lime);
+  border-color: var(--midnight);
+}
+.product-viewer {
+  min-height: 0;
+}
+.product-viewer .product-stage {
+  height: clamp(280px, 28vw, 420px);
+}
+.product-viewer .product-stage > span {
+  color: #8ed8ff;
+  font: 400 13px/1.7 var(--font-instrument);
+}
+.product-viewer .product-caption {
+  padding-top: 16px;
+}
+#root .np-main .np-feature-copy h2,
+#root .cp-main .cp-story-copy h3 {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+}
+@media (max-width: 640px) {
+  .simulation-toolbar {
+    align-items: flex-start;
+  }
+  .simulation-toolbar > div {
+    width: 100%;
+  }
+  .simulation-toolbar button {
+    flex: 1;
+  }
+  .ai-copy .simulation-index {
+    margin-bottom: 24px;
+  }
+  #root .experience h2 {
+    font-size: 36px;
+  }
+}
+
+/* Pink action, sky light and navy contrast; preserve all original motion. */
+.header.header { background: linear-gradient(110deg, #182947, var(--deep-navy)); }
+.hero { background: radial-gradient(ellipse at 85% 15%, #e94b8733, transparent 48%), radial-gradient(ellipse at 70% 70%, #6b7cff1c, transparent 60%), linear-gradient(115deg, var(--deep-navy), #10192f); }
+.hero h1 { color: var(--cloud-white); }
+.hero h1 em { color: var(--soft-blush); }
+.hero .light { background: radial-gradient(circle 300px at var(--lx, 66%) var(--ly, 34%), #e72b8860, #38bdf82b 52%, #38bdf808 78%, transparent); }
+.hero .button { background: var(--hyper-pink); color: var(--deep-navy); border-color: var(--hyper-pink); }
+.hero .button:hover { background: var(--soft-blush); border-color: var(--soft-blush); }
+.hero .speech { border-left-color: var(--electric-sky); }
+.hero .speech strong { color: var(--electric-sky); }
+.hero .hero-object:hover, .hero .hero-object:focus-visible { border-color: var(--hyper-pink); }
+.hero .hero-object:hover > span { color: var(--soft-blush); }
+.partnership.section-pad { background: radial-gradient(ellipse at 10% 80%, #e94b8740, transparent 65%), linear-gradient(130deg, #203b63, var(--deep-navy)); }
+.partnership .button-light { background: var(--hyper-pink); color: var(--deep-navy); }
+.partnership .button-light:hover { background: var(--soft-blush); }
+.ai-demo.section-pad { background: radial-gradient(ellipse at 100% 0%, #6b7cff24, transparent 65%), linear-gradient(125deg, var(--cloud-white), #f9e7f0); }
+.photo-stage { background: linear-gradient(145deg, #203b63, var(--deep-navy)); border-color: #6b7cff66; }
+.photo-topline > span { color: var(--electric-sky); }
+.ai-copy .tabs button[aria-selected="true"] { color: var(--soft-blush); }
+.tech-chat .chat-scenarios button[aria-pressed="true"], .tech-chat .tech-chat-options > button { color: var(--soft-blush); }
+.radar-section { background-color: #10192f; }
+.radar-trail { background: conic-gradient(from 0deg, transparent 0deg, transparent 264deg, #38bdf80a 278deg, #38bdf830 299deg, #e72b885c 321deg, #e72b887f 341deg, #e72b8894 355deg, #f7c6de70 359deg, transparent 360deg); }
+.radar-field svg :is(circle, path, line) { stroke: var(--electric-sky); }
+.radar-field svg > circle:nth-last-child(2) { fill: #e72b881c; }
+.radar-field svg > circle:last-child { fill: var(--hyper-pink); }
+
+/* Hyper-pink buttons need darker ink than the navy surface token. */
+.hero .button, .partnership .button-light { color: #261c36; }
+
+/* Static art direction only: no motion, event, state or layout overrides. */
+:root {
+  --hyper-pink: var(--brand-primary);
+  --electric-sky: var(--brand-secondary);
+  --cloud-white: var(--brand-surface);
+  --deep-navy: var(--brand-contrast);
+  --acid-lime: var(--brand-accent);
+  --soft-blush: var(--brand-soft);
+  --pearl: var(--brand-surface);
+  --lavender: var(--brand-soft);
+  --iris: var(--rose-text);
+  --violet: var(--brand-secondary);
+  --midnight: var(--brand-contrast);
+  --lime: var(--brand-accent);
+  --lime-soft: #ffe1a6;
+  --color-highlight: var(--brand-accent);
+  --color-primary: var(--rose-text);
+  --color-muted: var(--muted-ink);
+  --color-line: var(--brand-border);
+  --button-bg: var(--rose-text);
+  --button-fg: var(--cloud);
+}
+.header.header {
+  background: linear-gradient(100deg, var(--ocean) 15%, #173957 75%, #16415b);
+  border-bottom-color: #6b7cff66;
+}
+.header .extra-menu {
+  background: radial-gradient(ellipse at 100% 0%, #e94b8729, transparent 60%), var(--ocean);
+}
+.hero {
+  background:
+    radial-gradient(ellipse at 92% 0%, #e94b8766, transparent 53%),
+    radial-gradient(ellipse at 74% 85%, #6b7cff3d, transparent 57%),
+    linear-gradient(110deg, var(--ocean) 25%, #173654 65%, #3e3558);
+  border-bottom-color: #6b7cff7a;
+}
+#root .hero h1 {
+  color: var(--cloud);
+  font-weight: 500;
+  letter-spacing: -.05em;
+}
+#root .hero h1 em {
+  color: var(--ice);
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  letter-spacing: -.045em;
+}
+.hero .hero-label { color: var(--ice); }
+.hero .speech {
+  background: linear-gradient(90deg, #3e3558f0, #3e3558c7 70%, transparent);
+  border-left-color: var(--electric-cyan);
+}
+.hero .speech p { color: var(--cloud); }
+.hero .speech strong { color: var(--ice); }
+.hero .button {
+  background: var(--signature-pink);
+  color: var(--ink-on-pink);
+  border-color: var(--signature-pink);
+  box-shadow: 0 8px 28px #261c3633;
+}
+.hero-development { color: var(--ice); }
+.capabilities {
+  background: var(--cloud);
+  border-bottom: 1px solid var(--brand-border);
+}
+.capabilities .icon-bubble {
+  background: linear-gradient(135deg, var(--ice), #fcfaf4);
+  color: var(--rose-text);
+}
+.capabilities .number { color: var(--muted-ink); }
+.capabilities .capability h3 { color: var(--ocean); }
+.capabilities .capability p { color: var(--muted-ink); }
+.capabilities .short-line { background: var(--signature-pink); }
+.experience {
+  background: linear-gradient(108deg, var(--electric-cyan) 0%, #42c7f5 68%, #8cdef9);
+  border-top: 1px solid #ffffff80;
+}
+.experience :is(h2, .eyebrow), .experience-copy p { color: var(--ocean); }
+.experience-copy .short-line { background: var(--ocean); }
+.product-viewer {
+  background:
+    radial-gradient(ellipse at 9% 40%, #e94b8733, transparent 58%),
+    radial-gradient(ellipse at 95% 20%, #6b7cff29, transparent 55%),
+    var(--ocean);
+}
+.product-viewer > .eyebrow, .product-caption h2 { color: var(--cloud); }
+.product-viewer .product-stage > span, .product-caption p { color: var(--ice); }
+.ai-demo.section-pad {
+  background:
+    radial-gradient(ellipse at 100% 0%, #6b7cff2b, transparent 60%),
+    linear-gradient(115deg, var(--cloud), #edf8ff 75%, var(--ice));
+}
+.ai-copy .demo-intro { color: var(--ocean); }
+.ai-copy .simulation-index, .ai-copy .speech strong { color: var(--rose-text); }
+.ai-copy .speech {
+  background: #fcfaf4eb;
+  border-color: var(--brand-border);
+  border-left-color: var(--signature-pink);
+  box-shadow: 0 10px 30px #3e355808;
+}
+.ai-copy .speech p, .ai-copy .demo-note { color: var(--muted-ink); }
+.photo-stage {
+  background: linear-gradient(140deg, #204967, var(--ocean) 75%);
+  border-color: #6b7cff80;
+  box-shadow: 0 24px 55px #3e355826, inset 0 1px #8ed8ff40;
+}
+.photo-topline { color: var(--cloud); }
+.photo-topline > span { color: var(--ice); }
+.simulation-toolbar { color: var(--ice); }
+.about.section-pad { background: var(--ocean); }
+.about .belief {
+  background:
+    radial-gradient(ellipse at 100% 100%, #ddf36a26, transparent 65%),
+    linear-gradient(140deg, var(--signature-pink), #ff659f);
+  color: var(--ink-on-pink);
+}
+.about .belief :is(h2, .eyebrow, p), .about .belief > div p { color: var(--ink-on-pink); }
+.about .belief .short-line { background: var(--ocean); }
+.about .about-copy :is(h2,h3) { color: var(--cloud); }
+.about .about-copy > p:not(.eyebrow),
+.about .about-copy > h3 + p:not(.eyebrow) { color: var(--ice); }
+.about .about-copy > .eyebrow { color: var(--ice); }
+.community.section-pad { background: var(--cloud); }
+.community h2 { color: var(--rose-text); }
+.community p { color: var(--muted-ink); }
+.community .eyebrow { color: var(--rose-text); }
+.partnership.section-pad {
+  background:
+    radial-gradient(ellipse at 12% 80%, #6b7cff33, transparent 60%),
+    linear-gradient(115deg, var(--ocean) 20%, #234564 70%, #172d4b);
+}
+.partnership :is(h2,p) { color: var(--cloud); }
+.partnership > .eyebrow { color: var(--ice); }
+.partnership .button-light { background: var(--signature-pink); color: var(--ink-on-pink); }
+.footer { background: var(--ocean); border-top: 1px solid #6b7cff66; }
+.footer nav h2 { color: var(--ice); }
+
+/* Individual page expressions share the same static palette. */
+.product-page { background: var(--cloud); color: var(--ocean); }
+.product-page .product-hero {
+  background: radial-gradient(ellipse at 85% 25%, #e94b873d, transparent 60%), linear-gradient(115deg, var(--ocean), #19465f);
+}
+.product-page .product-hero h1 { color: var(--cloud); }
+.technology-page { background: var(--cloud); }
+.technology-page .technology-hero {
+  background: radial-gradient(ellipse at 80% 50%, #6b7cff33, transparent 58%), var(--ocean);
+}
+.about-editorial { background: var(--cloud); }
+.about-editorial .ab-hero {
+  background: linear-gradient(115deg, var(--cloud) 38%, var(--ice));
+}
+.about-editorial .ab-hero h1 { color: var(--ocean); }
+.about-editorial .ab-hero h1 em { color: var(--rose-text); }
+.cp-main { background: var(--cloud); }
+.cp-main .cp-hero {
+  background: radial-gradient(ellipse at 95% 0%, #e94b8738, transparent 60%), var(--ocean);
+}
+.np-main { background: var(--cloud); }
+.np-main .np-hero {
+  background: radial-gradient(ellipse at 5% 90%, #6b7cff33, transparent 60%), var(--ocean);
+}
+.pt, .ct { background: var(--cloud); }
+.pt .pt-hero, .ct .ct-hero {
+  background: radial-gradient(ellipse at 100% 5%, #6b7cff2b, transparent 55%), linear-gradient(110deg, #9c2350, var(--ocean) 65%);
+}
+.tech-chat { border-color: #6b7cff80; box-shadow: 0 24px 64px #3e35581a; }
+.tech-chat .chat-heading { background: var(--ocean); color: var(--cloud); }
+.tech-chat .chat-entry.seevia {
+  background: linear-gradient(110deg, var(--ice), var(--cloud));
+  border-left-color: var(--signature-pink);
+}
+.tech-chat .chat-entry.seevia p { color: var(--ocean); }
+
+/* Existing keyboard focus, given a static two-tone contrast treatment. */
+#root :focus-visible {
+  outline: 3px solid var(--ocean);
+  outline-offset: 5px;
+  box-shadow: 0 0 0 5px var(--cloud);
+}
+
+/* Prism Atelier: approved primitives and reusable brand roles. */
+:root {
+  --ivory-light: #fcfaf4;
+  --prism-pink: #e94b87;
+  --electric-periwinkle: #6b7cff;
+  --sky-aura: #8ed8ff;
+  --lime-glow: #ddf36a;
+  --plum-ink: #3e3558;
+  --prism-text-strong: #21172f;
+  --prism-rose-text: #9c2350;
+  --prism-muted: #60566d;
+  --prism-line: #d6cfdf;
+  --brand-primary: var(--prism-pink);
+  --brand-secondary: var(--electric-periwinkle);
+  --brand-surface: var(--ivory-light);
+  --brand-contrast: var(--plum-ink);
+  --brand-soft: var(--sky-aura);
+  --brand-accent: var(--lime-glow);
+  --signature-pink: var(--prism-pink);
+  --electric-cyan: var(--electric-periwinkle);
+  --cloud: var(--ivory-light);
+  --ocean: var(--plum-ink);
+  --amber: var(--lime-glow);
+  --ice: var(--sky-aura);
+  --rose-text: var(--prism-rose-text);
+  --ink-on-pink: var(--prism-text-strong);
+  --muted-ink: var(--prism-muted);
+  --brand-border: var(--prism-line);
+  --lime-soft: #eaf6a5;
+  --simulation-surface: var(--plum-ink);
+  --simulation-border: #6b7cff66;
+}
+.header.header {
+  background: linear-gradient(105deg, var(--plum-ink), #514366);
+  border-bottom-color: #8ed8ff66;
+}
+.hero {
+  background:
+    radial-gradient(ellipse at 90% 0%, #e94b874d, transparent 55%),
+    radial-gradient(ellipse at 72% 85%, #6b7cff40, transparent 60%),
+    linear-gradient(110deg, var(--plum-ink), #3d365e);
+}
+.hero .speech {
+  background: linear-gradient(90deg, #3e3558ed, #3e3558b3 70%, transparent);
+}
+.hero .button { background: var(--lime-glow); border-color: var(--lime-glow); color: var(--plum-ink); }
+#root .hero h1 em { color: var(--ivory-light); }
+.capabilities { background: var(--ivory-light); }
+.capabilities .icon-bubble { background: linear-gradient(135deg, #e5e7ff, #f2ecf4); }
+.experience {
+  background: linear-gradient(110deg, var(--sky-aura), #c6eaff 78%, #e0effa);
+}
+.experience :is(h2,.eyebrow), .experience-copy p { color: var(--plum-ink); }
+.product-viewer {
+  background:
+    radial-gradient(ellipse at 12% 40%, #e94b871c, transparent 55%),
+    radial-gradient(ellipse at 90% 20%, #6b7cff24, transparent 60%),
+    var(--ivory-light);
+}
+.product-viewer > .eyebrow, .product-viewer .product-caption :is(h2,p),
+.product-viewer .product-stage > span { color: var(--plum-ink); }
+.ai-demo.section-pad {
+  background: radial-gradient(ellipse at 100% 0%, #6b7cff1c, transparent 65%), linear-gradient(115deg, var(--ivory-light), #f3edf4);
+}
+.photo-stage { background: linear-gradient(135deg, #57476b, var(--plum-ink)); border-color: #6b7cff80; }
+.about.section-pad { background: var(--ivory-light); }
+.about .belief {
+  background: radial-gradient(ellipse at 100% 100%, #ddf36a24, transparent 60%), linear-gradient(135deg, var(--prism-pink), #f38db2);
+}
+.about .belief :is(h2,.eyebrow,p), .about .belief > div p { color: var(--prism-text-strong); }
+.about .about-copy :is(h2,h3), .about .about-copy > .eyebrow { color: var(--plum-ink); }
+.about .about-copy > p:not(.eyebrow), .about .about-copy > h3 + p:not(.eyebrow) { color: var(--prism-muted); }
+.about .about-copy .button { background: var(--plum-ink); color: var(--ivory-light); }
+.community.section-pad { background: var(--ivory-light); }
+.community h2 { color: var(--plum-ink); }
+.partnership.section-pad {
+  background:
+    radial-gradient(ellipse at 8% 15%, #e94b871a, transparent 55%),
+    linear-gradient(115deg, #e5e7ff, #f1edf8 65%, var(--ivory-light));
+}
+.partnership :is(h2,p), .partnership > .eyebrow { color: var(--plum-ink); }
+.partnership .button-light { background: var(--plum-ink); color: var(--ivory-light); }
+.partnership .button-outline { color: var(--plum-ink); border-color: var(--plum-ink); }
+.footer { background: var(--plum-ink); border-top-color: #8ed8ff66; }
+.product-page .product-hero {
+  background: radial-gradient(ellipse at 90% 0%, #e94b8724, transparent 60%), linear-gradient(115deg, var(--ivory-light), #e6e8ff);
+  color: var(--plum-ink);
+}
+.product-page .product-hero h1, .product-page .product-hero p { color: var(--plum-ink); }
+.product-page .product-hero .button-light { background: var(--plum-ink); color: var(--ivory-light); }
+.product-page .product-hero .button-outline { color: var(--plum-ink); border-color: var(--plum-ink); }
+.technology-page .technology-hero {
+  background: radial-gradient(ellipse at 95% 10%, #6b7cff29, transparent 60%), var(--sky-aura);
+  color: var(--plum-ink);
+}
+.technology-hero h1, .technology-hero h1 span, .technology-hero-layout > p { color: var(--plum-ink); }
+.about-editorial .ab-hero { background: linear-gradient(115deg, var(--ivory-light) 40%, #e9e8fa); }
+.cp-main .cp-hero {
+  background: linear-gradient(120deg, var(--ivory-light) 25%, #e5e8ff);
+  color: var(--plum-ink);
+}
+.cp-main .cp-hero :is(h1,p,em) { color: var(--plum-ink); }
+.cp-main .cp-hero .cp-action { color: var(--plum-ink); border-color: var(--plum-ink); }
+.np-main .np-hero {
+  background: radial-gradient(ellipse at 10% 90%, #6b7cff33, transparent 60%), var(--plum-ink);
+}
+.pt .pt-hero, .ct .ct-hero {
+  background: radial-gradient(ellipse at 100% 0%, #6b7cff26, transparent 60%), linear-gradient(110deg, var(--ivory-light), #e5eafa);
+  color: var(--plum-ink);
+}
+.pt .pt-hero :is(h1,p,em), .ct .ct-hero :is(h1,p,em) { color: var(--plum-ink); }
+.pt .pt-hero .pt-action, .ct .ct-hero .ct-action { background: var(--plum-ink); color: var(--ivory-light); border-color: var(--plum-ink); }
+.tech-chat .chat-heading { background: var(--plum-ink); }
+.tech-chat .chat-entry.seevia { background: linear-gradient(110deg, #e8f4fa, var(--ivory-light)); }
+
+/* A confident periwinkle panel offsets the ivory reading surfaces. */
+.partnership.section-pad {
+  background: radial-gradient(ellipse at 100% 0%, #8ed8ff66, transparent 60%), linear-gradient(110deg, var(--electric-periwinkle), #a5b0ff);
+}
+.partnership.section-pad :is(h2,p), .partnership.section-pad > .eyebrow { color: var(--prism-text-strong); }
+
+/* ======================================================================
+   OPTICAL INTELLIGENCE — static materials, original structure and motion.
+   No pseudo-elements, new stacking contexts, filters or event interception.
+   ====================================================================== */
+:root {
+  /* Primitive palette. */
+  --optical-white: #fafcff;
+  --silver-mist: #f5f7fa;
+  --optical-pink: #e94b87;
+  --signal-blue: #426bff;
+  --optical-sky: #8ed8ff;
+  --chrome-silver: #c9d2e1;
+  --digital-ink: #252b42;
+  /* Contrast and material roles. */
+  --optical-muted: #536078;
+  --optical-blue-text: #3153c4;
+  --optical-rose-text: #a02453;
+  --optical-strong: #1d2033;
+  --material-chrome: linear-gradient(125deg, #ffffff 0%, #e2e7ef 20%, #fafcff 38%, #c9d2e1 58%, #f5f7fa 78%, #e4e9f1 100%);
+  --material-line: #aab9ce;
+  --material-shadow: 0 18px 45px #252b4212, inset 0 1px 0 #ffffff;
+  --brand-primary: var(--optical-pink);
+  --brand-secondary: var(--signal-blue);
+  --brand-surface: var(--optical-white);
+  --brand-contrast: var(--digital-ink);
+  --brand-soft: var(--silver-mist);
+  --brand-accent: var(--optical-sky);
+  --brand-border: var(--chrome-silver);
+  --ivory-light: var(--optical-white);
+  --prism-pink: var(--optical-pink);
+  --electric-periwinkle: var(--signal-blue);
+  --sky-aura: var(--optical-sky);
+  --lime-glow: var(--optical-sky);
+  --plum-ink: var(--digital-ink);
+  --prism-text-strong: var(--optical-strong);
+  --prism-rose-text: var(--optical-rose-text);
+  --prism-muted: var(--optical-muted);
+  --prism-line: var(--chrome-silver);
+  --signature-pink: var(--optical-pink);
+  --electric-cyan: var(--signal-blue);
+  --cloud: var(--optical-white);
+  --ocean: var(--digital-ink);
+  --amber: var(--optical-sky);
+  --ice: var(--silver-mist);
+  --rose-text: var(--optical-rose-text);
+  --ink-on-pink: var(--optical-strong);
+  --muted-ink: var(--optical-muted);
+  --color-line: var(--chrome-silver);
+  --color-primary: var(--optical-blue-text);
+  --color-text: var(--digital-ink);
+  --color-muted: var(--optical-muted);
+  --button-bg: var(--digital-ink);
+  --button-fg: var(--optical-white);
+  --lime-soft: #c6eaff;
+  --simulation-surface: var(--digital-ink);
+  --simulation-border: var(--chrome-silver);
+}
+body { background: var(--optical-white); color: var(--digital-ink); }
+.header.header {
+  background: linear-gradient(110deg, #252b42, #303951);
+  border-bottom-color: #c9d2e166;
+  box-shadow: inset 0 -1px #ffffff0d;
+}
+.header .extra-menu { background: linear-gradient(145deg, #303951, var(--digital-ink)); }
+.hero {
+  color: var(--digital-ink);
+  background:
+    radial-gradient(ellipse 400px 330px at 78% 50%, transparent 67%, #a8b9d080 67.2%, transparent 67.6%, transparent 80%, #c9d2e18c 80.2%, transparent 80.6%),
+    radial-gradient(ellipse at 83% 40%, #c9d2e1 0%, #e3e8f1 22%, transparent 50%),
+    linear-gradient(115deg, var(--optical-white) 30%, #edf1f7 68%, #dfe7f2);
+  border-bottom-color: var(--chrome-silver);
+}
+.hero .hero-content {
+  background: linear-gradient(90deg, #fafcfff2 0%, #fafcffe0 46%, #fafcff00 76%);
+}
+#root .hero h1 { color: var(--digital-ink); font-weight: 600; letter-spacing: -.06em; }
+#root .hero h1 em { color: var(--optical-blue-text); font-weight: 400; }
+.hero .hero-label { color: var(--optical-blue-text); }
+.hero .hero-label:before { background: var(--signal-blue); }
+.hero .speech {
+  background: linear-gradient(100deg, #fafcfff2, #fafcffc7 80%, transparent);
+  border-left-color: var(--signal-blue);
+}
+.hero .speech strong { color: var(--optical-blue-text); }
+.hero .speech p, .hero .hero-development { color: var(--digital-ink); }
+.hero .hero-object {
+  background: #252b42ed;
+  color: var(--optical-white);
+  border-color: #c9d2e1c7;
+  box-shadow: inset 0 1px #ffffff1a;
+}
+.hero .button {
+  background: var(--digital-ink);
+  color: var(--optical-white);
+  border-color: var(--digital-ink);
+  border-radius: 7px;
+  box-shadow: 0 8px 20px #252b421f, inset 0 1px #ffffff26;
+}
+.capabilities {
+  background: var(--optical-white);
+  border-bottom-color: var(--chrome-silver);
+}
+.capabilities .capability { border-color: var(--chrome-silver); }
+.capabilities .number { color: var(--optical-muted); font-variant-numeric: tabular-nums; }
+.capabilities .icon-bubble {
+  background: var(--material-chrome);
+  color: var(--optical-blue-text);
+  border: 1px solid #b5c2d5;
+  box-shadow: inset 0 1px #ffffff, 0 5px 12px #252b4208;
+}
+.capabilities .line-label { color: var(--optical-blue-text); }
+.capabilities .capability h3 { color: var(--digital-ink); font-weight: 600; }
+.capabilities .short-line { background: var(--optical-pink); }
+.experience {
+  background:
+    linear-gradient(90deg, transparent 0 79%, #c9d2e159 79% 79.08%, transparent 79.08%),
+    linear-gradient(115deg, var(--silver-mist), #e8eef6 80%, #dce8f5);
+  border-top-color: #ffffff;
+  border-bottom: 1px solid var(--chrome-silver);
+}
+.experience :is(h2,.eyebrow), .experience-copy p { color: var(--digital-ink); }
+.experience .eyebrow { color: var(--optical-blue-text); }
+.experience-copy .short-line { background: var(--signal-blue); }
+.product-viewer {
+  background:
+    linear-gradient(#c9d2e12e 1px, transparent 1px),
+    linear-gradient(90deg, #c9d2e12e 1px, transparent 1px),
+    radial-gradient(ellipse at 70% 42%, #8ed8ff26, transparent 65%),
+    var(--silver-mist);
+  background-size: 64px 64px, 64px 64px, auto, auto;
+  border-bottom: 1px solid var(--chrome-silver);
+}
+.product-viewer > .eyebrow { color: var(--optical-blue-text); }
+.product-viewer .product-stage > span { color: var(--optical-muted); }
+.product-viewer .product-caption :is(h2,p) { color: var(--digital-ink); }
+.ai-demo.section-pad {
+  background: radial-gradient(ellipse at 100% 0%, #426bff0d, transparent 60%), var(--optical-white);
+}
+.ai-copy .simulation-index { color: var(--optical-blue-text); border-color: var(--chrome-silver); }
+.ai-copy .demo-intro { color: var(--digital-ink); }
+.ai-copy .speech {
+  background: linear-gradient(115deg, #ffffffd9, #f5f7fa);
+  border-color: var(--chrome-silver);
+  border-left-color: var(--signal-blue);
+  border-radius: 0 7px 7px 0;
+  box-shadow: inset 0 1px #ffffff, 0 6px 18px #252b4205;
+}
+.ai-copy .speech strong { color: var(--optical-blue-text); }
+.photo-stage {
+  background: var(--material-chrome);
+  border-color: var(--material-line);
+  border-radius: 14px;
+  box-shadow: var(--material-shadow);
+}
+.photo-topline { color: var(--digital-ink); }
+.photo-topline > span { color: var(--optical-blue-text); }
+.photo-wrap { border-color: #7d8da6; border-radius: 6px; }
+.simulation-toolbar {
+  background: var(--digital-ink);
+  color: var(--optical-white);
+  border-radius: 0 0 6px 6px;
+}
+.about.section-pad { background: var(--optical-white); }
+.about .belief {
+  background:
+    radial-gradient(ellipse at 0% 0%, #426bff12, transparent 70%),
+    var(--material-chrome);
+  border: 1px solid var(--chrome-silver);
+  box-shadow: inset 0 1px #ffffff;
+}
+.about .belief :is(h2,.eyebrow,p), .about .belief > div p { color: var(--digital-ink); }
+.about .belief .eyebrow { color: var(--optical-blue-text); }
+.about .belief .short-line { background: var(--optical-pink); }
+.about .about-copy .button { background: var(--digital-ink); color: var(--optical-white); border-radius: 7px; }
+.community.section-pad { background: var(--silver-mist); border-top: 1px solid var(--chrome-silver); }
+.community .eyebrow { color: var(--optical-blue-text); }
+.community h2 { color: var(--digital-ink); }
+.partnership.section-pad {
+  background:
+    linear-gradient(108deg, #426bff00 78%, #426bff0d 78% 91%, #e94b870d 91%),
+    linear-gradient(120deg, var(--optical-white), #e5edf8);
+  border-top: 1px solid var(--chrome-silver);
+}
+.partnership.section-pad :is(h2,p), .partnership.section-pad > .eyebrow { color: var(--digital-ink); }
+.partnership > .eyebrow { color: var(--optical-blue-text); }
+.partnership .button-light { background: var(--digital-ink); color: var(--optical-white); border-radius: 7px; }
+.partnership .button-outline { color: var(--digital-ink); border-color: var(--digital-ink); border-radius: 7px; }
+.radar-section {
+  background-color: var(--silver-mist);
+  background-image: linear-gradient(#c9d2e12b 1px, transparent 1px), linear-gradient(90deg, #c9d2e12b 1px, transparent 1px);
+  border-top-color: var(--chrome-silver);
+}
+.radar-copy :is(h2,p) { color: var(--digital-ink); }
+.radar-field { background: radial-gradient(circle closest-side, var(--digital-ink) 0 94%, transparent 94.5%); }
+.footer { background: var(--digital-ink); border-top-color: var(--chrome-silver); }
+
+/* Page-specific chrome, retaining each approved composition. */
+.product-page .product-hero,
+.about-editorial .ab-hero,
+.cp-main .cp-hero,
+.pt .pt-hero,
+.ct .ct-hero {
+  background:
+    radial-gradient(ellipse at 95% 5%, #8ed8ff26, transparent 60%),
+    linear-gradient(115deg, var(--optical-white), #e8edf5);
+  border-bottom: 1px solid var(--chrome-silver);
+}
+.technology-page .technology-hero {
+  background: radial-gradient(ellipse at 90% 35%, #426bff14, transparent 60%), var(--silver-mist);
+  border-bottom: 1px solid var(--chrome-silver);
+}
+.np-main .np-hero { background: linear-gradient(115deg, var(--digital-ink), #34405b); }
+.product-page .product-hero h1,
+.product-page .product-hero p,
+.technology-hero h1,
+.technology-hero h1 span,
+.technology-hero-layout > p,
+.about-editorial .ab-hero h1,
+.cp-main .cp-hero :is(h1,p,em),
+.pt .pt-hero :is(h1,p,em),
+.ct .ct-hero :is(h1,p,em) { color: var(--digital-ink); }
+.about-editorial .ab-hero h1 em { color: var(--optical-blue-text); }
+.tech-chat {
+  border-color: var(--material-line);
+  border-radius: 14px;
+  box-shadow: var(--material-shadow);
+}
+.tech-chat .chat-heading {
+  background: var(--material-chrome);
+  color: var(--digital-ink);
+  border-bottom: 1px solid var(--chrome-silver);
+}
+.tech-chat .chat-entry.seevia {
+  background: linear-gradient(110deg, #edf2ff, var(--optical-white));
+  border-left-color: var(--signal-blue);
+}
+.tech-closeup-photo {
+  background: var(--material-chrome);
+  border: 1px solid var(--chrome-silver);
+}
+.pt-direction, .ct-form, .np-dialog { border-color: var(--chrome-silver); box-shadow: 0 12px 30px #252b420a; }
+.policy-document { background: var(--optical-white); color: var(--digital-ink); }
+@media (max-width: 640px) {
+  .hero .hero-content { background: linear-gradient(90deg, #fafcfff5, #fafcffb3); }
+  .hero { background-size: auto; }
+}
+
+/* Chrome actions keep dark type readable through existing light hover fills. */
+.hero .button, .partnership .button-light {
+  background: var(--material-chrome);
+  color: var(--digital-ink);
+  border-color: #7d8da6;
+}
+.radar-section:after {
+  background:
+    linear-gradient(90deg, #f5f7fa25, transparent 48%),
+    linear-gradient(0deg, #c9d2e150, transparent 12%, transparent 88%, #c9d2e150);
+}
+
+/* Light material continuity beyond the homepage. */
+.product-page .product-design {
+  background: linear-gradient(115deg, var(--silver-mist), #e8edf5);
+  color: var(--digital-ink);
+}
+.product-design-copy > .eyebrow { color: var(--optical-blue-text); }
+.product-design-copy h2, .design-principles h3 { color: var(--digital-ink); }
+.design-principles li { border-top-color: var(--chrome-silver); }
+.design-principles li > span { color: var(--optical-blue-text); }
+.device-card {
+  background: var(--material-chrome);
+  border-color: var(--material-line);
+  box-shadow: var(--material-shadow);
+}
+.product-page .product-technology {
+  background: radial-gradient(ellipse at 90% 25%, #426bff0d, transparent 65%), var(--optical-white);
+  color: var(--digital-ink);
+}
+.product-technology .technology-answer, .product-technology .eyebrow { color: var(--optical-blue-text); }
+.product-technology .technology-cards article {
+  background: linear-gradient(135deg, #fafcff, #edf1f7);
+  border-color: var(--chrome-silver);
+  box-shadow: inset 0 1px #ffffff;
+}
+.product-technology .technology-cards .eyebrow { color: var(--optical-blue-text); }
+.product-technology .technology-cards article > p:last-child { color: var(--optical-muted); }
+.product-page .product-progress { background: linear-gradient(115deg, var(--silver-mist), #e8edf5); }
+.product-progress > .product-container > h2 { color: var(--digital-ink); }
+.technology-page .tech-flow { background: var(--silver-mist); color: var(--digital-ink); }
+.technology-page .tech-flow .eyebrow, .technology-page .tech-flow-grid small { color: var(--optical-blue-text); }
+.technology-page .tech-flow-grid h3 { color: var(--digital-ink); }
+.technology-page .tech-flow-grid p, .technology-page .tech-note { color: var(--optical-muted); }
+.tech-processing { background: linear-gradient(110deg, #e8eef9, var(--optical-white)); color: var(--digital-ink); }
+.technology-page .tech-processing .eyebrow, .tech-processing h2 span, .tech-processing-grid article > span { color: var(--optical-blue-text); }
+.tech-processing-grid p { color: var(--optical-muted); }
+.about-editorial .ab-direction { background: var(--material-chrome); color: var(--digital-ink); }
+.about-editorial .ab-direction h2 em, .about-editorial .ab-direction .ab-eyebrow, .about-editorial .ab-principles article > span { color: var(--optical-blue-text); }
+.about-editorial .ab-direction-copy > p, .about-editorial .ab-principles p { color: var(--optical-muted); }
+.about-editorial .ab-principles article { border-top-color: var(--material-line); }
+
+/* Readable instrumentation on the newly light material surfaces. */
+.device-card .device-features button { color: var(--digital-ink); }
+.device-card .device-features button > span { color: var(--optical-blue-text); }
+.device-card .device-features p, .device-card .feature-feedback { color: var(--optical-muted); }
+.product-angle-placeholder { background: var(--material-chrome); color: var(--optical-muted); }
+.product-page .product-progress > .product-container > .eyebrow { color: var(--optical-blue-text); }
+.tech-closeup-placeholder { background: var(--material-chrome); color: var(--optical-muted); }

@@ -3,9 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "server": "node --env-file-if-exists=contact-backend/.env contact-backend/server.mjs",
     "test:mail": "node --test contact-backend/*.test.mjs",
+    "assistant:verify": "node --env-file-if-exists=contact-backend/.env contact-backend/verify-cohere.mjs",
+    "test:assistant": "node --test contact-backend/assistant.test.mjs",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/contact.mjs": { "maxDuration": 30 },
+    "api/assistant.mjs": { "maxDuration": 30 }
+  },
+  "rewrites": [
+    {
+      "source": "/api/assistant/status",
+      "destination": "/api/assistant?assistant_status=1"
+    },
+    {
+      "source": "/api/contact/status",
+      "destination": "/api/contact?contact_status=1"
+    },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}

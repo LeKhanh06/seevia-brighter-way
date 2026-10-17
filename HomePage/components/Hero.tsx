@@ -140,15 +140,18 @@ export default function Hero() {
         <h1>
           Không chỉ là tầm nhìn.
           <br />
-          Là cả một thế giới.
+          <em>Là cả một thế giới.</em>
         </h1>
         <div className="speech">
-          <strong>SEEVIA NÓI</strong>
+          <strong>SEEVIA NÓI · MÔ PHỎNG</strong>
           <p aria-live="polite" aria-atomic="true">
             {response}
           </p>
         </div>
         <Button to="productPage">Khám phá sản phẩm</Button>
+        <p className="hero-development">
+          Dự án đang phát triển ý tưởng. Hiện chưa có mô hình kính.
+        </p>
       </div>
     </section>
   );

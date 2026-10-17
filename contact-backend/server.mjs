@@ -3,6 +3,7 @@ import { readFile, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { readConfig, validateContact, sendContact } from "./mailgun.mjs";
+import { createAssistantHandler } from "./assistant.mjs";
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -18,12 +19,14 @@ const MIME = {
   ".woff": "font/woff",
   ".woff2": "font/woff2",
 };
-export function createContactServer({
+export function createContactHandler({
   env = process.env,
   fetchImpl = fetch,
   now = Date.now,
+  apiOnly = false,
 } = {}) {
   const config = readConfig(env);
+  const assistant = createAssistantHandler({ env, fetchImpl, now });
   const allowed = new Set(
     (env.ALLOWED_ORIGIN || "")
       .split(",")
@@ -33,7 +36,7 @@ export function createContactServer({
   const hits = new Map();
   const windowMs = 10 * 60 * 1000;
   const dist = path.resolve(fileURLToPath(new URL("../dist", import.meta.url)));
-  return createServer(async (req, res) => {
+  return async (req, res) => {
     res.setHeader("X-Content-Type-Options", "nosniff");
     res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
     res.setHeader("X-Frame-Options", "SAMEORIGIN");
@@ -45,6 +48,8 @@ export function createContactServer({
       res.end(JSON.stringify(body));
     };
     const pathname = new URL(req.url, "http://localhost").pathname;
+    if (pathname === "/api/assistant" || pathname === "/api/assistant/status")
+      return assistant(req, res);
     if (pathname.startsWith("/api/")) {
       const origin = req.headers.origin;
       let sameOrigin = false;
@@ -102,17 +107,24 @@ export function createContactServer({
       const chunks = [];
       let bytes = 0;
       try {
-        for await (const chunk of req) {
-          bytes += chunk.length;
-          if (bytes > 16384) {
-            json(413, { ok: false, code: "too_large" });
-            return;
+        let body = req.body;
+        if (body !== undefined) {
+          const raw = typeof body === "string" ? body : JSON.stringify(body);
+          if (Buffer.byteLength(raw) > 16384)
+            return json(413, { ok: false, code: "too_large" });
+          body = typeof body === "string" ? JSON.parse(body) : body;
+        } else {
+          for await (const chunk of req) {
+            bytes += chunk.length;
+            if (bytes > 16384) {
+              json(413, { ok: false, code: "too_large" });
+              return;
+            }
+            chunks.push(chunk);
           }
-          chunks.push(chunk);
+          body = JSON.parse(Buffer.concat(chunks).toString("utf8"));
         }
-        const data = validateContact(
-          JSON.parse(Buffer.concat(chunks).toString("utf8")),
-        );
+        const data = validateContact(body);
         if (!data) return json(400, { ok: false, code: "invalid_fields" });
         if (data.website)
           return json(400, { ok: false, code: "invalid_fields" });
@@ -130,6 +142,7 @@ export function createContactServer({
         return json(502, { ok: false, code: "delivery_failed" });
       }
     }
+    if (apiOnly) return json(404, { ok: false, code: "not_found" });
     if (!["GET", "HEAD"].includes(req.method))
       return json(405, { ok: false, code: "method_not_allowed" });
     try {
@@ -160,7 +173,10 @@ export function createContactServer({
     } catch {
       json(404, { ok: false, code: "not_found" });
     }
-  });
+  };
+}
+export function createContactServer(options) {
+  return createServer(createContactHandler(options));
 }
 if (
   process.argv[1] &&

@@ -167,7 +167,9 @@ export default function Home() {
               nhu cầu của mình. Sự thấu hiểu và tôn trọng khác biệt dẫn đường
               cho định hướng phát triển dự án.
             </p>
-            <Button light to="about">Xem thêm về SeeVia</Button>
+            <Button light to="about">
+              Xem thêm về SeeVia
+            </Button>
           </div>
         </section>
         <section className="community section-pad" id="community">
@@ -203,8 +205,12 @@ export default function Home() {
             triển giải pháp sát với nhu cầu thực tế.
           </p>
           <div className="cta-pair">
-            <Button light to="contact">Trao đổi về trải nghiệm</Button>
-            <Button outline to="partnership">Liên hệ hợp tác</Button>
+            <Button light to="contact">
+              Trao đổi về trải nghiệm
+            </Button>
+            <Button outline to="partnership">
+              Liên hệ hợp tác
+            </Button>
           </div>
         </section>
         <Radar />

@@ -134,6 +134,16 @@ Các bài kiểm tra trình duyệt hỗ trợ biến `BASE_URL` khi dùng cổn
 
 ## Triển khai và cấu hình bí mật
 
+### Vercel
+
+Dự án có `vercel.json` và API serverless tại `api/contact.mjs`. Chọn preset **Vite**, build `npm run build`, output `dist`, Node.js **24.x**. Các trang nội dung được rewrite về `index.html`; API gửi thư vẫn có đường dẫn riêng. Không chạy `npm run server` trên Vercel.
+
+Khai báo `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `MAILGUN_REGION`, `MAIL_FROM` và `MAIL_TO` trong Environment Variables của dự án Vercel; khóa API phải là biến bí mật phía server. Khi frontend và API cùng domain, để trống `VITE_CONTACT_API_BASE`. `.vercelignore` loại `.env`, kết quả kiểm thử và các file local khỏi gói upload.
+
+Sau khi triển khai, kiểm tra `/lien-he`, `/api/contact/status` và mở lại trực tiếp các đường dẫn con để xác nhận routing. Xem [tài liệu backend](contact-backend/README.md) về giới hạn gửi thư.
+
+### Các nền tảng khác
+
 - Backend Node có thể phục vụ cả thư mục `dist` và API trên cùng domain. Cấu hình biến môi trường trên hosting theo [tài liệu backend](contact-backend/README.md).
 - Nếu frontend và backend ở hai domain khác nhau, đặt `VITE_CONTACT_API_BASE` trước khi build và khai báo origin frontend tại backend.
 - Hosting tĩnh không chạy được API Node. Bản hiện tại dùng đường dẫn từ gốc domain và điều hướng nhiều trang; cần cấu hình SPA fallback và điều chỉnh base path nếu triển khai trong một thư mục con như GitHub Pages project site.

@@ -1,0 +1,12 @@
+.git
+node_modules
+dist
+test-results
+.tools
+.env
+.env.*
+**/.env
+**/.env.*
+tests
+**/*.test.mjs
+contact-backend/send-test.mjs

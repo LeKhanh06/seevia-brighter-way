@@ -6,7 +6,8 @@ import {
   sendContact,
   TOPICS,
 } from "./mailgun.mjs";
-import { createContactServer } from "./server.mjs";
+import { createContactServer, createContactHandler } from "./server.mjs";
+import { createServer } from "node:http";
 const env = {
   MAILGUN_API_KEY: "unit-test-only",
   MAILGUN_DOMAIN: "sandbox.example.org",
@@ -21,6 +22,47 @@ const message = {
   message: "Một lời nhắn tiếng Việt.",
   website: "",
 };
+test("serverless handler accepts a pre-parsed Vercel request body", async (t) => {
+  let received;
+  const handler = createContactHandler({
+    env,
+    apiOnly: true,
+    fetchImpl: async (_url, options) => {
+      received = options.body.get("text");
+      return new Response(JSON.stringify({ id: "serverless-test" }));
+    },
+  });
+  const server = createServer((req, res) => {
+    req.body = message;
+    return handler(req, res);
+  });
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const response = await fetch(base + "/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message),
+  });
+  assert.equal(response.status, 200);
+  assert.ok(received.includes(message.message));
+  assert.equal((await fetch(base + "/lien-he")).status, 404);
+});
+test("Vercel status rewrite reaches the status endpoint without sending mail", async (t) => {
+  const { default: handler } = await import("../api/contact.mjs");
+  const server = createServer(handler);
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  for (const route of [
+    "/api/contact/status",
+    "/api/contact?contact_status=1",
+  ]) {
+    assert.deepEqual(await (await fetch(base + route)).json(), {
+      available: false,
+    });
+  }
+});
 test("validation preserves optional identity and rejects invalid input/header injection", () => {
   assert.ok(validateContact(message));
   for (const invalid of [
