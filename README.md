@@ -6,7 +6,7 @@ SeeVia — A project developing AI-powered visual assistance glasses within a gl
 
 Website giới thiệu dự án kính trợ lý thị giác SeeVia dành cho người khiếm thị và người suy giảm thị lực tại Việt Nam. Dự án kết hợp nội dung sản phẩm, công nghệ, câu chuyện cộng đồng và kênh liên hệ trong một website song ngữ Việt–Anh.
 
-SeeVia đang trong giai đoạn phát triển bản mẫu. Những tình huống AI trên website là mô phỏng được viết sẵn, không sử dụng camera hoặc mô hình AI trực tiếp.
+SeeVia đang trong giai đoạn phát triển bản mẫu, chưa có mô hình kính. Những tình huống AI trong phần mô phỏng ở trang chủ là kịch bản viết sẵn, không dùng camera hay nhận diện thật. Riêng **trợ lý SeeVia AI** (nút "Hỏi SeeVia AI") là chatbot chạy thật qua Cohere: chỉ nhận văn bản, trả lời dựa trên nội dung dự án đã được duyệt và không bật camera.
 
 ## Điểm chính
 
@@ -16,6 +16,7 @@ SeeVia đang trong giai đoạn phát triển bản mẫu. Những tình huống
 - Câu chuyện cộng đồng, tin tức có nguồn dẫn, bộ lọc và tìm kiếm bằng cả hai ngôn ngữ.
 - Biểu mẫu liên hệ có xem trước, sao chép, tải bản nháp và gửi email qua Mailgun khi backend được cấu hình.
 - Hai trang chính sách riêng, có mục lục và chức năng In/Lưu PDF.
+- Trợ lý **SeeVia AI** trả lời câu hỏi về dự án bằng tiếng Việt, gợi ý câu hỏi tiếp theo, lưu lịch sử trò chuyện trên thiết bị (xem [CHAT_HISTORY.md](CHAT_HISTORY.md)) và trả lời trung thực khi dự án chưa xác nhận một thông tin.
 
 ## Công nghệ
 
@@ -25,6 +26,7 @@ SeeVia đang trong giai đoạn phát triển bản mẫu. Những tình huống
 | Trình bày  | CSS, Lora, Playfair Display, Be Vietnam Pro |
 | Song ngữ   | Bộ bản dịch và JSX runtime trong `src/i18n` |
 | Gửi email  | Node.js HTTP server, Mailgun HTTP API       |
+| Trợ lý AI  | Cohere (model `command-a-03-2025`), Node.js |
 | Kiểm tra   | Playwright với Chrome, Node.js Test Runner  |
 
 ## Chạy nhanh
@@ -52,7 +54,18 @@ npm run server
 
 Backend chạy mặc định tại **http://127.0.0.1:3001**. Vite chuyển tiếp các yêu cầu `/api` đến backend. Nếu backend chưa sẵn sàng, trang Liên hệ vẫn cho soạn và lưu bản nháp.
 
-Xem [hướng dẫn Mailgun](contact-backend/README.md) để cấu hình domain, origin và triển khai.
+Xem [hướng dẫn backend](contact-backend/README.md) để cấu hình domain, origin và triển khai.
+
+### Bật trợ lý SeeVia AI
+
+Trợ lý dùng cùng backend. Thêm vào `contact-backend/.env` (không đặt trong biến `VITE_*`):
+
+```text
+COHERE_API_KEY=...           # bắt buộc
+COHERE_MODEL=command-a-03-2025   # tùy chọn, hiện chỉ hỗ trợ model này
+```
+
+Không có khóa Cohere hợp lệ thì nút chat hiện "AI chưa kết nối" và không có câu trả lời nào được tạo. Chi tiết giới hạn tần suất, Redis trên Vercel và cách thêm kiến thức: xem [hướng dẫn backend](contact-backend/README.md#trợ-lý-seevia-ai).
 
 ### Bản build
 
@@ -93,11 +106,12 @@ seevia-brighter-way/
 ├── PartnerPage/          # Hướng hợp tác và đầu mối đề xuất
 ├── ContactPage/          # Biểu mẫu và bản nháp lời nhắn
 ├── PolicyPage/           # Chính sách bảo mật, điều khoản
-├── contact-backend/      # API gửi email, cấu hình riêng và kiểm thử
+├── contact-backend/      # API gửi email, trợ lý SeeVia AI, cấu hình riêng và kiểm thử
 ├── src/
 │   ├── components/       # Header, Footer, Button, animation chung
 │   ├── i18n/             # Chuyển ngôn ngữ và bản dịch
 │   ├── styles/           # CSS dùng chung
+│   ├── support/          # Lịch sử chat, danh mục trang cho trợ lý
 │   ├── navigation.ts    # Đích điều hướng
 │   └── main.tsx         # Chọn trang theo đường dẫn
 ├── public/images/       # Logo và ảnh tĩnh
@@ -122,6 +136,7 @@ Chạy Vite tại cổng **5176** như hướng dẫn trên và cài Google Chro
 | ----------------------------------- | ------------------------------------------------------------ |
 | `npm run build`                     | TypeScript và bản build                                      |
 | `npm run test:mail`                 | API, kiểm tra dữ liệu và Mailgun giả lập; không gửi thư thật |
+| `npm run test:assistant`            | Trợ lý SeeVia AI với Cohere giả lập; không gọi Cohere thật   |
 | `node tests/site-check.mjs`         | Các trang, liên kết nội bộ và responsive                     |
 | `node tests/language-check.mjs`     | VI/EN, giữ bản nháp, tìm kiếm và hội thoại                   |
 | `node tests/contact-send-check.mjs` | Gửi thư giả lập, trạng thái thành công/lỗi                   |
@@ -138,7 +153,7 @@ Các bài kiểm tra trình duyệt hỗ trợ biến `BASE_URL` khi dùng cổn
 
 Dự án có `vercel.json` và API serverless tại `api/contact.mjs`. Chọn preset **Vite**, build `npm run build`, output `dist`, Node.js **24.x**. Các trang nội dung được rewrite về `index.html`; API gửi thư vẫn có đường dẫn riêng. Không chạy `npm run server` trên Vercel.
 
-Khai báo `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `MAILGUN_REGION`, `MAIL_FROM` và `MAIL_TO` trong Environment Variables của dự án Vercel; khóa API phải là biến bí mật phía server. Khi frontend và API cùng domain, để trống `VITE_CONTACT_API_BASE`. `.vercelignore` loại `.env`, kết quả kiểm thử và các file local khỏi gói upload.
+Khai báo `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `MAILGUN_REGION`, `MAIL_FROM` và `MAIL_TO` trong Environment Variables của dự án Vercel; khóa API phải là biến bí mật phía server. Để bật trợ lý SeeVia AI, khai báo thêm `COHERE_API_KEY`, `ASSISTANT_REDIS_REST_URL` và `ASSISTANT_REDIS_REST_TOKEN`: trên Vercel trợ lý bắt buộc có bộ đếm Redis dùng chung, thiếu thì trợ lý báo chưa kết nối. Khi frontend và API cùng domain, để trống `VITE_CONTACT_API_BASE`. `.vercelignore` loại `.env`, kết quả kiểm thử và các file local khỏi gói upload.
 
 Sau khi triển khai, kiểm tra `/lien-he`, `/api/contact/status` và mở lại trực tiếp các đường dẫn con để xác nhận routing. Xem [tài liệu backend](contact-backend/README.md) về giới hạn gửi thư.
 
