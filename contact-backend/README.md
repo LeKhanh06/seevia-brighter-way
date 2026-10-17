@@ -20,7 +20,7 @@ Sandbox Mailgun chỉ gửi đến người nhận đã xác minh. Domain riêng
 
 ## Vercel
 
-`api/contact.mjs` dùng lại handler từ `server.mjs` (handler này cũng định tuyến `/api/assistant` và `/api/assistant/status`), hỗ trợ body JSON đã được Vercel phân tích. Kiểm tra `vercel.json` có route cho cả hai đường dẫn trợ lý. `vercel.json` cấu hình luồng kiểm tra trạng thái, route API và fallback các trang React. Function không gọi `listen()` và không phục vụ thư mục `dist`; phần giao diện do Vercel phục vụ riêng.
+`api/contact.mjs` dùng lại handler từ `server.mjs`, hỗ trợ body JSON đã được Vercel phân tích. Trợ lý SeeVia AI là một hàm riêng, `api/assistant.mjs`, dùng lại `createAssistantHandler` từ `contact-backend/assistant.mjs` và luôn đặt `TRUST_PROXY=true` (Vercel là proxy tin cậy nên bộ đếm lấy IP từ `X-Forwarded-For`). Cả hai hàm có `maxDuration` 30 giây trong `vercel.json`. Đường dẫn `/api/assistant/status` được rewrite sang `/api/assistant?assistant_status=1`, tương tự `/api/contact/status`; khi chạy local bằng `npm run server`, `server.mjs` tự định tuyến cả `/api/assistant` và `/api/assistant/status`. `vercel.json` cấu hình luồng kiểm tra trạng thái, route API và fallback các trang React. Function không gọi `listen()` và không phục vụ thư mục `dist`; phần giao diện do Vercel phục vụ riêng.
 
 Đặt các biến `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `MAILGUN_REGION`, `MAIL_FROM`, `MAIL_TO` ở Environment Variables trên Vercel; để dùng trợ lý, thêm `COHERE_API_KEY`, `ASSISTANT_REDIS_REST_URL`, `ASSISTANT_REDIS_REST_TOKEN`. Không upload `.env`. Dùng cùng domain cho giao diện/API thì không cần `VITE_CONTACT_API_BASE` hoặc origin bổ sung. Adapter Vercel dùng IP từ proxy nền tảng cho bộ đếm.
 
