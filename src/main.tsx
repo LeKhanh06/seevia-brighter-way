@@ -1,11 +1,5 @@
 import { navigateTo, pageOrder, pageRegistry } from "./navigation";
 import React, { useLayoutEffect, useRef, useState } from "react";
-import "@fontsource/nunito/latin-700.css";
-import "@fontsource/nunito/vietnamese-700.css";
-import "@fontsource/nunito/latin-800.css";
-import "@fontsource/nunito/vietnamese-800.css";
-import "@fontsource/nunito/latin-900.css";
-import "@fontsource/nunito/vietnamese-900.css";
 import "@fontsource/be-vietnam-pro/latin-400.css";
 import "@fontsource/be-vietnam-pro/vietnamese-400.css";
 import "@fontsource/be-vietnam-pro/latin-500.css";
@@ -14,9 +8,20 @@ import "@fontsource/be-vietnam-pro/latin-600.css";
 import "@fontsource/be-vietnam-pro/vietnamese-600.css";
 import "@fontsource/be-vietnam-pro/latin-700.css";
 import "@fontsource/be-vietnam-pro/vietnamese-700.css";
+import "@fontsource/be-vietnam-pro/latin-400-italic.css";
+import "@fontsource/be-vietnam-pro/vietnamese-400-italic.css";
+import "@fontsource/lora/latin-400.css";
+import "@fontsource/lora/vietnamese-400.css";
+import "@fontsource/lora/latin-500-italic.css";
+import "@fontsource/lora/vietnamese-500-italic.css";
+import "@fontsource/lora/latin-400-italic.css";
+import "@fontsource/lora/vietnamese-400-italic.css";
+import "@fontsource/lora/latin-600.css";
+import "@fontsource/lora/vietnamese-600.css";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
 import Home from "../HomePage/Home";
+import MotionLayer from "../HomePage/components/MotionLayer";
 import QuickOverview from "../OverviewPage/QuickOverview";
 import Product from "../ProductPage/Product";
 import Technology from "../TechnologyPage/Technology";
@@ -32,7 +37,9 @@ import LanguageEffects from "./i18n/LanguageEffects";
 import SeeViaSupport from "./components/SeeViaSupport";
 import SectionRail from "./components/SectionRail";
 import "./styles/global.css";
-import "./styles/tactile-theme.css";
+import "./styles/retained-typography.css";
+import "./styles/iridescent-theme.css";
+import "../HomePage/styles/motion.css";
 
 const routePath = () => window.location.pathname.replace(/\/$/, "") || "/";
 const entryKey = () =>
@@ -76,7 +83,10 @@ function Page({ path }: { path: string }) {
   ) : path === pageRegistry.productPage.href ? (
     <Product />
   ) : (
-    <Home />
+    <>
+      <Home />
+      <MotionLayer />
+    </>
   );
 }
 

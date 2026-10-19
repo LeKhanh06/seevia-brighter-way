@@ -1,6 +1,6 @@
 #root .ct .ct-hero,
 #root .pt .pt-hero {
-  background: linear-gradient(115deg, #151515 0%, #151515 58%, #151515 100%);
+  background: linear-gradient(115deg, #020238 0%, #0b1553 58%, #17286e 100%);
 }
 
 .hero-glows {
@@ -25,7 +25,7 @@
   width: clamp(430px, 38vw, 680px);
   aspect-ratio: 1;
   top: -27%;
-  background: radial-gradient(circle, rgb(255 212 0 / 0.388) 0%, rgb(21 21 21 / 0.192) 28%, rgb(21 21 21 / 0.055) 49%, transparent 71%);
+  background: radial-gradient(circle, #6cd6fc63 0%, #426af831 28%, #426af80e 49%, transparent 71%);
   animation: hero-glow-right-to-left 34s linear -9s infinite;
 }
 
@@ -33,7 +33,7 @@
   width: clamp(450px, 42vw, 740px);
   aspect-ratio: 1;
   bottom: -48%;
-  background: radial-gradient(circle, rgb(217 207 168 / 0.376) 0%, rgb(217 207 168 / 0.192) 31%, rgb(255 212 0 / 0.043) 52%, transparent 72%);
+  background: radial-gradient(circle, #b5b6fc60 0%, #8c9aff31 31%, #6cd6fc0b 52%, transparent 72%);
   animation: hero-glow-left-to-right 38s linear -4s infinite;
 }
 

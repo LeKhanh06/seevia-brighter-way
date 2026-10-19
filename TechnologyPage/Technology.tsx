@@ -92,6 +92,7 @@ export default function Technology() {
         <CloseupParts />
         <section className="tech-flow tech-section">
           <div className="tech-container">
+            <p className="eyebrow">LUỒNG HOẠT ĐỘNG</p>
             <h2>
               Bốn bước từ một câu nói
               <br />
@@ -103,6 +104,7 @@ export default function Technology() {
                   <div className="flow-icon">
                     <FlowIcon name={s.icon} />
                   </div>
+                  <small>BƯỚC 0{i + 1}</small>
                   <h3>{s.title}</h3>
                   <p>{s.description}</p>
                 </article>
@@ -119,6 +121,7 @@ export default function Technology() {
         <section className="tech-conversation tech-section">
           <div className="tech-container tech-conversation-layout">
             <div>
+              <p className="eyebrow">MỘT YÊU CẦU, MỘT CHỨC NĂNG PHÙ HỢP</p>
               <h2>
                 Bạn chỉ cần nói
                 <br />
@@ -139,6 +142,7 @@ export default function Technology() {
         <section className="tech-transparency">
           <div className="tech-container">
             <div>
+              <p className="eyebrow">MINH BẠCH & CHỦ ĐỘNG</p>
               <h2>
                 Minh bạch về những điều
                 <br />

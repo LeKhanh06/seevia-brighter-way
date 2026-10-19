@@ -1,3 +1,5 @@
+@import "@fontsource/playfair-display/latin-400-italic.css";
+@import "@fontsource/playfair-display/vietnamese-400-italic.css";
 .experience {
   background: linear-gradient(106deg, var(--sv-pearl) 0%, var(--sv-orchid) 100%);
   padding: 76px 9.07% 64px;
@@ -14,7 +16,7 @@
 }
 .experience h2 {
   font:
-    italic 400 68px/100px "Nunito",
+    italic 400 68px/100px "Playfair Display",
     serif;
   letter-spacing: 0;
   color: var(--sv-navy);

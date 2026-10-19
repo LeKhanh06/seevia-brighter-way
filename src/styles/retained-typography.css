@@ -1,6 +1,6 @@
 /* Current typography retained over the original red/black visual design. */
 :root {
-  --font-editorial: var(--display);
+  --font-editorial: "Lora", Georgia, serif;
   --font-interface: var(--sans);
   --font-instrument: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
@@ -14,7 +14,7 @@
 #root .hero h1 em { font-family: var(--serif); font-weight: 400; }
 /* Editorial signature, independent of the shared section-title scale. */
 #root main .radar-copy h2 {
-  font-family: var(--display);
+  font-family: "Playfair Display", Georgia, serif;
   font-style: italic;
   font-weight: 400;
   font-size: clamp(54px, 5.9vw, 88px);

@@ -6,14 +6,14 @@
    ========================================================== */
 
 html.sv-home-active {
-  --sv-navy: #151515;
-  --sv-cyan: #ffd400;
-  --sv-vision: #151515;
-  --sv-lavender: #d9cfa8;
-  --sv-orchid: #ffd400;
-  --sv-pearl: #fff8d6;
-  --sv-muted: #3b3830;
-  --sv-grad: linear-gradient(100deg, #ffd400, #151515 38%, #d9cfa8 68%, #ffd400);
+  --sv-navy: #020238;
+  --sv-cyan: #6cd6fc;
+  --sv-vision: #426af8;
+  --sv-lavender: #b5b6fc;
+  --sv-orchid: #e5c6fc;
+  --sv-pearl: #f5f4ff;
+  --sv-muted: #4a5073;
+  --sv-grad: linear-gradient(100deg, #6cd6fc, #426af8 38%, #b5b6fc 68%, #e5c6fc);
 }
 
 /* Lenis */
@@ -25,7 +25,7 @@ html.lenis body { height: auto; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
 
 /* Khe giữa các section khi "nở" ra: nền navy */
-html.sv-home-active main { background: linear-gradient(180deg, var(--sv-navy), #151515); }
+html.sv-home-active main { background: linear-gradient(180deg, var(--sv-navy), #0b0b5e); }
 
 /* ---------- Text mask reveal ---------- */
 .sv-w {
@@ -54,12 +54,12 @@ html.sv-home-active .short-line { display: block; }
 .sv-aura i:nth-child(1) { left: -22%; top: -30%; }
 .sv-aura i:nth-child(2) { right: -25%; bottom: -40%; }
 .sv-aura i:nth-child(3) { left: 35%; top: 20%; width: 40vmax; height: 40vmax; }
-.sv-aura--light i:nth-child(1) { background: radial-gradient(circle, rgb(255 212 0 / 0.251), transparent 65%); }
-.sv-aura--light i:nth-child(2) { background: radial-gradient(circle, rgb(255 212 0 / 0.4), transparent 65%); }
-.sv-aura--light i:nth-child(3) { background: radial-gradient(circle, rgb(21 21 21 / 0.141), transparent 65%); }
-.sv-aura--dark i:nth-child(1) { background: radial-gradient(circle, rgb(21 21 21 / 0.361), transparent 65%); }
-.sv-aura--dark i:nth-child(2) { background: radial-gradient(circle, rgb(255 212 0 / 0.188), transparent 65%); }
-.sv-aura--dark i:nth-child(3) { background: radial-gradient(circle, rgb(255 212 0 / 0.133), transparent 65%); }
+.sv-aura--light i:nth-child(1) { background: radial-gradient(circle, #6cd6fc40, transparent 65%); }
+.sv-aura--light i:nth-child(2) { background: radial-gradient(circle, #e5c6fc66, transparent 65%); }
+.sv-aura--light i:nth-child(3) { background: radial-gradient(circle, #426af824, transparent 65%); }
+.sv-aura--dark i:nth-child(1) { background: radial-gradient(circle, #426af85c, transparent 65%); }
+.sv-aura--dark i:nth-child(2) { background: radial-gradient(circle, #6cd6fc30, transparent 65%); }
+.sv-aura--dark i:nth-child(3) { background: radial-gradient(circle, #e5c6fc22, transparent 65%); }
 @keyframes sv-drift {
   from { transform: translate3d(-1.5%, 0, 0) scale(1); }
   to { transform: translate3d(1.5%, -2%, 0) scale(1.06); }
@@ -86,8 +86,8 @@ html.sv-home-active .short-line { display: block; }
 
 /* ---------- Header ---------- */
 html.sv-home-active .header.header {
-  background: linear-gradient(105deg, #151515, var(--sv-navy));
-  border-bottom-color: rgb(217 207 168 / 0.188);
+  background: linear-gradient(105deg, #0a0a5e, var(--sv-navy));
+  border-bottom-color: #b5b6fc30;
 }
 html.sv-home-active .main-nav button:hover { color: var(--sv-cyan); }
 @media (hover: hover) and (pointer: fine) {
@@ -109,7 +109,7 @@ html.sv-home-active .button::after {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(105deg, transparent 30%, #ffffff55 48%, rgb(255 212 0 / 0.267) 52%, transparent 70%);
+  background: linear-gradient(105deg, transparent 30%, #ffffff55 48%, #6cd6fc44 52%, transparent 70%);
   transform: translateX(-120%);
   transition: transform 0.8s cubic-bezier(0.2, 0.65, 0.25, 1);
   pointer-events: none;
@@ -120,16 +120,16 @@ html.sv-home-active .button:hover { transform: none; } /* vị trí do GSAP quic
 /* ---------- Hero ---------- */
 html.sv-home-active .hero {
   background:
-    radial-gradient(ellipse at 76% 42%, rgb(21 21 21 / 0.2), transparent 58%),
-    radial-gradient(ellipse at 14% 92%, rgb(255 212 0 / 0.078), transparent 50%),
-    linear-gradient(115deg, var(--sv-navy), #151515 60%, #151515);
-  border-bottom: 1px solid rgb(217 207 168 / 0.188);
+    radial-gradient(ellipse at 76% 42%, #426af833, transparent 58%),
+    radial-gradient(ellipse at 14% 92%, #6cd6fc14, transparent 50%),
+    linear-gradient(115deg, var(--sv-navy), #07073f 60%, #0b1050);
+  border-bottom: 1px solid #b5b6fc30;
 }
 html.sv-home-active .hero h1 { color: var(--sv-pearl); }
 html.sv-home-active .hero h1 em { font-style: italic; }
 html.sv-home-active .hero h1 em .sv-wi,
 html.sv-home-active .hero h1 em {
-  background: linear-gradient(100deg, #ffd400, #d9cfa8 45%, #ffd400 70%, #ffd400);
+  background: linear-gradient(100deg, #6cd6fc, #b5b6fc 45%, #e5c6fc 70%, #6cd6fc);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -141,14 +141,14 @@ html.sv-home-active .hero .hero-label { color: var(--sv-pearl); }
 html.sv-home-active .hero .hero-label:before { background: var(--sv-cyan); }
 html.sv-home-active .hero .speech {
   border-left-color: var(--sv-cyan);
-  background: linear-gradient(90deg, rgb(21 21 21 / 0.122), transparent);
+  background: linear-gradient(90deg, #426af81f, transparent);
 }
 html.sv-home-active .hero .speech strong { color: var(--sv-cyan); }
 html.sv-home-active .hero .button {
   color: #fff;
-  border: 1px solid rgb(255 212 0 / 0.333);
-  background: linear-gradient(100deg, #151515, var(--sv-vision) 60%, #151515);
-  box-shadow: 0 10px 30px rgb(21 21 21 / 0.333);
+  border: 1px solid #6cd6fc55;
+  background: linear-gradient(100deg, #2a46d6, var(--sv-vision) 60%, #5a8cf8);
+  box-shadow: 0 10px 30px #426af855;
 }
 html.sv-home-active .hero .button:hover {
   color: var(--sv-navy);
@@ -157,12 +157,12 @@ html.sv-home-active .hero .button:hover {
 }
 html.sv-home-active .hero-object {
   color: var(--sv-lavender);
-  background: rgb(21 21 21 / 0.6);
-  border-color: rgb(255 212 0 / 0.2);
+  background: #0a0a5a99;
+  border-color: #6cd6fc33;
   transition: border-color 0.3s, background-color 0.3s;
 }
 html.sv-home-active .hero-object span { color: var(--sv-cyan); display: inline-block; transition: transform 0.5s; }
-html.sv-home-active .hero-object:hover { border-color: var(--sv-cyan); background: rgb(21 21 21 / 0.251); }
+html.sv-home-active .hero-object:hover { border-color: var(--sv-cyan); background: #426af840; }
 html.sv-home-active .hero-object:hover span { transform: rotate(180deg) scale(1.3); }
 
 /* Lens: vòng kính đi theo đèn quét (dùng --lx/--ly có sẵn từ Hero.tsx) */
@@ -176,8 +176,8 @@ html.sv-home-active .hero .light::after {
   height: 190px;
   margin: -95px 0 0 -95px;
   border-radius: 50%;
-  border: 1px solid rgb(255 212 0 / 0.333);
-  box-shadow: inset 0 0 50px rgb(21 21 21 / 0.2), 0 0 40px rgb(255 212 0 / 0.102);
+  border: 1px solid #6cd6fc55;
+  box-shadow: inset 0 0 50px #426af833, 0 0 40px #6cd6fc1a;
 }
 
 /* ---------- Capabilities ---------- */
@@ -186,9 +186,9 @@ html.sv-home-active .capabilities .line-label:after {
   transform: scaleX(var(--line, 1));
   transform-origin: 0 50%;
 }
-html.sv-home-active .capabilities .capability { border-left-color: #d9cfa8; transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.25, 1); }
-html.sv-home-active .capabilities .number { color: #d9cfa8; transition: color 0.4s; }
-html.sv-home-active .capabilities .capability p { color: #3b3830; }
+html.sv-home-active .capabilities .capability { border-left-color: #d6d4f7; transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.25, 1); }
+html.sv-home-active .capabilities .number { color: #8f91e8; transition: color 0.4s; }
+html.sv-home-active .capabilities .capability p { color: #4a5073; }
 html.sv-home-active .capabilities .icon-bubble {
   background: var(--sv-orchid);
   transition: transform 0.6s cubic-bezier(0.2, 0.65, 0.25, 1), box-shadow 0.6s, background-color 0.4s;
@@ -196,7 +196,7 @@ html.sv-home-active .capabilities .icon-bubble {
 html.sv-home-active .capabilities .capability:hover .icon-bubble {
   transform: translateY(-8px) rotate(-8deg);
   background: linear-gradient(135deg, var(--sv-cyan), var(--sv-orchid));
-  box-shadow: 0 16px 32px rgb(21 21 21 / 0.2);
+  box-shadow: 0 16px 32px #426af833;
 }
 html.sv-home-active .capabilities .capability:hover .number { color: var(--sv-vision); }
 html.sv-home-active .capabilities .short-line { background: var(--sv-vision); transition: width 0.5s; }
@@ -212,15 +212,15 @@ html.sv-home-active .capabilities:after {
 /* ---------- Product viewer ---------- */
 html.sv-home-active .product-viewer {
   background:
-    radial-gradient(circle 470px at 12% 40%, rgb(21 21 21 / 0.302), transparent 100%),
-    radial-gradient(circle 370px at 93% 29%, rgb(255 212 0 / 0.169), transparent 100%),
-    #151515;
+    radial-gradient(circle 470px at 12% 40%, #426af84d, transparent 100%),
+    radial-gradient(circle 370px at 93% 29%, #e5c6fc2b, transparent 100%),
+    #05052e;
 }
-html.sv-home-active .product-stage { color: #d9cfa8; }
-html.sv-home-active .product-ellipses { border-color: rgb(217 207 168 / 0.133); }
+html.sv-home-active .product-stage { color: #9a9dd8; }
+html.sv-home-active .product-ellipses { border-color: #b5b6fc22; }
 html.sv-home-active .product-ellipses:after {
-  border-color: rgb(217 207 168 / 0.2);
-  background: radial-gradient(ellipse, rgb(255 212 0 / 0.239) 0%, rgb(21 21 21 / 0.125) 30%, transparent 70%);
+  border-color: #b5b6fc33;
+  background: radial-gradient(ellipse, #6cd6fc3d 0%, #426af820 30%, transparent 70%);
 }
 
 /* ---------- AI demo ---------- */
@@ -229,15 +229,15 @@ html.sv-home-active .tabs button {
   border-color: var(--sv-vision);
   transition: background-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
 }
-html.sv-home-active .tabs button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgb(21 21 21 / 0.18); }
-html.sv-home-active .tabs button[aria-selected="true"] { box-shadow: 0 8px 22px rgb(21 21 21 / 0.302); }
-html.sv-home-active .demo-note { color: #3b3830; }
-html.sv-home-active .photo-stage { background: #151515; box-shadow: 0 24px 60px rgb(21 21 21 / 0.149); }
-html.sv-home-active .photo-wrap { background: #151515; }
+html.sv-home-active .tabs button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px #426af82e; }
+html.sv-home-active .tabs button[aria-selected="true"] { box-shadow: 0 8px 22px #426af84d; }
+html.sv-home-active .demo-note { color: #5f6590; }
+html.sv-home-active .photo-stage { background: #07073f; box-shadow: 0 24px 60px #02023826; }
+html.sv-home-active .photo-wrap { background: #050530; }
 html.sv-home-active .photo-topline,
 html.sv-home-active .photo-topline span,
 html.sv-home-active .photo-missing { color: var(--sv-lavender); }
-html.sv-home-active .photo-scan { background: var(--sv-cyan); box-shadow: 0 0 22px 6px rgb(21 21 21 / 0.467); }
+html.sv-home-active .photo-scan { background: var(--sv-cyan); box-shadow: 0 0 22px 6px #426af877; }
 
 /* Đổi cảnh: ảnh "mở ống kính", khung nhận diện hiện lần lượt, lời thoại trượt vào */
 html.sv-home-active .photo-wrap img { animation: sv-lens-in 1s cubic-bezier(0.2, 0.65, 0.25, 1) both; }
@@ -253,20 +253,20 @@ html.sv-home-active .ai-copy .speech p { animation: sv-text-in 0.6s ease both; }
 html.sv-home-active .about .belief {
   --ring: 0;
   background:
-    radial-gradient(circle 380px at -12% 100%, rgb(21 21 21 / 0.302), transparent 100%),
-    radial-gradient(circle 320px at 110% 0%, rgb(255 212 0 / 0.133), transparent 100%),
-    linear-gradient(110deg, var(--sv-navy), #151515);
+    radial-gradient(circle 380px at -12% 100%, #426af84d, transparent 100%),
+    radial-gradient(circle 320px at 110% 0%, #e5c6fc22, transparent 100%),
+    linear-gradient(110deg, var(--sv-navy), #0d0d6b);
 }
 html.sv-home-active .about .belief:before,
-html.sv-home-active .about .belief:after { border-color: rgb(217 207 168 / 0.18); will-change: transform; }
+html.sv-home-active .about .belief:after { border-color: #b5b6fc2e; will-change: transform; }
 html.sv-home-active .about .belief:before { transform: translateY(calc(var(--ring) * -50px)) scale(calc(1 + var(--ring) * 0.16)); }
 html.sv-home-active .about .belief:after { transform: translateY(calc(var(--ring) * 40px)) scale(calc(1 - var(--ring) * 0.1)); }
 html.sv-home-active .about .belief .eyebrow { color: var(--sv-cyan); }
 html.sv-home-active .about .belief > div .short-line { background: var(--sv-cyan); }
-html.sv-home-active .about .belief > div p { color: #fff8d6; }
-html.sv-home-active .about .about-copy > p:not(.eyebrow) { color: #d9cfa8; }
-html.sv-home-active .about .about-copy > h3 + p:not(.eyebrow) { color: #d9cfa8; }
-html.sv-home-active .about .about-copy hr { border-top-color: rgb(217 207 168 / 0.333); transform-origin: 0 50%; }
+html.sv-home-active .about .belief > div p { color: #d7d8ff; }
+html.sv-home-active .about .about-copy > p:not(.eyebrow) { color: #c9caff; }
+html.sv-home-active .about .about-copy > h3 + p:not(.eyebrow) { color: #aeb0e8; }
+html.sv-home-active .about .about-copy hr { border-top-color: #b5b6fc55; transform-origin: 0 50%; }
 html.sv-home-active .about .about-copy .button { background: var(--sv-pearl); color: var(--sv-navy); }
 
 /* ---------- Community ---------- */
@@ -276,15 +276,15 @@ html.sv-home-active .community-placeholder img { will-change: transform; }
 /* ---------- Partnership ---------- */
 html.sv-home-active .partnership.section-pad {
   background:
-    radial-gradient(ellipse at 50% 30%, rgb(21 21 21 / 0.239) 0%, transparent 62%),
-    linear-gradient(160deg, var(--sv-navy), #151515 60%, #151515);
+    radial-gradient(ellipse at 50% 30%, #426af83d 0%, transparent 62%),
+    linear-gradient(160deg, var(--sv-navy), #0d0d5c 60%, #1a1f7a);
 }
 html.sv-home-active .partnership > .eyebrow { color: var(--sv-cyan); }
 html.sv-home-active .partnership .button-outline { border-color: var(--sv-lavender); transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-html.sv-home-active .partnership .button-outline:hover { background: rgb(217 207 168 / 0.149); border-color: var(--sv-cyan); }
+html.sv-home-active .partnership .button-outline:hover { background: #b5b6fc26; border-color: var(--sv-cyan); }
 
 /* ---------- Radar ---------- */
-html.sv-home-active .radar-copy .button { background: linear-gradient(100deg, #151515, var(--sv-vision)); color: #fff; border: 1px solid rgb(255 212 0 / 0.333); }
+html.sv-home-active .radar-copy .button { background: linear-gradient(100deg, #2a46d6, var(--sv-vision)); color: #fff; border: 1px solid #6cd6fc55; }
 html.sv-home-active .radar > circle:first-of-type {
   transform-box: fill-box;
   transform-origin: center;
@@ -318,10 +318,10 @@ html.sv-home-active .hero .hero-development {
   margin-top: 22px;
   line-height: 1.7;
   max-width: 520px;
-  color: #d9cfa8;
+  color: #c9caff;
 }
 html.sv-home-active .hero .speech {
-  background: linear-gradient(90deg, rgb(21 21 21 / 0.8), rgb(21 21 21 / 0.502) 70%, transparent);
+  background: linear-gradient(90deg, #04044acc, #04044a80 70%, transparent);
   backdrop-filter: blur(6px);
 }
 html.sv-home-active .sv-ribbon-hero {
@@ -411,23 +411,23 @@ html.sv-home-active :is(.experience, .community, .partnership) { isolation: isol
 
 /* ---------- About / thẻ "Niềm tin": nền xanh-tím với radial gradient chuyển động ---------- */
 html.sv-home-active .about .belief {
-  background: linear-gradient(145deg, #151515 0%, #3b3830 55%, #151515 100%);
+  background: linear-gradient(145deg, #0a1688 0%, #1d38cf 55%, #4c3fcb 100%);
 }
 .belief-glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 .belief-glow i { position: absolute; border-radius: 50%; will-change: transform; }
 .belief-glow i:nth-child(1) {
   width: 90%; aspect-ratio: 1; left: -25%; top: -20%;
-  background: radial-gradient(circle, rgb(255 212 0 / 0.4), transparent 68%);
+  background: radial-gradient(circle, #6cd6fc66, transparent 68%);
   animation: sv-glow-a 16s ease-in-out infinite alternate;
 }
 .belief-glow i:nth-child(2) {
   width: 100%; aspect-ratio: 1; right: -35%; bottom: -30%;
-  background: radial-gradient(circle, rgb(255 212 0 / 0.702), rgb(255 212 0 / 0.133) 45%, transparent 68%);
+  background: radial-gradient(circle, #e5c6fcb3, #e5c6fc22 45%, transparent 68%);
   animation: sv-glow-b 21s ease-in-out infinite alternate;
 }
 .belief-glow i:nth-child(3) {
   width: 62%; aspect-ratio: 1; left: 28%; top: 32%;
-  background: radial-gradient(circle, rgb(217 207 168 / 0.333), transparent 66%);
+  background: radial-gradient(circle, #b5b6fc55, transparent 66%);
   animation: sv-glow-c 26s ease-in-out infinite alternate;
 }
 @keyframes sv-glow-a { from { transform: translate3d(-6%, -4%, 0) scale(0.9); } to { transform: translate3d(38%, 30%, 0) scale(1.15); } }
@@ -439,14 +439,14 @@ html.sv-home-active .about .belief {
 
 /* ---------- Thẻ "Niềm tin": linear Soft Lavender → Pearl White (nền sáng, chữ navy) ---------- */
 html.sv-home-active .about .belief {
-  background: linear-gradient(145deg, var(--sv-lavender) 0%, #fff8d6 48%, var(--sv-pearl) 100%);
+  background: linear-gradient(145deg, var(--sv-lavender) 0%, #d8d8fd 48%, var(--sv-pearl) 100%);
 }
-html.sv-home-active .about .belief .eyebrow { color: #3b3830; }
+html.sv-home-active .about .belief .eyebrow { color: #1d2fa8; }
 html.sv-home-active .about .belief h2 { color: var(--sv-navy); }
 html.sv-home-active .about .belief > div .short-line { background: var(--sv-vision); }
-html.sv-home-active .about .belief > div p { color: #151515; }
+html.sv-home-active .about .belief > div p { color: #1c2260; }
 html.sv-home-active .about .belief:before,
-html.sv-home-active .about .belief:after { border-color: rgb(21 21 21 / 0.22); }
-.belief-glow i:nth-child(1) { background: radial-gradient(circle, rgb(255 212 0 / 0.349), transparent 68%); }
-.belief-glow i:nth-child(2) { background: radial-gradient(circle, rgb(255 212 0 / 0.761), rgb(255 212 0 / 0.2) 45%, transparent 68%); }
-.belief-glow i:nth-child(3) { background: radial-gradient(circle, rgb(21 21 21 / 0.149), transparent 66%); }
+html.sv-home-active .about .belief:after { border-color: #426af838; }
+.belief-glow i:nth-child(1) { background: radial-gradient(circle, #6cd6fc59, transparent 68%); }
+.belief-glow i:nth-child(2) { background: radial-gradient(circle, #e5c6fcc2, #e5c6fc33 45%, transparent 68%); }
+.belief-glow i:nth-child(3) { background: radial-gradient(circle, #426af826, transparent 66%); }

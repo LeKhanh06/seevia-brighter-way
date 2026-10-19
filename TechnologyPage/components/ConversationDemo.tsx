@@ -1,6 +1,5 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { conversations } from "../data/technologyData";
-import Arrow from "../../src/components/Arrow";
 type Message = { id: number; text: string; speaker: "user" | "seevia" };
 export default function ConversationDemo() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -50,6 +49,9 @@ export default function ConversationDemo() {
   return (
     <div className="tech-chat">
       <div className="chat-heading">
+        <span>
+          <i className="chat-indicator" /> SEEVIA / MÔ PHỎNG
+        </span>
         <span>Không dùng camera thật</span>
       </div>
       <div className="chat-scenarios" aria-label="Chọn tình huống">
@@ -60,7 +62,7 @@ export default function ConversationDemo() {
             disabled={busy}
             onClick={() => respond(i)}
           >
-            <span className={`tile ${selected === i ? "tile-dome" : "tile-rib"}`} aria-hidden="true" />
+            <span>0{i + 1}</span>
             {c.label}
           </button>
         ))}
@@ -142,11 +144,11 @@ export default function ConversationDemo() {
         </span>
         {!messages.length ? (
           <button onClick={() => respond(selected)}>
-            {entry.question} <Arrow />
+            {entry.question} <span aria-hidden="true">↗</span>
           </button>
         ) : !followed ? (
           <button disabled={busy} onClick={() => respond(selected, true)}>
-            {entry.followup} <Arrow />
+            {entry.followup} <span aria-hidden="true">↗</span>
           </button>
         ) : (
           <button onClick={() => respond(selected)}>

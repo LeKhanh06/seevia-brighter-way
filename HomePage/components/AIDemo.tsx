@@ -8,7 +8,7 @@ function PhotoScene({ scene }: { scene: (typeof scenarios)[number] }) {
   return (
     <div className="photo-stage">
       <div className="photo-topline">
-        Mô phỏng <span>{loaded ? "Vùng quét minh họa" : "Chờ ảnh"}</span>
+        MÔ PHỎNG <span>{loaded ? "Vùng quét minh họa" : "Chờ ảnh"}</span>
       </div>
       <div className="photo-wrap">
         {!missing && (
@@ -55,7 +55,10 @@ export default function AIDemo() {
   return (
     <section className="ai-demo section-pad" id="technology">
       <div className="ai-copy">
-        <h2>Mô phỏng góc nhìn của AI</h2>
+        <p className="simulation-index" aria-hidden="true">
+          SEEVIA / VISION LAB <span>0{index + 1} — 03</span>
+        </p>
+        <h2 className="eyebrow">MÔ PHỎNG GÓC NHÌN CỦA AI</h2>
         <p className="demo-intro">
           Bạn hãy chọn một tình huống để xem SeeVia thu thập thông tin và phản
           hồi như thế nào.
@@ -91,7 +94,7 @@ export default function AIDemo() {
           ))}
         </div>
         <div className="speech" aria-live="polite">
-          <strong>SeeVia nói</strong>
+          <strong>SEEVIA NÓI</strong>
           <p key={scene.id}>{scene.response}</p>
         </div>
         <p className="demo-note">

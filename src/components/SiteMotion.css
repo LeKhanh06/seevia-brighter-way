@@ -11,8 +11,8 @@
 #progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #d9cfa8, #ffd400, #d9cfa8);
-  box-shadow: 0 0 6px rgb(255 212 0 / 0.6);
+  background: linear-gradient(90deg, #8f94ff, #d9b8ff, #ffc8e8);
+  box-shadow: 0 0 6px rgba(217, 184, 255, .6);
 }
 #sparkle-layer {
   position: fixed;
@@ -129,7 +129,7 @@
   main .np-row-image:hover,
   main .tech-closeup-photo:hover {
     translate: 0 -4px;
-    filter: drop-shadow(0 14px 18px rgb(21 21 21 / 0.141));
+    filter: drop-shadow(0 14px 18px #32151d24);
   }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -259,16 +259,16 @@
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: #fff8d6;
-  box-shadow: 0 0 8px 1px rgb(255 212 0 / 0.6);
+  background: #f5f4ff;
+  box-shadow: 0 0 8px 1px #6cd6fc99;
   opacity: 0;
   animation: site-star-wander 9s ease-in-out infinite;
 }
 .site-ambient-stars i:nth-child(3n) {
-  background: #ffd400;
-  box-shadow: 0 0 9px 2px rgb(255 212 0 / 0.533);
+  background: #6cd6fc;
+  box-shadow: 0 0 9px 2px #6cd6fc88;
 }
-.site-ambient-stars i:nth-child(3n + 1) { background: #d9cfa8; }
+.site-ambient-stars i:nth-child(3n + 1) { background: #b5b6fc; }
 .site-ambient-stars i:nth-child(4n) {
   width: 4px;
   height: 4px;
@@ -306,15 +306,15 @@
 }
 .site-ambient-glow i:first-child { left: -24%; top: -40%; }
 .site-ambient-glow i:last-child { right: -25%; bottom: -48%; animation-delay: -11s; }
-.site-ambient-glow--dark i:first-child { background: radial-gradient(circle, rgb(21 21 21 / 0.22), transparent 65%); }
-.site-ambient-glow--dark i:last-child { background: radial-gradient(circle, rgb(255 212 0 / 0.141), transparent 65%); }
+.site-ambient-glow--dark i:first-child { background: radial-gradient(circle, #426af838, transparent 65%); }
+.site-ambient-glow--dark i:last-child { background: radial-gradient(circle, #e5c6fc24, transparent 65%); }
 .site-ambient-glow--light {
   background:
-    radial-gradient(ellipse at 52% 12%, rgb(217 207 168 / 0.11), transparent 58%),
-    radial-gradient(ellipse at 45% 88%, rgb(255 212 0 / 0.078), transparent 64%);
+    radial-gradient(ellipse at 52% 12%, #b5b6fc1c, transparent 58%),
+    radial-gradient(ellipse at 45% 88%, #6cd6fc14, transparent 64%);
 }
-.site-ambient-glow--light i:first-child { background: radial-gradient(circle, rgb(255 212 0 / 0.22), transparent 68%); }
-.site-ambient-glow--light i:last-child { background: radial-gradient(circle, rgb(255 212 0 / 0.4), transparent 68%); }
+.site-ambient-glow--light i:first-child { background: radial-gradient(circle, #6cd6fc38, transparent 68%); }
+.site-ambient-glow--light i:last-child { background: radial-gradient(circle, #e5c6fc66, transparent 68%); }
 @keyframes site-ambient-drift {
   from { transform: translate3d(-4%, 1%, 0) scale(1); }
   to { transform: translate3d(4%, -4%, 0) scale(1.12); }

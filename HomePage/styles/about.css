@@ -1,3 +1,5 @@
+@import "@fontsource/playfair-display/latin-400.css";
+@import "@fontsource/playfair-display/vietnamese-400.css";
 .about.section-pad {
   background: var(--sv-navy);
   grid-template-columns: minmax(0, 490fr) minmax(0, 608fr);
@@ -10,8 +12,8 @@
   min-height: 596px;
   padding: 44px 48px 48px;
   background:
-    radial-gradient(circle 380px at -12% 100%, rgb(21 21 21 / 0.251), transparent 100%),
-    linear-gradient(110deg, var(--sv-navy), #151515);
+    radial-gradient(circle 380px at -12% 100%, #d0806240, transparent 100%),
+    linear-gradient(110deg, var(--sv-navy), #361c25);
   isolation: isolate;
 }
 .about .belief:after {
@@ -20,7 +22,7 @@
   left: -55px;
   top: 345px;
   bottom: auto;
-  border: 1px solid rgb(217 207 168 / 0.145);
+  border: 1px solid #dda7aa25;
   box-shadow: none;
   z-index: -1;
 }
@@ -31,7 +33,7 @@
   height: 630px;
   left: -110px;
   top: 290px;
-  border: 1px solid rgb(217 207 168 / 0.145);
+  border: 1px solid #dda7aa25;
   border-radius: 50%;
   z-index: -1;
   pointer-events: none;
@@ -43,7 +45,7 @@
 }
 .about .belief h2 {
   font:
-    italic 400 58px/1.3 "Nunito",
+    italic 400 58px/1.3 "Playfair Display",
     serif;
   color: var(--sv-pearl);
   margin: 65px 0 88px;
@@ -51,11 +53,11 @@
 .about .belief > div .short-line {
   width: 52px;
   height: 1px;
-  background: rgb(217 207 168 / 0.502);
+  background: #b5b6fc80;
 }
 .about .belief > div p {
   font: 400 15px/1.7 var(--sans);
-  color: #d9cfa8;
+  color: #e6c4bd;
   margin: 23px 0 0;
 }
 .about .about-copy {
@@ -69,7 +71,7 @@
 }
 .about .about-copy h2 {
   font:
-    400 44px/59px "Nunito",
+    400 44px/59px "Playfair Display",
     serif;
   color: var(--sv-lavender);
   margin: 0 0 28px;
@@ -77,12 +79,12 @@
 }
 .about .about-copy > p:not(.eyebrow) {
   font: 400 18px/31px var(--sans);
-  color: #d9cfa8;
+  color: #d7ada5;
   margin-bottom: 0;
 }
 .about .about-copy hr {
   border: 0;
-  border-top: 1px solid rgb(217 207 168 / 0.502);
+  border-top: 1px solid #b5b6fc80;
   margin: 30px 0;
 }
 .about .about-copy h3 {
@@ -91,7 +93,7 @@
   margin: 0 0 12px;
 }
 .about .about-copy > h3 + p:not(.eyebrow) {
-  color: #d9cfa8;
+  color: #b4aca6;
   font-size: 17px;
   line-height: 30px;
 }

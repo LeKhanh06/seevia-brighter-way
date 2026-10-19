@@ -33,7 +33,7 @@
   --midnight: #3e3558;
   --lime: #ddf36a;
   --lime-soft: #ffe1a6;
-  --font-editorial: var(--display);
+  --font-editorial: "Lora", Georgia, serif;
   --font-interface: var(--sans);
   --font-instrument: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --color-highlight: var(--lime);

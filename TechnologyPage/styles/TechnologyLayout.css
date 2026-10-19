@@ -14,7 +14,7 @@
 .technology-page .technology-hero {
   min-height: 420px;
   background:
-    linear-gradient(transparent, transparent),
+    radial-gradient(circle 300px at 76% 52%, #02023880, transparent 100%),
     var(--sv-navy);
 }
 .technology-page .technology-hero-layout {
@@ -57,12 +57,12 @@
   gap: 30px;
 }
 .technology-page .tech-flow-grid:before {
-  border-color: rgb(217 207 168 / 0.333);
+  border-color: #b5b6fc55;
 }
 .technology-page .flow-icon {
   background: var(--sv-navy);
   color: var(--rose);
-  border-color: rgb(217 207 168 / 0.439);
+  border-color: #b5b6fc70;
   animation: tech-step-pulse 8s infinite;
 }
 .technology-page .tech-flow-grid article:nth-child(2) .flow-icon {
@@ -82,15 +82,15 @@
 }
 .technology-page .tech-flow-grid p {
   font-size: 14px;
-  color: #d9cfa8;
+  color: #d4c9c3;
 }
 .technology-page .tech-note {
   font-size: 11px;
-  color: #d9cfa8;
+  color: #ab9992;
   margin-top: 28px;
 }
 .tech-processing {
-  background: linear-gradient(110deg, #151515, var(--sv-navy) 50%, var(--sv-navy));
+  background: linear-gradient(110deg, #982332, var(--sv-navy) 50%, var(--sv-navy));
   color: var(--ivory);
 }
 .technology-page .tech-processing .eyebrow {
@@ -105,7 +105,7 @@
   gap: 36px;
 }
 .tech-processing-grid article {
-  border-top: 1px solid rgb(217 207 168 / 0.439);
+  border-top: 1px solid #b5b6fc70;
   padding-top: 22px;
 }
 .tech-processing-grid article > span {
@@ -115,7 +115,7 @@
 }
 .tech-processing-grid h3 {
   font:
-    400 26px/1.4 "Nunito",
+    400 26px/1.4 "Playfair Display",
     Georgia,
     serif;
   margin: 14px 0 12px;
@@ -151,7 +151,7 @@
   transform: translateX(-50%);
   width: calc(100% - 48px);
   height: 1px;
-  background: rgb(217 207 168 / 0.251);
+  background: #b5b6fc40;
 }
 .technology-page .tech-transparency h2 {
   color: var(--ivory);
@@ -161,7 +161,7 @@
   color: var(--rose);
 }
 .technology-page .tech-transparency p:not(.eyebrow) {
-  color: #d9cfa8;
+  color: #cdbdb5;
   font-size: 13px;
   max-width: 720px;
 }
@@ -186,7 +186,7 @@
   18% {
     background: var(--sv-navy);
     color: var(--sv-pearl);
-    box-shadow: 0 0 0 5px rgb(217 207 168 / 0.071);
+    box-shadow: 0 0 0 5px #b5b6fc12;
   }
   25%,
   100% {
@@ -276,7 +276,7 @@
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 24px;
   align-items: center;
-  border-top: 1px solid #d9cfa8;
+  border-top: 1px solid #cbb8af;
   padding-top: 24px;
 }
 .tech-closeup-photo {
@@ -284,7 +284,7 @@
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  background: #151515;
+  background: #272022;
 }
 .tech-closeup-photo img {
   width: 100%;
@@ -299,8 +299,8 @@
   justify-content: center;
   gap: 16px;
   padding: 20px;
-  background: linear-gradient(140deg, #151515, var(--sv-navy));
-  color: #151515;
+  background: linear-gradient(140deg, #442128, var(--sv-navy));
+  color: #d1a39c;
   text-align: center;
 }
 .tech-closeup-placeholder svg {
@@ -316,19 +316,19 @@
   top: 12px;
   left: 14px;
   font:
-    italic 19px "Nunito",
+    italic 19px "Playfair Display",
     Georgia,
     serif;
   color: var(--sv-lavender);
 }
 .tech-closeup-copy .tech-closeup-label {
   font: 500 10px/1.6 var(--sans);
-  color: #3b3830;
+  color: #8b5a55;
   margin: 0 0 8px;
 }
 .tech-closeup-copy h3 {
   font:
-    400 26px/1.3 "Nunito",
+    400 26px/1.3 "Playfair Display",
     Georgia,
     serif;
   color: var(--sv-navy);

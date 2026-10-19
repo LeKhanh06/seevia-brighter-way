@@ -19,7 +19,7 @@
     circle at 66% 50%,
     transparent 0,
     transparent 94px,
-    rgb(21 21 21 / 0.063) 95px,
+    #c9898810 95px,
     transparent 96px
   );
   pointer-events: none;
@@ -30,8 +30,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle 280px at var(--lx, 66%) var(--ly, 34%),
-    rgb(21 21 21 / 0.42),
-    rgb(21 21 21 / 0.16) 55%,
+    rgba(212, 106, 122, 0.42),
+    rgba(161, 0, 21, 0.16) 55%,
     transparent 100%
   );
 }
@@ -44,7 +44,7 @@
 .hero-label {
   display: inline-block;
   color: var(--sv-pearl);
-  border-bottom: 1px solid #d9cfa8;
+  border-bottom: 1px solid #a69a88;
   padding-bottom: 12px;
   margin-bottom: 25px;
 }
@@ -110,8 +110,8 @@
   content: "";
   position: absolute;
   inset: -11px;
-  border-top: 1px solid rgb(21 21 21 / 0.4);
-  border-right: 1px solid rgb(21 21 21 / 0.4);
+  border-top: 1px solid #426af866;
+  border-right: 1px solid #426af866;
   border-radius: 50%;
   transform: rotate(-25deg);
 }
@@ -159,9 +159,9 @@
 }
 .product-viewer {
   background:
-    radial-gradient(ellipse at 12% 40%, #151515, transparent 38%),
-    radial-gradient(ellipse at 93% 27%, #151515, transparent 25%), #151515;
-  color: #d9cfa8;
+    radial-gradient(ellipse at 12% 40%, #42212b, transparent 38%),
+    radial-gradient(ellipse at 93% 27%, #312b2d, transparent 25%), #181619;
+  color: #dbd0c2;
   padding: 35px 4.3% 40px;
   min-height: 835px;
   overflow: hidden;
@@ -175,7 +175,7 @@
   display: grid;
   place-items: center;
   position: relative;
-  color: #d9cfa8;
+  color: #92817a;
   font-size: 16px;
 }
 .product-ellipses {
@@ -183,15 +183,15 @@
   width: 95%;
   height: 140px;
   bottom: 48px;
-  border: 1px solid rgb(217 207 168 / 0.11);
+  border: 1px solid #bc7b771c;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgb(217 207 168 / 0.149), transparent 48%);
+  background: radial-gradient(ellipse, #dbc4b826, transparent 48%);
 }
 .product-ellipses:after {
   content: "";
   position: absolute;
   inset: 20px 8%;
-  border: 1px solid rgb(217 207 168 / 0.157);
+  border: 1px solid #bc7b7728;
   border-radius: 50%;
 }
 .product-caption h2 {
@@ -226,7 +226,7 @@
   margin: 20px 0 34px;
 }
 .tabs button {
-  border: 1px solid #151515;
+  border: 1px solid #c46879;
   color: var(--sv-navy);
   border-radius: 24px;
   background: transparent;
@@ -259,7 +259,7 @@
 }
 .about {
   background: var(--sv-navy);
-  color: #d9cfa8;
+  color: #c1b8ad;
   display: grid;
   grid-template-columns: 1fr 1.24fr;
   gap: 88px;
@@ -268,7 +268,7 @@
 }
 .belief {
   position: relative;
-  background: linear-gradient(120deg, var(--sv-navy), #151515);
+  background: linear-gradient(120deg, var(--sv-navy), #401824);
   padding: 44px 48px;
   min-height: 596px;
   display: flex;
@@ -281,17 +281,17 @@
   position: absolute;
   width: 520px;
   height: 520px;
-  border: 1px solid rgb(21 21 21 / 0.094);
+  border: 1px solid #426af818;
   border-radius: 50%;
   left: -50px;
   bottom: -240px;
   pointer-events: none;
   box-shadow:
-    0 0 0 28px rgb(21 21 21 / 0.024),
-    0 0 0 75px rgb(21 21 21 / 0.016);
+    0 0 0 28px #426af806,
+    0 0 0 75px #426af804;
 }
 .belief .eyebrow {
-  color: #d9cfa8;
+  color: #dda7aa;
 }
 .belief h2 {
   font: italic 500 59px/1.2 var(--serif);
@@ -318,12 +318,12 @@
 }
 .about-copy hr {
   border: 0;
-  border-top: 1px solid #3b3830;
+  border-top: 1px solid #74685e;
   margin: 30px 0;
 }
 .about-copy h3 {
   font-size: 20px;
-  color: #d9cfa8;
+  color: #ddd5c9;
   margin-bottom: 12px;
 }
 .about-copy .button {
@@ -354,12 +354,12 @@
 }
 .community-placeholder {
   height: 432px;
-  background: #d9cfa8;
+  background: #d9d9d9;
   border-radius: 0 48px 0 48px;
 }
 .partnership {
   background:
-    radial-gradient(ellipse at 50% 20%, var(--sv-navy), transparent 80%), #151515;
+    radial-gradient(ellipse at 50% 20%, var(--sv-navy), transparent 80%), #421821;
   color: var(--sv-pearl);
   text-align: center;
   min-height: 618px;
@@ -367,7 +367,7 @@
   padding-bottom: 110px;
 }
 .partnership > .eyebrow {
-  color: #d9cfa8;
+  color: #dda7aa;
 }
 .partnership h2 {
   font: 600 48px/1.3 var(--serif);
@@ -388,18 +388,18 @@
 .radar-section {
   height: 700px;
   position: relative;
-  background-color: #151515;
+  background-color: #141010;
   background-image:
-    linear-gradient(rgb(217 207 168 / 0.047) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(217 207 168 / 0.047) 1px, transparent 1px);
+    linear-gradient(#ddada20c 1px, transparent 1px),
+    linear-gradient(90deg, #ddada20c 1px, transparent 1px);
   background-size: 125px 125px;
   overflow: hidden;
   display: flex;
   align-items: end;
   padding: 0 3.7% 165px;
-  border-top: 1px solid #3b3830;
-  border-bottom: 1px solid rgb(21 21 21 / 0.133);
-  color: #d9cfa8;
+  border-top: 1px solid #a13a4a;
+  border-bottom: 1px solid #a13a4a22;
+  color: #ddd4c8;
 }
 .radar-copy {
   width: 36%;

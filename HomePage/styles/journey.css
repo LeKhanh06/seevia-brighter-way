@@ -23,7 +23,7 @@
 
 .journey-glow {
   fill: none;
-  stroke: #ffd400;
+  stroke: #6cd6fc;
   stroke-width: 14;
   opacity: 0.26;
 }
@@ -37,7 +37,7 @@
 
 .journey-run {
   fill: none;
-  stroke: #fff8d6;
+  stroke: #f5f4ff;
   stroke-width: 3;
   stroke-linecap: round;
   opacity: 0.8;

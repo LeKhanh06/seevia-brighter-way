@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
+import HeroGlows from "../src/components/HeroGlows";
 import organizations from "./organizations.json";
 import "./Partner.css";
 
@@ -93,6 +94,7 @@ export default function Partner() {
       <Header active="partnership" />
       <main className="pt" id="partner-main" ref={main}>
         <section className="pt-hero">
+          <HeroGlows variant="partner" />
           <div className="pt-hero-copy">
             <h1>
               Những kết nối
@@ -110,6 +112,7 @@ export default function Partner() {
         </section>
         <section className="pt-section pt-directions" id="directions">
           <div className="pt-heading">
+            <p className="pt-eyebrow">HƯỚNG ĐỒNG HÀNH</p>
             <h2>
               Mỗi thế mạnh,
               <br />
@@ -123,7 +126,7 @@ export default function Partner() {
           <div className="pt-direction-grid">
             {directions.map(([title, label, body], i) => (
               <article className="pt-direction" key={title}>
-                <span className={`tile ${i === steps.length - 1 ? "tile-dome" : "tile-rib"}`} aria-hidden="true" />
+                <span className="pt-index">0{i + 1}</span>
                 <h3>{title}</h3>
                 <p className="pt-label">{label}</p>
                 <p>{body}</p>
@@ -133,6 +136,7 @@ export default function Partner() {
         </section>
         <section className="pt-section pt-directory" id="organizations">
           <div className="pt-heading">
+            <p className="pt-eyebrow">NHỮNG KẾT NỐI MONG MUỐN</p>
             <h2>
               Gần hơn với
               <br />
@@ -184,6 +188,7 @@ export default function Partner() {
         </section>
         <section className="pt-section pt-process">
           <div className="pt-heading">
+            <p className="pt-eyebrow">CÁCH CÙNG LÀM</p>
             <h2>
               Đi từng bước.
               <br />
@@ -193,7 +198,7 @@ export default function Partner() {
           <div className="pt-steps">
             {steps.map(([title, body], i) => (
               <article className="pt-step" key={title}>
-                <span className={`tile ${i === steps.length - 1 ? "tile-dome" : "tile-rib"}`} aria-hidden="true" />
+                <span className="pt-index">0{i + 1}</span>
                 <h3>{title}</h3>
                 <p>{body}</p>
               </article>

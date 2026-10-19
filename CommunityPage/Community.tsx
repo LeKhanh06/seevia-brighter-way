@@ -153,6 +153,7 @@ export default function Community() {
         <section className="cp-understand cp-section" id="understand">
           <div className="cp-container cp-reveal">
             <div className="cp-heading">
+              <p className="cp-eyebrow">HIỂU ĐỂ ĐỒNG HÀNH</p>
               <h2>
                 Mỗi người có một
                 <br />
@@ -191,6 +192,7 @@ export default function Community() {
         <section className="cp-stories cp-section" id="stories">
           <div className="cp-container">
             <div className="cp-heading cp-reveal">
+              <p className="cp-eyebrow">GÓC NHÌN ĐỜI SỐNG</p>
               <h2>
                 Những cuộc gặp,
                 <br />
@@ -231,10 +233,10 @@ export default function Community() {
                       </span>
                     </a>
                     <div className="cp-story-copy">
-                      <h3>{story.title}</h3>
                       <p className="cp-category">
                         {categories[story.category]}
                       </p>
+                      <h3>{story.title}</h3>
                       <p>{story.description}</p>
                       <a
                         className="cp-action cp-action-outline"
@@ -260,6 +262,7 @@ export default function Community() {
         <section className="cp-ecosystem cp-section" id="ecosystem">
           <div className="cp-container cp-reveal">
             <div className="cp-heading">
+              <p className="cp-eyebrow">HỆ SINH THÁI SEEVIA</p>
               <h2>
                 Từ nhu cầu của bạn,
                 <br />

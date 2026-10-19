@@ -1,9 +1,9 @@
 .product-viewer {
   position: relative;
   background:
-    radial-gradient(circle 470px at 12% 40%, rgb(21 21 21 / 0.329), transparent 100%),
-    radial-gradient(circle 370px at 93% 29%, rgb(217 207 168 / 0.161), transparent 100%),
-    #151515;
+    radial-gradient(circle 470px at 12% 40%, #9b344e54, transparent 100%),
+    radial-gradient(circle 370px at 93% 29%, #e8c3ad29, transparent 100%),
+    #1b191b;
   padding: 36px 1.4% 30px;
   min-height: 835px;
   color: var(--sv-pearl);
@@ -28,7 +28,7 @@
 .product-stage {
   height: 635px;
   position: relative;
-  color: #3b3830;
+  color: #80736b;
   font: 400 18px/1.5 var(--sans);
 }
 .product-stage > span {
@@ -39,17 +39,17 @@
   height: 170px;
   left: 1.5%;
   bottom: 76px;
-  border: 1px solid rgb(217 207 168 / 0.078);
+  border: 1px solid #c58d8714;
   border-radius: 50%;
   background: none;
 }
 .product-ellipses:after {
   inset: 25px 8%;
-  border: 1px solid rgb(217 207 168 / 0.149);
+  border: 1px solid #c58d8726;
   background: radial-gradient(
     ellipse,
-    rgb(217 207 168 / 0.259) 0%,
-    rgb(217 207 168 / 0.078) 30%,
+    #c58d8742 0%,
+    #c58d8714 30%,
     transparent 70%
   );
   border-radius: 50%;
@@ -61,7 +61,7 @@
 }
 .product-caption h2 {
   font:
-    italic 400 36px/49px "Nunito",
+    italic 400 36px/49px "Playfair Display",
     serif;
   letter-spacing: 0;
   color: var(--sv-pearl);

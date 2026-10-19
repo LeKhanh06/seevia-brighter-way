@@ -43,6 +43,7 @@ export default function CloseupParts() {
     <section className="tech-anatomy tech-section" id="technology-detail">
       <div className="tech-container">
         <header className="tech-section-title">
+          <p className="eyebrow">THIẾT KẾ & CHỨC NĂNG</p>
           <h2>Chi tiết công nghệ</h2>
         </header>
         <div className="tech-closeup-grid">
@@ -78,8 +79,12 @@ export default function CloseupParts() {
                       <span>Ảnh cận {part.title.toLowerCase()}</span>
                     </div>
                   )}
+                  <span className="tech-closeup-index" aria-hidden="true">
+                    0{index + 1}
+                  </span>
                 </figure>
                 <div className="tech-closeup-copy">
+                  <p className="tech-closeup-label">{part.label}</p>
                   <h3>{part.title}</h3>
                   <p>{part.description}</p>
                 </div>

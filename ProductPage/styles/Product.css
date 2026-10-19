@@ -1,5 +1,5 @@
 .product-page {
-  --product-serif: var(--display);
+  --product-serif: "Playfair Display", Georgia, serif;
   background: var(--sv-pearl);
   color: var(--sv-navy);
 }
@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   color: var(--sv-pearl);
-  background: linear-gradient(110deg, var(--sv-navy) 0%, #151515 52%, #151515 100%);
+  background: linear-gradient(110deg, var(--sv-navy) 0%, #76101a 52%, #ba0223 100%);
   isolation: isolate;
 }
 .product-hero .product-container {
@@ -34,7 +34,7 @@
   padding-bottom: 100px;
 }
 .product-hero h1 {
-  font: italic 500 72px/95px var(--display);
+  font: italic 500 72px/95px "Lora", Georgia, serif;
   color: var(--sv-lavender);
   letter-spacing: 0;
   margin: 0 0 28px;
@@ -47,15 +47,15 @@
 }
  .product-hero-rings {
   position:absolute; width:850px; height:850px; left:-257px; top:141px;
-  border:2px solid rgb(255 248 214 / 0.2); border-radius:50%; pointer-events:none; z-index:0;
+  border:2px solid #f5f4ff33; border-radius:50%; pointer-events:none; z-index:0;
 }
 .product-hero-rings:after {
   content:''; position:absolute; width:600px; height:600px; left:123px; top:123px;
-  border:2px solid rgb(255 248 214 / 0.2); border-radius:50%;
+  border:2px solid #f5f4ff33; border-radius:50%;
 }
 .product-watermark {
   position:absolute; right:-35px; top:155px;
-  font:italic 400 300px/1 var(--display);
+  font:italic 400 300px/1 "Playfair Display",Georgia,serif;
   color:transparent; -webkit-text-stroke:1px var(--sv-pearl); opacity:.2;
   white-space:nowrap; pointer-events:none; z-index:0;
 }
@@ -68,9 +68,9 @@
   font: 600 18px/30px var(--sans);
   min-height: 40px;
   padding: 5px 28px;
-  color: #151515;
+  color: #a71823;
 }
-.product-hero-actions .button-outline { font-weight:600; color:var(--sv-pearl); border-color:rgb(255 248 214 / 0.667); }
+.product-hero-actions .button-outline { font-weight:600; color:var(--sv-pearl); border-color:#f5f4ffaa; }
 .product-hero-actions .button>span { display:none; }
 .product-design {
   display: grid;
@@ -98,7 +98,7 @@
 .design-principles li {
   display: flex;
   gap: 28px;
-  border-top: 1px solid rgb(217 207 168 / 0.314);
+  border-top: 1px solid #b5b6fc50;
   padding: 23px 0;
 }
 .design-principles li > span {
@@ -118,22 +118,22 @@
   margin: 0;
 }
 .device-card {
-  background: #151515;
-  border: 1px solid rgb(217 207 168 / 0.09);
+  background: #151112;
+  border: 1px solid #b5b6fc17;
   border-radius: 40px;
   padding: 30px;
   overflow: hidden;
   background-image:
-    linear-gradient(rgb(217 207 168 / 0.027) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(217 207 168 / 0.027) 1px, transparent 1px);
+    linear-gradient(#dda7aa07 1px, transparent 1px),
+    linear-gradient(90deg, #dda7aa07 1px, transparent 1px);
   background-size: 100px 100px;
 }
 .device-illustration {
   position: relative;
-  border: 24px solid #d9cfa8;
+  border: 24px solid #c4c4c4;
   border-radius: 35px;
   overflow: hidden;
-  background: #151515;
+  background: #151112;
 }
 .device-illustration img {
   width: 100%;
@@ -154,7 +154,7 @@
 .device-hotspot.selected {
   background: var(--sv-pearl);
   color: var(--sv-navy);
-  box-shadow: 0 0 0 5px rgb(21 21 21 / 0.271);
+  box-shadow: 0 0 0 5px #426af845;
 }
 .device-features {
   display: grid;
@@ -173,8 +173,8 @@
   color: var(--sv-lavender);
 }
 .device-features button.selected {
-  background: rgb(21 21 21 / 0.169);
-  border-color: rgb(21 21 21 / 0.333);
+  background: #0202382b;
+  border-color: #426af855;
 }
 .device-features button > span {
   font-size: 14px;
@@ -191,18 +191,18 @@
   font-size: 13px;
   line-height: 1.6;
   margin: 0;
-  color: #d9cfa8;
+  color: #aaa09a;
 }
 .feature-feedback {
   font-size: 12px;
-  color: #d9cfa8;
+  color: #bdaba4;
   min-height: 40px;
   margin: 24px 10px 0;
 }
 .product-angle-placeholder {
   height: 350px;
-  background: #d9cfa8;
-  color: #3b3830;
+  background: #c4c4c4;
+  color: #5e554f;
   border-radius: 40px;
   margin-top: 55px;
   display: grid;
@@ -214,7 +214,7 @@
 .product-colors {
   background: var(--sv-pearl);
   padding: 65px 0;
-  border-block: 1px solid #d9cfa8;
+  border-block: 1px solid #e0cfc6;
 }
 .colors-layout {
   display: grid;
@@ -225,7 +225,7 @@
 .colors-layout figure {
   margin: 0;
   padding: 50px;
-  background: #d9cfa8;
+  background: #c4c4c4;
   border-radius: 40px;
 }
 .colors-layout figure img {
@@ -262,7 +262,7 @@
   border-radius: 50%;
   border: 3px solid #fff;
   display: block;
-  background: #d9cfa8;
+  background: #c4c4c4;
 }
 .color-option.selected > span {
   outline: 1px solid var(--sv-navy);
@@ -277,7 +277,7 @@
 .product-technology {
   padding: 75px 0 85px;
   background:
-    linear-gradient(transparent, transparent), var(--sv-navy);
+    radial-gradient(ellipse at 50% 42%, #020238a0, transparent 65%), var(--sv-navy);
   color: var(--sv-pearl);
 }
 .product-technology > .product-container > .eyebrow {
@@ -302,14 +302,14 @@
 }
 .technology-cards article {
   padding: 28px;
-  border: 1px solid rgb(217 207 168 / 0.082);
+  border: 1px solid #b5b6fc15;
   border-radius: 26px;
-  background: rgb(217 207 168 / 0.071);
+  background: #b5b6fc12;
   min-height: 260px;
 }
 .technology-cards .eyebrow {
   font-size: 13px;
-  color: #d9cfa8;
+  color: #e2b8ad;
 }
 .technology-cards h3 {
   font: 500 20px/1.5 var(--product-serif);
@@ -317,10 +317,10 @@
 }
 .technology-cards article > p:last-child {
   font-size: 15px;
-  color: #d9cfa8;
+  color: #e0c8c0;
 }
 .product-progress {
-  background: linear-gradient(110deg, #151515, #151515);
+  background: linear-gradient(110deg, #a10025, #620817);
   padding: 95px 0;
   color: var(--sv-pearl);
 }
@@ -339,7 +339,7 @@
   gap: 40px;
 }
 .product-progress li {
-  background: #151515;
+  background: #4f101b;
   border-radius: 27px;
   padding: 30px;
   min-height: 175px;
@@ -376,7 +376,7 @@
   margin: 40px 0 0;
 }
 .faq-questions details {
-  border-top: 1px solid #d9cfa8;
+  border-top: 1px solid #a9958d;
   padding: 20px 0;
 }
 .faq-questions summary {
@@ -405,7 +405,7 @@
 }
 .product-contact {
   background: var(--sv-orchid);
-  border-top: 1px solid #d9cfa8;
+  border-top: 1px solid #a9958d;
   padding: 65px 0;
 }
 .product-contact > .product-container {
@@ -680,7 +680,7 @@
   width: 850px;
   height: 850px;
   border-width: 1px;
-  border-color: rgb(255 248 214 / 0.11);
+  border-color: #f5f4ff1c;
   box-shadow: none;
 }
 .product-hero .product-hero-rings:after {
@@ -689,14 +689,14 @@
   left: 124px;
   top: 124px;
   border-width: 1px;
-  border-color: rgb(255 248 214 / 0.11);
+  border-color: #f5f4ff1c;
 }
 .product-hero .product-watermark {
   left: 42%;
   right: auto;
   top: 165px;
   font-size: 300px;
-  -webkit-text-stroke: 1px #d9cfa8;
+  -webkit-text-stroke: 1px #74798c;
   opacity: .27;
 }
 @media(max-width:1100px){
@@ -754,7 +754,7 @@
   margin: 0 0 20px;
 }
 .product-colors .colors-layout h2 {
-  font: 900 50px/1.15 var(--display);
+  font: italic 500 50px/1.35 'Lora', Georgia, serif;
   color: var(--sv-navy);
   margin: 0 0 40px;
   letter-spacing: -.5px;
@@ -788,29 +788,29 @@
 .product-page .product-technology {
   min-height: 943px;
   padding: 65px 0 90px;
-  background: radial-gradient(ellipse at 50% 51%,var(--sv-navy) 0%,#151515 30%,var(--sv-navy) 75%);
+  background: radial-gradient(ellipse at 50% 51%,var(--sv-navy) 0%,#491d25 30%,var(--sv-navy) 75%);
 }
 .product-technology h2 {font-size:60px;line-height:1.45;margin:40px 0 25px}
 .technology-answer {color:var(--sv-lavender)}
 .product-technology .product-tech-intro {font-size:18px;line-height:31px;max-width:660px}
 .product-technology .technology-cards {gap:60px;margin:70px 0 65px}
 .product-technology .technology-cards article {
-  min-height:275px;padding:25px 28px;border:1px solid rgb(217 207 168 / 0.09);border-radius:26px;
-  background:linear-gradient(135deg,rgb(255 248 214 / 0.051),rgb(21 21 21 / 0.071));box-shadow:inset 0 0 0 1px rgb(255 248 214 / 0.02);
+  min-height:275px;padding:25px 28px;border:1px solid #b5b6fc17;border-radius:26px;
+  background:linear-gradient(135deg,#f5f4ff0d,#426af812);box-shadow:inset 0 0 0 1px #f5f4ff05;
 }
-.product-technology .technology-cards h3{font:800 22px/1.3 var(--display);letter-spacing:0;margin:18px 0 12px}
-.product-technology .technology-cards .eyebrow{font-size:16px;font-weight:400;color:#d9cfa8;letter-spacing:.08em}
-.product-technology .technology-cards article>p:last-child{font-size:16px;line-height:31px;color:#d9cfa8}
+.product-technology .technology-cards h3{font:600 20px/1.5 'Playfair Display',serif;letter-spacing:.04em;margin:18px 0 12px}
+.product-technology .technology-cards .eyebrow{font-size:16px;font-weight:400;color:#dba99e;letter-spacing:.08em}
+.product-technology .technology-cards article>p:last-child{font-size:16px;line-height:31px;color:#eadbd4}
 .product-technology .button{font-size:20px;min-height:50px;padding:10px 28px}
-.product-page .product-progress{padding:105px 0 115px;background:radial-gradient(ellipse at 0% 50%,#3b3830 0%,var(--sv-navy) 50%,var(--sv-navy) 100%)}
+.product-page .product-progress{padding:105px 0 115px;background:radial-gradient(ellipse at 0% 50%,#ba2230 0%,var(--sv-navy) 50%,var(--sv-navy) 100%)}
 .product-progress .eyebrow{font-size:18px;font-weight:600}
 .product-progress h2{font-size:54px;line-height:1.4;margin:15px 0 48px}
 .product-progress ol{gap:38px}
-.product-progress li{min-height:175px;padding:35px 28px;border-radius:26px;background:rgb(21 21 21 / 0.851)}
+.product-progress li{min-height:175px;padding:35px 28px;border-radius:26px;background:#32141bd9}
 .product-progress h3{font-size:17px;font-weight:600;margin-bottom:12px}
-.product-progress li p{font-size:16px;line-height:26px;color:#d9cfa8}
+.product-progress li p{font-size:16px;line-height:26px;color:#e3c9c3}
 .product-progress li[aria-current=step] p{color:var(--sv-navy)}
-.product-page .product-contact{min-height:317px;display:flex;align-items:center;padding:65px 0;background:var(--sv-orchid);border-top:1px solid rgb(217 207 168 / 0.314)}
+.product-page .product-contact{min-height:317px;display:flex;align-items:center;padding:65px 0;background:var(--sv-orchid);border-top:1px solid #a9958d50}
 .product-contact>.product-container{padding-inline:8%}
 .product-contact h2{font-size:50px;line-height:1.4;margin-bottom:18px}
 .product-contact p{font-size:18px;line-height:31px}
@@ -912,8 +912,8 @@
   z-index: 0;
   pointer-events: none;
   background:
-    linear-gradient(transparent, transparent),
-    linear-gradient(135deg, rgb(21 21 21 / 0.141), rgb(217 207 168 / 0.094));
+    radial-gradient(circle 300px at var(--card-glow-x, 50%) var(--card-glow-y, 35%), #6cd6fc61, #426af836 42%, transparent 78%),
+    linear-gradient(135deg, #426af824, #b5b6fc18);
   opacity: 0;
   transition: opacity 300ms ease;
 }
@@ -927,8 +927,8 @@
     transform: translateY(-8px);
     translate: 0 0;
     filter: none;
-    border-color: rgb(255 212 0 / 0.612);
-    box-shadow: 0 20px 44px rgb(21 21 21 / 0.439), inset 0 1px 0 rgb(255 212 0 / 0.333);
+    border-color: #6cd6fc9c;
+    box-shadow: 0 20px 44px #02023870, inset 0 1px 0 #e5c6fc55;
   }
   #root .product-technology .technology-cards article:hover::before { opacity: 1; }
   #root .product-technology .technology-cards article:hover .eyebrow { color: var(--sv-cyan); }
@@ -939,6 +939,6 @@
   #root .product-technology .technology-cards article::before { transition: none; }
   #root .product-technology .technology-cards article:hover { transform: none; }
   #root .product-technology .technology-cards article::before {
-    background: linear-gradient(135deg, rgb(21 21 21 / 0.141), rgb(217 207 168 / 0.094));
+    background: linear-gradient(135deg, #426af824, #b5b6fc18);
   }
 }

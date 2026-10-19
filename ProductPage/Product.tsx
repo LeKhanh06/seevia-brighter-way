@@ -9,7 +9,8 @@ import {
   questions,
   technologies,
 } from "./data/productData";
-import GlassesDrawing from "./components/GlassesDrawing";
+import glassesDiagram from "./assets/glasses-diagram.png";
+import glassesBurgundy from "./assets/glasses-burgundy.png";
 import "./styles/Product.css";
 
 export default function Product() {
@@ -74,7 +75,7 @@ export default function Product() {
               fill="#74798c"
               filter="url(#wordmark-outline)"
               style={{
-                fontFamily: "var(--display)",
+                fontFamily: "Playfair Display, Georgia, serif",
                 fontStyle: "italic",
                 fontWeight: 400,
                 fontSize: 300,
@@ -95,9 +96,9 @@ export default function Product() {
               <br className="desktop-break" /> và chỉ lên tiếng khi bạn cần.
             </p>
             <div className="product-hero-actions">
-              <Button to="design">Thiết kế</Button>
-              <Button to="colors">Màu sắc</Button>
-              <Button to="technology">Công nghệ</Button>
+              <Button light to="design">Thiết kế</Button>
+              <Button light to="colors">Màu sắc</Button>
+              <Button light to="technology">Công nghệ</Button>
               <Button outline to="contact">Trao đổi về trải nghiệm</Button>
             </div>
           </div>
@@ -105,7 +106,8 @@ export default function Product() {
 
         <section className="product-design product-container" id="design">
           <div className="product-design-copy">
-                        <h2>Công nghệ chỉ có ích khi bạn quên rằng mình đang đeo nó.</h2>
+            <p className="eyebrow">THIẾT KẾ</p>
+            <h2>Công nghệ chỉ có ích khi bạn quên rằng mình đang đeo nó.</h2>
             <ol className="design-principles">
               {principles.map((p, i) => (
                 <li key={p.title}>
@@ -121,12 +123,10 @@ export default function Product() {
           <div className="product-design-visual">
             <div className="device-card">
               <div className="device-illustration">
-                <div
-                  role="img"
-                  aria-label="Sơ đồ kính SeeVia với bốn vị trí: camera, microphone, nút điều khiển và phản hồi âm thanh."
-                >
-                  <GlassesDrawing callouts className="device-drawing" />
-                </div>
+                <img
+                  src={glassesDiagram}
+                  alt="Sơ đồ kính SeeVia với bốn vị trí: camera, microphone, nút điều khiển và phản hồi âm thanh."
+                />
                 {features.map((f, i) => (
                   <button
                     className={`device-hotspot ${feature === i ? "selected" : ""}`}
@@ -175,12 +175,13 @@ export default function Product() {
         <section className="product-colors" id="colors">
           <div className="product-container colors-layout">
             <figure>
-              <div role="img" aria-label="Bản vẽ gọng kính SeeVia màu burgundy.">
-                <GlassesDrawing frame="#7a1823" className="colors-drawing" />
-              </div>
-              <figcaption>Burgundy</figcaption>
+              <img
+                src={glassesBurgundy}
+                alt="Bản vẽ gọng kính SeeVia màu burgundy."
+              />
             </figure>
             <div>
+              <p className="eyebrow">MÀU SẮC</p>
               <h2>
                 Đa dạng sắc màu,
                 <br />
@@ -213,6 +214,7 @@ export default function Product() {
 
         <section className="product-technology">
           <div className="product-container">
+            <p className="eyebrow">CÔNG NGHỆ TRONG KÍNH</p>
             <h2>
               Một chạm, một câu nói.
               <br />
@@ -224,8 +226,16 @@ export default function Product() {
             </p>
             <div className="technology-cards">
               {technologies.map((t) => (
-                <article key={t.label}>
-                  <span className="tile tile-dome" aria-hidden="true" />
+                <article
+                  key={t.label}
+                  onPointerMove={(event) => {
+                    if (event.pointerType !== "mouse") return;
+                    const bounds = event.currentTarget.getBoundingClientRect();
+                    event.currentTarget.style.setProperty("--card-glow-x", `${event.clientX - bounds.left}px`);
+                    event.currentTarget.style.setProperty("--card-glow-y", `${event.clientY - bounds.top}px`);
+                  }}
+                >
+                  <p className="eyebrow">{t.label}</p>
                   <h3>
                     {t.label === "HIỂU CẢNH" ? (
                       <>
@@ -247,6 +257,7 @@ export default function Product() {
 
         <section className="product-progress">
           <div className="product-container">
+            <p className="eyebrow">TIẾN TRÌNH PHÁT TRIỂN</p>
             <h2>Từng bước đưa SeeVia đến gần bạn.</h2>
             <ol>
               {milestones.map(([title, description], i) => (
@@ -262,6 +273,7 @@ export default function Product() {
         <section className="product-faq" id="product-faq">
           <div className="product-container faq-layout">
             <div>
+              <p className="eyebrow">CÂU HỎI THƯỜNG GẶP</p>
               <h2>
                 Điều bạn có thể
                 <br />

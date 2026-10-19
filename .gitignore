@@ -10,7 +10,3 @@ test-results/
 .vercel/
 *.tsbuildinfo
 
-
-# Impeccable working files (screenshots, decision server state)
-.impeccable/review/
-.impeccable/questions/

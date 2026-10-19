@@ -1,5 +1,5 @@
 ﻿.about-editorial {
-  --ab-serif: var(--display);
+  --ab-serif: "Playfair Display", Georgia, serif;
   --ab-line: var(--sv-lavender);
   background: var(--sv-pearl);
   color: var(--charcoal);
@@ -17,7 +17,7 @@
 }
 .about-editorial h1 {
   font:
-    italic 500 clamp(38px, 4vw, 58px)/1.35 "Nunito",
+    italic 500 clamp(38px, 4vw, 58px)/1.35 "Lora",
     Georgia,
     serif;
   letter-spacing: -0.02em;
@@ -96,10 +96,10 @@
 }
 .about-editorial .ab-hero .ab-action-outline {
   color: var(--burgundy);
-  border-color: rgb(21 21 21 / 0.502);
+  border-color: #02023880;
 }
 .about-editorial .ab-hero .ab-action-outline:hover {
-  background: rgb(21 21 21 / 0.039);
+  background: #0202380a;
   border-color: var(--burgundy);
 }
 .about-editorial .ab-hero-copy > p:not(.ab-eyebrow) {
@@ -122,19 +122,24 @@
 .about-editorial .ab-why,
 .about-editorial .ab-direction {
   background:
-    linear-gradient(transparent, transparent), var(--sv-navy);
+    radial-gradient(ellipse at 65% 50%, #02023870, transparent 72%), var(--sv-navy);
   color: var(--ivory);
 }
 .about-editorial .ab-why {
   background-color: var(--sv-navy);
-  background-image: linear-gradient(transparent, transparent);
+  background-image: radial-gradient(
+    circle 380px at 78% 46%,
+    #020238b3 0%,
+    #02023852 44%,
+    #02023800 100%
+  );
 }
 .about-editorial .ab-why h2 {
   color: var(--sv-pearl);
 }
 .about-editorial .ab-why .ab-section-heading > p,
 .about-editorial .ab-direction-copy > p {
-  color: #d9cfa8;
+  color: #d4c9c3;
   font-size: 14px;
 }
 .about-editorial .ab-needs {
@@ -143,7 +148,7 @@
   gap: 30px;
 }
 .about-editorial .ab-needs article {
-  border-top: 1px solid rgb(217 207 168 / 0.4);
+  border-top: 1px solid #b5b6fc66;
   padding-top: 22px;
 }
 .about-editorial .ab-needs h3 {
@@ -153,7 +158,7 @@
 }
 .about-editorial .ab-needs p {
   font-size: 13px;
-  color: #d9cfa8;
+  color: #e0d5cf;
 }
 .about-editorial .ab-evidence {
   background: linear-gradient(110deg, var(--sv-orchid), var(--sv-pearl) 75%);
@@ -213,7 +218,12 @@
   gap: 70px;
   align-items: start;
   background:
-    linear-gradient(transparent, transparent),
+    radial-gradient(
+      ellipse at 10% 30%,
+      #ba02238c 0%,
+      #a3212c59 38%,
+      transparent 78%
+    ),
     var(--sv-navy);
 }
 .about-editorial .ab-direction .ab-section-heading {
@@ -225,7 +235,7 @@
   gap: 0;
 }
 .about-editorial .ab-principles article {
-  border-top: 1px solid rgb(217 207 168 / 0.333);
+  border-top: 1px solid #b5b6fc55;
   padding-block: 20px;
   display: flex;
   gap: 16px;
@@ -239,11 +249,11 @@
   margin-bottom: 10px;
 }
 .about-editorial .ab-principles p {
-  color: #d9cfa8;
+  color: #d4c9c3;
   font-size: 13px;
 }
 .about-editorial .ab-founders {
-  background: linear-gradient(110deg, var(--sv-pearl), rgb(255 212 0 / 0.502));
+  background: linear-gradient(110deg, var(--sv-pearl), #e5c6fc80);
 }
 .about-editorial .ab-founder-grid {
   display: grid;
@@ -255,8 +265,8 @@
   aspect-ratio: 4 / 4.5;
   display: grid;
   place-items: center;
-  color: rgb(217 207 168 / 0.502);
-  background: linear-gradient(145deg, #151515, var(--sv-navy));
+  color: #b5b6fc80;
+  background: linear-gradient(145deg, #382329, var(--sv-navy));
 }
 .about-editorial .ab-founder-photo > span {
   position: absolute;
@@ -279,7 +289,7 @@
   margin-top: 6px;
 }
 .about-editorial .ab-connect {
-  background: linear-gradient(110deg, #3b3830, var(--sv-navy) 48%, var(--sv-navy));
+  background: linear-gradient(110deg, #a3212c, var(--sv-navy) 48%, var(--sv-navy));
   color: var(--ivory);
   padding-block: 40px;
   display: flex;
@@ -331,11 +341,11 @@
 }
 .about-editorial .ab-action-outline {
   background: transparent;
-  border-color: rgb(217 207 168 / 0.502);
+  border-color: #b5b6fc80;
   color: var(--ivory);
 }
 .about-editorial .ab-action-outline:hover {
-  background: rgb(255 248 214 / 0.047);
+  background: #f5f4ff0c;
   border-color: var(--rose);
 }
 .about-editorial .ab-action-solid {

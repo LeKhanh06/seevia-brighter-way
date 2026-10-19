@@ -206,6 +206,7 @@ export default function News() {
         </section>
         <section className="np-feature np-section" id="featured">
           <div className="np-container">
+            <p className="np-eyebrow">TIÊU ĐIỂM</p>
             <article className="np-feature-grid np-reveal">
               <figure>
                 <a
@@ -255,6 +256,7 @@ export default function News() {
         <section className="np-journal np-section" id="journal">
           <div className="np-container">
             <header className="np-heading">
+              <p className="np-eyebrow">ĐỌC & KHÁM PHÁ</p>
               <h2>Tin tức và ghi chú</h2>
             </header>
             <div className="np-tools">
@@ -402,6 +404,7 @@ export default function News() {
         </section>
         <section className="np-perspective np-section" id="perspective">
           <div className="np-container">
+            <p className="np-eyebrow">GÓC NHÌN SEEVIA</p>
             <h2>
               Công nghệ thay đổi.
               <br />
@@ -423,6 +426,7 @@ export default function News() {
         </section>
         <section className="np-sources">
           <div className="np-container">
+            <p className="np-eyebrow">THÔNG TIN BIÊN TẬP</p>
             <p>
               Tin tham khảo được tóm tắt từ nguồn ghi kèm, với ngày đăng theo
               bài gốc. Ghi chú “Từ SeeVia” trình bày định hướng dự án, không
