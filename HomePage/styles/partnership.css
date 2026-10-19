@@ -1,7 +1,7 @@
 .partnership.section-pad {
   min-height: 617px;
   padding: 110px 9% 115px;
-  background: radial-gradient(ellipse at 50% 45%, var(--sv-navy) 0%, #451723 100%);
+  background: radial-gradient(ellipse at 50% 45%, var(--sv-navy) 0%, #151515 100%);
   color: var(--sv-pearl);
   text-align: center;
   display: flex;
@@ -17,7 +17,7 @@
 }
 .partnership h2 {
   font:
-    700 50px/86px "Playfair Display",
+    700 50px/86px "Nunito",
     serif;
   letter-spacing: 0;
   color: var(--sv-pearl);

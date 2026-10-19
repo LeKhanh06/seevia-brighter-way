@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T00:00:00Z",
+  "title": "Design System: SeeVia",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "neutral", "displayName": "Signage Ink", "canonical": "#151515", "tonalRamp": ["#151515", "#2a2a2a", "#3f3f3f", "#5a5a5a", "#7a7a7a", "#9e9e9e", "#c6c6c6", "#ececec"] },
+      "ink-soft": { "role": "neutral", "displayName": "Worn Ink", "canonical": "#3b3830", "tonalRamp": ["#1d1b17", "#3b3830", "#55514a", "#706b62", "#8d887e", "#aba69c", "#cbc7be", "#ebe8e2"] },
+      "lemon": { "role": "primary", "displayName": "Guidance Lemon", "canonical": "#ffd400", "tonalRamp": ["#3d3200", "#6b5800", "#9a7f00", "#c9a500", "#e3bb00", "#ffd400", "#ffe566", "#fff3a8"] },
+      "lemon-deep": { "role": "primary", "displayName": "Tile Body", "canonical": "#e3bb00", "tonalRamp": ["#3d3200", "#6b5800", "#9a7f00", "#c9a500", "#e3bb00", "#ffd400", "#ffe566", "#fff3a8"] },
+      "lemon-shade": { "role": "primary", "displayName": "Tile Shadow Edge", "canonical": "#c9a500", "tonalRamp": ["#3d3200", "#6b5800", "#9a7f00", "#c9a500", "#e3bb00", "#ffd400", "#ffe566", "#fff3a8"] },
+      "dome-glint": { "role": "primary", "displayName": "Dome Glint", "canonical": "#fff3a8", "tonalRamp": ["#3d3200", "#6b5800", "#9a7f00", "#c9a500", "#e3bb00", "#ffd400", "#ffe566", "#fff3a8"] },
+      "cream": { "role": "neutral", "displayName": "Pavement Cream", "canonical": "#fff8d6", "tonalRamp": ["#3a3726", "#6b664a", "#9a9470", "#c4bd96", "#e2dab0", "#f6edc2", "#fff8d6", "#fffcee"] },
+      "cream-deep": { "role": "neutral", "displayName": "Deep Cream", "canonical": "#f6edc2", "tonalRamp": ["#3a3726", "#6b664a", "#9a9470", "#c4bd96", "#e2dab0", "#f6edc2", "#fff8d6", "#fffcee"] },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#ffffff", "tonalRamp": ["#262626", "#474747", "#6b6b6b", "#8f8f8f", "#b3b3b3", "#d6d6d6", "#efefef", "#ffffff"] },
+      "joint": { "role": "neutral", "displayName": "Joint", "canonical": "rgb(21 21 21 / 7%)" },
+      "line": { "role": "neutral", "displayName": "Line", "canonical": "rgb(21 21 21 / 18%)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home opening h1 only." },
+      "display-inner": { "displayName": "Display (inner pages)", "purpose": "Opening h1 on inner pages." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2; statement sections may run larger." },
+      "title": { "displayName": "Title", "purpose": "h3, walk-row and step names." },
+      "lede": { "displayName": "Lede", "purpose": "First paragraph after an opening h1, 34-52ch." },
+      "body": { "displayName": "Body", "purpose": "All reading copy; 17px under 760px." },
+      "note": { "displayName": "Note", "purpose": "Disclaimers, captions, hints, in ink-soft." },
+      "label": { "displayName": "Label", "purpose": "Nav, form labels, tabs, legends." },
+      "button": { "displayName": "Button", "purpose": "Pill button text." }
+    },
+    "shadows": [
+      { "name": "drawer-cast", "value": "-18px 0 40px rgb(21 21 21 / 22%)", "purpose": "Lemon menu drawer overlay." },
+      { "name": "assistant-launcher", "value": "0 8px 20px rgb(21 21 21 / 25%)", "purpose": "Floating SeeVia AI launcher." },
+      { "name": "assistant-panel", "value": "0 24px 60px rgb(21 21 21 / 30%)", "purpose": "Open SeeVia AI panel." },
+      { "name": "dome-relief", "value": "inset 0 -3px 0 #c9a500, 0 0 0 2.5px #151515", "purpose": "Raised dome on rail stops and tiles." },
+      { "name": "cell-dome-raised", "value": "0 10px 18px rgb(21 21 21 / 28%), inset 0 -8px 0 rgb(255 255 255 / 6%)", "purpose": "Raised ink domes of the braille cell." },
+      { "name": "focus-halo", "value": "0 0 0 7px #ffd400", "purpose": "Lemon halo outside the 3px ink focus outline (offset 3px)." },
+      { "name": "selected-ring", "value": "0 0 0 4px #ffd400, 0 0 0 6.5px #151515", "purpose": "Selected swatch and current rail stop." }
+    ],
+    "motion": [
+      { "name": "state", "value": "0.18s ease", "purpose": "Button fill/colour flips." },
+      { "name": "rail-stop", "value": "0.25s ease", "purpose": "Rail stop shape change between dome and rib." },
+      { "name": "dome-rise", "value": "0.7s cubic-bezier(0.16, 1, 0.3, 1), stagger 0.16s", "purpose": "Braille cell domes rising on load; off under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "home-stack", "value": "1000px" },
+      { "name": "grid-stack", "value": "900px" },
+      { "name": "strip-band", "value": "760px" },
+      { "name": "compact", "value": "560px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink pill with lemon text; flips to lemon on hover. The default call to action.",
+      "html": "<button class=\"ds-btn-primary\">Khám phá sản phẩm <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 18L18 6M9 6H18V15\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 10px; font-family: Nunito, 'Be Vietnam Pro', Arial, sans-serif; font-weight: 900; font-size: 19px; min-height: 52px; padding: 12px 28px; border-radius: 999px; border: 3px solid #151515; background: #151515; color: #ffd400; cursor: pointer; transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease; } .ds-btn-primary:hover { background: #ffd400; color: #151515; } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 3px solid #151515; outline-offset: 3px; box-shadow: 0 0 0 7px #ffd400; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Transparent pill with ink edge; secondary action.",
+      "html": "<button class=\"ds-btn-outline\">Liên hệ hợp tác</button>",
+      "css": ".ds-btn-outline { font-family: Nunito, 'Be Vietnam Pro', Arial, sans-serif; font-weight: 900; font-size: 19px; min-height: 52px; padding: 12px 28px; border-radius: 999px; border: 3px solid #151515; background: transparent; color: #151515; cursor: pointer; transition: background-color 0.18s ease; } .ds-btn-outline:hover { background: #ffd400; } .ds-btn-outline:focus-visible { outline: 3px solid #151515; outline-offset: 3px; box-shadow: 0 0 0 7px #ffd400; }"
+    },
+    {
+      "name": "Ask Bar",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Pill field holding a text input and an ink submit button; lemon halo on focus.",
+      "html": "<label class=\"ds-ask-label\" for=\"ds-ask\">Hỏi SeeVia AI về dự án</label><div class=\"ds-ask\"><input id=\"ds-ask\" placeholder=\"Ví dụ: Đọc được hóa đơn không?\"><button>Hỏi SeeVia AI</button></div>",
+      "css": ".ds-ask-label { display: block; margin-bottom: 10px; font: 800 17px/1.3 Nunito, sans-serif; color: #151515; } .ds-ask { display: flex; gap: 10px; padding: 8px; max-width: 640px; background: #ffffff; border: 3px solid #151515; border-radius: 999px; } .ds-ask:focus-within { box-shadow: 0 0 0 6px #ffd400; } .ds-ask input { flex: 1; min-width: 0; padding: 0 16px; border: 0; background: transparent; font: 400 18px 'Be Vietnam Pro', Arial, sans-serif; color: #151515; outline: none; } .ds-ask input::placeholder { color: #5f5a4c; } .ds-ask button { font: 900 19px Nunito, sans-serif; min-height: 52px; padding: 12px 28px; border-radius: 999px; border: 3px solid #151515; background: #151515; color: #ffd400; cursor: pointer; } .ds-ask button:hover { background: #ffd400; color: #151515; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Cream header with ink bottom edge; current page is a lemon pill with an inset ink ring.",
+      "html": "<nav class=\"ds-nav\"><button aria-current=\"page\">Trang chủ</button><button>Sản phẩm</button><button>Công nghệ</button><button>Về chúng tôi</button></nav>",
+      "css": ".ds-nav { display: flex; gap: 12px; padding: 18px 24px; background: #fff8d6; border-bottom: 3px solid #151515; } .ds-nav button { font: 800 17px Nunito, sans-serif; color: #151515; background: transparent; border: 0; padding: 8px 16px; border-radius: 999px; cursor: pointer; } .ds-nav button:hover { background: #f6edc2; } .ds-nav button[aria-current=\"page\"] { background: #ffd400; box-shadow: inset 0 0 0 2.5px #151515; } .ds-nav button:focus-visible { outline: 3px solid #151515; outline-offset: 3px; box-shadow: 0 0 0 7px #ffd400; }"
+    },
+    {
+      "name": "Tabs",
+      "kind": "chip",
+      "refersTo": "tab-selected",
+      "description": "Paper pills with ink edge; selected inverts to ink with lemon text.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\">Đọc chữ</button><button role=\"tab\">Nhận diện tiền</button><button role=\"tab\">Mô tả xung quanh</button></div>",
+      "css": ".ds-tabs { display: flex; flex-wrap: wrap; gap: 10px; } .ds-tabs button { min-height: 48px; padding: 10px 20px; border-radius: 999px; border: 2.5px solid #151515; background: #ffffff; color: #151515; font: 800 17px Nunito, sans-serif; cursor: pointer; } .ds-tabs button:hover { background: #ffd400; } .ds-tabs button[aria-selected=\"true\"] { background: #151515; color: #ffd400; } .ds-tabs button:focus-visible { outline: 3px solid #151515; outline-offset: 3px; box-shadow: 0 0 0 7px #ffd400; }"
+    },
+    {
+      "name": "Walk Slab",
+      "kind": "card",
+      "refersTo": "slab-walk",
+      "description": "One outlined slab of full-width rows separated by joints; dome tile and lemon fill mark what is available now, rib tiles mark later directions.",
+      "html": "<ul class=\"ds-walk\"><li class=\"is-now\"><span class=\"ds-tile ds-dome\"></span><h3>Đọc &amp; Nhận diện</h3><p>Đọc chữ, nhận diện tiền và màu sắc.</p></li><li><span class=\"ds-tile ds-rib\"></span><h3>Kết nối</h3><p>Gọi điện, SOS, nhạc và AI.</p></li></ul>",
+      "css": ".ds-walk { margin: 0; padding: 0; list-style: none; border: 3px solid #151515; border-radius: 20px; overflow: hidden; background: #ffffff; font-family: 'Be Vietnam Pro', Arial, sans-serif; color: #151515; } .ds-walk li { display: grid; grid-template-columns: 52px minmax(140px, 0.9fr) minmax(0, 1.4fr); align-items: center; gap: 16px 28px; padding: 22px 28px; } .ds-walk li + li { border-top: 2px solid rgb(21 21 21 / 18%); } .ds-walk li.is-now { background: #ffd400; } .ds-walk h3 { margin: 0; font: 900 24px/1.2 Nunito, sans-serif; } .ds-walk p { margin: 0; font-size: 18px; } .ds-tile { display: inline-block; width: 52px; height: 52px; border-radius: 8px; background-color: #ffd400; box-shadow: inset 0 0 0 2.5px #151515; } .ds-dome { background-image: radial-gradient(circle at 40% 36%, #fff3a8 0 1.5px, transparent 2.5px), radial-gradient(circle, #e3bb00 0 4.5px, #c9a500 5px, transparent 6px); background-size: 13px 13px; background-position: 1px 1px; } .ds-rib { background-image: repeating-linear-gradient(90deg, transparent 0 6px, #e3bb00 6px 11px, #c9a500 11px 12px, transparent 12px 14px); background-position: 4px 0; }"
+    },
+    {
+      "name": "Guidance Strip Rail",
+      "kind": "custom",
+      "refersTo": "tile",
+      "description": "Lemon strip with section stops: passed = rib tile, current = inked dome with glint, upcoming = plain dome.",
+      "html": "<div class=\"ds-strip\"><button class=\"ds-stop is-passed\" aria-label=\"Phần 1\"><span></span></button><button class=\"ds-stop is-active\" aria-label=\"Phần 2\" aria-current=\"location\"><span></span></button><button class=\"ds-stop\" aria-label=\"Phần 3\"><span></span></button><button class=\"ds-stop\" aria-label=\"Phần 4\"><span></span></button></div>",
+      "css": ".ds-strip { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; width: 64px; padding: 14px 0; background: #ffd400; border: 3px solid #151515; } .ds-stop { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; cursor: pointer; } .ds-stop span { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff3a8 0 3px, transparent 4px), #e3bb00; box-shadow: inset 0 -3px 0 #c9a500, 0 0 0 2.5px #151515; transition: all 0.25s ease; } .ds-stop.is-passed span { width: 30px; height: 22px; border-radius: 5px; background: repeating-linear-gradient(90deg, #e3bb00 0 5px, #ffd400 5px 9px); box-shadow: 0 0 0 2.5px #151515; } .ds-stop.is-active span { width: 30px; height: 30px; background: radial-gradient(circle at 64% 34%, #fff8d6 0 4px, transparent 5px), #151515; box-shadow: 0 0 0 4px #ffd400, 0 0 0 6.5px #151515; } .ds-stop:hover span { transform: scale(1.12); } .ds-stop:focus-visible { outline: 3px solid #151515; outline-offset: 1px; }"
+    },
+    {
+      "name": "Braille Cell",
+      "kind": "custom",
+      "description": "The logo's S cell (dots 2, 3, 4 raised; dot 4 is the pupil) as tactile domes on a lemon plate.",
+      "html": "<div class=\"ds-cell\" aria-hidden=\"true\"><span class=\"ds-dot\"></span><span class=\"ds-dot up pupil\"></span><span class=\"ds-dot up\"></span><span class=\"ds-dot\"></span><span class=\"ds-dot up\"></span><span class=\"ds-dot\"></span></div>",
+      "css": ".ds-cell { --d: 64px; display: inline-grid; grid-template-columns: repeat(2, var(--d)); grid-auto-rows: var(--d); gap: calc(var(--d) * 0.36); padding: calc(var(--d) * 0.4); background: #ffd400; border: 3px solid #151515; border-radius: 28px; } .ds-dot { place-self: center; width: 34%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 38% 34%, #fff3a8 0 8%, transparent 14%), #e3bb00; box-shadow: inset 0 -4px 0 #c9a500, 0 0 0 2.5px rgb(21 21 21 / 35%); } .ds-dot.up { width: 100%; background: #151515; box-shadow: 0 10px 18px rgb(21 21 21 / 28%); } .ds-dot.pupil { position: relative; width: 118%; } .ds-dot.pupil::after { content: ''; position: absolute; right: 18%; top: 16%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: #fff8d6; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Guided Walkway",
+    "overview": "The site is laid like the tactile paving at a Vietnamese crosswalk. A lemon guidance strip runs down the left edge of every page; the page itself is cream pavement with faint square joints at a 96px tile pitch; content sits on flush slabs edged with 3px ink outlines and separated by joints. The two tile textures carry meaning everywhere they appear: dome tiles say stop and look (the current thing, the thing available now), rib tiles say keep going (passed, in progress, future direction). Type is ink, heavy and round; nothing glows.\n\nThe world is built for low-vision readers first. Contrast is high by construction (ink on cream, ink on lemon, lemon on ink), body text is 18px, headings are 900-weight rounded sans, and emphasis is a highlighter stroke rather than italic or colour. Density is calm: one idea per slab, generous section padding, long rows instead of grids of small cards.\n\nThe signature is the logo's six-dot braille cell (letter S, dots 2, 3, 4; dot 4 is also the pupil), rendered as tactile domes on a lemon plate in the home opening, and the same dome/rib vocabulary scaled down into section-rail stops, step markers and row tiles. It rejects the dark, glowing \"AI glasses\" hero and the icon-card feature grid.",
+    "keyCharacteristics": [
+      "Cream pavement ground with 1px joints at 96px tile pitch.",
+      "A fixed lemon guidance strip (64px; 14px on mobile) that doubles as the section rail.",
+      "Dome = stop and look; rib = keep going. Applied consistently to tiles, steps and rail stops.",
+      "Flush slabs with 3px ink outlines, divided by 2px joints, never floating cards.",
+      "Nunito 800/900 for every heading and control; Be Vietnam Pro 18px for reading.",
+      "Ink pill buttons with lemon text; monoline icons with round caps."
+    ],
+    "rules": [
+      { "name": "The Signage Pair Rule", "body": "Text is ink on cream, paper or lemon, or lemon/cream on ink. No other text pairing; no lemon text on light grounds.", "section": "colors" },
+      { "name": "The Highlighter Rule", "body": "Emphasis inside a heading is a highlighter band (58% to 92% of the line): lemon on cream and paper, paper on lemon slabs, plain lemon text with no band on ink slabs. Emphasis in body copy is weight 700, no band.", "section": "colors" },
+      { "name": "The Relief-Only Rule", "body": "lemon-deep, lemon-shade and dome-glint model tile relief and nothing else.", "section": "colors" },
+      { "name": "The Upright Rule", "body": "Nothing is italic, anywhere: em, blockquote, cite and quote classes are forced upright.", "section": "typography" },
+      { "name": "The One Display Voice Rule", "body": "h1 and h2 are always 900, h3 always 800, always Nunito, always ink (or lemon/cream on ink slabs).", "section": "typography" },
+      { "name": "The Wordmark Rule", "body": "\"SeeVia\" as a mark is never typeset; it is always the official hand-drawn wordmark from the logo files.", "section": "typography" },
+      { "name": "The Flush Paving Rule", "body": "Articles, figures, cards and panels in page content sit flush on the pavement with no shadow. Only overlays (drawer, assistant widget) cast shadows.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do set every heading in Nunito 900 (h3 800) and ink; keep body copy at 18px Be Vietnam Pro, 1.65 line height.",
+      "Do use dome tiles for \"stop and look / available now\" and rib tiles for \"keep going / passed / later\", and never swap them.",
+      "Do group related items as rows in one 3px-outlined slab separated by 2px joints.",
+      "Do emphasise heading words with the highlighter band: lemon on cream and paper, paper on lemon, lemon text on ink.",
+      "Do use the ink logo on cream, paper and lemon, and the lemon (or white) logo on ink; use the official SVG paths verbatim.",
+      "Do keep the 3px ink outline plus lemon halo focus ring on every interactive element, and 44px minimum targets.",
+      "Do draw icons and illustrations as monoline strokes with round caps and joins in currentColor."
+    ],
+    "donts": [
+      "Don't place the lemon logo (or any lemon text) on white, cream or other light grounds.",
+      "Don't retype \"SeeVia\" in Nunito, Be Vietnam Pro or any other font; use the wordmark file.",
+      "Don't use italics anywhere, including quotes and emphasis.",
+      "Don't set headings in ink-soft or any colour other than ink (lemon and cream only on ink slabs).",
+      "Don't float content blocks with shadows; shadows belong only to the drawer and the assistant widget.",
+      "Don't build a dark, glowing \"AI glasses\" hero or an icon-card feature grid.",
+      "Don't use lemon-deep, lemon-shade or the dome glint as text or flat fill colours."
+    ]
+  }
+}

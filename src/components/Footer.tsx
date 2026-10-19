@@ -1,4 +1,5 @@
 import { navigate, type Destination } from "../navigation";
+import Logo from "./Logo";
 const groups: { title: string; links: [string, Destination?][] }[] = [
   {
     title: "KHÁM PHÁ SEEVIA",
@@ -41,7 +42,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-main">
         <div className="footer-brand">
-          <a href="/" aria-label="SeeVia — Trang chủ"><img src="/images/260.png" alt="SeeVia" /></a>
+          <a href="/" aria-label="SeeVia — Trang chủ"><Logo /></a>
           <p>
             Hướng đến trải nghiệm dễ tiếp cận, sự tự chủ và kết nối trong cuộc
             sống.

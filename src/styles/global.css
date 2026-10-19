@@ -1,6 +1,6 @@
 :root {
   font-family: var(--sans);
-  color: #504b48;
+  color: #3b3830;
   background: var(--sv-pearl);
   font-synthesis: none;
   --burgundy: var(--sv-navy);
@@ -8,7 +8,7 @@
   --rose: var(--sv-lavender);
   --ivory: var(--sv-pearl);
   --sans: "Be Vietnam Pro", Arial, Helvetica, sans-serif;
-  --serif: "Lora", Georgia, "Times New Roman", serif;
+  --serif: var(--display);
 }
 * {
   box-sizing: border-box;
@@ -97,10 +97,10 @@ img {
   color: var(--sv-navy);
 }
 .button-light:hover {
-  background: #f0dcd2;
+  background: #d9cfa8;
 }
 .button-outline {
-  border-color: #efd3d0;
+  border-color: #d9cfa8;
   background: transparent;
 }
 .button-outline:hover {
@@ -136,7 +136,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 40;
-  box-shadow: 0 1px 0 #b5b6fc38, 0 8px 24px #1e0d1012;
+  box-shadow: 0 1px 0 rgb(217 207 168 / 0.22), 0 8px 24px rgb(21 21 21 / 0.071);
 }
 .logo {
   width: 182px;
@@ -157,7 +157,7 @@ img {
 }
 .main-nav a {
   padding: 12px 0;
-  border-bottom: 1px solid #eac0b4;
+  border-bottom: 1px solid #d9cfa8;
 }
 .header-tools {
   display: flex;
@@ -219,7 +219,7 @@ img {
   margin-bottom: 12px;
 }
 .footer-bottom {
-  border-top: 1px solid #6cd6fc80;
+  border-top: 1px solid rgb(255 212 0 / 0.502);
   margin-top: 50px;
   padding-top: 25px;
   display: flex;

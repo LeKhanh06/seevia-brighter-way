@@ -7,13 +7,13 @@
   --sv-dur-reveal: 600ms;
   --sv-dur-route: 450ms;
   /* the one gradient every accent should reuse */
-  --sv-grad-iridescent: linear-gradient(105deg, #6cd6fc, #426af8 38%, #b5b6fc 70%, #e5c6fc);
+  --sv-grad-iridescent: linear-gradient(105deg, #ffd400, #151515 38%, #d9cfa8 70%, #ffd400);
 }
 
 /* Layer sits at the bottom of #root's stacking context: transparent sections
    show it, opaque sections cover it. No z-index fights with existing CSS. */
 #root { isolation: isolate; }
-body { background: var(--sv-pearl, #f5f4ff); }
+body { background: var(--sv-pearl, #fff8d6); }
 
 .ribbon-field {
   position: fixed;
@@ -38,12 +38,12 @@ body { background: var(--sv-pearl, #f5f4ff); }
 @media (max-width: 760px) { .ribbon--c { display: none; } }
 
 /* ---- Let the ribbons show through. Active only while <RibbonField/> is mounted. ---- */
-.ribbon-on .hero.vision-hero { background: radial-gradient(ellipse at 92% 0%, #6cd6fc12, transparent 60%); }
+.ribbon-on .hero.vision-hero { background: radial-gradient(ellipse at 92% 0%, rgb(255 212 0 / 0.071), transparent 60%); }
 .ribbon-on .hero:not(.vision-hero) {
   background:
-    radial-gradient(ellipse at 82% 38%, #426af84d 0%, #6cd6fc20 28%, transparent 64%),
-    radial-gradient(ellipse at 62% 100%, #b5b6fc16 0%, transparent 56%),
-    linear-gradient(115deg, #020238 0%, #090943 55%, #101d62 100%);
+    radial-gradient(ellipse at 82% 38%, rgb(21 21 21 / 0.302) 0%, rgb(255 212 0 / 0.125) 28%, transparent 64%),
+    radial-gradient(ellipse at 62% 100%, rgb(217 207 168 / 0.086) 0%, transparent 56%),
+    linear-gradient(115deg, #151515 0%, #151515 55%, #151515 100%);
 }
 /* Replace the oversized diagonal bands in the home hero with quiet orbits. */
 .ribbon-field[data-home-hero="true"] .ribbon { display: none; }
@@ -53,7 +53,7 @@ body { background: var(--sv-pearl, #f5f4ff); }
   position: absolute;
   z-index: 0;
   pointer-events: none;
-  border: 1px solid #b5b6fc20;
+  border: 1px solid rgb(217 207 168 / 0.125);
   border-radius: 50%;
   width: min(72vw, 980px);
   height: min(72vw, 980px);
@@ -69,31 +69,31 @@ body { background: var(--sv-pearl, #f5f4ff); }
   height: min(90vw, 1220px);
   right: -31vw;
   top: -49vw;
-  border-color: #6cd6fc16;
+  border-color: rgb(255 212 0 / 0.086);
 }
 .ribbon-on .capabilities,
 .ribbon-on .community { background: transparent; }
 .ribbon-on .experience,
-.ribbon-on .ai-demo.section-pad { background: linear-gradient(106deg, #f5f4ff99, #e5c6fc73); }
+.ribbon-on .ai-demo.section-pad { background: linear-gradient(106deg, rgb(255 248 214 / 0.6), rgb(255 212 0 / 0.451)); }
 
 /* dark sections: translucent navy so ribbons glow faintly through.
    This also replaces the leftover maroon tints in these blocks. */
 .ribbon-on .product-viewer {
   background:
-    radial-gradient(circle 470px at 12% 40%, #426af833, transparent 100%),
-    radial-gradient(circle 370px at 93% 29%, #b5b6fc22, transparent 100%),
-    #020238d9;
+    radial-gradient(circle 470px at 12% 40%, rgb(21 21 21 / 0.2), transparent 100%),
+    radial-gradient(circle 370px at 93% 29%, rgb(217 207 168 / 0.133), transparent 100%),
+    rgb(21 21 21 / 0.851);
 }
-.ribbon-on .about.section-pad { background: #020238d9; }
+.ribbon-on .about.section-pad { background: rgb(21 21 21 / 0.851); }
 .ribbon-on .about .belief {
   background:
-    radial-gradient(circle 380px at -12% 100%, #426af838, transparent 100%),
-    linear-gradient(110deg, #020238, #14206b);
+    radial-gradient(circle 380px at -12% 100%, rgb(21 21 21 / 0.22), transparent 100%),
+    linear-gradient(110deg, #151515, #151515);
 }
 .ribbon-on .partnership.section-pad {
-  background: radial-gradient(ellipse at 50% 45%, #020238f2 0%, #10206ccc 100%);
+  background: radial-gradient(ellipse at 50% 45%, rgb(21 21 21 / 0.949) 0%, rgb(21 21 21 / 0.8) 100%);
 }
-.ribbon-on .radar-section { background-color: #020238d9; }
+.ribbon-on .radar-section { background-color: rgb(21 21 21 / 0.851); }
 
 /* Shared accent: any short rule becomes the ribbon gradient */
 .ribbon-on .short-line { background: var(--sv-grad-iridescent); }

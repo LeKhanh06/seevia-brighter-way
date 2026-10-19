@@ -1,9 +1,9 @@
 .photo-stage {
-  background: #211d1e;
+  background: #151515;
   border-radius: 28px;
   overflow: hidden;
   padding: 18px;
-  box-shadow: 0 16px 45px #02023812;
+  box-shadow: 0 16px 45px rgb(21 21 21 / 0.071);
 }
 .photo-topline {
   display: flex;
@@ -22,7 +22,7 @@
   width: 100%;
   overflow: hidden;
   border-radius: 14px;
-  background: #171516;
+  background: #151515;
 }
 .ai-visual .photo-wrap img {
   width: 100%;
@@ -40,7 +40,7 @@
   position: absolute;
   border: 2px solid var(--sv-vision);
   border-radius: 5px;
-  background: #426af814;
+  background: rgb(21 21 21 / 0.078);
   pointer-events: none;
 }
 .photo-box span {
@@ -48,7 +48,7 @@
   bottom: 100%;
   left: -2px;
   background: var(--sv-vision);
-  color: #211d1e;
+  color: #151515;
   font-size: 11px;
   padding: 4px 8px;
   border-radius: 5px 5px 0 0;
@@ -73,7 +73,7 @@
   top: 0;
   height: 2px;
   background: var(--sv-lavender);
-  box-shadow: 0 0 20px 5px #426af866;
+  box-shadow: 0 0 20px 5px rgb(21 21 21 / 0.4);
   animation: photo-sweep 4s ease-in-out infinite;
   pointer-events: none;
 }
@@ -97,7 +97,7 @@
   color: var(--sv-navy);
 }
 .demo-intro {
-  font-family: "Playfair Display", serif;
+  font-family: var(--display);
   font-size: 20px;
   line-height: 1.6;
 }
@@ -115,7 +115,7 @@
   font-size: 14px;
   letter-spacing: 0.04em;
   max-width: 100%;
-  color: #82776f;
+  color: #3b3830;
 }
 @media (max-width: 760px) {
   .ai-copy > .eyebrow {

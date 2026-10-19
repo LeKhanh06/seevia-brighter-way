@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>SeeVia logo</title><style>path{fill:#151515}@media (prefers-color-scheme:dark){path{fill:#FFD400}}</style><g transform="translate(-23.3 -23.3) scale(1.182)">
+
+<path d="M60 132a28 28 0 1 0 56 0a28 28 0 1 0 -56 0ZM60 204a28 28 0 1 0 56 0a28 28 0 1 0 -56 0Z"/>
+<path fill-rule="evenodd" d="M124 60a36 36 0 1 0 72 0a36 36 0 1 0 -72 0ZM159 48a13 13 0 1 0 26 0a13 13 0 1 0 -26 0Z"/>
+<path d="M74 60a14 14 0 1 0 28 0a14 14 0 1 0 -28 0ZM146 132a14 14 0 1 0 28 0a14 14 0 1 0 -28 0ZM146 204a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/>
+</g></svg>

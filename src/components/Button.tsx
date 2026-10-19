@@ -1,4 +1,5 @@
 import { navigate, type Destination } from "../navigation";
+import Arrow from "./Arrow";
 export default function Button({
   children,
   to,
@@ -16,7 +17,7 @@ export default function Button({
       onClick={() => navigate(to)}
     >
       {children}
-      <span aria-hidden="true">↗</span>
+      <Arrow />
     </button>
   );
 }

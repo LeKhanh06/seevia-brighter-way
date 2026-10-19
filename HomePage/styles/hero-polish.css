@@ -1,7 +1,7 @@
 .header.header {
   height: 84px;
-  background: linear-gradient(105deg, #721c25, var(--sv-navy));
-  border-bottom: 1px solid #b5b6fc30;
+  background: linear-gradient(105deg, #151515, var(--sv-navy));
+  border-bottom: 1px solid rgb(217 207 168 / 0.188);
   padding-inline: 7.5%;
 }
 .header .logo {
@@ -55,8 +55,8 @@
 .hero {
   min-height: clamp(590px, 76svh, 740px);
   background:
-    radial-gradient(ellipse at 78% 48%, #39232b55, transparent 54%), var(--sv-navy);
-  border-bottom: 1px solid #b1636840;
+    radial-gradient(ellipse at 78% 48%, rgb(21 21 21 / 0.333), transparent 54%), var(--sv-navy);
+  border-bottom: 1px solid rgb(217 207 168 / 0.251);
 }
 .hero-rings {
   inset: 0;
@@ -64,7 +64,7 @@
     circle at 75% 48%,
     transparent 0,
     transparent 98px,
-    #b5b6fc0b 99px,
+    rgb(217 207 168 / 0.043) 99px,
     transparent 100px
   );
 }
@@ -75,7 +75,7 @@
   right: 7.5%;
   bottom: 32px;
   height: 1px;
-  background: linear-gradient(90deg, #b5b6fc50, transparent 65%);
+  background: linear-gradient(90deg, rgb(217 207 168 / 0.314), transparent 65%);
   pointer-events: none;
 }
 .hero-content {
@@ -99,7 +99,7 @@
   content: "";
   width: 32px;
   height: 1px;
-  background: #b16368;
+  background: #d9cfa8;
 }
 .hero h1 {
   font-size: clamp(46px, 4.9vw, 72px);
@@ -113,8 +113,8 @@
   min-height: 80px;
   padding: 10px 18px;
   margin-bottom: 24px;
-  border-left: 1px solid #b16368;
-  background: linear-gradient(90deg, #b5b6fc08, transparent);
+  border-left: 1px solid #d9cfa8;
+  background: linear-gradient(90deg, rgb(217 207 168 / 0.031), transparent);
 }
 .hero .speech strong {
   font-size: 11px;
@@ -131,21 +131,21 @@
   font-size: 16px;
   min-height: 46px;
   padding: 10px 24px;
-  border: 1px solid #b5b6fc30;
+  border: 1px solid rgb(217 207 168 / 0.188);
   background: var(--sv-navy);
   box-shadow: 0 6px 24px #0002;
 }
 .hero .button:hover {
-  background: #8b2230;
-  border-color: #b5b6fc80;
+  background: #151515;
+  border-color: rgb(217 207 168 / 0.502);
 }
 .hero-object {
   font-size: 12px;
   letter-spacing: 0.06em;
   padding: 8px 12px;
-  border: 1px solid #b5b6fc25;
+  border: 1px solid rgb(217 207 168 / 0.145);
   border-radius: 2px;
-  background: #211c20b3;
+  background: rgb(21 21 21 / 0.702);
   color: var(--sv-lavender);
 }
 .hero-object span {
@@ -232,8 +232,8 @@
 }
 .hero {
   background:
-    radial-gradient(ellipse at 76% 42%, #5c1c2820, transparent 58%),
-    linear-gradient(115deg, var(--sv-navy), #191719);
+    radial-gradient(ellipse at 76% 42%, rgb(21 21 21 / 0.125), transparent 58%),
+    linear-gradient(115deg, var(--sv-navy), #151515);
 }
 .hero-rings {
   opacity: 0.65;
@@ -241,16 +241,16 @@
 .hero .light {
   background: radial-gradient(
     circle 280px at var(--lx, 66%) var(--ly, 34%),
-    #426af852 0%,
-    #3158e229 45%,
-    #02023808 75%,
+    rgb(21 21 21 / 0.322) 0%,
+    rgb(21 21 21 / 0.161) 45%,
+    rgb(21 21 21 / 0.031) 75%,
     transparent 100%
   );
 }
 .hero-object {
   opacity: var(--visibility, 0);
-  background: #201a1d80;
-  border-color: #b5b6fc20;
+  background: rgb(21 21 21 / 0.502);
+  border-color: rgb(217 207 168 / 0.125);
   border-radius: 3px;
   backdrop-filter: blur(4px);
 }
