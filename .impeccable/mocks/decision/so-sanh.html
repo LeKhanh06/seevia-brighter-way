@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4 hướng thiết kế SeeVia</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f1e4;color:#151515;font:16px/1.5 system-ui,"Segoe UI",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 80px}
+h1{font-size:26px;margin:0 0 6px}
+.lead{margin:0 0 28px;color:#444}
+section{margin-bottom:40px}
+h2{font-size:22px;margin:0 0 4px;display:flex;gap:12px;align-items:center}
+h2 .n{background:#151515;color:#FFD400;border-radius:99px;width:36px;height:36px;display:grid;place-items:center;font-size:18px}
+h2 .rec{font-size:13px;background:#FFD400;padding:2px 10px;border-radius:99px}
+p.d{margin:0 0 12px;max-width:80ch}
+.frame{width:100%;aspect-ratio:1440/900;position:relative;overflow:hidden;border:3px solid #151515;border-radius:10px;background:#fff}
+.frame iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0}
+</style></head><body><div class="wrap">
+<h1>4 hướng thiết kế cho web SeeVia</h1>
+<p class="lead">Mỗi ô là màn hình đầu tiên của trang chủ theo một hướng. Đây là bản phác, chưa phải thiết kế cuối.</p>
+
+<section><h2><span class="n">1</span>Vở ô li <span class="rec">Đề xuất</span></h2>
+<p class="d">Trang vở ô li kẻ mờ, menu là nhãn vở. Bút dạ quang vàng tô chữ kính đang đọc, chạy cùng giọng đọc tiếng Việt.</p>
+<div class="frame"><iframe src="assigned.html" scrolling="no" title="Vở ô li"></iframe></div></section>
+
+<section><h2><span class="n">2</span>Gạch dẫn hướng</h2>
+<p class="d">Dải gạch vàng chấm nổi, vạch kẻ chạy dọc trang làm trục điều hướng; chấm nổi ghép thành con mắt của logo.</p>
+<div class="frame"><iframe src="model-pick.html" scrolling="no" title="Gạch dẫn hướng"></iframe></div></section>
+
+<section><h2><span class="n">3</span>Áp phích chữ gỗ</h2>
+<p class="d">Tiêu đề Nunito siêu đậm xếp thành dải kín bề ngang, chữ rất to.</p>
+<div class="frame"><iframe src="challenger-hatch.html" scrolling="no" title="Áp phích chữ gỗ"></iframe></div></section>
+
+<section><h2><span class="n">4</span>Chuẩn của ngành</h2>
+<p class="d">Tiêu đề và nút bên trái, ảnh kính bên phải, hàng thẻ tính năng bên dưới.</p>
+<div class="frame"><iframe src="canon.html" scrolling="no" title="Chuẩn của ngành"></iframe></div></section>
+</div>
+<script>
+function fit(){document.querySelectorAll('.frame').forEach(f=>{f.querySelector('iframe').style.transform='scale('+(f.clientWidth/1440)+')'})}
+addEventListener('resize',fit);fit();
+</script>
+</body></html>

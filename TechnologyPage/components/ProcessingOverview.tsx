@@ -3,7 +3,6 @@ export function ProcessingOverview() {
     <section className="tech-processing tech-section">
       <div className="tech-container">
         <header className="tech-section-title">
-          <p className="eyebrow">XỬ LÝ THÔNG TIN</p>
           <h2>
             Từ ảnh chụp
             <br />
@@ -12,7 +11,6 @@ export function ProcessingOverview() {
         </header>
         <div className="tech-processing-grid">
           <article>
-            <span>01 / NHẬN DẠNG</span>
             <h3>Đọc chữ trong ảnh</h3>
             <p>
               OCR chuyển chữ in thành văn bản. Độ rõ của ảnh, ánh sáng và kích
@@ -20,7 +18,6 @@ export function ProcessingOverview() {
             </p>
           </article>
           <article>
-            <span>02 / PHÂN TÍCH</span>
             <h3>Hiểu theo yêu cầu</h3>
             <p>
               AI và thị giác máy tính phân tích vật thể, bối cảnh để chọn thông
@@ -28,7 +25,6 @@ export function ProcessingOverview() {
             </p>
           </article>
           <article>
-            <span>03 / PHẢN HỒI</span>
             <h3>Diễn đạt thành lời</h3>
             <p>
               Kết quả được chuyển thành giọng đọc tiếng Việt; phần chưa nhận

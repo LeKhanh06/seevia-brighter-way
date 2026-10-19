@@ -1,4 +1,5 @@
 import AssistantMessage from "./AssistantMessage";
+import Arrow from "./Arrow";
 import {
   useEffect,
   useMemo,
@@ -151,6 +152,16 @@ export default function SeeViaSupport() {
   const [welcomeError, setWelcomeError] = useState(false);
   const [welcomeVersion, setWelcomeVersion] = useState(0);
   const [draft, setDraft] = useState("");
+  // Trang có thể mở trợ lý kèm câu hỏi soạn sẵn, ví dụ ô hỏi ở trang chủ.
+  useEffect(() => {
+    const openWith = (event: Event) => {
+      const text = (event as CustomEvent<{ text?: string }>).detail?.text;
+      if (text) setDraft(text);
+      setOpen(true);
+    };
+    window.addEventListener("seevia:open-assistant", openWith);
+    return () => window.removeEventListener("seevia:open-assistant", openWith);
+  }, []);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [announcement, setAnnouncement] = useState("");
@@ -685,7 +696,7 @@ export default function SeeViaSupport() {
                         {turn.pageIds.map((id) => (
                           <a key={id} href={destinations[id]}>
                             Mở trang {pages[id].title}{" "}
-                            <span aria-hidden="true">↗</span>
+                            <Arrow />
                           </a>
                         ))}
                       </div>
@@ -801,7 +812,7 @@ export default function SeeViaSupport() {
             <footer className="sv-support-footer">
               <a href={destinations.contact}>
                 Liên hệ trực tiếp với đội ngũ SeeVia{" "}
-                <span aria-hidden="true">↗</span>
+                <Arrow />
               </a>
               <span className="sv-support-contact-note">
                 Biểu mẫu liên hệ đội ngũ · Không phải chat trực tiếp

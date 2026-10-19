@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>Gạch dẫn hướng</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1440px;height:900px;overflow:hidden;background:#FFF8D6;color:#151515;font-family:"Be Vietnam Pro"}
+.path{position:absolute;left:120px;top:0;width:200px;height:900px;background:#FFD400;
+background-image:radial-gradient(circle,#e3bb00 11px,transparent 12px);background-size:40px 40px}
+.path .bars{position:absolute;left:0;right:0;top:560px;height:340px;background:#FFD400;
+background-image:repeating-linear-gradient(90deg,transparent 0 14px,#e3bb00 14px 26px)}
+.top{position:absolute;left:380px;right:80px;top:44px;display:flex;justify-content:space-between;align-items:center}
+.top svg{width:170px}
+.top nav{display:flex;gap:30px;font-weight:600;font-size:17px}
+h1{position:absolute;left:380px;top:200px;font-family:Nunito;font-weight:900;font-size:120px;line-height:.95;width:900px}
+p.lede{position:absolute;left:384px;top:600px;width:620px;font-size:24px;line-height:1.5}
+.btn{position:absolute;left:384px;top:740px;font-family:Nunito;font-weight:900;font-size:24px;background:#151515;color:#FFD400;border-radius:999px;padding:20px 36px}
+.stop{position:absolute;left:150px;top:150px;width:140px;font-family:Nunito;font-weight:900;font-size:22px;background:#151515;color:#FFD400;padding:10px 14px;border-radius:10px;text-align:center}
+.go{position:absolute;left:150px;top:600px;width:140px;font-family:Nunito;font-weight:900;font-size:22px;background:#151515;color:#FFD400;padding:10px 14px;border-radius:10px;text-align:center}
+.eye{position:absolute;right:110px;top:250px;display:grid;grid-template-columns:repeat(2,110px);gap:30px}
+.eye i{width:110px;height:110px;border-radius:50%;background:#151515;display:block}
+.eye i.s{transform:scale(.35);}
+.eye i.p{position:relative}.eye i.p:after{content:"";position:absolute;right:22px;top:20px;width:30px;height:30px;border-radius:50%;background:#FFF8D6}
+</style></head><body>
+<div class="path"><div class="bars"></div></div>
+<div class="stop">Dừng · nhìn</div><div class="go">Đi tiếp</div>
+<div class="top"><svg viewBox="-14 64 516 140"><path fill="none" stroke="#151515" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" d="M53.8 101.3A23 23 0 1 0 33.0 134.0A23 23 0 1 1 12.2 166.7M92.0 150.0H152A30 30 0 1 0 140.5 173.6M186.0 150.0H246A30 30 0 1 0 234.5 173.6M268.0 88.0L308.0 180.0L348.0 88.0M382.0 120.0V180M476.0 150.0A30 30 0 1 0 416.0 150.0A30 30 0 1 0 476.0 150.0ZM476.0 120.0V180"/><path fill="#151515" d="M370 84a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z"/></svg><nav><span>Sản phẩm</span><span>Công nghệ</span><span>Cộng đồng</span><span>Liên hệ</span><span>VI | EN</span></nav></div>
+<h1>Thấy đường,<br>đọc chữ,<br>đi tiếp.</h1>
+<p class="lede">Kính trợ lý thị giác nói tiếng Việt, cho người nhìn kém tự đi học, đi làm giữa thành phố.</p>
+<div class="btn">Hỏi SeeVia AI</div>
+<div class="eye"><i class="s"></i><i class="p"></i><i></i><i class="s"></i><i></i><i class="s"></i></div>
+</body></html>

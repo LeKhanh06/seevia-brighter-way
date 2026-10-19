@@ -16,7 +16,7 @@
 }
 .pt h2,
 .pt h3 {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: var(--display);
   font-weight: 400;
 }
 .pt h2 {
@@ -37,7 +37,7 @@
 }
 .pt a:focus-visible,
 .pt summary:focus-visible {
-  outline: 2px solid #c56f79;
+  outline: 2px solid #151515;
   outline-offset: 6px;
 }
 .pt-section {
@@ -61,7 +61,7 @@
 }
 .pt h1 {
   font:
-    500 italic clamp(42px, 4.7vw, 67px)/1.25 "Lora",
+    500 italic clamp(42px, 4.7vw, 67px)/1.25 "Nunito",
     Georgia,
     serif;
   letter-spacing: -1.6px;
@@ -79,7 +79,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  border: 1px solid #0202385c;
+  border: 1px solid rgb(21 21 21 / 0.361);
   border-radius: 24px;
   padding: 8px 16px;
   min-height: 38px;
@@ -97,16 +97,16 @@
   flex-shrink: 0;
 }
 .pt-action:hover {
-  background: #0202380d;
+  background: rgb(21 21 21 / 0.051);
   transform: translateY(-2px);
 }
 .pt-hero .pt-action,
 .pt-connect .pt-action {
-  border-color: #b5b6fc66;
+  border-color: rgb(217 207 168 / 0.4);
 }
 .pt-hero .pt-action:hover,
 .pt-connect .pt-action:hover {
-  background: #f5f4ff10;
+  background: rgb(255 248 214 / 0.063);
 }
 .pt-heading {
   max-width: 660px;
@@ -132,14 +132,14 @@
   margin-top: 36px;
 }
 .pt-direction {
-  border-top: 1px solid #02023850;
+  border-top: 1px solid rgb(21 21 21 / 0.314);
   padding-top: 20px;
 }
 .pt-index {
   font:
-    italic 20px "Lora",
+    italic 20px "Nunito",
     serif;
-  color: #985e58;
+  color: #3b3830;
 }
 .pt-direction h3,
 .pt-step h3 {
@@ -163,10 +163,10 @@
   min-width: 0;
 }
 .pt-organizations details {
-  border-top: 1px solid #02023842;
+  border-top: 1px solid rgb(21 21 21 / 0.259);
 }
 .pt-organizations details:last-child {
-  border-bottom: 1px solid #02023842;
+  border-bottom: 1px solid rgb(21 21 21 / 0.259);
 }
 .pt summary {
   display: grid;
@@ -183,7 +183,7 @@
 .pt-org-name {
   display: block;
   font:
-    400 27px/1.35 "Playfair Display",
+    400 27px/1.35 "Nunito",
     serif;
 }
 .pt-org-role {
@@ -240,20 +240,20 @@
   margin-top: 38px;
 }
 .pt-step {
-  border-top: 1px solid #b5b6fc40;
+  border-top: 1px solid rgb(217 207 168 / 0.251);
   padding-top: 22px;
 }
 .pt-step .pt-index {
   color: var(--sv-lavender);
 }
 .pt-step p {
-  color: #cfc4bf;
+  color: #d9cfa8;
 }
 .pt-principles {
   display: flex;
   flex-wrap: wrap;
   gap: 16px 40px;
-  border-top: 1px solid #b5b6fc30;
+  border-top: 1px solid rgb(217 207 168 / 0.188);
   margin-top: 36px;
   padding-top: 22px;
   font-size: 12px;
@@ -265,15 +265,15 @@
   justify-content: space-between;
   gap: 30px;
   background:
-    radial-gradient(ellipse at 5% 40%, #a8203480, transparent 75%), var(--sv-navy);
+    linear-gradient(transparent, transparent), var(--sv-navy);
   color: var(--sv-pearl);
-  border-top: 1px solid #b5b6fc40;
+  border-top: 1px solid rgb(217 207 168 / 0.251);
 }
 .pt-connect h2 {
   font-size: 30px;
 }
 .pt-connect p {
-  color: #d7c7c1;
+  color: #d9cfa8;
   margin-top: 12px;
 }
 .pt-connect-actions {

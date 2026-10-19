@@ -1,11 +1,11 @@
 /* Scoped addition: none of the existing website selectors are overridden. */
 .sv-support {
-  --support-ink: #302625;
+  --support-ink: #151515;
   --support-wine: var(--sv-navy);
   --support-rose: var(--sv-lavender);
   --support-paper: var(--sv-pearl);
-  --support-muted: #6c5652;
-  --support-line: #d7beb5;
+  --support-muted: #3b3830;
+  --support-line: #d9cfa8;
   font-family: var(--sans, "Be Vietnam Pro", sans-serif);
   color: var(--support-ink);
 }
@@ -43,11 +43,11 @@
   column-gap: 10px;
   padding: 12px 18px;
   min-height: 56px;
-  border: 1px solid #b7636c;
+  border: 1px solid #151515;
   border-radius: 40px;
-  background: linear-gradient(125deg, var(--sv-navy), #54131c);
+  background: linear-gradient(125deg, var(--sv-navy), #151515);
   color: var(--support-paper);
-  box-shadow: 0 6px 22px #31121735;
+  box-shadow: 0 6px 22px rgb(21 21 21 / 0.208);
 }
 .sv-support-launcher svg {
   width: 24px;
@@ -90,14 +90,14 @@
   padding: 0;
   margin: 0;
   overflow: hidden;
-  border: 1px solid #af7a77;
+  border: 1px solid #d9cfa8;
   border-radius: 18px;
   background: var(--support-paper);
   color: var(--support-ink);
-  box-shadow: 0 20px 70px #21131440;
+  box-shadow: 0 20px 70px rgb(21 21 21 / 0.251);
 }
 .sv-support-panel::backdrop {
-  background: #21171833;
+  background: rgb(21 21 21 / 0.2);
 }
 .sv-support-shell {
   display: flex;
@@ -112,7 +112,7 @@
   gap: 16px;
   flex-shrink: 0;
   padding: 20px;
-  background: linear-gradient(120deg, var(--sv-navy), #59171e);
+  background: linear-gradient(120deg, var(--sv-navy), #151515);
   color: var(--support-paper);
 }
 .sv-support-overline {
@@ -133,7 +133,7 @@
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  border: 1px solid #b5b6fc66;
+  border: 1px solid rgb(217 207 168 / 0.4);
   border-radius: 50%;
   background: transparent;
   color: var(--support-paper);
@@ -243,14 +243,14 @@
   gap: 4px;
   padding: 12px;
   min-height: 44px;
-  border: 1px solid #b7837c;
+  border: 1px solid #d9cfa8;
   border-radius: 6px;
   color: var(--support-wine);
-  background: #b5b6fc12;
+  background: rgb(217 207 168 / 0.071);
   text-decoration: none;
 }
 .sv-support-page-links a:hover {
-  background: #b5b6fc30;
+  background: rgb(217 207 168 / 0.188);
 }
 .sv-support-page-links strong {
   font-size: 13px;
@@ -296,7 +296,7 @@
   max-width: 100%;
   padding: 10px 12px;
   min-height: 44px;
-  border: 1px solid #b7837c;
+  border: 1px solid #d9cfa8;
   border-radius: 20px;
   background: transparent;
   color: var(--support-wine);
@@ -305,7 +305,7 @@
   line-height: 1.5;
 }
 .sv-support-suggestions button:hover {
-  background: #b5b6fc30;
+  background: rgb(217 207 168 / 0.188);
 }
 .sv-support-working {
   display: flex;
@@ -325,7 +325,7 @@
   border-left: 2px solid var(--support-wine);
   margin: 16px 0;
   padding: 10px 12px;
-  background: #b5b6fc20;
+  background: rgb(217 207 168 / 0.125);
   font-size: 13px;
   line-height: 1.7;
 }
@@ -354,7 +354,7 @@
   min-width: 0;
   resize: none;
   padding: 10px 12px;
-  border: 1px solid #95675f;
+  border: 1px solid #3b3830;
   border-radius: 8px;
   color: var(--support-ink);
   background: var(--sv-pearl);
@@ -485,21 +485,21 @@
 /* Burgundy atelier: static light fields preserve readable surfaces. */
 .sv-support-panel {
   width: 440px;
-  border: 1px solid #c99b91;
+  border: 1px solid #d9cfa8;
   border-radius: 24px;
-  background: linear-gradient(155deg, var(--sv-pearl), var(--sv-pearl) 65%, #f6e8e1);
+  background: linear-gradient(155deg, var(--sv-pearl), var(--sv-pearl) 65%, #fff8d6);
   box-shadow:
-    0 28px 90px #35171d38,
-    0 4px 16px #35171d16;
+    0 28px 90px rgb(21 21 21 / 0.22),
+    0 4px 16px rgb(21 21 21 / 0.086);
 }
 .sv-support-header {
   position: relative;
   padding: 25px 22px;
   background:
-    radial-gradient(ellipse at 95% 0%, #a9565e85, transparent 62%),
-    radial-gradient(ellipse at 0% 100%, #9f29375c, transparent 65%),
-    linear-gradient(125deg, #681c28, #36151e);
-  border-bottom: 1px solid #cf9c9370;
+    radial-gradient(ellipse at 95% 0%, rgb(21 21 21 / 0.522), transparent 62%),
+    radial-gradient(ellipse at 0% 100%, rgb(21 21 21 / 0.361), transparent 65%),
+    linear-gradient(125deg, #151515, #151515);
+  border-bottom: 1px solid rgb(21 21 21 / 0.439);
 }
 .sv-support-header h2 {
   font-size: 26px;
@@ -512,31 +512,31 @@
 .sv-support-ai-topline {
   padding: 4px 22px;
   background: var(--sv-pearl);
-  border-bottom: 1px solid #e6d3ca;
+  border-bottom: 1px solid #d9cfa8;
 }
 .sv-support-transcript {
   padding: 20px 22px;
   background:
-    radial-gradient(ellipse at 100% 0%, #b5b6fc29, transparent 60%),
-    radial-gradient(ellipse at 0% 100%, #ead4c72b, transparent 65%);
+    radial-gradient(ellipse at 100% 0%, rgb(217 207 168 / 0.161), transparent 60%),
+    radial-gradient(ellipse at 0% 100%, rgb(217 207 168 / 0.169), transparent 65%);
   scrollbar-width: thin;
-  scrollbar-color: #b78a80 transparent;
+  scrollbar-color: #d9cfa8 transparent;
 }
 .sv-support-disclosure {
   font-size: 12px;
   line-height: 1.65;
 }
 .sv-support-availability {
-  background: #f5f4ffcc;
+  background: rgb(255 248 214 / 0.8);
   border-radius: 12px;
 }
 .sv-support-turn {
   border-radius: 4px 16px 16px 16px;
-  box-shadow: 0 3px 12px #54242a05;
+  box-shadow: 0 3px 12px rgb(21 21 21 / 0.02);
 }
 .sv-support-turn-user {
   border-radius: 16px 4px 16px 16px;
-  background: linear-gradient(135deg, var(--sv-navy), #541d2a);
+  background: linear-gradient(135deg, var(--sv-navy), #151515);
 }
 .sv-support-suggestions {
   display: grid;
@@ -545,23 +545,23 @@
 .sv-support-suggestions button {
   padding: 12px 14px;
   border-radius: 12px;
-  border-color: #c49c91;
-  background: linear-gradient(110deg, var(--sv-pearl), #f8eee8);
+  border-color: #d9cfa8;
+  background: linear-gradient(110deg, var(--sv-pearl), #fff8d6);
   font-size: 13px;
 }
 .sv-support-composer {
   padding: 16px 20px 6px;
   background: linear-gradient(180deg, var(--sv-pearl), var(--sv-pearl));
-  box-shadow: 0 -6px 20px #53242a04;
+  box-shadow: 0 -6px 20px rgb(21 21 21 / 0.016);
 }
 .sv-support-input-row textarea {
   border-radius: 12px;
-  border-color: #b38a80;
+  border-color: #d9cfa8;
 }
 .sv-support-input-row button {
   min-width: 58px;
   border-radius: 12px;
-  background: linear-gradient(145deg, #8a2533, #581925);
+  background: linear-gradient(145deg, #151515, #151515);
   box-shadow: inset 0 1px 0 #ffffff26;
 }
 .sv-support-footer {
@@ -622,7 +622,7 @@
   margin: 7px 0 0;
   font-size: 12px;
   line-height: 1.6;
-  color: #f1d7d1;
+  color: #d9cfa8;
 }
 .sv-support-ai-topline {
   min-height: 42px;
@@ -638,10 +638,10 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #8a655e;
+  background: #3b3830;
 }
 .sv-support-connection[data-state="ready"]::before {
-  background: #376047;
+  background: #3b3830;
 }
 .sv-support-intro {
   padding: 12px 0 20px;
@@ -675,7 +675,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  border-color: #d9c2b9;
+  border-color: #d9cfa8;
   background: var(--sv-pearl);
   border-radius: 10px;
 }
@@ -693,7 +693,7 @@
   padding: 10px 12px;
 }
 .sv-support-footer {
-  border-top: 1px solid #e7d6ce;
+  border-top: 1px solid #d9cfa8;
   padding-top: 5px;
 }
 .sv-support-footer a {
@@ -779,17 +779,17 @@
   padding: 13px 20px;
   border-radius: 20px;
   background:
-    radial-gradient(ellipse at top right, #c15d6555, transparent 65%),
-    linear-gradient(125deg, var(--sv-navy), #43141e);
+    radial-gradient(ellipse at top right, rgb(21 21 21 / 0.333), transparent 65%),
+    linear-gradient(125deg, var(--sv-navy), #151515);
   box-shadow:
-    0 10px 30px #38101d30,
+    0 10px 30px rgb(21 21 21 / 0.188),
     inset 0 1px 0 #ffffff24;
 }
 .sv-support-launcher-caption {
   text-transform: none;
   letter-spacing: 0.01em;
   font-size: 11px;
-  color: #f2d2cd;
+  color: #d9cfa8;
 }
 .sv-support-launcher[data-compact="true"] {
   border-radius: 50%;
@@ -822,7 +822,7 @@
 }
 .sv-support-turn-assistant {
   background: var(--sv-pearl);
-  border-color: #e0cdc3;
+  border-color: #d9cfa8;
 }
 .sv-support-turn p {
   font-size: 16px;
@@ -831,11 +831,11 @@
 .sv-support-page-links {
   margin: 12px 0 0;
   padding: 16px;
-  border: 1px solid #d8b8ad;
+  border: 1px solid #d9cfa8;
   border-radius: 14px;
   background:
-    radial-gradient(ellipse at 100% 0%, #edc7be55, transparent 75%),
-    linear-gradient(135deg, #f9eee6, #fffaf4);
+    radial-gradient(ellipse at 100% 0%, rgb(217 207 168 / 0.333), transparent 75%),
+    linear-gradient(135deg, #fff8d6, #fff8d6);
 }
 .sv-support-page-question {
   margin: 0 0 4px;
@@ -846,7 +846,7 @@
 }
 .sv-support-page-links a {
   background: var(--sv-pearl);
-  border-color: #b88e82;
+  border-color: #d9cfa8;
   border-radius: 10px;
 }
 .sv-support-page-links strong {
@@ -1197,7 +1197,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid #e6d3ca;
+  border-bottom: 1px solid #d9cfa8;
 }
 .sv-support-history li:last-child {
   border-bottom: 0;
@@ -1246,9 +1246,9 @@
   width: 34px;
   height: 34px;
   padding: 6px;
-  border: 1px solid #b5b6fc86;
+  border: 1px solid rgb(217 207 168 / 0.525);
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 25%, #b5b6fc35, transparent 72%);
+  background: radial-gradient(circle at 35% 25%, rgb(217 207 168 / 0.208), transparent 72%);
   stroke-linecap: round;
   stroke-linejoin: round;
   flex-shrink: 0;
@@ -1263,7 +1263,7 @@
   padding: 5px;
 }
 .sv-support-icon-button {
-  background: radial-gradient(circle at 35% 25%, #b5b6fc24, transparent 72%);
+  background: radial-gradient(circle at 35% 25%, rgb(217 207 168 / 0.141), transparent 72%);
   box-shadow: inset 0 1px 0 #ffffff18;
 }
 .sv-support-icon-button svg {
@@ -1329,10 +1329,10 @@
   place-items: center;
   border: 1px solid var(--sv-lavender);
   border-radius: 18px;
-  background: linear-gradient(145deg, #84232e, #54131c);
+  background: linear-gradient(145deg, #151515, #151515);
   color: var(--support-paper);
   box-shadow:
-    0 8px 24px #31121735,
+    0 8px 24px rgb(21 21 21 / 0.208),
     inset 0 1px 0 #ffffff25;
 }
 .sv-support-launcher svg,
@@ -1350,11 +1350,11 @@
   right: calc(100% + 8px);
   top: 50%;
   padding: 9px 13px;
-  border: 1px solid #a75b63;
+  border: 1px solid #d9cfa8;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--sv-navy), #54131c);
+  background: linear-gradient(135deg, var(--sv-navy), #151515);
   color: var(--support-paper);
-  box-shadow: 0 8px 24px #31121730;
+  box-shadow: 0 8px 24px rgb(21 21 21 / 0.188);
   content: "Hỏi SeeVia AI";
   font-size: 14px;
   font-weight: 600;
@@ -1370,7 +1370,7 @@
   transform: translate(0, -50%);
 }
 .sv-support-launcher:hover {
-  background: linear-gradient(145deg, #922d39, #651b25);
+  background: linear-gradient(145deg, #151515, #151515);
   color: var(--support-paper);
 }
 .sv-support-launcher:focus-visible {
@@ -1395,9 +1395,9 @@
   align-content: center;
   border: 2px solid #fff;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8ed8ff, #b5b6fc);
-  color: #020238;
-  box-shadow: 0 8px 26px #02023855;
+  background: linear-gradient(135deg, #ffd400, #d9cfa8);
+  color: #151515;
+  box-shadow: 0 8px 26px rgb(21 21 21 / 0.333);
 }
 .sv-support-launcher svg {
   width: 30px;
@@ -1405,11 +1405,11 @@
   grid-row: auto;
 }
 .sv-support-launcher:hover {
-  background: linear-gradient(135deg, #6cd6fc, #e5c6fc);
-  color: #020238;
+  background: linear-gradient(135deg, #ffd400, #ffd400);
+  color: #151515;
 }
 .sv-support-launcher::after {
-  border-color: #b5b6fc;
-  background: #020238;
-  color: #f5f4ff;
+  border-color: #d9cfa8;
+  background: #151515;
+  color: #fff8d6;
 }

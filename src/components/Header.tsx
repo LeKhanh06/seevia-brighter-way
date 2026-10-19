@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { navigate, pageRegistry, type Destination } from "../navigation";
 import "./Header.css";
 import { useLanguage, setLanguage } from "../i18n/language";
-import Sparkles from "../../HomePage/components/Sparkles";
+import Logo from "./Logo";
 export default function Header({
   active = "home",
 }: {
@@ -93,7 +93,7 @@ export default function Header({
   return (
     <header className="header">
       <a className="logo" href="/" aria-label="SeeVia — Trang chủ">
-        <img src="/images/260.png" alt="SeeVia" />
+        <Logo />
       </a>
       <nav aria-label="Điều hướng chính" className="main-nav">
         <button
@@ -134,7 +134,7 @@ export default function Header({
           aria-controls="extra-menu"
           onClick={() => setOpen(!open)}
         >
-          <span aria-hidden="true">☰</span>
+          <span aria-hidden="true" />
         </button>
       </div>
       {open && (
@@ -148,9 +148,8 @@ export default function Header({
             aria-modal="true"
             aria-label="Khám phá thêm"
           >
-            <Sparkles tone="dark" density={22} />
             <div className="drawer-top">
-              <img src="/images/260.png" alt="SeeVia" />
+              <Logo className="drawer-logo" />
               <button
                 className="drawer-close"
                 aria-label="Đóng menu"
