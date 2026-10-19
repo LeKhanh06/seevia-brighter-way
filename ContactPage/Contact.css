@@ -1,6 +1,6 @@
 .ct {
-  color: #1e1e1e;
-  background: #f7f3ef;
+  color: var(--sv-navy);
+  background: var(--sv-pearl);
   font-family: "Be Vietnam Pro", sans-serif;
 }
 .ct * {
@@ -19,12 +19,12 @@
     serif;
 }
 .ct h2 em {
-  color: #7a1823;
+  color: var(--sv-navy);
 }
 .ct p {
   font-size: 14px;
   line-height: 1.9;
-  color: #635751;
+  color: var(--sv-muted);
 }
 .ct a {
   text-decoration: none;
@@ -35,26 +35,12 @@
   isolation: isolate;
   overflow: hidden;
   padding: 70px max(7%, calc((100% - 1240px) / 2));
-  color: #fff8f0;
-  background: linear-gradient(110deg, #7a1823, #491b23 52%, #1e1e1e);
+  color: var(--sv-pearl);
+  background: linear-gradient(110deg, var(--sv-navy), var(--sv-night-mid) 52%, var(--sv-navy));
 }
-.ct-hero:before,
-.ct-hero:after {
-  content: "";
-  position: absolute;
-  border: 1px solid #f2b4ad18;
-  border-radius: 50%;
-  width: 720px;
-  height: 720px;
-  right: -320px;
-  top: -430px;
-  z-index: -1;
-}
-.ct-hero:after {
-  width: 920px;
-  height: 920px;
-  right: -420px;
-  top: -530px;
+.ct-hero-copy {
+  position: relative;
+  z-index: 1;
 }
 .ct h1 {
   font:
@@ -64,10 +50,10 @@
   letter-spacing: -1.3px;
 }
 .ct h1 em {
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .ct-hero p {
-  color: #e6d5ce;
+  color: var(--sv-lavender);
   margin: 24px 0;
 }
 .ct-action {
@@ -77,7 +63,7 @@
   gap: 14px;
   min-height: 38px;
   padding: 8px 16px;
-  border: 1px solid #7a18235c;
+  border: 1px solid #0202385c;
   border-radius: 24px;
   background: transparent;
   color: inherit;
@@ -96,21 +82,21 @@
   flex-shrink: 0;
 }
 .ct-action:hover {
-  background: #7a18230d;
+  background: #0202380d;
   transform: translateY(-2px);
 }
 .ct-hero .ct-action {
-  border-color: #f2b4ad66;
+  border-color: #b5b6fc66;
 }
 .ct-hero .ct-action:hover {
-  background: #fff8f010;
+  background: #f5f4ff10;
 }
 .ct-letter {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 72px;
   padding: 64px max(7%, calc((100% - 1240px) / 2));
-  background: linear-gradient(100deg, #f1ddd6, #f7f3ef 65%);
+  background: linear-gradient(100deg, var(--sv-orchid), var(--sv-pearl) 65%);
   scroll-margin-top: 30px;
 }
 .ct-eyebrow {
@@ -118,7 +104,7 @@
     600 12px/1.6 "Be Vietnam Pro",
     sans-serif !important;
   letter-spacing: 1.5px;
-  color: #7a1823 !important;
+  color: var(--sv-navy) !important;
   margin-bottom: 20px !important;
 }
 .ct-intro > p:not(.ct-eyebrow) {
@@ -126,7 +112,7 @@
   max-width: 440px;
 }
 .ct-note {
-  border-top: 1px solid #7a182338;
+  border-top: 1px solid #02023838;
   margin-top: 30px;
   padding-top: 22px;
 }
@@ -144,7 +130,7 @@
   gap: 14px;
   align-items: center;
   font-size: 13px;
-  color: #7a1823 !important;
+  color: var(--sv-navy) !important;
   margin-top: 24px;
 }
 .ct-form {
@@ -177,7 +163,7 @@
   font-weight: 400;
 }
 .ct-topics input {
-  accent-color: #7a1823;
+  accent-color: var(--sv-navy);
   width: 16px;
   height: 16px;
   margin: 0;
@@ -199,14 +185,14 @@
 .ct textarea {
   display: block;
   width: 100%;
-  border: 1px solid #7a182338;
+  border: 1px solid #02023838;
   border-radius: 4px;
-  background: #fffaf5;
+  background: var(--sv-pearl);
   padding: 12px 14px;
   font:
     400 13px/1.7 "Be Vietnam Pro",
     sans-serif;
-  color: #1e1e1e;
+  color: var(--sv-navy);
 }
 .ct-fields input {
   margin-top: 10px;
@@ -225,9 +211,9 @@
   margin: 10px 0 24px;
 }
 .ct-primary {
-  background: #7a1823 !important;
-  color: #fff8f0 !important;
-  border-color: #7a1823;
+  background: var(--sv-navy) !important;
+  color: var(--sv-pearl) !important;
+  border-color: var(--sv-navy);
 }
 .ct-primary:hover {
   background: #941f2d !important;
@@ -238,9 +224,9 @@
   align-items: center;
   gap: 30px;
   padding: 38px max(7%, calc((100% - 1240px) / 2));
-  background: #1e1e1e;
-  color: #fff8f0;
-  border-bottom: 1px solid #f2b4ad40;
+  background: var(--sv-navy);
+  color: var(--sv-pearl);
+  border-bottom: 1px solid #b5b6fc40;
 }
 .ct-explore h2 {
   font-size: 29px;
@@ -252,23 +238,24 @@
 .ct-explore > div:last-child {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  column-gap: 22px;
+  row-gap: 12px;
   flex-shrink: 0;
 }
 .ct-explore .ct-action {
-  border-color: #f2b4ad66;
+  border-color: #b5b6fc66;
 }
 .ct-dialog {
   position: fixed;
   inset: 0;
-  border: 1px solid #dccfc7;
+  border: 1px solid var(--sv-lavender);
   border-radius: 8px;
   width: min(640px, calc(100% - 32px));
   max-height: 85vh;
   overflow: auto;
   padding: 36px;
-  color: #1e1e1e;
-  background: #f7f3ef;
+  color: var(--sv-navy);
+  background: var(--sv-pearl);
   font:
     400 13px/1.8 "Be Vietnam Pro",
     sans-serif;
@@ -290,17 +277,17 @@
   border: 0;
   font-size: 28px;
   cursor: pointer;
-  color: #7a1823;
+  color: var(--sv-navy);
 }
 .ct-message {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  border-top: 1px solid #dccfc7;
+  border-top: 1px solid var(--sv-lavender);
   padding-top: 20px;
   margin-top: 20px;
 }
 .ct-dialog-note {
-  color: #635751;
+  color: var(--sv-muted);
   font-size: 12px;
 }
 .ct-dialog-actions {
@@ -313,7 +300,7 @@
   outline: 2px solid #a33345;
   outline-offset: 4px;
 }
-.ct-hero > div {
+.ct-hero-copy {
   animation: ct-arrive 0.7s ease both;
 }
 @keyframes ct-arrive {
@@ -387,5 +374,5 @@
   display: inline-block;
   margin-top: 12px;
   font-size: 12px;
-  color: #7a1823;
+  color: var(--sv-navy);
 }

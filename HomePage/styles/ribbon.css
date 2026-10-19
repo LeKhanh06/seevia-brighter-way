@@ -1,0 +1,103 @@
+/* ============ SeeVia ribbon motion language ============ */
+:root {
+  /* motion tokens (keep in sync with MOTION in ribbon-motion.ts) */
+  --sv-ease-out: cubic-bezier(0.2, 0.65, 0.25, 1);
+  --sv-dur-micro: 200ms;
+  --sv-dur-hover: 300ms;
+  --sv-dur-reveal: 600ms;
+  --sv-dur-route: 450ms;
+  /* the one gradient every accent should reuse */
+  --sv-grad-iridescent: linear-gradient(105deg, #6cd6fc, #426af8 38%, #b5b6fc 70%, #e5c6fc);
+}
+
+/* Layer sits at the bottom of #root's stacking context: transparent sections
+   show it, opaque sections cover it. No z-index fights with existing CSS. */
+#root { isolation: isolate; }
+body { background: var(--sv-pearl, #f5f4ff); }
+
+.ribbon-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+.ribbon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: max(240vw, 2200px); /* half of this = one wave period ≥ 120vw → seamless */
+  height: auto;
+  overflow: visible;
+  opacity: 0;                 /* JS sets the real value before first paint */
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+.ribbon-field[data-lite="true"] .ribbon--c { display: none; }
+@media (max-width: 760px) { .ribbon--c { display: none; } }
+
+/* ---- Let the ribbons show through. Active only while <RibbonField/> is mounted. ---- */
+.ribbon-on .hero.vision-hero { background: radial-gradient(ellipse at 92% 0%, #6cd6fc12, transparent 60%); }
+.ribbon-on .hero:not(.vision-hero) {
+  background:
+    radial-gradient(ellipse at 82% 38%, #426af84d 0%, #6cd6fc20 28%, transparent 64%),
+    radial-gradient(ellipse at 62% 100%, #b5b6fc16 0%, transparent 56%),
+    linear-gradient(115deg, #020238 0%, #090943 55%, #101d62 100%);
+}
+/* Replace the oversized diagonal bands in the home hero with quiet orbits. */
+.ribbon-field[data-home-hero="true"] .ribbon { display: none; }
+.ribbon-on .hero:not(.vision-hero)::before,
+.ribbon-on .hero:not(.vision-hero)::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  border: 1px solid #b5b6fc20;
+  border-radius: 50%;
+  width: min(72vw, 980px);
+  height: min(72vw, 980px);
+  right: -23vw;
+  top: -39vw;
+}
+@media (max-width: 760px) {
+  .ribbon-on .hero:not(.vision-hero)::before { width: 118vw; height: 118vw; right: -58vw; top: -44vw; }
+  .ribbon-on .hero:not(.vision-hero)::after { width: 148vw; height: 148vw; right: -75vw; top: -58vw; }
+}
+.ribbon-on .hero:not(.vision-hero)::after {
+  width: min(90vw, 1220px);
+  height: min(90vw, 1220px);
+  right: -31vw;
+  top: -49vw;
+  border-color: #6cd6fc16;
+}
+.ribbon-on .capabilities,
+.ribbon-on .community { background: transparent; }
+.ribbon-on .experience,
+.ribbon-on .ai-demo.section-pad { background: linear-gradient(106deg, #f5f4ff99, #e5c6fc73); }
+
+/* dark sections: translucent navy so ribbons glow faintly through.
+   This also replaces the leftover maroon tints in these blocks. */
+.ribbon-on .product-viewer {
+  background:
+    radial-gradient(circle 470px at 12% 40%, #426af833, transparent 100%),
+    radial-gradient(circle 370px at 93% 29%, #b5b6fc22, transparent 100%),
+    #020238d9;
+}
+.ribbon-on .about.section-pad { background: #020238d9; }
+.ribbon-on .about .belief {
+  background:
+    radial-gradient(circle 380px at -12% 100%, #426af838, transparent 100%),
+    linear-gradient(110deg, #020238, #14206b);
+}
+.ribbon-on .partnership.section-pad {
+  background: radial-gradient(ellipse at 50% 45%, #020238f2 0%, #10206ccc 100%);
+}
+.ribbon-on .radar-section { background-color: #020238d9; }
+
+/* Shared accent: any short rule becomes the ribbon gradient */
+.ribbon-on .short-line { background: var(--sv-grad-iridescent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon { will-change: auto; }
+}

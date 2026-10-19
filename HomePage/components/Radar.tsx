@@ -26,19 +26,19 @@ export default function Radar() {
               <path
                 d="M100 0H0V100"
                 fill="none"
-                stroke="#dda7aa"
-                stroke-opacity=".055"
-                stroke-width="1"
+                stroke="#b5b6fc"
+                strokeOpacity=".055"
+                strokeWidth="1"
               />
             </pattern>
           </defs>
-          <g fill="none" stroke="#dda7aa" strokeOpacity=".19" strokeWidth="1">
+          <g fill="none" stroke="#b5b6fc" strokeOpacity=".19" strokeWidth="1">
             {[58, 178, 298, 418].map((r) => (
               <circle key={r} cx="400" cy="400" r={r} />
             ))}
           </g>
-          <circle cx="400" cy="400" r="16" fill="#d943571c" />
-          <circle cx="400" cy="400" r="6" fill="#df4d60" />
+          <circle cx="400" cy="400" r="16" fill="#426af82c" />
+          <circle cx="400" cy="400" r="6" fill="#6cd6fc" />
         </svg>
       </div>
     </section>

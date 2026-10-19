@@ -6,12 +6,12 @@
     #1b191b;
   padding: 36px 1.4% 30px;
   min-height: 835px;
-  color: #fff8f0;
+  color: var(--sv-pearl);
 }
 .product-viewer > .eyebrow {
   font: 600 18px/1.4 var(--sans);
   letter-spacing: 0.08em;
-  color: #dccfc7;
+  color: var(--sv-lavender);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -22,7 +22,7 @@
   content: "";
   width: 24px;
   height: 1px;
-  background: #f2b4ad;
+  background: var(--sv-lavender);
   flex-shrink: 0;
 }
 .product-stage {
@@ -64,13 +64,13 @@
     italic 400 36px/49px "Playfair Display",
     serif;
   letter-spacing: 0;
-  color: #fff8f0;
+  color: var(--sv-pearl);
   margin: 0 0 8px;
 }
 .product-caption p {
   font: italic 400 20px/49px var(--sans);
   letter-spacing: 0;
-  color: #fff8f0;
+  color: var(--sv-pearl);
   margin: 0;
   text-wrap: pretty;
 }

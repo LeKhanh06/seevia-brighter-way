@@ -65,14 +65,14 @@ export default function Product() {
                   operator="out"
                   result="outline"
                 />
-                <feFlood floodColor="#fff8f0" />
+                <feFlood floodColor="#74798c" />
                 <feComposite in2="outline" operator="in" />
               </filter>
             </defs>
             <text
               x="0"
               y="285"
-              fill="#fff8f0"
+              fill="#74798c"
               filter="url(#wordmark-outline)"
               style={{
                 fontFamily: "Playfair Display, Georgia, serif",
@@ -226,7 +226,15 @@ export default function Product() {
             </p>
             <div className="technology-cards">
               {technologies.map((t) => (
-                <article key={t.label}>
+                <article
+                  key={t.label}
+                  onPointerMove={(event) => {
+                    if (event.pointerType !== "mouse") return;
+                    const bounds = event.currentTarget.getBoundingClientRect();
+                    event.currentTarget.style.setProperty("--card-glow-x", `${event.clientX - bounds.left}px`);
+                    event.currentTarget.style.setProperty("--card-glow-y", `${event.clientY - bounds.top}px`);
+                  }}
+                >
                   <p className="eyebrow">{t.label}</p>
                   <h3>
                     {t.label === "HIỂU CẢNH" ? (

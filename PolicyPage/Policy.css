@@ -1,6 +1,6 @@
 .policy-document {
-  background: #f7f3ef;
-  color: #1e1e1e;
+  background: var(--sv-pearl);
+  color: var(--sv-navy);
   font:
     400 14px/1.9 "Be Vietnam Pro",
     sans-serif;
@@ -9,30 +9,30 @@
   box-sizing: border-box;
 }
 .policy-document a {
-  color: #7a1823;
+  color: var(--sv-navy);
   text-underline-offset: 4px;
 }
 .policy-document a:focus-visible,
 .policy-document button:focus-visible {
-  outline: 2px solid #b54a5a;
+  outline: 2px solid var(--sv-vision-ink);
   outline-offset: 4px;
 }
 .policy-document .eyebrow {
   font-size: 11px;
   letter-spacing: 1.5px;
   font-weight: 600;
-  color: #7a1823;
+  color: var(--sv-navy);
 }
 .policy-hero {
   padding: 60px max(7%, calc((100% - 1240px) / 2));
   display: grid;
   grid-template-columns: 1fr 250px;
   gap: 50px;
-  background: linear-gradient(110deg, #7a1823, #491b23 55%, #1e1e1e);
-  color: #fff8f0;
+  background: linear-gradient(110deg, var(--sv-navy), var(--sv-night-mid) 55%, var(--sv-navy));
+  color: var(--sv-pearl);
 }
 .policy-hero .eyebrow {
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .policy-hero h1 {
   font:
@@ -42,25 +42,25 @@
 }
 .policy-tagline {
   font-size: 16px;
-  color: #ead6ce;
+  color: var(--sv-pearl);
   margin: 0;
 }
 .policy-tagline em {
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .policy-hero aside {
   align-self: center;
-  border-left: 1px solid #f2b4ad40;
+  border-left: 1px solid #b5b6fc40;
   padding-left: 28px;
 }
 .draft-badge {
   display: inline-block;
   font-size: 10px;
   letter-spacing: 1px;
-  border: 1px solid #f2b4ad55;
+  border: 1px solid #b5b6fc55;
   border-radius: 20px;
   padding: 4px 12px;
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .policy-hero dl {
   margin: 20px 0;
@@ -70,7 +70,7 @@
 }
 .policy-hero dt {
   font-size: 11px;
-  color: #d4b6af;
+  color: var(--sv-lavender);
 }
 .policy-hero dd {
   font-size: 13px;
@@ -81,9 +81,9 @@
   gap: 16px;
   align-items: center;
   background: none;
-  border: 1px solid #f2b4ad66;
+  border: 1px solid #b5b6fc66;
   border-radius: 22px;
-  color: #fff8f0;
+  color: var(--sv-pearl);
   padding: 8px 16px;
   font:
     500 13px "Be Vietnam Pro",
@@ -92,7 +92,7 @@
 }
 .scope-note {
   padding: 20px max(7%, calc((100% - 1240px) / 2));
-  background: #f1ddd6;
+  background: var(--sv-orchid);
   display: flex;
   gap: 30px;
   align-items: baseline;
@@ -100,14 +100,14 @@
 .scope-note > span {
   font-size: 10px;
   letter-spacing: 1px;
-  color: #7a1823;
+  color: var(--sv-navy);
   white-space: nowrap;
   font-weight: 600;
 }
 .scope-note p {
   font-size: 12px;
   margin: 0;
-  color: #635751;
+  color: var(--sv-muted);
 }
 .policy-layout {
   display: grid;
@@ -131,17 +131,17 @@
   display: flex;
   gap: 12px;
   padding: 9px 0;
-  border-bottom: 1px solid #7a18231c;
+  border-bottom: 1px solid #0202381c;
   text-decoration: none;
   font-size: 12px;
   line-height: 1.6;
-  color: #635751;
+  color: var(--sv-muted);
 }
 .policy-index nav a:hover {
-  color: #7a1823;
+  color: var(--sv-navy);
 }
 .policy-index nav span {
-  color: #a46c65;
+  color: var(--sv-vision-ink);
   font-size: 11px;
 }
 .index-other {
@@ -153,7 +153,7 @@
   min-width: 0;
 }
 .policy-content > section {
-  border-top: 1px solid #7a182338;
+  border-top: 1px solid #02023838;
   padding: 28px 0 20px;
   scroll-margin-top: 24px;
 }
@@ -161,7 +161,7 @@
   font:
     italic 17px "Lora",
     serif;
-  color: #9b655e;
+  color: var(--sv-vision-ink);
 }
 .policy-content h2 {
   font:
@@ -170,7 +170,7 @@
   margin: 8px 0 20px;
 }
 .policy-content p {
-  color: #635751;
+  color: var(--sv-muted);
   margin: 0 0 16px;
 }
 .table-wrap {
@@ -188,11 +188,11 @@
   padding: 14px;
   text-align: left;
   vertical-align: top;
-  border: 1px solid #dccfc7;
+  border: 1px solid var(--sv-lavender);
 }
 .policy-content th {
-  background: #f1ddd6;
-  color: #7a1823;
+  background: var(--sv-orchid);
+  color: var(--sv-navy);
   font-weight: 500;
 }
 .policy-content td:first-child {
@@ -201,7 +201,7 @@
 }
 .policy-sources {
   padding: 24px;
-  background: #f1ddd66b;
+  background: #e5c6fc6b;
   margin: 20px 0;
 }
 .policy-sources > a {
@@ -217,7 +217,7 @@
   display: grid;
   grid-template-columns: 1fr auto;
   padding: 24px 0;
-  border-top: 1px solid #7a182340;
+  border-top: 1px solid #02023840;
   text-decoration: none;
 }
 .next-policy span {
@@ -252,7 +252,7 @@
   }
   .policy-hero aside {
     border-left: 0;
-    border-top: 1px solid #f2b4ad40;
+    border-top: 1px solid #b5b6fc40;
     padding: 20px 0 0;
   }
   .policy-hero dl {

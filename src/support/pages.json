@@ -5,6 +5,12 @@
     "aliases": ["trang chủ", "home"],
     "description": "Tổng quan dự án và các nhóm khả năng hỗ trợ."
   },
+  "overview": {
+    "title": "Tổng quan nhanh",
+    "href": "/tong-quan",
+    "aliases": ["tổng quan", "tổng quan nhanh", "giới thiệu nhanh", "tóm tắt dự án", "thông tin dự án"],
+    "description": "Tóm lược mục tiêu, nhóm người dùng, chức năng định hướng, công nghệ và trạng thái phát triển của SeeVia."
+  },
   "terms": {
     "title": "Điều khoản sử dụng",
     "href": "/dieu-khoan-su-dung",

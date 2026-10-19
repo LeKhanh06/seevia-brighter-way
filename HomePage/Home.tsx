@@ -5,6 +5,7 @@ import Button from "../src/components/Button";
 import Hero from "./components/Hero";
 import AIDemo from "./components/AIDemo";
 import Radar from "./components/Radar";
+import Motif from "./components/Motif";
 import { capabilities } from "./homeData";
 import "./styles/Home.css";
 import "./styles/hero-effects.css";
@@ -16,7 +17,8 @@ import "./styles/about.css";
 import "./styles/partnership.css";
 import "./styles/radar.css";
 import "./styles/animations.css";
-import useReveal from "./useReveal";
+import "./styles/home-motion.css";
+import useHomeMotion from "./useHomeMotion";
 function Icon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
     document: (
@@ -60,7 +62,7 @@ function Icon({ name }: { name: string }) {
   );
 }
 export default function Home() {
-  useReveal();
+  useHomeMotion();
   const [notice, setNotice] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => {
@@ -100,6 +102,7 @@ export default function Home() {
           </div>
         </section>
         <section className="experience section-pad" id="product">
+          <Motif variant="ripple" />
           <div>
             <p className="eyebrow">TRẢI NGHIỆM SẢN PHẨM</p>
             <h2>
@@ -139,6 +142,11 @@ export default function Home() {
         <AIDemo />
         <section className="about section-pad" id="about">
           <div className="belief">
+            <div className="belief-glow" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </div>
             <p className="eyebrow">NIỀM TIN CỦA SEEVIA</p>
             <h2>
               Công nghệ
@@ -173,6 +181,7 @@ export default function Home() {
           </div>
         </section>
         <section className="community section-pad" id="community">
+          <Motif variant="braille" />
           <div>
             <p className="eyebrow">GÓC NHÌN TỪ CỘNG ĐỒNG</p>
             <h2>

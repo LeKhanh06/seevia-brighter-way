@@ -14,20 +14,17 @@ const titles: Record<string, string> = {
   "/dieu-khoan-su-dung": "Điều khoản sử dụng — SeeVia",
   "/thong-tin": "Thông tin sử dụng website — SeeVia",
 };
-export default function LanguageEffects() {
+export default function LanguageEffects({ path }: { path: string }) {
   const language = useLanguage();
   useEffect(() => {
     let active = true;
     queueMicrotask(() => {
       if (active)
-        document.title = translate(
-          titles[location.pathname.replace(/\/$/, "") || "/"] ?? titles["/"],
-          language,
-        );
+        document.title = translate(titles[path] ?? titles["/"], language);
     });
     return () => {
       active = false;
     };
-  }, [language]);
+  }, [language, path]);
   return null;
 }

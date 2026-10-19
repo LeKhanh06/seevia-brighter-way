@@ -2,15 +2,15 @@
   height: 700px;
   align-items: center;
   padding: 70px 5.4%;
-  background-color: #141010;
+  background-color: #020238;
   background-image:
-    linear-gradient(#dda7aa09 1px, transparent 1px),
-    linear-gradient(90deg, #dda7aa09 1px, transparent 1px);
+    linear-gradient(#b5b6fc12 1px, transparent 1px),
+    linear-gradient(90deg, #b5b6fc12 1px, transparent 1px);
   background-size: 90px 90px;
   background-position: calc(100% - 310px) calc(50% + 45px);
   overflow: hidden;
   isolation: isolate;
-  border-top: 1px solid #7a1823;
+  border-top: 1px solid var(--sv-navy);
 }
 .radar-copy {
   width: 46%;
@@ -22,7 +22,7 @@
     italic 400 85px/100px "Playfair Display",
     serif;
   letter-spacing: 0;
-  color: #fff8f0;
+  color: var(--sv-pearl);
   margin: 0 0 22px;
 }
 .radar-copy h2:after {
@@ -31,7 +31,7 @@
   width: 56px;
   height: 2px;
   margin-top: 28px;
-  background: linear-gradient(90deg, #d46a7a, #7a1823);
+  background: linear-gradient(90deg, var(--sv-vision), var(--sv-navy));
   opacity: 0.85;
 }
 .radar-section:after {
@@ -41,25 +41,25 @@
   pointer-events: none;
   z-index: 1;
   background:
-    linear-gradient(90deg, #14101025, transparent 48%),
+    linear-gradient(90deg, #02023825, transparent 48%),
     linear-gradient(
       0deg,
-      #14101050,
+      #02023850,
       transparent 12%,
       transparent 88%,
-      #14101050
+      #02023850
     );
 }
 .radar-copy p {
   font: 400 17px/29px var(--sans);
-  color: #ddd4cc;
+  color: #e7e8ff;
   max-width: 440px;
   margin-bottom: 30px;
 }
 .radar-copy .button {
   font-size: 18px;
   min-height: 48px;
-  background: #7a1823;
+  background: var(--sv-navy);
 }
 .radar-field {
   position: absolute;
@@ -85,12 +85,12 @@
     from 0deg,
     transparent 0deg,
     transparent 264deg,
-    #a100150a 278deg,
-    #b8122b30 299deg,
-    #cc17345c 321deg,
-    #de28457f 341deg,
-    #ed526994 355deg,
-    #f2b4ad70 359deg,
+    #3158e20a 278deg,
+    #426af830 299deg,
+    #426af85c 321deg,
+    #6cd6fc7f 341deg,
+    #e5c6fc94 355deg,
+    #b5b6fc70 359deg,
     transparent 360deg
   );
   mask-image: radial-gradient(
@@ -187,15 +187,15 @@
     linear-gradient(
       90deg,
       transparent calc(var(--radar-center-x) - 0.5px),
-      #dda7aa14 calc(var(--radar-center-x) - 0.5px),
-      #dda7aa14 calc(var(--radar-center-x) + 0.5px),
+      #b5b6fc14 calc(var(--radar-center-x) - 0.5px),
+      #b5b6fc14 calc(var(--radar-center-x) + 0.5px),
       transparent calc(var(--radar-center-x) + 0.5px)
     ),
     linear-gradient(
       0deg,
       transparent calc(100% - var(--radar-center-y) - 0.5px),
-      #dda7aa14 calc(100% - var(--radar-center-y) - 0.5px),
-      #dda7aa14 calc(100% - var(--radar-center-y) + 0.5px),
+      #b5b6fc14 calc(100% - var(--radar-center-y) - 0.5px),
+      #b5b6fc14 calc(100% - var(--radar-center-y) + 0.5px),
       transparent calc(100% - var(--radar-center-y) + 0.5px)
     );
 }

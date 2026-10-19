@@ -81,6 +81,7 @@ Mở **http://127.0.0.1:3001** để chạy website đã build cùng API. `npm r
 | Trang              | Đường dẫn             | Tài liệu                                   |
 | ------------------ | --------------------- | ------------------------------------------ |
 | Trang chủ          | `/`                   | `HomePage/`                                |
+| Tổng quan nhanh    | `/tong-quan`          | `OverviewPage/`                            |
 | Sản phẩm           | `/san-pham`           | [ProductPage](ProductPage/README.md)       |
 | Công nghệ          | `/cong-nghe`          | [TechnologyPage](TechnologyPage/README.md) |
 | Về chúng tôi       | `/ve-chung-toi`       | [AboutPage](AboutPage/README.md)           |

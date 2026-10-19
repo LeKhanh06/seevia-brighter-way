@@ -23,7 +23,7 @@ function PhotoScene({ scene }: { scene: (typeof scenarios)[number] }) {
         {loaded && (
           <>
             <div className="photo-scan" aria-hidden="true" />
-            {scene.boxes.map((box) => (
+            {scene.boxes.map((box, idx) => (
                 <div
                   key={box.label}
                   className={`photo-box ${box.y < 8 ? "photo-box-label-below" : ""} ${scene.id === "surroundings" && box.label === "Trụ cứu hỏa" ? "photo-box-label-bottom" : ""}`}
@@ -32,7 +32,8 @@ function PhotoScene({ scene }: { scene: (typeof scenarios)[number] }) {
                     top: `${box.y}%`,
                     width: `${box.w}%`,
                     height: `${box.h}%`,
-                  }}
+                    ["--i" as string]: idx,
+                  } as React.CSSProperties}
                   aria-hidden="true"
                 >
                   <span>{box.label}</span>
@@ -94,7 +95,7 @@ export default function AIDemo() {
         </div>
         <div className="speech" aria-live="polite">
           <strong>SEEVIA NÓI</strong>
-          <p>{scene.response}</p>
+          <p key={scene.id}>{scene.response}</p>
         </div>
         <p className="demo-note">
           Mô phỏng minh họa, không phải kết quả thực tế của sản phẩm.

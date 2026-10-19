@@ -111,14 +111,15 @@ function Icon({ close = false }: { close?: boolean }) {
       {close ? (
         <path d="m6 6 12 12M18 6 6 18" />
       ) : (
-        <>
-          <path d="M20 11.5a8 8 0 0 1-8 8H5l-3 2v-10a9 9 0 0 1 18 0Z" />
-          <path
-            d="M7 11h.01M12 11h.01M17 11h.01"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-        </>
+        <g className="sv-support-bot-mark">
+          <circle cx="12" cy="3" r="1.35" fill="currentColor" stroke="none" />
+          <path d="M12 4.6v2" strokeWidth="1.8" />
+          <rect x="5.3" y="7" width="13.4" height="11.6" rx="4.8" fill="none" strokeWidth="2.5" />
+          <rect x="3.2" y="10" width="2.4" height="4.6" rx="1.2" fill="currentColor" stroke="none" />
+          <rect x="18.4" y="10" width="2.4" height="4.6" rx="1.2" fill="currentColor" stroke="none" />
+          <ellipse cx="9.4" cy="12.7" rx="1.05" ry="1.55" fill="currentColor" stroke="none" />
+          <ellipse cx="14.6" cy="12.7" rx="1.05" ry="1.55" fill="currentColor" stroke="none" />
+        </g>
       )}
     </svg>
   );
@@ -479,17 +480,13 @@ export default function SeeViaSupport() {
         data-compact={nearFooter}
         ref={launcher}
         type="button"
-        aria-label="Mở hỗ trợ SeeVia"
+        aria-label="Mở trò chuyện với trợ lý SeeVia AI"
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={open ? "seevia-support-panel" : undefined}
         onClick={() => setOpen(true)}
       >
         <Icon />
-        <span>Hỏi SeeVia AI</span>
-        <span className="sv-support-launcher-caption">
-          Cùng bạn tìm câu trả lời
-        </span>
       </button>
       {open && (
         <dialog

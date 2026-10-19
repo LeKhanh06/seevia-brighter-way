@@ -1,12 +1,12 @@
 :root {
   font-family: var(--sans);
   color: #504b48;
-  background: #fff8f0;
+  background: var(--sv-pearl);
   font-synthesis: none;
-  --burgundy: #7a1823;
-  --charcoal: #1e1e1e;
-  --rose: #f2b4ad;
-  --ivory: #fff8f0;
+  --burgundy: var(--sv-navy);
+  --charcoal: var(--sv-navy);
+  --rose: var(--sv-lavender);
+  --ivory: var(--sv-pearl);
   --sans: "Be Vietnam Pro", Arial, Helvetica, sans-serif;
   --serif: "Lora", Georgia, "Times New Roman", serif;
 }
@@ -38,8 +38,12 @@ button:disabled {
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #d46a7a;
+  outline: 3px solid var(--sv-vision);
   outline-offset: 5px;
+}
+/* Route headings receive programmatic focus for screen-reader context, not a control outline. */
+main h1[tabindex="-1"]:focus-visible {
+  outline: none;
 }
 p {
   line-height: 1.65;
@@ -51,7 +55,10 @@ p {
   margin-top: 0;
 }
 section {
-  scroll-margin-top: 24px;
+  scroll-margin-top: 112px;
+}
+html {
+  scroll-padding-top: 112px;
 }
 img {
   max-width: 100%;
@@ -68,8 +75,8 @@ img {
   align-items: center;
   justify-content: center;
   gap: 15px;
-  background: #7a1823;
-  color: #fff8f0;
+  background: var(--sv-navy);
+  color: var(--sv-pearl);
   border: 1px solid transparent;
   border-radius: 28px;
   padding: 10px 26px;
@@ -83,11 +90,11 @@ img {
   font-weight: 400;
 }
 .button:hover {
-  background: #a10015;
+  background: var(--sv-vision-ink);
 }
 .button-light {
-  background: #fff8f0;
-  color: #7a1823;
+  background: var(--sv-pearl);
+  color: var(--sv-navy);
 }
 .button-light:hover {
   background: #f0dcd2;
@@ -103,10 +110,10 @@ img {
   display: block;
   width: 35px;
   height: 2px;
-  background: #d46a7a;
+  background: var(--sv-vision);
 }
 .speech {
-  border-left: 2px solid #d46a7a;
+  border-left: 2px solid var(--sv-vision);
   padding-left: 18px;
 }
 .speech strong {
@@ -124,10 +131,12 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 0 7%;
-  color: #fff8f0;
-  background: #7a1823;
-  position: relative;
-  z-index: 5;
+  color: var(--sv-pearl);
+  background: var(--sv-navy);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 1px 0 #b5b6fc38, 0 8px 24px #1e0d1012;
 }
 .logo {
   width: 182px;
@@ -168,7 +177,7 @@ img {
   top: 100%;
   width: 245px;
   padding: 22px;
-  background: #7a1823;
+  background: var(--sv-navy);
   box-shadow: 0 12px 28px #0003;
   display: grid;
   gap: 22px;
@@ -181,8 +190,8 @@ img {
   display: none;
 }
 .footer {
-  background: #211f20;
-  color: #f5eee8;
+  background: var(--sv-navy);
+  color: var(--sv-pearl);
   padding: 75px 7% 38px;
 }
 .footer-main {
@@ -200,7 +209,7 @@ img {
 }
 .footer nav h2 {
   font: 600 13px var(--sans);
-  color: #f2b4ad;
+  color: var(--sv-lavender);
   margin: 32px 0 20px;
 }
 .footer nav button {
@@ -210,7 +219,7 @@ img {
   margin-bottom: 12px;
 }
 .footer-bottom {
-  border-top: 1px solid #766769;
+  border-top: 1px solid #6cd6fc80;
   margin-top: 50px;
   padding-top: 25px;
   display: flex;
@@ -228,7 +237,7 @@ img {
   z-index: 50;
   padding: 15px;
   background: white;
-  color: #a10015;
+  color: var(--sv-vision-ink);
 }
 .skip-link:focus {
   top: 10px;
@@ -240,7 +249,7 @@ img {
   transform: translateX(-50%);
   z-index: 20;
   max-width: calc(100% - 32px);
-  background: #1e1e1e;
+  background: var(--sv-navy);
   color: #fff;
   padding: 0;
   border-radius: 8px;
@@ -288,6 +297,12 @@ img {
   }
 }
 @media (max-width: 640px) {
+  html {
+    scroll-padding-top: 84px;
+  }
+  section {
+    scroll-margin-top: 84px;
+  }
   .header {
     height: 68px;
   }

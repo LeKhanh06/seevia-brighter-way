@@ -1,0 +1,44 @@
+.partnership > .journey {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.journey svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0 18%, transparent 30% 62%, #000 82% 100%);
+  mask-image: linear-gradient(to bottom, #000 0 18%, transparent 30% 62%, #000 82% 100%);
+}
+
+@media (max-width: 760px) {
+  .journey svg {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0 8%, transparent 25% 65%, #000 84% 100%);
+    mask-image: linear-gradient(to bottom, #000 0 8%, transparent 25% 65%, #000 84% 100%);
+  }
+}
+
+.journey-glow {
+  fill: none;
+  stroke: #6cd6fc;
+  stroke-width: 14;
+  opacity: 0.26;
+}
+
+.journey-line {
+  fill: none;
+  stroke: url(#journey-grad);
+  stroke-width: 2;
+  opacity: 0.64;
+}
+
+.journey-run {
+  fill: none;
+  stroke: #f5f4ff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.8;
+}

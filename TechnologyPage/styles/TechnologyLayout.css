@@ -14,8 +14,8 @@
 .technology-page .technology-hero {
   min-height: 420px;
   background:
-    radial-gradient(circle 300px at 76% 52%, #7a182380, transparent 100%),
-    #1e1e1e;
+    radial-gradient(circle 300px at 76% 52%, #02023880, transparent 100%),
+    var(--sv-navy);
 }
 .technology-page .technology-hero-layout {
   gap: 64px;
@@ -40,13 +40,13 @@
   margin-bottom: 16px;
 }
 .tech-anatomy {
-  background: linear-gradient(115deg, #f1ddd6, #f7f3ef 70%);
+  background: linear-gradient(115deg, var(--sv-orchid), var(--sv-pearl) 70%);
 }
 .tech-anatomy h2 span {
   color: var(--burgundy);
 }
 .technology-page .tech-flow {
-  background: #1e1e1e;
+  background: var(--sv-navy);
   color: var(--ivory);
 }
 .technology-page .tech-flow .eyebrow {
@@ -57,12 +57,12 @@
   gap: 30px;
 }
 .technology-page .tech-flow-grid:before {
-  border-color: #f2b4ad55;
+  border-color: #b5b6fc55;
 }
 .technology-page .flow-icon {
-  background: #1e1e1e;
+  background: var(--sv-navy);
   color: var(--rose);
-  border-color: #f2b4ad70;
+  border-color: #b5b6fc70;
   animation: tech-step-pulse 8s infinite;
 }
 .technology-page .tech-flow-grid article:nth-child(2) .flow-icon {
@@ -90,7 +90,7 @@
   margin-top: 28px;
 }
 .tech-processing {
-  background: linear-gradient(110deg, #982332, #7a1823 50%, #540110);
+  background: linear-gradient(110deg, #982332, var(--sv-navy) 50%, var(--sv-navy));
   color: var(--ivory);
 }
 .technology-page .tech-processing .eyebrow {
@@ -105,7 +105,7 @@
   gap: 36px;
 }
 .tech-processing-grid article {
-  border-top: 1px solid #f2b4ad70;
+  border-top: 1px solid #b5b6fc70;
   padding-top: 22px;
 }
 .tech-processing-grid article > span {
@@ -122,11 +122,11 @@
 }
 .tech-processing-grid p {
   font: 400 14px/1.85 var(--sans);
-  color: #f1ddd6;
+  color: var(--sv-orchid);
   margin: 0;
 }
 .technology-page .tech-conversation {
-  background: linear-gradient(110deg, #f7f3ef, #f1ddd6);
+  background: linear-gradient(110deg, var(--sv-pearl), var(--sv-orchid));
 }
 .technology-page .tech-conversation-layout {
   gap: 56px;
@@ -139,7 +139,7 @@
 .technology-page .tech-transparency {
   position: relative;
   padding-block: 48px;
-  background: #1e1e1e;
+  background: var(--sv-navy);
   color: var(--ivory);
   border: 0;
 }
@@ -151,7 +151,7 @@
   transform: translateX(-50%);
   width: calc(100% - 48px);
   height: 1px;
-  background: #f2b4ad40;
+  background: #b5b6fc40;
 }
 .technology-page .tech-transparency h2 {
   color: var(--ivory);
@@ -184,14 +184,14 @@
 @keyframes tech-step-pulse {
   0%,
   18% {
-    background: #7a1823;
-    color: #fff8f0;
-    box-shadow: 0 0 0 5px #f2b4ad12;
+    background: var(--sv-navy);
+    color: var(--sv-pearl);
+    box-shadow: 0 0 0 5px #b5b6fc12;
   }
   25%,
   100% {
-    background: #1e1e1e;
-    color: #f2b4ad;
+    background: var(--sv-navy);
+    color: var(--sv-lavender);
     box-shadow: none;
   }
 }
@@ -299,7 +299,7 @@
   justify-content: center;
   gap: 16px;
   padding: 20px;
-  background: linear-gradient(140deg, #442128, #1e1e1e);
+  background: linear-gradient(140deg, #442128, var(--sv-navy));
   color: #d1a39c;
   text-align: center;
 }
@@ -319,7 +319,7 @@
     italic 19px "Playfair Display",
     Georgia,
     serif;
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .tech-closeup-copy .tech-closeup-label {
   font: 500 10px/1.6 var(--sans);
@@ -331,12 +331,12 @@
     400 26px/1.3 "Playfair Display",
     Georgia,
     serif;
-  color: #7a1823;
+  color: var(--sv-navy);
   margin: 0 0 14px;
 }
 .tech-closeup-copy > p:last-child {
   font: 400 13px/1.9 var(--sans);
-  color: #635751;
+  color: var(--sv-muted);
   margin: 0;
 }
 @media (max-width: 1050px) {

@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { navigate, pageRegistry, type Destination } from "../navigation";
 import "./Header.css";
 import { useLanguage, setLanguage } from "../i18n/language";
+import Sparkles from "../../HomePage/components/Sparkles";
 export default function Header({
   active = "home",
 }: {
   active?:
     | "home"
+    | "overview"
     | "product"
     | "technology"
     | "about"
@@ -127,7 +129,7 @@ export default function Header({
         <button
           ref={toggle}
           className="menu-toggle"
-          aria-label="Mở menu"
+          aria-label={open ? "Đóng menu" : "Mở menu"}
           aria-expanded={open}
           aria-controls="extra-menu"
           onClick={() => setOpen(!open)}
@@ -146,6 +148,7 @@ export default function Header({
             aria-modal="true"
             aria-label="Khám phá thêm"
           >
+            <Sparkles tone="dark" density={22} />
             <div className="drawer-top">
               <img src="/images/260.png" alt="SeeVia" />
               <button
@@ -166,6 +169,7 @@ export default function Header({
                 {item("Công nghệ", "technology")}
                 {item("Về chúng tôi", "about")}
               </div>
+              {item("Tổng quan nhanh", "overview", true)}
               {item("Cộng đồng", "community", true)}
               {item("Tin tức", "news", true)}
               {item("Đối tác", "partnership", true)}

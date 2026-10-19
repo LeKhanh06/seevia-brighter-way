@@ -4,6 +4,7 @@ const groups: { title: string; links: [string, Destination?][] }[] = [
     title: "KHÁM PHÁ SEEVIA",
     links: [
       ["Trang chủ", "home"],
+      ["Tổng quan nhanh", "overview"],
       ["Kính SeeVia", "product"],
       ["Công nghệ", "technology"],
       ["Các khả năng hỗ trợ", "capabilities"],

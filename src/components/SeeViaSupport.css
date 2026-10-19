@@ -1,9 +1,9 @@
 /* Scoped addition: none of the existing website selectors are overridden. */
 .sv-support {
   --support-ink: #302625;
-  --support-wine: #7a1823;
-  --support-rose: #f2b4ad;
-  --support-paper: #fff8f0;
+  --support-wine: var(--sv-navy);
+  --support-rose: var(--sv-lavender);
+  --support-paper: var(--sv-pearl);
   --support-muted: #6c5652;
   --support-line: #d7beb5;
   font-family: var(--sans, "Be Vietnam Pro", sans-serif);
@@ -45,7 +45,7 @@
   min-height: 56px;
   border: 1px solid #b7636c;
   border-radius: 40px;
-  background: linear-gradient(125deg, #7a1823, #54131c);
+  background: linear-gradient(125deg, var(--sv-navy), #54131c);
   color: var(--support-paper);
   box-shadow: 0 6px 22px #31121735;
 }
@@ -112,7 +112,7 @@
   gap: 16px;
   flex-shrink: 0;
   padding: 20px;
-  background: linear-gradient(120deg, #7a1823, #59171e);
+  background: linear-gradient(120deg, var(--sv-navy), #59171e);
   color: var(--support-paper);
 }
 .sv-support-overline {
@@ -133,7 +133,7 @@
   flex-shrink: 0;
   width: 44px;
   height: 44px;
-  border: 1px solid #f2b4ad66;
+  border: 1px solid #b5b6fc66;
   border-radius: 50%;
   background: transparent;
   color: var(--support-paper);
@@ -207,7 +207,7 @@
   padding: 14px;
   border: 1px solid var(--support-line);
   border-radius: 0 12px 12px 12px;
-  background: #fffdf9;
+  background: var(--sv-pearl);
   overflow-wrap: anywhere;
 }
 .sv-support-speaker {
@@ -246,11 +246,11 @@
   border: 1px solid #b7837c;
   border-radius: 6px;
   color: var(--support-wine);
-  background: #f2b4ad12;
+  background: #b5b6fc12;
   text-decoration: none;
 }
 .sv-support-page-links a:hover {
-  background: #f2b4ad30;
+  background: #b5b6fc30;
 }
 .sv-support-page-links strong {
   font-size: 13px;
@@ -305,7 +305,7 @@
   line-height: 1.5;
 }
 .sv-support-suggestions button:hover {
-  background: #f2b4ad30;
+  background: #b5b6fc30;
 }
 .sv-support-working {
   display: flex;
@@ -325,7 +325,7 @@
   border-left: 2px solid var(--support-wine);
   margin: 16px 0;
   padding: 10px 12px;
-  background: #f2b4ad20;
+  background: #b5b6fc20;
   font-size: 13px;
   line-height: 1.7;
 }
@@ -357,7 +357,7 @@
   border: 1px solid #95675f;
   border-radius: 8px;
   color: var(--support-ink);
-  background: #fffdfa;
+  background: var(--sv-pearl);
   font: 400 16px/1.5 var(--sans);
 }
 .sv-support-input-row textarea::placeholder {
@@ -487,7 +487,7 @@
   width: 440px;
   border: 1px solid #c99b91;
   border-radius: 24px;
-  background: linear-gradient(155deg, #fffdf9, #fff8f0 65%, #f6e8e1);
+  background: linear-gradient(155deg, var(--sv-pearl), var(--sv-pearl) 65%, #f6e8e1);
   box-shadow:
     0 28px 90px #35171d38,
     0 4px 16px #35171d16;
@@ -511,13 +511,13 @@
 }
 .sv-support-ai-topline {
   padding: 4px 22px;
-  background: #fffaf5;
+  background: var(--sv-pearl);
   border-bottom: 1px solid #e6d3ca;
 }
 .sv-support-transcript {
   padding: 20px 22px;
   background:
-    radial-gradient(ellipse at 100% 0%, #f2b4ad29, transparent 60%),
+    radial-gradient(ellipse at 100% 0%, #b5b6fc29, transparent 60%),
     radial-gradient(ellipse at 0% 100%, #ead4c72b, transparent 65%);
   scrollbar-width: thin;
   scrollbar-color: #b78a80 transparent;
@@ -527,7 +527,7 @@
   line-height: 1.65;
 }
 .sv-support-availability {
-  background: #fffdf9cc;
+  background: #f5f4ffcc;
   border-radius: 12px;
 }
 .sv-support-turn {
@@ -536,7 +536,7 @@
 }
 .sv-support-turn-user {
   border-radius: 16px 4px 16px 16px;
-  background: linear-gradient(135deg, #7a1823, #541d2a);
+  background: linear-gradient(135deg, var(--sv-navy), #541d2a);
 }
 .sv-support-suggestions {
   display: grid;
@@ -546,12 +546,12 @@
   padding: 12px 14px;
   border-radius: 12px;
   border-color: #c49c91;
-  background: linear-gradient(110deg, #fffdf9, #f8eee8);
+  background: linear-gradient(110deg, var(--sv-pearl), #f8eee8);
   font-size: 13px;
 }
 .sv-support-composer {
   padding: 16px 20px 6px;
-  background: linear-gradient(180deg, #fffdf9, #fff8f0);
+  background: linear-gradient(180deg, var(--sv-pearl), var(--sv-pearl));
   box-shadow: 0 -6px 20px #53242a04;
 }
 .sv-support-input-row textarea {
@@ -566,7 +566,7 @@
 }
 .sv-support-footer {
   padding-top: 2px;
-  background: #fff8f0;
+  background: var(--sv-pearl);
 }
 @media (max-width: 600px) {
   .sv-support-panel {
@@ -676,7 +676,7 @@
   justify-content: space-between;
   gap: 12px;
   border-color: #d9c2b9;
-  background: #fffdfa;
+  background: var(--sv-pearl);
   border-radius: 10px;
 }
 .sv-support-suggestions button::after {
@@ -780,7 +780,7 @@
   border-radius: 20px;
   background:
     radial-gradient(ellipse at top right, #c15d6555, transparent 65%),
-    linear-gradient(125deg, #7a1823, #43141e);
+    linear-gradient(125deg, var(--sv-navy), #43141e);
   box-shadow:
     0 10px 30px #38101d30,
     inset 0 1px 0 #ffffff24;
@@ -821,7 +821,7 @@
   padding: 18px;
 }
 .sv-support-turn-assistant {
-  background: #fffdfa;
+  background: var(--sv-pearl);
   border-color: #e0cdc3;
 }
 .sv-support-turn p {
@@ -845,7 +845,7 @@
   line-height: 1.65;
 }
 .sv-support-page-links a {
-  background: #fffdfa;
+  background: var(--sv-pearl);
   border-color: #b88e82;
   border-radius: 10px;
 }
@@ -1118,7 +1118,7 @@
   border-radius: 18px;
   font-size: 11px;
   line-height: 1.4;
-  background: #fffaf5;
+  background: var(--sv-pearl);
 }
 @media (pointer: coarse) {
   .sv-support-composer .sv-support-suggestions button {
@@ -1180,7 +1180,7 @@
   overscroll-behavior: contain;
   padding: 6px 16px 8px;
   border-bottom: 1px solid var(--support-line);
-  background: #fffaf5;
+  background: var(--sv-pearl);
 }
 .sv-support-history-note {
   margin: 4px 0 6px;
@@ -1237,9 +1237,179 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Keep the launcher and dialog controls in one refined, rounded-line icon family. */
+.sv-support-launcher {
+  grid-template-columns: 34px auto;
+}
+.sv-support-launcher svg {
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  border: 1px solid #b5b6fc86;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #b5b6fc35, transparent 72%);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.sv-support-launcher[data-compact="true"] {
+  grid-template-columns: 30px;
+  padding: 12px;
+}
+.sv-support-launcher[data-compact="true"] svg {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+}
+.sv-support-icon-button {
+  background: radial-gradient(circle at 35% 25%, #b5b6fc24, transparent 72%);
+  box-shadow: inset 0 1px 0 #ffffff18;
+}
+.sv-support-icon-button svg {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sv-support-launcher:hover,
+.sv-support-icon-button:hover {
+  translate: 0 -1px;
+}
+@media (max-width: 600px) {
+  .sv-support-launcher {
+    grid-template-columns: 30px;
+    padding: 12px;
+  }
+  .sv-support-launcher svg {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-support-launcher:hover,
+  .sv-support-icon-button:hover {
+    translate: none;
+  }
+}
 .sv-support-history-delete,
 .sv-support-history-clear {
   color: var(--support-wine);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* A single message tile stays the same size beside every section and on mobile. */
+.sv-support-launcher,
+.sv-support-launcher[data-compact="true"] {
+  width: 60px;
+  height: 60px;
+  min-height: 60px;
+  padding: 10px;
+  grid-template-columns: 1fr;
+  place-items: center;
+  border-radius: 18px;
+}
+.sv-support-launcher svg,
+.sv-support-launcher[data-compact="true"] svg {
+  width: 38px;
+  height: 38px;
+  padding: 6px;
+  border-radius: 12px;
+}
+
+/* Keep only the message glyph visible; reveal its label on hover or keyboard focus. */
+.sv-support-launcher,
+.sv-support-launcher[data-compact="true"] {
+  position: fixed;
+  display: grid;
+  width: 60px;
+  height: 60px;
+  min-height: 60px;
+  padding: 8px;
+  place-items: center;
+  border: 1px solid var(--sv-lavender);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #84232e, #54131c);
+  color: var(--support-paper);
+  box-shadow:
+    0 8px 24px #31121735,
+    inset 0 1px 0 #ffffff25;
+}
+.sv-support-launcher svg,
+.sv-support-launcher[data-compact="true"] svg {
+  width: 44px;
+  height: 44px;
+  padding: 2px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  filter: none;
+}
+.sv-support-launcher::after {
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 50%;
+  padding: 9px 13px;
+  border: 1px solid #a75b63;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--sv-navy), #54131c);
+  color: var(--support-paper);
+  box-shadow: 0 8px 24px #31121730;
+  content: "Hỏi SeeVia AI";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(4px, -50%);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.sv-support-launcher:is(:hover, :focus-visible)::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+.sv-support-launcher:hover {
+  background: linear-gradient(145deg, #922d39, #651b25);
+  color: var(--support-paper);
+}
+.sv-support-launcher:focus-visible {
+  outline: 2px solid var(--support-wine);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--support-paper);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-support-launcher::after {
+    transition: none;
+  }
+}
+
+.sv-support-launcher,
+.sv-support-launcher[data-compact="true"] {
+  width: 64px;
+  height: 64px;
+  min-height: 64px;
+  padding: 0;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-content: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8ed8ff, #b5b6fc);
+  color: #020238;
+  box-shadow: 0 8px 26px #02023855;
+}
+.sv-support-launcher svg {
+  width: 30px;
+  height: 30px;
+  grid-row: auto;
+}
+.sv-support-launcher:hover {
+  background: linear-gradient(135deg, #6cd6fc, #e5c6fc);
+  color: #020238;
+}
+.sv-support-launcher::after {
+  border-color: #b5b6fc;
+  background: #020238;
+  color: #f5f4ff;
 }

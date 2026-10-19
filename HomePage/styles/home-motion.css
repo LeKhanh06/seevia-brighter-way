@@ -1,0 +1,452 @@
+/* ==========================================================
+   SeeVia Home: bảng màu logo SV + lớp chuyển động.
+   Import SAU tất cả css khác của Home.
+   Mọi quy tắc nằm dưới html.sv-home-active (do useHomeMotion thêm/bỏ),
+   nên không ảnh hưởng các trang khác.
+   ========================================================== */
+
+html.sv-home-active {
+  --sv-navy: #020238;
+  --sv-cyan: #6cd6fc;
+  --sv-vision: #426af8;
+  --sv-lavender: #b5b6fc;
+  --sv-orchid: #e5c6fc;
+  --sv-pearl: #f5f4ff;
+  --sv-muted: #4a5073;
+  --sv-grad: linear-gradient(100deg, #6cd6fc, #426af8 38%, #b5b6fc 68%, #e5c6fc);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* Khe giữa các section khi "nở" ra: nền navy */
+html.sv-home-active main { background: linear-gradient(180deg, var(--sv-navy), #0b0b5e); }
+
+/* ---------- Text mask reveal ---------- */
+.sv-w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* chừa chỗ cho dấu tiếng Việt và nét chân chữ nghiêng */
+  padding: 0.3em 0.14em 0.18em;
+  margin: -0.3em -0.14em -0.18em;
+}
+.sv-wi { display: inline-block; will-change: transform; }
+html.sv-home-active .short-line { display: block; }
+
+/* ---------- Aura + ribbon ---------- */
+.sv-has-aura { overflow: clip; }
+.sv-has-aura:not(.hero) > :not(.sv-aura):not(.sv-ribbon) { position: relative; z-index: 1; }
+.sv-aura {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  animation: sv-drift 22s ease-in-out infinite alternate;
+}
+.sv-aura i { position: absolute; width: 62vmax; height: 62vmax; border-radius: 50%; will-change: transform; }
+.sv-aura i:nth-child(1) { left: -22%; top: -30%; }
+.sv-aura i:nth-child(2) { right: -25%; bottom: -40%; }
+.sv-aura i:nth-child(3) { left: 35%; top: 20%; width: 40vmax; height: 40vmax; }
+.sv-aura--light i:nth-child(1) { background: radial-gradient(circle, #6cd6fc40, transparent 65%); }
+.sv-aura--light i:nth-child(2) { background: radial-gradient(circle, #e5c6fc66, transparent 65%); }
+.sv-aura--light i:nth-child(3) { background: radial-gradient(circle, #426af824, transparent 65%); }
+.sv-aura--dark i:nth-child(1) { background: radial-gradient(circle, #426af85c, transparent 65%); }
+.sv-aura--dark i:nth-child(2) { background: radial-gradient(circle, #6cd6fc30, transparent 65%); }
+.sv-aura--dark i:nth-child(3) { background: radial-gradient(circle, #e5c6fc22, transparent 65%); }
+@keyframes sv-drift {
+  from { transform: translate3d(-1.5%, 0, 0) scale(1); }
+  to { transform: translate3d(1.5%, -2%, 0) scale(1.06); }
+}
+
+.sv-ribbon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  animation: sv-ribbon-float 16s ease-in-out infinite alternate;
+}
+.sv-ribbon-hero {
+  opacity: 0.58;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 52%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 52%);
+}
+@keyframes sv-ribbon-float {
+  from { transform: translate3d(0, -1.5%, 0) rotate(-0.6deg); }
+  to { transform: translate3d(0, 1.5%, 0) rotate(0.6deg); }
+}
+
+/* ---------- Header ---------- */
+html.sv-home-active .header.header {
+  background: linear-gradient(105deg, #0a0a5e, var(--sv-navy));
+  border-bottom-color: #b5b6fc30;
+}
+html.sv-home-active .main-nav button:hover { color: var(--sv-cyan); }
+@media (hover: hover) and (pointer: fine) {
+  html.sv-home-active .header-tools .menu-toggle:before { transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; transform-origin: center; }
+  html.sv-home-active .header-tools .menu-toggle:not([aria-expanded="true"]):is(:hover, :focus-visible, :active):before {
+    background: var(--sv-cyan);
+    box-shadow: 0 6px var(--sv-lavender), 0 12px var(--sv-orchid);
+    transform: scaleX(1.12);
+  }
+  html.sv-home-active .header-tools .menu-toggle:not([aria-expanded="true"]):is(:hover, :focus-visible, :active):after {
+    opacity: 0;
+  }
+}
+
+/* ---------- Nút: sheen + từ tính ---------- */
+html.sv-home-active .button { position: relative; overflow: hidden; isolation: isolate; }
+html.sv-home-active .button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, #ffffff55 48%, #6cd6fc44 52%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s cubic-bezier(0.2, 0.65, 0.25, 1);
+  pointer-events: none;
+}
+html.sv-home-active .button:hover::after { transform: translateX(120%); }
+html.sv-home-active .button:hover { transform: none; } /* vị trí do GSAP quickTo điều khiển */
+
+/* ---------- Hero ---------- */
+html.sv-home-active .hero {
+  background:
+    radial-gradient(ellipse at 76% 42%, #426af833, transparent 58%),
+    radial-gradient(ellipse at 14% 92%, #6cd6fc14, transparent 50%),
+    linear-gradient(115deg, var(--sv-navy), #07073f 60%, #0b1050);
+  border-bottom: 1px solid #b5b6fc30;
+}
+html.sv-home-active .hero h1 { color: var(--sv-pearl); }
+html.sv-home-active .hero h1 em { font-style: italic; }
+html.sv-home-active .hero h1 em .sv-wi,
+html.sv-home-active .hero h1 em {
+  background: linear-gradient(100deg, #6cd6fc, #b5b6fc 45%, #e5c6fc 70%, #6cd6fc);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sv-shimmer 9s linear infinite;
+}
+@keyframes sv-shimmer { to { background-position: -220% 0; } }
+html.sv-home-active .hero .hero-label { color: var(--sv-pearl); }
+html.sv-home-active .hero .hero-label:before { background: var(--sv-cyan); }
+html.sv-home-active .hero .speech {
+  border-left-color: var(--sv-cyan);
+  background: linear-gradient(90deg, #426af81f, transparent);
+}
+html.sv-home-active .hero .speech strong { color: var(--sv-cyan); }
+html.sv-home-active .hero .button {
+  color: #fff;
+  border: 1px solid #6cd6fc55;
+  background: linear-gradient(100deg, #2a46d6, var(--sv-vision) 60%, #5a8cf8);
+  box-shadow: 0 10px 30px #426af855;
+}
+html.sv-home-active .hero .button:hover {
+  color: var(--sv-navy);
+  background: linear-gradient(100deg, var(--sv-cyan), var(--sv-lavender));
+  border-color: var(--sv-cyan);
+}
+html.sv-home-active .hero-object {
+  color: var(--sv-lavender);
+  background: #0a0a5a99;
+  border-color: #6cd6fc33;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+html.sv-home-active .hero-object span { color: var(--sv-cyan); display: inline-block; transition: transform 0.5s; }
+html.sv-home-active .hero-object:hover { border-color: var(--sv-cyan); background: #426af840; }
+html.sv-home-active .hero-object:hover span { transform: rotate(180deg) scale(1.3); }
+
+/* Lens: vòng kính đi theo đèn quét (dùng --lx/--ly có sẵn từ Hero.tsx) */
+html.sv-home-active .hero .light { contain: layout paint; }
+html.sv-home-active .hero .light::after {
+  content: "";
+  position: absolute;
+  left: var(--lx, 66%);
+  top: var(--ly, 34%);
+  width: 190px;
+  height: 190px;
+  margin: -95px 0 0 -95px;
+  border-radius: 50%;
+  border: 1px solid #6cd6fc55;
+  box-shadow: inset 0 0 50px #426af833, 0 0 40px #6cd6fc1a;
+}
+
+/* ---------- Capabilities ---------- */
+html.sv-home-active .capabilities .line-label:after {
+  background: linear-gradient(90deg, var(--sv-lavender), var(--sv-orchid) 60%, transparent);
+  transform: scaleX(var(--line, 1));
+  transform-origin: 0 50%;
+}
+html.sv-home-active .capabilities .capability { border-left-color: #d6d4f7; transition: transform 0.5s cubic-bezier(0.2, 0.65, 0.25, 1); }
+html.sv-home-active .capabilities .number { color: #8f91e8; transition: color 0.4s; }
+html.sv-home-active .capabilities .capability p { color: #4a5073; }
+html.sv-home-active .capabilities .icon-bubble {
+  background: var(--sv-orchid);
+  transition: transform 0.6s cubic-bezier(0.2, 0.65, 0.25, 1), box-shadow 0.6s, background-color 0.4s;
+}
+html.sv-home-active .capabilities .capability:hover .icon-bubble {
+  transform: translateY(-8px) rotate(-8deg);
+  background: linear-gradient(135deg, var(--sv-cyan), var(--sv-orchid));
+  box-shadow: 0 16px 32px #426af833;
+}
+html.sv-home-active .capabilities .capability:hover .number { color: var(--sv-vision); }
+html.sv-home-active .capabilities .short-line { background: var(--sv-vision); transition: width 0.5s; }
+html.sv-home-active .capabilities .capability:hover .short-line { width: 64px; }
+html.sv-home-active .capabilities .icon-bubble:before {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 62 60'%3E%3Cpath d='M1 1C34 0 61 24 61 59' fill='none' stroke='%23426AF8' stroke-opacity='.4' stroke-width='1'/%3E%3Cpath d='M51 15Q51 21 57 21Q51 21 51 27Q51 21 45 21Q51 21 51 15Z' fill='%236CD6FC' transform='translate(-5 -2)'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+}
+html.sv-home-active .capabilities:before,
+html.sv-home-active .capabilities:after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 73 143'%3E%3Cpath d='M.5 0C1 68 22 122 73 142.5' fill='none' stroke='%23426AF8' stroke-opacity='.3' stroke-width='1'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+}
+
+/* ---------- Product viewer ---------- */
+html.sv-home-active .product-viewer {
+  background:
+    radial-gradient(circle 470px at 12% 40%, #426af84d, transparent 100%),
+    radial-gradient(circle 370px at 93% 29%, #e5c6fc2b, transparent 100%),
+    #05052e;
+}
+html.sv-home-active .product-stage { color: #9a9dd8; }
+html.sv-home-active .product-ellipses { border-color: #b5b6fc22; }
+html.sv-home-active .product-ellipses:after {
+  border-color: #b5b6fc33;
+  background: radial-gradient(ellipse, #6cd6fc3d 0%, #426af820 30%, transparent 70%);
+}
+
+/* ---------- AI demo ---------- */
+html.sv-home-active .ai-demo.section-pad { background: linear-gradient(106deg, var(--sv-pearl), var(--sv-orchid)); }
+html.sv-home-active .tabs button {
+  border-color: var(--sv-vision);
+  transition: background-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+html.sv-home-active .tabs button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px #426af82e; }
+html.sv-home-active .tabs button[aria-selected="true"] { box-shadow: 0 8px 22px #426af84d; }
+html.sv-home-active .demo-note { color: #5f6590; }
+html.sv-home-active .photo-stage { background: #07073f; box-shadow: 0 24px 60px #02023826; }
+html.sv-home-active .photo-wrap { background: #050530; }
+html.sv-home-active .photo-topline,
+html.sv-home-active .photo-topline span,
+html.sv-home-active .photo-missing { color: var(--sv-lavender); }
+html.sv-home-active .photo-scan { background: var(--sv-cyan); box-shadow: 0 0 22px 6px #426af877; }
+
+/* Đổi cảnh: ảnh "mở ống kính", khung nhận diện hiện lần lượt, lời thoại trượt vào */
+html.sv-home-active .photo-wrap img { animation: sv-lens-in 1s cubic-bezier(0.2, 0.65, 0.25, 1) both; }
+@keyframes sv-lens-in {
+  from { clip-path: circle(0% at 50% 50%); transform: scale(1.15); }
+  to { clip-path: circle(75% at 50% 50%); transform: scale(1); }
+}
+html.sv-home-active .photo-box { animation-delay: calc(0.7s + var(--i, 0) * 0.18s); }
+html.sv-home-active .ai-copy .speech p { animation: sv-text-in 0.6s ease both; }
+@keyframes sv-text-in { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---------- About ---------- */
+html.sv-home-active .about .belief {
+  --ring: 0;
+  background:
+    radial-gradient(circle 380px at -12% 100%, #426af84d, transparent 100%),
+    radial-gradient(circle 320px at 110% 0%, #e5c6fc22, transparent 100%),
+    linear-gradient(110deg, var(--sv-navy), #0d0d6b);
+}
+html.sv-home-active .about .belief:before,
+html.sv-home-active .about .belief:after { border-color: #b5b6fc2e; will-change: transform; }
+html.sv-home-active .about .belief:before { transform: translateY(calc(var(--ring) * -50px)) scale(calc(1 + var(--ring) * 0.16)); }
+html.sv-home-active .about .belief:after { transform: translateY(calc(var(--ring) * 40px)) scale(calc(1 - var(--ring) * 0.1)); }
+html.sv-home-active .about .belief .eyebrow { color: var(--sv-cyan); }
+html.sv-home-active .about .belief > div .short-line { background: var(--sv-cyan); }
+html.sv-home-active .about .belief > div p { color: #d7d8ff; }
+html.sv-home-active .about .about-copy > p:not(.eyebrow) { color: #c9caff; }
+html.sv-home-active .about .about-copy > h3 + p:not(.eyebrow) { color: #aeb0e8; }
+html.sv-home-active .about .about-copy hr { border-top-color: #b5b6fc55; transform-origin: 0 50%; }
+html.sv-home-active .about .about-copy .button { background: var(--sv-pearl); color: var(--sv-navy); }
+
+/* ---------- Community ---------- */
+html.sv-home-active .community-placeholder { background: linear-gradient(135deg, var(--sv-lavender), var(--sv-orchid)); }
+html.sv-home-active .community-placeholder img { will-change: transform; }
+
+/* ---------- Partnership ---------- */
+html.sv-home-active .partnership.section-pad {
+  background:
+    radial-gradient(ellipse at 50% 30%, #426af83d 0%, transparent 62%),
+    linear-gradient(160deg, var(--sv-navy), #0d0d5c 60%, #1a1f7a);
+}
+html.sv-home-active .partnership > .eyebrow { color: var(--sv-cyan); }
+html.sv-home-active .partnership .button-outline { border-color: var(--sv-lavender); transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+html.sv-home-active .partnership .button-outline:hover { background: #b5b6fc26; border-color: var(--sv-cyan); }
+
+/* ---------- Radar ---------- */
+html.sv-home-active .radar-copy .button { background: linear-gradient(100deg, #2a46d6, var(--sv-vision)); color: #fff; border: 1px solid #6cd6fc55; }
+html.sv-home-active .radar > circle:first-of-type {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sv-ping 2.8s ease-out infinite;
+}
+@keyframes sv-ping {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(3.2); opacity: 0; }
+}
+
+/* ---------- Giảm chuyển động (bỏ qua khi thử bằng ?motion=on) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html:not(.sv-motion-on) .sv-aura,
+  html:not(.sv-motion-on) .sv-ribbon,
+  html:not(.sv-motion-on).sv-home-active .hero h1 em,
+  html:not(.sv-motion-on).sv-home-active .hero h1 em .sv-wi,
+  html:not(.sv-motion-on).sv-home-active .photo-wrap img,
+  html:not(.sv-motion-on).sv-home-active .ai-copy .speech p,
+  html:not(.sv-motion-on).sv-home-active .capabilities .icon-bubble,
+  html:not(.sv-motion-on).sv-home-active .radar > circle:first-of-type { animation: none; }
+  html:not(.sv-motion-on).sv-home-active .button::after { display: none; }
+  html:not(.sv-motion-on) #progress { display: none; }
+}
+
+/* ---------- Sửa chữ dính + dễ đọc trên nền ruy-băng ---------- */
+html.sv-home-active .hero h1 {
+  letter-spacing: -0.5px;
+  word-spacing: 0.08em;
+}
+html.sv-home-active .hero .hero-development {
+  margin-top: 22px;
+  line-height: 1.7;
+  max-width: 520px;
+  color: #c9caff;
+}
+html.sv-home-active .hero .speech {
+  background: linear-gradient(90deg, #04044acc, #04044a80 70%, transparent);
+  backdrop-filter: blur(6px);
+}
+html.sv-home-active .sv-ribbon-hero {
+  opacity: 0.58;
+}
+@media (max-width: 760px) {
+  html.sv-home-active .sv-ribbon-hero {
+    opacity: 0.34;
+    -webkit-mask-image: linear-gradient(90deg, transparent 10%, #000 70%);
+    mask-image: linear-gradient(90deg, transparent 10%, #000 70%);
+  }
+}
+
+/* ---------- Section "nở" bằng transform: cần bo góc được cắt nội dung ---------- */
+html.sv-home-active :is(.capabilities, .experience, .ai-demo, .about, .community, .partnership, .radar-section) {
+  overflow: clip;
+  will-change: transform;
+}
+
+/* ---------- Chuyển động nền liên tục ---------- */
+@keyframes sv-bob {
+  from { translate: 0 0; }
+  to { translate: 0 -7px; }
+}
+html.sv-home-active .capabilities .icon-bubble { animation: sv-bob 4.5s ease-in-out infinite alternate; }
+html.sv-home-active .capabilities .capability:nth-child(2) .icon-bubble { animation-delay: -0.9s; }
+html.sv-home-active .capabilities .capability:nth-child(3) .icon-bubble { animation-delay: -1.8s; }
+html.sv-home-active .capabilities .capability:nth-child(4) .icon-bubble { animation-delay: -2.7s; }
+html.sv-home-active .capabilities .capability:nth-child(5) .icon-bubble { animation-delay: -3.6s; }
+html.sv-home-active .product-ellipses { animation: sv-breathe 7s ease-in-out infinite alternate; }
+@keyframes sv-breathe { from { filter: brightness(0.85); } to { filter: brightness(1.35); } }
+@media (prefers-reduced-motion: reduce) {
+  html:not(.sv-motion-on).sv-home-active .product-ellipses { animation: none; }
+}
+
+/* ---------- Họa tiết riêng từng section ---------- */
+html.sv-home-active :is(.experience, .community, .partnership) { isolation: isolate; }
+.sv-motif { position: absolute; z-index: -1; pointer-events: none; }
+
+/* Experience: sóng âm lan tỏa (nhịp chậm, nền sáng) */
+.sv-motif-ripple {
+  right: 2%;
+  top: 50%;
+  width: min(560px, 46vw);
+  translate: 0 -50%;
+  color: var(--sv-vision);
+  opacity: 0.4;
+}
+.sv-motif-ripple circle[r="150"] {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sv-ripple 9s cubic-bezier(0.2, 0.5, 0.3, 1) infinite;
+  animation-delay: calc(var(--i, 0) * -1.8s);
+  opacity: 0;
+}
+@keyframes sv-ripple {
+  0% { transform: scale(0.15); opacity: 0.8; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Community: chữ nổi SEEVIA hiện lần lượt từng ô */
+.sv-motif-braille { left: 9%; bottom: 10px; width: min(360px, 42%); color: var(--sv-vision); }
+.sv-bdot { fill: currentColor; opacity: 0.12; }
+.sv-bdot-on { animation: sv-dot 7s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.5s); }
+@keyframes sv-dot {
+  0%, 8% { opacity: 0.12; }
+  22%, 78% { opacity: 0.75; }
+  92%, 100% { opacity: 0.12; }
+}
+
+/* Partnership: hành trình, chấm dẫn chạy theo cuộn */
+.sv-motif-journey { inset: 0; width: 100%; height: 100%; opacity: 0.75; }
+.sv-journey-halo { opacity: 0.35; transform-box: fill-box; transform-origin: center; animation: sv-halo 2.6s ease-out infinite; }
+@keyframes sv-halo { from { transform: scale(0.8); opacity: 0.55; } to { transform: scale(3); opacity: 0; } }
+
+@media (max-width: 760px) {
+  .sv-motif-ripple { right: -20%; width: 90vw; opacity: 0.28; }
+  .sv-motif-braille { left: 6%; width: 60%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:not(.sv-motion-on) .sv-motif-ripple circle[r="150"],
+  html:not(.sv-motion-on) .sv-bdot-on,
+  html:not(.sv-motion-on) .sv-journey-halo { animation: none; }
+  html:not(.sv-motion-on) .sv-motif-ripple circle[r="150"] { opacity: 0.35; transform: scale(calc(0.6 + var(--i, 0) * 0.45)); }
+  html:not(.sv-motion-on) .sv-bdot-on { opacity: 0.6; }
+}
+
+/* ---------- About / thẻ "Niềm tin": nền xanh-tím với radial gradient chuyển động ---------- */
+html.sv-home-active .about .belief {
+  background: linear-gradient(145deg, #0a1688 0%, #1d38cf 55%, #4c3fcb 100%);
+}
+.belief-glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.belief-glow i { position: absolute; border-radius: 50%; will-change: transform; }
+.belief-glow i:nth-child(1) {
+  width: 90%; aspect-ratio: 1; left: -25%; top: -20%;
+  background: radial-gradient(circle, #6cd6fc66, transparent 68%);
+  animation: sv-glow-a 16s ease-in-out infinite alternate;
+}
+.belief-glow i:nth-child(2) {
+  width: 100%; aspect-ratio: 1; right: -35%; bottom: -30%;
+  background: radial-gradient(circle, #e5c6fcb3, #e5c6fc22 45%, transparent 68%);
+  animation: sv-glow-b 21s ease-in-out infinite alternate;
+}
+.belief-glow i:nth-child(3) {
+  width: 62%; aspect-ratio: 1; left: 28%; top: 32%;
+  background: radial-gradient(circle, #b5b6fc55, transparent 66%);
+  animation: sv-glow-c 26s ease-in-out infinite alternate;
+}
+@keyframes sv-glow-a { from { transform: translate3d(-6%, -4%, 0) scale(0.9); } to { transform: translate3d(38%, 30%, 0) scale(1.15); } }
+@keyframes sv-glow-b { from { transform: translate3d(8%, 6%, 0) scale(1); } to { transform: translate3d(-42%, -34%, 0) scale(1.2); } }
+@keyframes sv-glow-c { from { transform: translate3d(-30%, 20%, 0) scale(0.8); } to { transform: translate3d(34%, -28%, 0) scale(1.1); } }
+@media (prefers-reduced-motion: reduce) {
+  html:not(.sv-motion-on) .belief-glow i { animation: none; }
+}
+
+/* ---------- Thẻ "Niềm tin": linear Soft Lavender → Pearl White (nền sáng, chữ navy) ---------- */
+html.sv-home-active .about .belief {
+  background: linear-gradient(145deg, var(--sv-lavender) 0%, #d8d8fd 48%, var(--sv-pearl) 100%);
+}
+html.sv-home-active .about .belief .eyebrow { color: #1d2fa8; }
+html.sv-home-active .about .belief h2 { color: var(--sv-navy); }
+html.sv-home-active .about .belief > div .short-line { background: var(--sv-vision); }
+html.sv-home-active .about .belief > div p { color: #1c2260; }
+html.sv-home-active .about .belief:before,
+html.sv-home-active .about .belief:after { border-color: #426af838; }
+.belief-glow i:nth-child(1) { background: radial-gradient(circle, #6cd6fc59, transparent 68%); }
+.belief-glow i:nth-child(2) { background: radial-gradient(circle, #e5c6fcc2, #e5c6fc33 45%, transparent 68%); }
+.belief-glow i:nth-child(3) { background: radial-gradient(circle, #426af826, transparent 66%); }

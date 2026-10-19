@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
+import HeroGlows from "../src/components/HeroGlows";
 import "./Contact.css";
 import { translate } from "../src/i18n/language";
 import { contactApi } from "./contactApi";
@@ -135,7 +136,8 @@ export default function Contact() {
       <Header active="contact" />
       <main className="ct" id="contact-main">
         <section className="ct-hero">
-          <div>
+          <HeroGlows variant="contact" />
+          <div className="ct-hero-copy">
             <h1>
               Một lời chào.
               <br />

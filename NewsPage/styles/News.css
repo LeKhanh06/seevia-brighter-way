@@ -4,7 +4,7 @@
   color: var(--charcoal);
 }
 .np-main {
-  background: #f7f3ef;
+  background: var(--sv-pearl);
 }
 .np-container {
   width: 86%;
@@ -75,7 +75,7 @@
   gap: 10px;
   min-height: 38px;
   padding: 8px 16px;
-  border: 1px solid #7a182380;
+  border: 1px solid #02023880;
   border-radius: 22px;
   color: var(--burgundy);
   background: transparent;
@@ -83,16 +83,16 @@
   width: fit-content;
 }
 .np-action:hover {
-  background: #7a18230a;
+  background: #0202380a;
   border-color: var(--burgundy);
 }
 .np-action-light {
   color: var(--ivory);
-  border-color: #f2b4ad80;
+  border-color: #b5b6fc80;
 }
 .np-action-light:hover {
   color: var(--rose);
-  background: #fff8f00c;
+  background: #f5f4ff0c;
   border-color: var(--rose);
 }
 .np-hero {
@@ -100,7 +100,7 @@
   isolation: isolate;
   overflow: hidden;
   background:
-    radial-gradient(circle at 18% 70%, #ba022359, transparent 60%), #1e1e1e;
+    radial-gradient(circle at 18% 70%, #ba022359, transparent 60%), var(--sv-navy);
   color: var(--ivory);
   padding-block: 64px 58px;
 }
@@ -114,8 +114,8 @@
   right: 30%;
   top: -240px;
   transform: rotate(-34deg);
-  border-left: 1px solid #f2b4ad30;
-  background: linear-gradient(180deg, #7a182300, #7a182326 45%, #f2b4ad29);
+  border-left: 1px solid #b5b6fc30;
+  background: linear-gradient(180deg, #02023800, #02023826 45%, #b5b6fc29);
   z-index: -1;
 }
 .np-hero::after {
@@ -123,7 +123,7 @@
   height: 820px;
   right: 8%;
   top: -250px;
-  background: linear-gradient(180deg, #7a182300, #7a182333 45%, #f2b4ad40);
+  background: linear-gradient(180deg, #02023800, #02023833 45%, #b5b6fc40);
 }
 .np-hero h1 {
   animation: np-enter 0.7s both;
@@ -132,13 +132,13 @@
   color: var(--rose);
 }
 .np-main .np-hero p {
-  color: #dccfc7;
+  color: var(--sv-lavender);
   max-width: 600px;
   font-size: 15px;
   margin: 22px 0;
 }
 .np-feature {
-  background: linear-gradient(110deg, #f7f3ef, #f1ddd6);
+  background: linear-gradient(110deg, var(--sv-pearl), var(--sv-orchid));
 }
 .np-feature-grid {
   display: grid;
@@ -150,7 +150,7 @@
   height: 330px;
 }
 .np-feature figcaption {
-  color: #796c65;
+  color: var(--sv-muted);
   font: 400 10px/1.8 var(--sans);
   margin-top: 10px;
 }
@@ -166,7 +166,7 @@
 }
 .np-meta > span {
   font-weight: 400;
-  color: #796c65;
+  color: var(--sv-muted);
   text-transform: none;
   letter-spacing: 0;
 }
@@ -176,13 +176,13 @@
 }
 .np-feature-copy > p:not(.np-meta) {
   font-size: 14px;
-  color: #635751;
+  color: var(--sv-muted);
   margin-bottom: 22px;
 }
 .np-feature-copy small {
   display: block;
   font-size: 10px;
-  color: #796c65;
+  color: var(--sv-muted);
   margin-top: 14px;
 }
 .np-heading {
@@ -193,7 +193,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  border-bottom: 1px solid #dccfc7;
+  border-bottom: 1px solid var(--sv-lavender);
 }
 .np-filters {
   display: flex;
@@ -206,7 +206,7 @@
   border-bottom: 2px solid transparent;
   background: none;
   font: 500 12px/1.6 var(--sans);
-  color: #796c65;
+  color: var(--sv-muted);
 }
 .np-filters button[aria-pressed="true"],
 .np-filters button:hover {
@@ -224,7 +224,7 @@
 .np-search > svg {
   width: 18px;
   height: 18px;
-  color: #796c65;
+  color: var(--sv-muted);
   flex-shrink: 0;
 }
 .np-search input {
@@ -237,7 +237,7 @@
   padding: 4px;
 }
 .np-search:focus-within {
-  outline: 2px solid #7a182380;
+  outline: 2px solid #02023880;
   outline-offset: 4px;
 }
 .np-search input:focus {
@@ -245,7 +245,7 @@
 }
 .np-main .np-result {
   font-size: 11px;
-  color: #796c65;
+  color: var(--sv-muted);
   margin-top: 16px;
 }
 .np-row {
@@ -254,7 +254,7 @@
   gap: 30px;
   align-items: center;
   padding-block: 26px;
-  border-bottom: 1px solid #dccfc7;
+  border-bottom: 1px solid var(--sv-lavender);
   animation: np-enter 0.35s both;
 }
 .np-row-image,
@@ -287,12 +287,12 @@
 }
 .np-row-copy > p:not(.np-meta) {
   font-size: 13px;
-  color: #635751;
+  color: var(--sv-muted);
 }
 .np-row-copy small {
   display: block;
   font-size: 10px;
-  color: #796c65;
+  color: var(--sv-muted);
   margin-top: 10px;
 }
 .np-open {
@@ -300,13 +300,13 @@
   place-items: center;
   width: 38px;
   height: 38px;
-  border: 1px solid #7a182350;
+  border: 1px solid #02023850;
   border-radius: 50%;
   color: var(--burgundy);
   background: none;
 }
 .np-open:hover {
-  background: #7a18230a;
+  background: #0202380a;
 }
 .np-note-art {
   display: flex;
@@ -316,7 +316,7 @@
   gap: 10px;
   border: 0;
   width: 100%;
-  background: linear-gradient(130deg, #7a1823, #351d22);
+  background: linear-gradient(130deg, var(--sv-navy), #351d22);
   color: var(--ivory);
 }
 .np-note-art > span {
@@ -331,18 +331,18 @@
   letter-spacing: 0.1em;
 }
 .np-note-control {
-  background: radial-gradient(circle, #7a182380, transparent 90%), #1e1e1e;
+  background: radial-gradient(circle, #02023880, transparent 90%), var(--sv-navy);
 }
 .np-empty {
   padding-block: 42px;
 }
 .np-empty > p {
-  color: #635751;
+  color: var(--sv-muted);
   font-size: 14px;
   margin: 12px 0 20px;
 }
 .np-perspective {
-  background: linear-gradient(110deg, #9c2430, #7a1823 40%, #540110);
+  background: linear-gradient(110deg, #9c2430, var(--sv-navy) 40%, var(--sv-navy));
   color: var(--ivory);
 }
 .np-perspective .np-eyebrow,
@@ -350,7 +350,7 @@
   color: var(--rose);
 }
 .np-perspective > .np-container > p:not(.np-eyebrow) {
-  color: #f1ddd6;
+  color: var(--sv-orchid);
   max-width: 650px;
   font-size: 14px;
   margin-top: 20px;
@@ -363,8 +363,8 @@
 }
 .np-sources {
   padding-block: 28px;
-  background: #1e1e1e;
-  border-bottom: 1px solid #f2b4ad40;
+  background: var(--sv-navy);
+  border-bottom: 1px solid #b5b6fc40;
 }
 .np-sources .np-eyebrow {
   color: var(--rose);
@@ -381,8 +381,8 @@
   width: min(680px, calc(100% - 40px));
   max-height: 85vh;
   padding: 44px;
-  border: 1px solid #dccfc7;
-  background: #f7f3ef;
+  border: 1px solid var(--sv-lavender);
+  background: var(--sv-pearl);
 }
 .np-dialog::backdrop {
   background: #141012c9;
@@ -410,14 +410,14 @@
 .np-dialog > p:not(.np-eyebrow) {
   font-size: 14px;
   line-height: 1.9;
-  color: #635751;
+  color: var(--sv-muted);
   margin-bottom: 18px;
 }
 .np-dialog small {
   display: block;
-  border-top: 1px solid #dccfc7;
+  border-top: 1px solid var(--sv-lavender);
   padding-top: 16px;
-  color: #796c65;
+  color: var(--sv-muted);
   font-size: 11px;
 }
 .np-sr-only {

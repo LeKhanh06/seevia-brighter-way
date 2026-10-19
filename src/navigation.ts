@@ -3,6 +3,7 @@ import pageRegistry from "./support/pages.json";
 export { pageRegistry };
 export const destinations = {
   home: pageRegistry.home.href,
+  overview: pageRegistry.overview.href,
   information: pageRegistry.information.href,
   product: pageRegistry.productPage.href,
   productPage: pageRegistry.productPage.href,
@@ -23,11 +24,32 @@ export const destinations = {
   privacy: pageRegistry.privacy.href,
   terms: pageRegistry.terms.href,
 } as const;
+export const pageOrder: string[] = [
+  destinations.home,
+  destinations.overview,
+  destinations.productPage,
+  destinations.technology,
+  destinations.about,
+  destinations.community,
+  destinations.news,
+  destinations.partnership,
+  destinations.contact,
+];
 export type Destination = keyof typeof destinations;
+export function navigateTo(path: string) {
+  const href = new URL(path, window.location.href);
+  if (href.origin !== window.location.origin) return;
+  const request = new CustomEvent("seevia:navigate", {
+    cancelable: true,
+    detail: { href: href.href },
+  });
+  // The client router handles this event; the fallback keeps navigation usable.
+  if (window.dispatchEvent(request)) window.location.assign(href.href);
+}
 export function navigate(destination?: Destination) {
   const path = destination ? destinations[destination] : null;
   if (path) {
-    window.location.assign(path);
+    navigateTo(path);
     return;
   }
   window.dispatchEvent(new Event("seevia:unavailable"));

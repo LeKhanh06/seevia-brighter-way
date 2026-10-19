@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
+import HeroGlows from "../src/components/HeroGlows";
 import organizations from "./organizations.json";
 import "./Partner.css";
 
@@ -93,6 +94,7 @@ export default function Partner() {
       <Header active="partnership" />
       <main className="pt" id="partner-main" ref={main}>
         <section className="pt-hero">
+          <HeroGlows variant="partner" />
           <div className="pt-hero-copy">
             <h1>
               Những kết nối

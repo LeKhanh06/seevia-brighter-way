@@ -2,7 +2,7 @@
   --tech-serif: "Playfair Display", Georgia, serif;
   --tech-bur: var(--burgundy);
   --tech-rose: var(--rose);
-  background: #f7f3ef;
+  background: var(--sv-pearl);
   color: var(--charcoal);
 }
 .tech-container {
@@ -22,7 +22,7 @@
 .technology-page .eyebrow {
   font: 600 13px/1.6 var(--sans);
   letter-spacing: 0.12em;
-  color: #7a1823;
+  color: var(--sv-navy);
   margin: 0 0 25px;
 }
 .technology-hero {
@@ -31,11 +31,11 @@
   background:
     radial-gradient(
       ellipse 300px 300px at 76% 52%,
-      #a1001540,
+      #3158e240,
       transparent 100%
     ),
-    #1e1e1e;
-  color: #fff8f0;
+    var(--sv-navy);
+  color: var(--sv-pearl);
   min-height: 510px;
   display: flex;
   align-items: center;
@@ -56,25 +56,25 @@
     Georgia,
     serif;
   letter-spacing: -0.02em;
-  color: #f2b4ad;
+  color: var(--sv-lavender);
   margin: 0;
   white-space: nowrap;
 }
 .technology-hero h1 span {
-  color: #fff8f0;
+  color: var(--sv-pearl);
 }
 .technology-hero-layout > p {
-  border-top: 1px solid #dccfc780;
+  border-top: 1px solid #b5b6fc80;
   padding-top: 24px;
   font: 400 16px/2.1 var(--sans);
   margin: 0;
-  color: #fff8f0;
+  color: var(--sv-pearl);
 }
 .technology-hero-rings {
   position: absolute;
   width: 1100px;
   height: 1100px;
-  border: 1px solid #dccfc730;
+  border: 1px solid #b5b6fc30;
   border-radius: 50%;
   left: -650px;
   top: -170px;
@@ -85,7 +85,7 @@
 .technology-hero-rings:after {
   content: "";
   position: absolute;
-  border: 1px solid #dccfc730;
+  border: 1px solid #b5b6fc30;
   border-radius: 50%;
 }
 .technology-hero-rings:before {
@@ -107,7 +107,7 @@
   left: 28px;
   right: calc(25% - 28px);
   top: 28px;
-  border-top: 1px dashed #7a18234d;
+  border-top: 1px dashed #0202384d;
 }
 .tech-flow-grid article {
   position: relative;
@@ -119,10 +119,10 @@
   place-items: center;
   width: 56px;
   height: 56px;
-  border: 1px solid #7a1823;
+  border: 1px solid var(--sv-navy);
   border-radius: 50%;
-  background: #f7f3ef;
-  color: #7a1823;
+  background: var(--sv-pearl);
+  color: var(--sv-navy);
   margin-bottom: 24px;
   animation: flow-highlight 8s linear infinite;
 }
@@ -142,21 +142,21 @@
 @keyframes flow-highlight {
   0%,
   18% {
-    background: #7a1823;
-    color: #fff8f0;
-    box-shadow: 0 0 0 7px #f2b4ad12;
+    background: var(--sv-navy);
+    color: var(--sv-pearl);
+    box-shadow: 0 0 0 7px #b5b6fc12;
   }
   25%,
   100% {
-    background: #f7f3ef;
-    color: #7a1823;
+    background: var(--sv-pearl);
+    color: var(--sv-navy);
     box-shadow: none;
   }
 }
 .tech-flow-grid small {
   font-size: 11px;
   letter-spacing: 0.12em;
-  color: #7a1823;
+  color: var(--sv-navy);
   font-weight: 500;
 }
 .tech-flow-grid h3 {
@@ -166,14 +166,14 @@
 }
 .tech-flow-grid p {
   font: 400 15px/1.85 var(--sans);
-  color: #635751;
+  color: var(--sv-muted);
   margin: 0;
 }
 .tech-note {
   font-size: 13px;
   color: #71645c;
   line-height: 1.8;
-  border: 1px dashed #7a182330;
+  border: 1px dashed #02023830;
   padding: 16px 20px;
   border-radius: 10px;
   max-width: 800px;
@@ -190,7 +190,7 @@
   }
 }
 .tech-conversation {
-  background: linear-gradient(110deg, #f7f3ef, #f1ddd6);
+  background: linear-gradient(110deg, var(--sv-pearl), var(--sv-orchid));
 }
 .tech-conversation-layout {
   display: grid;
@@ -201,7 +201,7 @@
 .tech-lead {
   font-size: 16px;
   line-height: 1.9;
-  color: #635751;
+  color: var(--sv-muted);
   margin: 25px 0 15px;
   max-width: 500px;
 }
@@ -212,20 +212,20 @@
   font-style: italic;
 }
 .tech-chat {
-  border: 1px solid #7a18231a;
+  border: 1px solid #0202381a;
   background: #fffcf7;
   border-radius: 25px;
   padding: 24px;
-  box-shadow: 0 18px 45px #7a18230d;
+  box-shadow: 0 18px 45px #0202380d;
   min-width: 0;
 }
 .chat-heading {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  border-bottom: 1px solid #7a18231a;
+  border-bottom: 1px solid #0202381a;
   padding-bottom: 16px;
-  color: #7a1823;
+  color: var(--sv-navy);
   font-size: 9px;
   letter-spacing: 0.08em;
 }
@@ -245,12 +245,12 @@
 .chat-empty {
   margin: auto;
   text-align: center;
-  color: #635751;
+  color: var(--sv-muted);
   padding: 20px;
 }
 .chat-empty > span {
   font: 70px/1 var(--tech-serif);
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .chat-empty p {
   font: italic 23px/1.5 var(--tech-serif);
@@ -274,7 +274,7 @@
 .chat-entry p {
   margin: 0;
   background: #fff;
-  border: 1px solid #7a18231a;
+  border: 1px solid #0202381a;
   border-radius: 16px 16px 16px 4px;
   padding: 12px 16px;
   font-size: 14px;
@@ -287,8 +287,8 @@
   text-align: right;
 }
 .chat-entry.user p {
-  background: #7a1823;
-  color: #fff8f0;
+  background: var(--sv-navy);
+  color: var(--sv-pearl);
   border-radius: 16px 16px 4px 16px;
 }
 .tech-typing {
@@ -302,7 +302,7 @@
 .tech-typing i {
   width: 5px;
   height: 5px;
-  background: #f2b4ad;
+  background: var(--sv-lavender);
   border-radius: 50%;
   animation: typing-dot 1s infinite;
 }
@@ -329,7 +329,7 @@
   }
 }
 .tech-chat-options {
-  border-top: 1px solid #7a18231a;
+  border-top: 1px solid #0202381a;
   padding-top: 16px;
   display: flex;
   flex-wrap: wrap;
@@ -342,19 +342,19 @@
 }
 .tech-chat-options button {
   font: 500 12px/1.6 var(--sans);
-  border: 1px solid #7a182370;
+  border: 1px solid #02023870;
   background: none;
-  color: #7a1823;
+  color: var(--sv-navy);
   border-radius: 20px;
   padding: 7px 12px;
 }
 .tech-chat-options button:hover {
-  background: #7a1823;
-  color: #fff8f0;
+  background: var(--sv-navy);
+  color: var(--sv-pearl);
 }
 .tech-transparency {
-  background: #fff8f0;
-  border-top: 1px solid #dccfc7;
+  background: var(--sv-pearl);
+  border-top: 1px solid var(--sv-lavender);
   padding: 70px 0;
 }
 .tech-transparency > .tech-container {
@@ -369,7 +369,7 @@
 .tech-transparency p:not(.eyebrow) {
   font-size: 15px;
   line-height: 1.9;
-  color: #635751;
+  color: var(--sv-muted);
   max-width: 700px;
   margin: 22px 0 0;
 }
@@ -453,7 +453,7 @@
     top: 0;
     bottom: 0;
     border-top: 0;
-    border-left: 1px dashed #7a18234d;
+    border-left: 1px dashed #0202384d;
   }
   .tech-flow-grid article {
     display: grid;
@@ -518,7 +518,7 @@
   isolation: isolate;
   background:
     radial-gradient(ellipse at 92% 10%, #d9a9a440, transparent 55%),
-    linear-gradient(130deg, #f7f3ef, #f1ddd6);
+    linear-gradient(130deg, var(--sv-pearl), var(--sv-orchid));
 }
 .tech-conversation-layout {
   grid-template-columns: 0.9fr 1.15fr;
@@ -528,10 +528,10 @@
   position: relative;
   padding: 26px;
   border-radius: 28px;
-  border: 1px solid #fff8f0;
+  border: 1px solid var(--sv-pearl);
   box-shadow:
-    0 25px 70px #7a182314,
-    0 2px 8px #7a182308;
+    0 25px 70px #02023814,
+    0 2px 8px #02023808;
 }
 .chat-heading {
   font-size: 10px;
@@ -545,9 +545,9 @@
 .chat-indicator {
   width: 6px;
   height: 6px;
-  background: #7a1823;
+  background: var(--sv-navy);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px #7a182310;
+  box-shadow: 0 0 0 4px #02023810;
 }
 .chat-scenarios {
   display: grid;
@@ -576,8 +576,8 @@
   opacity: 0.65;
 }
 .chat-scenarios button[aria-pressed="true"] {
-  background: #7a1823;
-  color: #fff8f0;
+  background: var(--sv-navy);
+  color: var(--sv-pearl);
 }
 .chat-scenarios button:hover:not(:disabled) {
   transform: translateY(-3px);
@@ -585,7 +585,7 @@
 .chat-scene {
   padding: 14px 16px;
   border-left: 2px solid #c58b88;
-  background: linear-gradient(90deg, #f1ddd64d, transparent);
+  background: linear-gradient(90deg, #e5c6fc4d, transparent);
 }
 .chat-scene > span {
   font-size: 9px;
@@ -596,7 +596,7 @@
   font-size: 12px;
   line-height: 1.7;
   margin: 6px 0 0;
-  color: #635751;
+  color: var(--sv-muted);
 }
 .chat-process {
   display: flex;
@@ -619,10 +619,10 @@
   background: #d8ccc5;
 }
 .chat-process .active {
-  color: #7a1823;
+  color: var(--sv-navy);
 }
 .chat-process .active i {
-  background: #7a1823;
+  background: var(--sv-navy);
   animation: process-pulse 1s infinite;
 }
 .chat-process .complete i {
@@ -642,7 +642,7 @@
   font-size: 14px;
   line-height: 1.85;
   padding: 14px 17px;
-  box-shadow: 0 2px 3px #7a182304;
+  box-shadow: 0 2px 3px #02023804;
 }
 .chat-entry small {
   font-size: 10px;
@@ -671,7 +671,7 @@
   border-radius: 50%;
   margin: 0 auto 20px;
   background: radial-gradient(circle, #ecd0c7, transparent);
-  box-shadow: 0 0 0 9px #f1ddd633;
+  box-shadow: 0 0 0 9px #e5c6fc33;
 }
 .chat-orb i {
   width: 3px;
@@ -715,7 +715,7 @@
   padding: 11px 15px;
   border-color: #d7b1ab;
   border-radius: 12px;
-  background: #fff8f0;
+  background: var(--sv-pearl);
   font-size: 12px;
   transition:
     background 0.2s,
@@ -747,10 +747,10 @@
   background:
     radial-gradient(
       ellipse 350px 330px at 76% 52%,
-      #7a182360,
+      #02023860,
       transparent 100%
     ),
-    #1e1e1e;
+    var(--sv-navy);
 }
 .tech-reveal {
   transition:
@@ -783,7 +783,7 @@
 }
 @keyframes process-pulse {
   50% {
-    box-shadow: 0 0 0 4px #7a182315;
+    box-shadow: 0 0 0 4px #02023815;
   }
 }
 @keyframes orb-voice {
@@ -860,9 +860,9 @@
 }
 /* Shared SeeVia palette: burgundy, charcoal, rose and ivory. */
 .technology-page {
-  --tech-paper: #f7f3ef;
-  --tech-blush: #f1ddd6;
-  --tech-rule: #dccfc7;
+  --tech-paper: var(--sv-pearl);
+  --tech-blush: var(--sv-orchid);
+  --tech-rule: var(--sv-lavender);
   background: var(--tech-paper);
   color: var(--charcoal);
 }
@@ -871,7 +871,7 @@
   background:
     radial-gradient(
       ellipse 330px 290px at 78% 54%,
-      #7a182380 16%,
+      #02023880 16%,
       #00000000 100%
     ),
     var(--charcoal);
@@ -887,11 +887,11 @@
   height: 1200px;
   left: -640px;
   top: 0;
-  border-color: #fff8f033;
+  border-color: #f5f4ff33;
 }
 .technology-hero-rings:before,
 .technology-hero-rings:after {
-  border-color: #fff8f033;
+  border-color: #f5f4ff33;
 }
 .technology-hero-rings:before {
   inset: 125px;
@@ -912,23 +912,23 @@
 }
 .tech-chat {
   background: var(--ivory);
-  border-color: #dccfc780;
-  box-shadow: 0 22px 60px #7a18230c;
+  border-color: #b5b6fc80;
+  box-shadow: 0 22px 60px #0202380c;
 }
 .chat-scenarios button {
-  background: #f1ddd680;
+  background: #e5c6fc80;
 }
 .chat-scenarios button[aria-pressed="true"] {
   background: var(--burgundy);
   color: var(--ivory);
 }
 .chat-scene {
-  background: linear-gradient(90deg, #f1ddd680, transparent);
-  border-color: #7a182360;
+  background: linear-gradient(90deg, #e5c6fc80, transparent);
+  border-color: #02023860;
 }
 .chat-orb {
-  background: radial-gradient(circle, #f1ddd6, transparent);
-  border-color: #7a182350;
+  background: radial-gradient(circle, var(--sv-orchid), transparent);
+  border-color: #02023850;
 }
 .chat-entry.seevia p {
   background: var(--tech-paper);
@@ -940,7 +940,7 @@
 }
 .tech-chat-options button {
   color: var(--burgundy);
-  border-color: #7a182360;
+  border-color: #02023860;
   background: transparent;
 }
 .tech-chat-options button:hover:not(:disabled) {
@@ -949,7 +949,7 @@
 }
 .tech-chat-options button:disabled {
   background: transparent;
-  color: #7a1823;
+  color: var(--sv-navy);
   opacity: 0.5;
 }
 .tech-transparency {

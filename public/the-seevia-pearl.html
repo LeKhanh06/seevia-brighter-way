@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bản tin nhanh</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<style>
+:root{--navy:#020238;--cyan:#6CD6FC;--blue:#426AF8;--lav:#B5B6FC;--orchid:#E5C6FC;--pearl:#F5F4FF;--ink:#020238;--ink2:rgba(2,2,56,.72);--line:rgba(2,2,56,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#020238}}
+:root[data-theme="dark"]{--ink:#020238}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden;background:var(--pearl);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+.stage{position:fixed;inset:0;display:grid;place-items:center;perspective:1200px;padding:16px}
+.card{position:absolute;width:min(440px,92vw);min-height:min(540px,74vh);max-height:calc(100% - 24px);padding:32px 28px;border-radius:32px;background:linear-gradient(160deg,rgba(255,255,255,.78),rgba(255,255,255,.46));border:1px solid rgba(255,255,255,.95);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);box-shadow:0 40px 70px -30px rgba(66,106,248,.4),0 10px 30px -12px rgba(2,2,56,.12),inset 0 1px 0 #fff;display:flex;flex-direction:column;gap:16px;overflow:hidden;opacity:0;transform:var(--in);filter:blur(12px);transition:transform .9s cubic-bezier(.2,.9,.2,1),opacity .7s,filter .7s;pointer-events:none}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--mx,28%) var(--my,10%),rgba(255,255,255,.55),transparent 48%);pointer-events:none}
+.card.active{opacity:1;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));filter:none;pointer-events:auto}
+.card.active.tilting{transition:transform .12s linear}
+.card.past{opacity:0;transform:var(--out);filter:blur(12px)}
+.top{display:flex;justify-content:space-between;align-items:center}
+.tag{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ac)}
+.num{font-size:12px;letter-spacing:.1em;color:var(--ink2);font-variant-numeric:tabular-nums}
+h2{font-size:clamp(26px,6.4vw,34px);line-height:1.15;font-weight:800;letter-spacing:-.02em;color:var(--navy)}
+p{color:var(--ink2);line-height:1.6;font-size:16px}
+ul{list-style:none;padding:0}
+li{position:relative;padding:12px 2px 12px 20px;border-top:1px solid var(--line);font-size:15px;line-height:1.45;color:var(--ink2)}
+li:last-of-type{border-bottom:1px solid var(--line)}
+li::before{content:"";position:absolute;left:2px;top:1.15em;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--cyan) 45%,var(--blue));box-shadow:0 2px 5px rgba(66,106,248,.45)}
+li strong{font-weight:700;color:var(--navy)}
+.stat{margin-top:auto;display:flex;align-items:baseline;gap:10px}
+.stat b{font-size:54px;line-height:1;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--cyan) 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{color:var(--ink2);font-size:14px}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+li.rv{transform:translateX(-24px)}
+.active .rv{opacity:1;transform:none;transition-delay:calc(.25s + var(--i)*.09s)}
+.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:5}
+.dot{width:8px;height:8px;border-radius:9px;border:0;padding:0;cursor:pointer;background:rgba(2,2,56,.22);transition:height .4s,background .4s}
+.dot.on{height:30px;background:linear-gradient(180deg,var(--cyan),var(--blue));box-shadow:0 4px 10px rgba(66,106,248,.45)}
+.count{position:fixed;left:20px;top:calc(18px + env(safe-area-inset-top,0px));font-size:13px;letter-spacing:.12em;z-index:5;color:var(--ink2)}
+.hint{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);font-size:13px;color:var(--ink2);z-index:5;text-align:center;transition:opacity .5s}
+.hint i{display:block;font-style:normal;font-size:20px;animation:up 1.4s infinite}
+@keyframes up{0%{transform:translateY(8px);opacity:0}50%{opacity:1}100%{transform:translateY(-8px);opacity:0}}
+.hint.off{opacity:0}
+@media (max-height:640px){.card{padding:20px 22px;gap:10px;min-height:0}p,li{font-size:14px}li{padding:8px 2px 8px 20px}.stat b{font-size:40px}}
+@media (prefers-reduced-motion:reduce){.hint i{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="count" id="count"></div>
+<div class="dots" id="dots"></div>
+<div class="stage" id="stage"></div>
+<div class="hint" id="hint"><i>⌃</i>Vuốt lên để xem tiếp</div>
+<script>
+// ===== NỘI DUNG: sửa tại đây. **từ khóa** sẽ được in đậm =====
+const CARDS=[
+ {tag:"Mở đầu",title:"Bản tin nhanh trong 60 giây",text:"Lướt lên để đi qua từng thông tin. Mỗi thẻ là một ý chính, đọc xong chỉ cần vuốt.",points:["Gọn: **mỗi thẻ một ý**","Nhanh: **vuốt, cuộn** hoặc phím ↑ ↓","**Đổi họa tiết nền** theo từng chủ đề"],stat:["06","thẻ thông tin"]},
+ {tag:"Trí tuệ nhân tạo",title:"AI đi vào công việc hằng ngày",text:"Trợ lý AI hỗ trợ viết, tóm tắt, lập trình và phân tích dữ liệu ngay trong công cụ quen thuộc.",points:["**Tóm tắt** tài liệu dài","**Soạn thảo** và **dịch thuật**","**Tự động hóa** việc lặp lại"],stat:["72%","doanh nghiệp thử nghiệm AI"]},
+ {tag:"Năng lượng",title:"Pin và năng lượng sạch tăng tốc",text:"Giá pin giảm giúp xe điện và lưu trữ điện mặt trời trở nên phổ biến hơn trong gia đình.",points:["Xe điện **giá mềm** hơn","**Lưu trữ điện** tại nhà","**Lưới điện** thông minh"],stat:["−90%","giá pin sau một thập kỷ"]},
+ {tag:"Sức khỏe",title:"Thói quen nhỏ, hiệu quả lớn",text:"Ngủ đủ, đi bộ mỗi ngày và hạn chế màn hình trước khi ngủ là những thay đổi dễ làm nhất.",points:["**7–8 giờ** ngủ mỗi đêm","**30 phút** vận động","Uống **đủ nước**"],stat:["30'","mỗi ngày là đủ bắt đầu"]},
+ {tag:"Tài chính",title:"Quản lý tiền theo quy tắc 50/30/20",text:"Chia thu nhập thành nhu cầu thiết yếu, mong muốn cá nhân và tiết kiệm để dễ theo dõi.",points:["**50%** nhu cầu thiết yếu","**30%** sở thích","**20%** tiết kiệm, đầu tư"],stat:["20%","dành cho tương lai"]},
+ {tag:"Kết thúc",title:"Bạn đã xem hết rồi!",text:"Muốn đọc lại thì vuốt xuống hoặc bấm chấm bên phải. Thay nội dung trong mảng CARDS để làm bản tin của riêng bạn.",points:["Thêm, bớt thẻ **tùy ý**","Đổi nội dung trong **CARDS**"],stat:["∞","thẻ bạn có thể thêm"]}
+];
+// ==========================================================
+const N=CARDS.length,p2=n=>String(n).padStart(2,'0');
+const ACC=['#426AF8','#6A5CF5','#9A63E8'];
+const hl=s=>s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const V=[['translateY(60vh) scale(.8) rotateX(-25deg)','translateY(-55vh) scale(.82) rotateX(30deg)'],['translateX(45vw) rotateY(65deg) scale(.8)','translateX(-45vw) rotateY(-65deg) scale(.8)'],['scale(.3) rotate(-25deg)','scale(1.7) rotate(20deg)'],['translateY(60vh) rotateZ(10deg)','translateY(-60vh) rotateZ(-10deg)'],['rotateX(90deg) translateY(30vh)','rotateX(-90deg) translateY(-30vh)'],['scale(1.8)','scale(.3)']];
+const stage=document.getElementById('stage'),dotsEl=document.getElementById('dots'),countEl=document.getElementById('count'),hint=document.getElementById('hint');
+const els=CARDS.map((c,i)=>{
+ const d=document.createElement('div');d.className='card';
+ d.style.setProperty('--in',V[i%V.length][0]);d.style.setProperty('--out',V[i%V.length][1]);d.style.setProperty('--ac',ACC[i%3]);
+ d.innerHTML=`<div class="top"><span class="tag">${c.tag}</span><span class="num">${p2(i+1)} / ${p2(N)}</span></div>
+ <h2 class="rv" style="--i:1">${c.title}</h2>
+ <p class="rv" style="--i:2">${c.text}</p>
+ <ul>${c.points.map((p,k)=>`<li class="rv" style="--i:${3+k}">${hl(p)}</li>`).join('')}</ul>
+ <div class="stat rv" style="--i:7"><b>${c.stat[0]}</b><span>${c.stat[1]}</span></div>`;
+ stage.appendChild(d);
+ const b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Thẻ '+(i+1));b.onclick=()=>go(i);dotsEl.appendChild(b);
+ return d;
+});
+const dots=[...dotsEl.children];
+let cur=-1,lock=false,kick=0,sm=.5,pmx=null;
+function go(n){
+ if(n<0||n>=N||n===cur||lock)return;
+ lock=true;setTimeout(()=>lock=false,800);
+ els.forEach((e,i)=>{e.classList.toggle('active',i===n);e.classList.toggle('past',i<n);e.style.setProperty('--rx','0deg');e.style.setProperty('--ry','0deg')});
+ dots.forEach((d,i)=>d.classList.toggle('on',i===n));
+ countEl.textContent=p2(n+1)+' / '+p2(N);
+ kick=1;if(n>0)hint.classList.add('off');
+ cur=n;
+}
+addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>12)go(cur+(e.deltaY>0?1:-1))},{passive:true});
+let sy=null;
+addEventListener('touchstart',e=>{sy=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{if(sy===null)return;const dy=sy-e.changedTouches[0].clientY;if(Math.abs(dy)>40)go(cur+(dy>0?1:-1));sy=null});
+addEventListener('keydown',e=>{if(['ArrowDown','ArrowRight',' ','PageDown'].includes(e.key))go(cur+1);if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key))go(cur-1)});
+addEventListener('pointermove',e=>{
+ pmx=e.clientX;
+ const el=els[cur];if(!el||e.pointerType==='touch')return;
+ const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5,s=el.style;
+ el.classList.add('tilting');
+ s.setProperty('--ry',(x*4)+'deg');s.setProperty('--rx',(-y*4)+'deg');
+ s.setProperty('--mx',(50+x*70)+'%');s.setProperty('--my',(50+y*70)+'%');
+ clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('tilting'),200);
+});
+// Nền Pearl White: vùng màu pastel, đường mảnh uốn lượn, cầu và vòng kính
+const cv=document.getElementById('bg'),ctx=cv.getContext('2d');
+let W,H,dpr;
+function resize(){dpr=Math.min(devicePixelRatio||1,1.5);W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr}
+addEventListener('resize',resize);resize();
+const PAL=[[108,214,252],[66,106,248],[181,182,252],[229,198,252]];
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches?.3:1;
+const BL=[[.15,.25,'108,214,252',.55],[.85,.2,'181,182,252',.6],[.8,.85,'229,198,252',.7],[.2,.85,'66,106,248',.28]];
+const LN=[{n:30,o:0,y:.72,a:.1,ix:[0,1,3]},{n:26,o:3,y:.26,a:.09,ix:[3,0,1]}];
+const ORBS=[{fx:.1,fy:.2,r:.1,d:1,ph:0},{fx:.9,fy:.15,r:.06,d:.6,ph:1.4},{fx:.88,fy:.82,r:.13,d:1.2,ph:2.7},{fx:.12,fy:.8,r:.07,d:.7,ph:4},{fx:.5,fy:.06,r:.04,d:.5,ph:5.2},{fx:.4,fy:.95,r:.05,d:.8,ph:.8}];
+const rgba=(p,a)=>`rgba(${p[0]},${p[1]},${p[2]},${a})`;
+function orb(x,y,r){
+ ctx.beginPath();ctx.ellipse(x,y+r*1.25,r*.8,r*.16,0,0,6.2832);ctx.fillStyle='rgba(66,106,248,.12)';ctx.fill();
+ const g=ctx.createRadialGradient(x-r*.35,y-r*.4,r*.05,x,y,r);
+ g.addColorStop(0,'rgba(255,255,255,.98)');g.addColorStop(.3,'rgba(229,198,252,.8)');g.addColorStop(.7,'rgba(181,182,252,.75)');g.addColorStop(1,'rgba(108,214,252,.9)');
+ ctx.shadowColor='rgba(66,106,248,.35)';ctx.shadowBlur=26*dpr;ctx.shadowOffsetY=10*dpr;
+ ctx.beginPath();ctx.arc(x,y,r,0,6.2832);ctx.fillStyle=g;ctx.fill();
+ ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+ ctx.lineWidth=1.5*dpr;ctx.strokeStyle='rgba(255,255,255,.9)';ctx.stroke();
+ ctx.beginPath();ctx.ellipse(x-r*.38,y-r*.5,r*.3,r*.15,-.6,0,6.2832);ctx.fillStyle='rgba(255,255,255,.95)';ctx.fill();
+ ctx.beginPath();ctx.arc(x,y,r*.82,.9,2.2);ctx.strokeStyle='rgba(66,106,248,.35)';ctx.lineWidth=2*dpr;ctx.stroke();
+}
+function ring(x,y,rx,ry,rot){
+ const g=ctx.createLinearGradient(x-rx,y,x+rx,y);
+ g.addColorStop(0,'rgba(108,214,252,.95)');g.addColorStop(.5,'rgba(66,106,248,.85)');g.addColorStop(1,'rgba(229,198,252,.95)');
+ ctx.shadowColor='rgba(66,106,248,.3)';ctx.shadowBlur=22*dpr;ctx.shadowOffsetY=8*dpr;
+ ctx.beginPath();ctx.ellipse(x,y,rx,ry,rot,0,6.2832);ctx.strokeStyle=g;ctx.lineWidth=18*dpr;ctx.stroke();
+ ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+ ctx.beginPath();ctx.ellipse(x,y,rx,ry,rot,3.5,5.5);ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=3*dpr;ctx.lineCap='round';ctx.stroke();
+}
+let t=0;
+function frame(){
+ kick*=.96;t+=(.008+kick*.025)*calm;
+ sm+=((pmx===null?.5:pmx/innerWidth)-sm)*.05;
+ const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#F5F4FF');g.addColorStop(1,'#E9ECFF');
+ ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ BL.forEach((b,i)=>{
+  const x=W*(b[0]+.1*Math.sin(t*.4+i*1.7+cur*.9)),y=H*(b[1]+.09*Math.cos(t*.35+i*2.1)),R=Math.max(W,H)*.55;
+  const rg=ctx.createRadialGradient(x,y,0,x,y,R);rg.addColorStop(0,`rgba(${b[2]},${b[3]})`);rg.addColorStop(1,`rgba(${b[2]},0)`);
+  ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
+ });
+ ctx.lineWidth=dpr;
+ for(const r of LN){
+  const gx=ctx.createLinearGradient(0,0,W,0);
+  gx.addColorStop(0,rgba(PAL[r.ix[0]],.9));gx.addColorStop(.5,rgba(PAL[r.ix[1]],.8));gx.addColorStop(1,rgba(PAL[r.ix[2]],.7));
+  ctx.strokeStyle=gx;
+  const base=H*r.y,amp=H*r.a*(1+kick*.5);
+  for(let i=0;i<r.n;i++){
+   const u=i/(r.n-1),s=u*u*(3-2*u);
+   ctx.globalAlpha=.12+.5*Math.sin(u*Math.PI);
+   ctx.beginPath();
+   for(let x=0;x<=W;x+=14){
+    const k=x/W*6.2832;
+    const A=Math.sin(k*.9+t*.8+r.o+sm*2)*amp+Math.sin(k*2+t*.5)*amp*.25;
+    const B=Math.sin(k*1.1-t*.6+r.o+2)*amp*.8+Math.cos(k*1.6+t*.4)*amp*.35+Math.sin(k*.5+t*.3)*amp*.5;
+    const y=base+A+(B-A)*s;
+    if(x)ctx.lineTo(x,y);else ctx.moveTo(x,y);
+   }
+   ctx.stroke();
+  }
+ }
+ ctx.globalAlpha=1;
+ const m=Math.min(W,H),px=(sm-.5)*-90*dpr;
+ ring(W*.18+px*.8,H*.58+Math.sin(t*.5)*H*.02,m*.3,m*.1,.55+Math.sin(t*.3)*.25);
+ ring(W*.88+px*.6,H*.36+Math.cos(t*.45)*H*.02,m*.22,m*.08,-.5+Math.cos(t*.35)*.25);
+ ORBS.forEach(o=>orb(W*o.fx+Math.sin(t*.5+o.ph)*W*.025+px*o.d,H*o.fy+Math.cos(t*.4+o.ph*1.3)*H*.03,m*o.r*2*(1+kick*.1)));
+ requestAnimationFrame(frame);
+}
+frame();go(0);
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 .header.header {
   height: 84px;
-  background: linear-gradient(105deg, #721c25, #7a1823);
-  border-bottom: 1px solid #f2b4ad30;
+  background: linear-gradient(105deg, #721c25, var(--sv-navy));
+  border-bottom: 1px solid #b5b6fc30;
   padding-inline: 7.5%;
 }
 .header .logo {
@@ -13,7 +13,7 @@
 }
 .main-nav button[aria-current="page"] {
   position: relative;
-  border-bottom: 1px solid #fff8f0;
+  border-bottom: 1px solid var(--sv-pearl);
   padding: 12px 0;
 }
 .main-nav button[aria-current="page"]:after {
@@ -24,14 +24,14 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #fff8f0;
+  background: var(--sv-pearl);
   transform: translateX(-50%);
 }
 .main-nav button {
   transition: color 0.2s;
 }
 .main-nav button:hover {
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .header-tools .menu-toggle {
   font-size: 0;
@@ -47,15 +47,15 @@
   top: 15px;
   width: 20px;
   height: 1px;
-  background: #fff8f0;
+  background: var(--sv-pearl);
   box-shadow:
-    0 6px #fff8f0,
-    0 12px #fff8f0;
+    0 6px var(--sv-pearl),
+    0 12px var(--sv-pearl);
 }
 .hero {
   min-height: clamp(590px, 76svh, 740px);
   background:
-    radial-gradient(ellipse at 78% 48%, #39232b55, transparent 54%), #1e1e1e;
+    radial-gradient(ellipse at 78% 48%, #39232b55, transparent 54%), var(--sv-navy);
   border-bottom: 1px solid #b1636840;
 }
 .hero-rings {
@@ -64,7 +64,7 @@
     circle at 75% 48%,
     transparent 0,
     transparent 98px,
-    #f2b4ad0b 99px,
+    #b5b6fc0b 99px,
     transparent 100px
   );
 }
@@ -75,7 +75,7 @@
   right: 7.5%;
   bottom: 32px;
   height: 1px;
-  background: linear-gradient(90deg, #f2b4ad50, transparent 65%);
+  background: linear-gradient(90deg, #b5b6fc50, transparent 65%);
   pointer-events: none;
 }
 .hero-content {
@@ -114,12 +114,12 @@
   padding: 10px 18px;
   margin-bottom: 24px;
   border-left: 1px solid #b16368;
-  background: linear-gradient(90deg, #f2b4ad08, transparent);
+  background: linear-gradient(90deg, #b5b6fc08, transparent);
 }
 .hero .speech strong {
   font-size: 11px;
   letter-spacing: 2px;
-  color: #f2b4ad;
+  color: var(--sv-lavender);
   font-weight: 500;
 }
 .hero .speech p {
@@ -131,22 +131,22 @@
   font-size: 16px;
   min-height: 46px;
   padding: 10px 24px;
-  border: 1px solid #f2b4ad30;
-  background: #7a1823;
+  border: 1px solid #b5b6fc30;
+  background: var(--sv-navy);
   box-shadow: 0 6px 24px #0002;
 }
 .hero .button:hover {
   background: #8b2230;
-  border-color: #f2b4ad80;
+  border-color: #b5b6fc80;
 }
 .hero-object {
   font-size: 12px;
   letter-spacing: 0.06em;
   padding: 8px 12px;
-  border: 1px solid #f2b4ad25;
+  border: 1px solid #b5b6fc25;
   border-radius: 2px;
   background: #211c20b3;
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .hero-object span {
   font-size: 15px;
@@ -233,7 +233,7 @@
 .hero {
   background:
     radial-gradient(ellipse at 76% 42%, #5c1c2820, transparent 58%),
-    linear-gradient(115deg, #1e1e1e, #191719);
+    linear-gradient(115deg, var(--sv-navy), #191719);
 }
 .hero-rings {
   opacity: 0.65;
@@ -241,16 +241,16 @@
 .hero .light {
   background: radial-gradient(
     circle 280px at var(--lx, 66%) var(--ly, 34%),
-    #d46a7a52 0%,
-    #a1001529 45%,
-    #7a182308 75%,
+    #426af852 0%,
+    #3158e229 45%,
+    #02023808 75%,
     transparent 100%
   );
 }
 .hero-object {
   opacity: var(--visibility, 0);
   background: #201a1d80;
-  border-color: #f2b4ad20;
+  border-color: #b5b6fc20;
   border-radius: 3px;
   backdrop-filter: blur(4px);
 }

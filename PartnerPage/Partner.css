@@ -1,8 +1,8 @@
 .pt {
-  --pt-rose: #f2b4ad;
-  --pt-ivory: #fff8f0;
-  color: #1e1e1e;
-  background: #f7f3ef;
+  --pt-rose: var(--sv-lavender);
+  --pt-ivory: var(--sv-pearl);
+  color: var(--sv-navy);
+  background: var(--sv-pearl);
   font-family: "Be Vietnam Pro", sans-serif;
 }
 .pt * {
@@ -24,12 +24,12 @@
   line-height: 1.25;
 }
 .pt h2 em {
-  color: #7a1823;
+  color: var(--sv-navy);
 }
 .pt p {
   font-size: 14px;
   line-height: 1.9;
-  color: #635751;
+  color: var(--sv-muted);
 }
 .pt a {
   color: inherit;
@@ -52,8 +52,12 @@
   gap: 60px;
   align-items: center;
   padding: 78px max(7%, calc((100% - 1240px) / 2));
-  background: linear-gradient(110deg, #7a1823 0%, #491b23 48%, #1e1e1e 90%);
+  background: linear-gradient(110deg, var(--sv-navy) 0%, var(--sv-night-mid) 48%, var(--sv-navy) 90%);
   color: var(--pt-ivory);
+}
+.pt-hero-copy {
+  position: relative;
+  z-index: 1;
 }
 .pt h1 {
   font:
@@ -67,7 +71,7 @@
 }
 .pt-hero-copy > p {
   max-width: 565px;
-  color: #e6d5ce;
+  color: var(--sv-lavender);
   margin: 24px 0;
 }
 .pt-action {
@@ -75,7 +79,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  border: 1px solid #7a18235c;
+  border: 1px solid #0202385c;
   border-radius: 24px;
   padding: 8px 16px;
   min-height: 38px;
@@ -93,16 +97,16 @@
   flex-shrink: 0;
 }
 .pt-action:hover {
-  background: #7a18230d;
+  background: #0202380d;
   transform: translateY(-2px);
 }
 .pt-hero .pt-action,
 .pt-connect .pt-action {
-  border-color: #f2b4ad66;
+  border-color: #b5b6fc66;
 }
 .pt-hero .pt-action:hover,
 .pt-connect .pt-action:hover {
-  background: #fff8f010;
+  background: #f5f4ff10;
 }
 .pt-heading {
   max-width: 660px;
@@ -111,7 +115,7 @@
   font-size: 12px !important;
   font-weight: 600;
   letter-spacing: 1.5px;
-  color: #7a1823 !important;
+  color: var(--sv-navy) !important;
   margin-bottom: 20px !important;
 }
 .pt-heading > p:not(.pt-eyebrow) {
@@ -128,7 +132,7 @@
   margin-top: 36px;
 }
 .pt-direction {
-  border-top: 1px solid #7a182350;
+  border-top: 1px solid #02023850;
   padding-top: 20px;
 }
 .pt-index {
@@ -146,23 +150,23 @@
 .pt-label {
   font-size: 12px !important;
   font-weight: 600;
-  color: #7a1823 !important;
+  color: var(--sv-navy) !important;
   margin-bottom: 12px !important;
 }
 .pt-directory {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: 70px;
-  background: linear-gradient(110deg, #f1ddd6, #f7f3ef);
+  background: linear-gradient(110deg, var(--sv-orchid), var(--sv-pearl));
 }
 .pt-organizations {
   min-width: 0;
 }
 .pt-organizations details {
-  border-top: 1px solid #7a182342;
+  border-top: 1px solid #02023842;
 }
 .pt-organizations details:last-child {
-  border-bottom: 1px solid #7a182342;
+  border-bottom: 1px solid #02023842;
 }
 .pt summary {
   display: grid;
@@ -185,14 +189,14 @@
 .pt-org-role {
   display: block;
   font-size: 12px;
-  color: #635751;
+  color: var(--sv-muted);
   margin-top: 6px;
 }
 .pt-plus {
   width: 18px;
   height: 18px;
   fill: none;
-  stroke: #7a1823;
+  stroke: var(--sv-navy);
   stroke-width: 1.5;
   transition: transform 0.25s;
 }
@@ -216,18 +220,18 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: #7a1823 !important;
+  color: var(--sv-navy) !important;
   font-size: 13px;
   margin-top: 18px;
 }
 .pt-process {
-  background: #1e1e1e;
-  color: #fff8f0;
+  background: var(--sv-navy);
+  color: var(--sv-pearl);
   position: relative;
 }
 .pt-process .pt-eyebrow,
 .pt-process h2 em {
-  color: #f2b4ad !important;
+  color: var(--sv-lavender) !important;
 }
 .pt-steps {
   display: grid;
@@ -236,11 +240,11 @@
   margin-top: 38px;
 }
 .pt-step {
-  border-top: 1px solid #f2b4ad40;
+  border-top: 1px solid #b5b6fc40;
   padding-top: 22px;
 }
 .pt-step .pt-index {
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .pt-step p {
   color: #cfc4bf;
@@ -249,11 +253,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px 40px;
-  border-top: 1px solid #f2b4ad30;
+  border-top: 1px solid #b5b6fc30;
   margin-top: 36px;
   padding-top: 22px;
   font-size: 12px;
-  color: #f2b4ad;
+  color: var(--sv-lavender);
 }
 .pt-connect {
   display: flex;
@@ -261,9 +265,9 @@
   justify-content: space-between;
   gap: 30px;
   background:
-    radial-gradient(ellipse at 5% 40%, #a8203480, transparent 75%), #1e1e1e;
-  color: #fff8f0;
-  border-top: 1px solid #f2b4ad40;
+    radial-gradient(ellipse at 5% 40%, #a8203480, transparent 75%), var(--sv-navy);
+  color: var(--sv-pearl);
+  border-top: 1px solid #b5b6fc40;
 }
 .pt-connect h2 {
   font-size: 30px;

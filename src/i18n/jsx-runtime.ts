@@ -24,10 +24,16 @@ function localiseChild(child: ReactNode, language: Language): ReactNode {
       ? child.map((value) => localiseChild(value, language))
       : child;
 }
-function LocalisedFragment({ children }: { children?: ReactNode }) {
+function LocalisedFragment({
+  children,
+  staticChildren,
+}: {
+  children?: ReactNode;
+  staticChildren: boolean;
+}) {
   const language = useLanguage();
   const excluded = useContext(Untranslated);
-  return reactJsx(Fragment, {
+  return (staticChildren ? reactJsxs : reactJsx)(Fragment, {
     children: excluded ? children : localiseChild(children, language),
   });
 }
@@ -73,7 +79,15 @@ type Props = Record<string, unknown> & {
   translate?: string;
   dangerouslySetInnerHTML?: { __html: string };
 };
-function LocalisedHost({ tag, original }: { tag: string; original: Props }) {
+function LocalisedHost({
+  tag,
+  original,
+  staticChildren,
+}: {
+  tag: string;
+  original: Props;
+  staticChildren: boolean;
+}) {
   const language = useLanguage();
   const inherited = useContext(Untranslated);
   const excluded =
@@ -93,7 +107,10 @@ function LocalisedHost({ tag, original }: { tag: string; original: Props }) {
         __html: localiseHtml(props.dangerouslySetInnerHTML.__html, language),
       };
   }
-  const element = reactJsx(tag as ElementType, props);
+  const element = (staticChildren ? reactJsxs : reactJsx)(
+    tag as ElementType,
+    props,
+  );
   return original.translate === "no"
     ? reactJsx(Untranslated.Provider, { value: true, children: element })
     : element;
@@ -105,9 +122,17 @@ function create(
   key?: Key,
 ) {
   if (type === Fragment)
-    return factory(LocalisedFragment, { children: props.children }, key);
+    return factory(
+      LocalisedFragment,
+      { children: props.children, staticChildren: factory === reactJsxs },
+      key,
+    );
   if (typeof type !== "string") return factory(type, props, key);
-  return factory(LocalisedHost, { tag: type, original: props }, key);
+  return factory(
+    LocalisedHost,
+    { tag: type, original: props, staticChildren: factory === reactJsxs },
+    key,
+  );
 }
 export const jsx: typeof reactJsx = (type, props, key) =>
   create(reactJsx, type, (props ?? {}) as Props, key);

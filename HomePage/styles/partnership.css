@@ -1,8 +1,8 @@
 .partnership.section-pad {
   min-height: 617px;
   padding: 110px 9% 115px;
-  background: radial-gradient(ellipse at 50% 45%, #7a1823 0%, #451723 100%);
-  color: #fff8f0;
+  background: radial-gradient(ellipse at 50% 45%, var(--sv-navy) 0%, #451723 100%);
+  color: var(--sv-pearl);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
 .partnership > .eyebrow {
   font: 600 18px/1.5 var(--sans);
   letter-spacing: 0.08em;
-  color: #f2b4ad;
+  color: var(--sv-lavender);
   margin: 0 0 16px;
 }
 .partnership h2 {
@@ -20,7 +20,7 @@
     700 50px/86px "Playfair Display",
     serif;
   letter-spacing: 0;
-  color: #fff8f0;
+  color: var(--sv-pearl);
   margin: 0 0 12px;
   text-wrap: balance;
 }
@@ -56,13 +56,13 @@
   line-height: 1;
 }
 .partnership .button-light {
-  background: #fff8f0;
-  color: #7a1823;
+  background: var(--sv-pearl);
+  color: var(--sv-navy);
 }
 .partnership .button-outline {
-  border: 1px solid #fff8f0;
+  border: 1px solid var(--sv-pearl);
   background: transparent;
-  color: #fff8f0;
+  color: var(--sv-pearl);
 }
 @media (max-width: 1100px) {
   .partnership.section-pad {

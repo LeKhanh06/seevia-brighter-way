@@ -1,14 +1,14 @@
 @import "@fontsource/playfair-display/latin-700.css";
 @import "@fontsource/playfair-display/vietnamese-700.css";
 .capabilities {
-  background: #f7f3ef;
+  background: var(--sv-pearl);
   padding: 32px 4.3% 34px;
   min-height: 383px;
 }
 .capabilities .line-label {
   font: 600 16px/25px var(--sans);
   letter-spacing: 0.08em;
-  color: #7a1823;
+  color: var(--sv-navy);
   gap: 36px;
   margin-bottom: 26px;
 }
@@ -43,7 +43,7 @@
   height: 84px;
   flex-shrink: 0;
   background: #f1e5e0;
-  color: #7a1823;
+  color: var(--sv-navy);
   margin: -1px 0 16px 34px;
 }
 .capabilities .icon-bubble:before {
@@ -71,7 +71,7 @@
     600 22px/1.3 "Playfair Display",
     serif;
   letter-spacing: 0.08em;
-  color: #1e1e1e;
+  color: var(--sv-navy);
   max-width: none;
   min-height: 57px;
   margin: 0 0 12px;
@@ -95,7 +95,7 @@
 .capabilities .short-line {
   width: 34px;
   height: 2px;
-  background: #7a1823;
+  background: var(--sv-navy);
   margin-top: auto;
 }
 .capabilities .capability {
