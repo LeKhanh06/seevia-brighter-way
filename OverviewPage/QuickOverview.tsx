@@ -128,6 +128,8 @@ export default function QuickOverview() {
       <main id="overview-main" ref={mainRef}>
         <section className="qv-editorial-hero" aria-labelledby="qv-hero-title">
           <Stars />
+          <i className="qv-hero-glow qv-hero-glow--a" aria-hidden="true" />
+          <i className="qv-hero-glow qv-hero-glow--b" aria-hidden="true" />
           <div className="qv-container qv-hero-layout">
             <div className="qv-hero-content">
               <SectionKicker number="SEEVIA">TỔNG QUAN</SectionKicker>

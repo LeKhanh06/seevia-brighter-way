@@ -397,40 +397,36 @@ html body #root .site-ambient-section > .site-ambient-glow {
   from { transform: translate3d(-4%, 1%, 0) scale(1); }
   to { transform: translate3d(4%, -4%, 0) scale(1.12); }
 }
-main {
-  view-transition-name: seevia-main;
+/* Page change = a viewport-sized crossfade of the root. Naming <main> made the browser
+   snapshot the whole (often 5000px+) page twice per navigation, which caused the stutter.
+   The floating menu gets its own name so it stays perfectly still. */
+.header {
+  view-transition-name: seevia-header;
 }
 main img.site-media-loading {
   background: linear-gradient(120deg, var(--sv-orchid), var(--sv-pearl));
 }
-::view-transition-old(root),
+::view-transition-group(seevia-header) {
+  animation: none;
+}
+::view-transition-old(seevia-header) {
+  display: none;
+}
+::view-transition-new(seevia-header) {
+  animation: none;
+}
+::view-transition-old(root) {
+  animation: site-tab-old-forward 240ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
 ::view-transition-new(root) {
-  animation: none;
+  animation: site-tab-new-forward 480ms cubic-bezier(0.22, 1, 0.36, 1) 40ms both;
 }
-/* Pages differ in height: don't morph the box (that stretches the content), just crossfade at true size. */
-::view-transition-group(seevia-main) {
-  animation: none;
-}
-::view-transition-old(seevia-main),
-::view-transition-new(seevia-main) {
-  height: 100%;
-  object-fit: none;
-  object-position: 50% 0;
-  mix-blend-mode: normal;
-}
-::view-transition-old(seevia-main) {
-  animation: site-tab-old-forward 200ms ease-out both;
-}
-::view-transition-new(seevia-main) {
-  animation: site-tab-new-forward 460ms var(--motion-ease) both;
-}
-html[data-route-direction="back"]::view-transition-old(seevia-main) {
+html[data-route-direction="back"]::view-transition-old(root) {
   animation-name: site-tab-old-back;
 }
-html[data-route-direction="back"]::view-transition-new(seevia-main) {
+html[data-route-direction="back"]::view-transition-new(root) {
   animation-name: site-tab-new-back;
 }
-/* Opacity and transform only: blurring whole-page snapshots drops frames. */
 @keyframes site-tab-old-forward {
   to {
     opacity: 0;
@@ -439,7 +435,7 @@ html[data-route-direction="back"]::view-transition-new(seevia-main) {
 @keyframes site-tab-new-forward {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(8px);
   }
 }
 @keyframes site-tab-old-back {
@@ -450,7 +446,7 @@ html[data-route-direction="back"]::view-transition-new(seevia-main) {
 @keyframes site-tab-new-back {
   from {
     opacity: 0;
-    transform: translateY(-14px);
+    transform: translateY(-8px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -460,8 +456,34 @@ html[data-route-direction="back"]::view-transition-new(seevia-main) {
     display: none;
     animation: none !important;
   }
-  ::view-transition-old(seevia-main),
-  ::view-transition-new(seevia-main) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation: none !important;
   }
 }
+
+/* Word-by-word title rise for every page except home (words split in SiteMotion.tsx). */
+.sv-split .sv-w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.3em 0.14em 0.18em;
+  margin: -0.3em -0.14em -0.18em;
+}
+.sv-split .sv-wi {
+  display: inline-block;
+  transform: translateY(115%) rotate(4deg);
+  transform-origin: 0% 100%;
+}
+.sv-split.is-in .sv-wi {
+  animation: sv-word-rise 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--w, 0) * 60ms + 80ms);
+}
+@keyframes sv-word-rise {
+  from { transform: translateY(115%) rotate(4deg); }
+  to { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-split .sv-wi { transform: none; animation: none; }
+}
+

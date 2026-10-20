@@ -299,7 +299,7 @@ html body #root .quick-overview-page .qv-hero-layout {
 }
 html body #root .quick-overview-page .qv-hero-content {
   display: block;
-  max-width: 620px;
+  max-width: none;
   margin: 0;
   text-align: left;
 }
@@ -307,19 +307,19 @@ html body #root .quick-overview-page .qv-hero-content > .qv-section-kicker { jus
 html body #root .quick-overview-page .qv-editorial-hero h1 {
   max-width: none;
   font-size: clamp(36px, 4.2vw, 60px);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.035em;
 }
 html body #root .quick-overview-page .qv-editorial-hero h1 em {
-  display: block;
+  display: inline;
   color: var(--cyan-200, #a8e5eb);
   font-family: "Lora", Georgia, serif;
   font-style: italic;
   font-weight: 400;
 }
 html body #root .quick-overview-page .qv-hero-intro {
-  max-width: 46ch;
+  max-width: 58ch;
   margin: 22px 0 0;
   font-size: clamp(15px, 1.2vw, 18px);
 }
@@ -335,4 +335,55 @@ html:not(.sv-home-active) body #root main :is(h1, h2) :is(.sv-w, .sv-wi) {
   font-weight: inherit !important;
   letter-spacing: inherit !important;
   -webkit-text-fill-color: currentColor;
+}
+
+/* Overview hero: the title on one line, two halos drifting past each other. */
+@media (min-width: 900px) {
+  html body #root .quick-overview-page .qv-editorial-hero h1 { white-space: nowrap; font-size: clamp(40px, 4.6vw, 68px); }
+}
+html body #root .quick-overview-page section.qv-editorial-hero { position: relative; overflow: hidden; isolation: isolate; }
+html body #root .quick-overview-page .qv-hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: 44vmax;
+  height: 44vmax;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+html body #root .quick-overview-page .qv-hero-glow--a {
+  left: -14vmax;
+  top: -14vmax;
+  background: radial-gradient(circle, rgb(64 95 250 / 0.7), transparent 65%);
+  animation: qv-glow-right 18s ease-in-out infinite alternate;
+}
+html body #root .quick-overview-page .qv-hero-glow--b {
+  right: -14vmax;
+  bottom: -18vmax;
+  background: radial-gradient(circle, rgb(9 184 200 / 0.5), transparent 65%);
+  animation: qv-glow-left 22s ease-in-out infinite alternate;
+}
+@keyframes qv-glow-right { to { transform: translate3d(55vw, 12vh, 0) scale(1.12); } }
+@keyframes qv-glow-left { to { transform: translate3d(-55vw, -14vh, 0) scale(0.92); } }
+@media (prefers-reduced-motion: reduce) {
+  html body #root .quick-overview-page .qv-hero-glow { animation: none; }
+}
+
+/* Partner hero: title on one line, the two crossing halos visible across the whole band. */
+@media (min-width: 900px) {
+  html body #root .pt section.pt-hero .pt-hero-copy h1 { white-space: nowrap; }
+  html body #root .pt section.pt-hero .pt-hero-copy h1 br { display: none; }
+  html body #root .pt section.pt-hero .pt-hero-copy h1 em { margin-left: 0.28em; }
+  html body #root .pt section.pt-hero .pt-hero-copy > p { max-width: 60ch; }
+}
+html body #root .pt .hero-glows--partner {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+html body #root .pt .hero-glows--partner i:first-child {
+  background: radial-gradient(circle, rgb(127 211 222 / 0.55) 0%, rgb(64 95 250 / 0.3) 30%, transparent 70%);
+}
+html body #root .pt .hero-glows--partner i:last-child {
+  background: radial-gradient(circle, rgb(191 201 252 / 0.5) 0%, rgb(64 95 250 / 0.28) 32%, transparent 72%);
 }

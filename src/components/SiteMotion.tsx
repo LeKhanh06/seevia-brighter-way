@@ -81,6 +81,7 @@ const GLOW_SELECTORS = [
   ".ab-why", ".cp-hero", ".np-hero", ".pt-hero", ".ct-hero",
 ];
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SiteMotion({ routeKey }: { routeKey: string }) {
@@ -89,39 +90,47 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
 
   // Every page outside home gets the homepage's title motion: words rise out of a mask, one by one.
   useLayoutEffect(() => {
+    // ScrollTrigger remembers scroll positions per URL and restores them on refresh,
+    // which reopened revisited pages halfway down. Navigation owns scroll position instead.
+    ScrollTrigger.clearScrollMemory("manual");
     if (routeKey === "/") return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const headings = Array.from(
       document.querySelectorAll<HTMLElement>("main h1, main h2"),
     ).filter((el) => !el.querySelector("a, button, input, select, textarea, img, svg"));
     const splits = headings.map((el) => ({ el, ...splitHeading(el) }));
-    const ctx = gsap.context(() => {
-      splits.forEach(({ el, words }) => {
-        const intro = el.tagName === "H1" || el.getBoundingClientRect().top < innerHeight * 0.9;
-        gsap.from(words, {
-          yPercent: 115,
-          rotate: 4,
-          transformOrigin: "0% 100%",
-          duration: 1.15,
-          ease: "expo.out",
-          stagger: 0.06,
-          delay: el.tagName === "H1" ? 0.1 : 0,
-          ...(intro ? {} : { scrollTrigger: { trigger: el, start: "top 88%", once: true } }),
-        });
-      });
+    // Pure CSS rise (see .sv-split in SiteMotion.css): no style reads during the page swap.
+    splits.forEach(({ el, words }) => {
+      words.forEach((word, i) => word.style.setProperty("--w", String(i)));
+      el.classList.add("sv-split");
     });
+    const show = (el: Element) => el.classList.add("is-in");
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach(({ target, isIntersecting }) => {
+          if (!isIntersecting) return;
+          show(target);
+          observer.unobserve(target);
+        }),
+      { rootMargin: "0px 0px -12% 0px" },
+    );
+    const frame = requestAnimationFrame(() =>
+      splits.forEach(({ el }) => {
+        if (el.tagName === "H1") show(el);
+        else observer.observe(el);
+      }),
+    );
     const restore = () => {
-      ctx.revert();
-      splits.forEach(({ restore }) => restore());
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      splits.forEach(({ el, restore }) => {
+        el.classList.remove("sv-split", "is-in");
+        restore();
+      });
       splits.length = 0;
     };
-    // Re-measure trigger positions once images and fonts settle, so nothing fires early.
-    const refresh = () => ScrollTrigger.refresh();
-    addEventListener("load", refresh);
-    void document.fonts?.ready.then(refresh);
     const stop = beforeLanguageChange(restore);
     return () => {
-      removeEventListener("load", refresh);
       stop();
       restore();
     };
@@ -262,7 +271,11 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
         }
       });
     };
-    setup();
+    // Everything set up here sits below the fold, so it can wait until the page-change
+    // crossfade has played instead of adding work to the frame that swaps the page.
+    const idle = window.requestIdleCallback
+      ? window.requestIdleCallback(setup, { timeout: 600 })
+      : window.setTimeout(setup, 300);
     motion.addEventListener("change", setup);
     document.addEventListener("focusin", reveal);
     const onHash = () => {
@@ -275,6 +288,8 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
     window.addEventListener("hashchange", onHash);
     if (location.hash) onHash();
     return () => {
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
       observer.disconnect();
       reveal();
       motion.removeEventListener("change", setup);
