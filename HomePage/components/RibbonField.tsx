@@ -156,10 +156,10 @@ export default function RibbonField() {
         <defs>
           {/* reflect over half a period → colour is periodic, so the wrap is invisible */}
           <linearGradient id="sv-rg-a" gradientUnits="userSpaceOnUse" x1="0" x2="720" y1="0" y2="0" spreadMethod="reflect">
-            <stop offset="0" stopColor="#6CD6FC" />
-            <stop offset=".45" stopColor="#426AF8" />
-            <stop offset=".8" stopColor="#B5B6FC" />
-            <stop offset="1" stopColor="#E5C6FC" />
+            <stop offset="0" stopColor="#7fd3de" />
+            <stop offset=".45" stopColor="#405ffa" />
+            <stop offset=".8" stopColor="#bfc9fc" />
+            <stop offset="1" stopColor="#cec4fb" />
           </linearGradient>
         </defs>
         <path d={RIBBON_PATHS.a} fill="url(#sv-rg-a)" />
@@ -167,15 +167,15 @@ export default function RibbonField() {
       <svg className="ribbon ribbon--b" viewBox={RIBBON_VIEWBOX} focusable="false">
         <defs>
           <linearGradient id="sv-rg-b" gradientUnits="userSpaceOnUse" x1="0" x2="720" y1="0" y2="0" spreadMethod="reflect">
-            <stop offset="0" stopColor="#E5C6FC" />
-            <stop offset=".5" stopColor="#B5B6FC" />
-            <stop offset="1" stopColor="#F5F4FF" />
+            <stop offset="0" stopColor="#cec4fb" />
+            <stop offset=".5" stopColor="#bfc9fc" />
+            <stop offset="1" stopColor="#f6f8ff" />
           </linearGradient>
         </defs>
         <path d={RIBBON_PATHS.b} fill="url(#sv-rg-b)" />
       </svg>
       <svg className="ribbon ribbon--c" viewBox={RIBBON_VIEWBOX} focusable="false">
-        <path d={RIBBON_PATHS.c} fill="none" stroke="#6CD6FC" strokeWidth="3" strokeLinecap="round" />
+        <path d={RIBBON_PATHS.c} fill="none" stroke="#7fd3de" strokeWidth="3" strokeLinecap="round" />
       </svg>
     </div>
   );

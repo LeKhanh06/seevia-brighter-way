@@ -54,62 +54,83 @@ export default function AIDemo() {
   const scene = scenarios[index];
   return (
     <section className="ai-demo section-pad" id="technology">
-      <div className="ai-copy">
+      <div className="ai-demo-heading">
         <p className="simulation-index" aria-hidden="true">
           SEEVIA / VISION LAB <span>0{index + 1} — 03</span>
         </p>
-        <h2 className="eyebrow">MÔ PHỎNG GÓC NHÌN CỦA AI</h2>
+        <h2 className="ai-demo-title">
+          Mô phỏng góc nhìn <em>của AI.</em>
+        </h2>
         <p className="demo-intro">
           Bạn hãy chọn một tình huống để xem SeeVia thu thập thông tin và phản
           hồi như thế nào.
         </p>
-        <div className="tabs" role="tablist" aria-label="Tình huống mô phỏng">
-          {scenarios.map((s, i) => (
-            <button
-              ref={(el) => {
-                tabs.current[i] = el;
-              }}
-              key={s.id}
-              id={`tab-${s.id}`}
-              role="tab"
-              aria-selected={index === i}
-              aria-controls="ai-panel"
-              tabIndex={index === i ? 0 : -1}
-              onClick={() => setIndex(i)}
-              onKeyDown={(e) => {
-                let next = i;
-                if (e.key === "ArrowRight") next = (i + 1) % scenarios.length;
-                else if (e.key === "ArrowLeft")
-                  next = (i + scenarios.length - 1) % scenarios.length;
-                else if (e.key === "Home") next = 0;
-                else if (e.key === "End") next = scenarios.length - 1;
-                else return;
-                e.preventDefault();
-                setIndex(next);
-                tabs.current[next]?.focus();
-              }}
-            >
-              {s.title}
-            </button>
-          ))}
-        </div>
-        <div className="speech" aria-live="polite">
-          <strong>SEEVIA NÓI</strong>
-          <p key={scene.id}>{scene.response}</p>
-        </div>
-        <p className="demo-note">
-          Mô phỏng minh họa, không phải kết quả thực tế của sản phẩm.
-        </p>
-        <Button to="technology">Tìm hiểu công nghệ</Button>
+      </div>
+      <div className="tabs" role="tablist" aria-label="Tình huống mô phỏng">
+        {scenarios.map((s, i) => (
+          <button
+            ref={(el) => {
+              tabs.current[i] = el;
+            }}
+            key={s.id}
+            id={`tab-${s.id}`}
+            role="tab"
+            aria-selected={index === i}
+            aria-controls="ai-panel"
+            tabIndex={index === i ? 0 : -1}
+            onClick={() => setIndex(i)}
+            onKeyDown={(e) => {
+              let next = i;
+              if (e.key === "ArrowRight") next = (i + 1) % scenarios.length;
+              else if (e.key === "ArrowLeft")
+                next = (i + scenarios.length - 1) % scenarios.length;
+              else if (e.key === "Home") next = 0;
+              else if (e.key === "End") next = scenarios.length - 1;
+              else return;
+              e.preventDefault();
+              setIndex(next);
+              tabs.current[next]?.focus();
+            }}
+          >
+            {s.title}
+          </button>
+        ))}
       </div>
       <div
         id="ai-panel"
         role="tabpanel"
         aria-labelledby={`tab-${scene.id}`}
         tabIndex={0}
-        className="ai-visual"
+        className="ai-demo-workspace"
       >
-        {<PhotoScene key={scene.id} scene={scene} />}
+        <div className="ai-visual">
+          <PhotoScene key={scene.id} scene={scene} />
+        </div>
+        <div className="ai-copy">
+          <div className="speech">
+            <div className="speech-head">
+              <strong>SEEVIA NÓI</strong>
+              <span className="speech-scene">{scene.title}</span>
+            </div>
+            <div className="speech-bubble">
+              <p key={scene.id} aria-live="polite">
+                {scene.response}
+              </p>
+              {/* Decorative voice-output cue: the reply is spoken aloud. */}
+              <span className="speech-wave" aria-hidden="true">
+                {Array.from({ length: 18 }, (_, i) => (
+                  <i key={i} style={{ "--i": i } as React.CSSProperties} />
+                ))}
+              </span>
+            </div>
+          </div>
+          <div className="ai-copy-footer">
+            <p className="demo-note">
+              Mô phỏng minh họa, không phải kết quả thực tế của sản phẩm.
+            </p>
+            <Button to="technology">Tìm hiểu công nghệ</Button>
+          </div>
+        </div>
       </div>
     </section>
   );

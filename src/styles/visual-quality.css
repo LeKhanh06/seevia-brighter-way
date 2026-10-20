@@ -1,19 +1,19 @@
 /* Optical Technology quality pass. Static presentation only; no motion overrides. */
 :root {
   /* Primitives */
-  --sv-white: #fafcff;
-  --sv-pink: #e94b87;
-  --sv-blue: #426bff;
-  --sv-silver: #c9d2e1;
-  --sv-ink: #252b42;
-  --sv-mist: #f5f7fa;
-  --sv-blue-readable: #3153c4;
-  --sv-pink-readable: #a02453;
+  --sv-white: var(--ink-25);
+  --sv-pink: var(--iris-600);
+  --sv-blue: var(--sapphire-500);
+  --sv-silver: var(--sapphire-200);
+  --sv-ink: var(--ink-800);
+  --sv-mist: var(--ink-50);
+  --sv-blue-readable: var(--sapphire-700);
+  --sv-pink-readable: var(--iris-800);
   /* Semantic */
   --sv-surface: var(--sv-white);
   --sv-surface-secondary: var(--sv-mist);
   --sv-text: var(--sv-ink);
-  --sv-text-secondary: #536078;
+  --sv-text-secondary: var(--sapphire-700);
   --sv-link: var(--sv-blue-readable);
   --sv-line: var(--sv-silver);
   --sv-gutter: max(6.5vw, calc((100vw - 1240px) / 2));
@@ -21,7 +21,7 @@
   --sv-body-size: 16px;
   --sv-small-size: 13px;
   /* Component roles and compatibility aliases */
-  --sv-panel-shadow: 0 12px 32px #252b420a, inset 0 1px #fff;
+  --sv-panel-shadow: 0 12px 32px #2926500a, inset 0 1px var(--white);
   --sv-panel-radius: 12px;
   --burgundy: var(--sv-pink-readable);
   --charcoal: var(--sv-ink);
@@ -31,7 +31,7 @@
   --color-highlight: var(--sv-silver);
   --control-active-bg: var(--sv-silver);
   --control-active-fg: var(--sv-ink);
-  --material-chrome: linear-gradient(125deg, #fff, #e8edf4 45%, #f5f7fa 75%, #dfe5ee);
+  --material-chrome: linear-gradient(125deg, var(--white), var(--sapphire-100) 45%, var(--ink-50) 75%, var(--sapphire-100));
   --material-shadow: var(--sv-panel-shadow);
 }
 
@@ -101,12 +101,12 @@
 .experience, .about .belief, .pt .pt-directory,
 .ct .ct-letter, .np-main .np-feature, .cp-main .cp-understand,
 .about-editorial .ab-evidence {
-  background: linear-gradient(115deg, var(--sv-mist), #edf2fa);
+  background: linear-gradient(115deg, var(--sv-mist), var(--sapphire-50));
 }
 .about-editorial .ab-why,
 .pt .pt-process, .cp-main .cp-ecosystem,
 .np-main .np-perspective {
-  background: linear-gradient(115deg, var(--sv-ink), #303c59);
+  background: linear-gradient(115deg, var(--sv-ink), var(--ink-700));
   color: var(--sv-white);
 }
 .about-editorial .ab-why h2,
@@ -115,18 +115,18 @@
 .pt .pt-process p, .cp-main .cp-ecosystem p,
 .np-main .np-perspective p,
 .about-editorial .ab-why .ab-section-heading > p,
-.about-editorial .ab-why .ab-needs p { color: #dce3ef; }
+.about-editorial .ab-why .ab-needs p { color: var(--sapphire-200); }
 .pt .pt-process h2 em, .cp-main .cp-ecosystem h2 em,
 .np-main .np-perspective h2 em,
-.about-editorial .ab-why .ab-needs h3 { color: #c9d2e1; }
+.about-editorial .ab-why .ab-needs h3 { color: var(--sapphire-200); }
 .np-main :is(.np-note-art,.np-note-control) {
-  background: linear-gradient(135deg, var(--sv-ink), #36486b);
+  background: linear-gradient(135deg, var(--sv-ink), var(--ink-700));
 }
 .ct .ct-explore, .pt .pt-connect, .about-editorial .ab-connect {
   background: var(--sv-ink);
 }
 .policy-document .policy-hero {
-  background: linear-gradient(115deg, var(--sv-white), #e8edf5);
+  background: linear-gradient(115deg, var(--sv-white), var(--sapphire-100));
   color: var(--sv-ink);
   border-bottom: 1px solid var(--sv-line);
 }

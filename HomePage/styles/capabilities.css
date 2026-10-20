@@ -13,7 +13,7 @@
   margin-bottom: 26px;
 }
 .capabilities .line-label:after {
-  background: #d9cec7;
+  background: var(--ink-200);
 }
 .capability-grid {
   gap: 0;
@@ -23,7 +23,7 @@
   min-height: 266px;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid #ded3cb;
+  border-left: 1px solid var(--ink-200);
 }
 .capabilities .capability:first-child {
   padding-left: 6px;
@@ -34,7 +34,7 @@
     700 35px/1 "Playfair Display",
     serif;
   letter-spacing: 0.08em;
-  color: #ad9b90;
+  color: var(--ink-500);
   position: relative;
   z-index: 1;
 }
@@ -42,7 +42,7 @@
   width: 84px;
   height: 84px;
   flex-shrink: 0;
-  background: #f1e5e0;
+  background: var(--sapphire-100);
   color: var(--sv-navy);
   margin: -1px 0 16px 34px;
 }
@@ -88,7 +88,7 @@
 .capabilities .capability p {
   font: 400 15px/22px var(--sans);
   letter-spacing: 0;
-  color: #5e554f;
+  color: var(--ink-700);
   max-width: 175px;
   margin: 0 0 15px;
 }
@@ -209,7 +209,7 @@
 }
 @media (max-width: 420px) {
   .capabilities .capability:nth-child(4) {
-    border-left: 1px solid #ded3cb;
+    border-left: 1px solid var(--ink-200);
   }
   .capabilities .capability:nth-child(odd) {
     border-left: 0;

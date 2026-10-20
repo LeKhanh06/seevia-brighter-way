@@ -19,14 +19,14 @@ export default function JourneyPath() {
       <svg viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="journey-grad" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0" stopColor="#6cd6fc" />
-            <stop offset=".55" stopColor="#b5b6fc" />
-            <stop offset="1" stopColor="#e5c6fc" />
+            <stop offset="0" stopColor="#7fd3de" />
+            <stop offset=".55" stopColor="#bfc9fc" />
+            <stop offset="1" stopColor="#cec4fb" />
           </linearGradient>
           <radialGradient id="journey-spark">
             <stop offset="0" stopColor="#fff" stopOpacity=".95" />
-            <stop offset=".35" stopColor="#6cd6fc" stopOpacity=".5" />
-            <stop offset="1" stopColor="#6cd6fc" stopOpacity="0" />
+            <stop offset=".35" stopColor="#7fd3de" stopOpacity=".5" />
+            <stop offset="1" stopColor="#7fd3de" stopOpacity="0" />
           </radialGradient>
           <filter id="journey-blur" x="-10%" y="-40%" width="120%" height="180%">
             <feGaussianBlur stdDeviation="10" />

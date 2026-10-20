@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import Button from "../src/components/Button";
-import Hero from "./components/Hero";
+import StoryHero from "./components/StoryHero";
 import AIDemo from "./components/AIDemo";
-import Radar from "./components/Radar";
-import Motif from "./components/Motif";
 import { capabilities } from "./homeData";
 import "./styles/Home.css";
 import "./styles/hero-effects.css";
@@ -18,6 +16,8 @@ import "./styles/partnership.css";
 import "./styles/radar.css";
 import "./styles/animations.css";
 import "./styles/home-motion.css";
+import "./styles/home-clean.css";
+import "./styles/home-palette.css";
 import useHomeMotion from "./useHomeMotion";
 function Icon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
@@ -84,7 +84,7 @@ export default function Home() {
       </a>
       <Header />
       <main id="main">
-        <Hero />
+        <StoryHero />
         <section className="capabilities" id="capabilities">
           <h2 className="eyebrow line-label">KHẢ NĂNG HỖ TRỢ</h2>
           <div className="capability-grid">
@@ -102,7 +102,6 @@ export default function Home() {
           </div>
         </section>
         <section className="experience section-pad" id="product">
-          <Motif variant="ripple" />
           <div>
             <p className="eyebrow">TRẢI NGHIỆM SẢN PHẨM</p>
             <h2>
@@ -123,14 +122,6 @@ export default function Home() {
         </section>
         <section className="product-viewer">
           <p className="eyebrow">KÍNH SEEVIA / KHÁM PHÁ THIẾT KẾ</p>
-          <div
-            className="product-stage"
-            role="img"
-            aria-label="Vùng chờ ảnh hoặc mô hình kính SeeVia"
-          >
-            <div className="product-ellipses" aria-hidden="true" />
-            <span>Ảnh kính đang được bổ sung</span>
-          </div>
           <div className="product-caption">
             <h2>Khám phá từng đường nét</h2>
             <p>
@@ -138,15 +129,23 @@ export default function Home() {
               hành giúp cuộc sống trở nên độc lập.
             </p>
           </div>
+          <div
+            className="product-stage"
+            role="img"
+            aria-label="Phác thảo minh họa gọng kính SeeVia; hình ảnh sản phẩm đang được bổ sung"
+          >
+            <div className="product-ellipses" aria-hidden="true" />
+            <svg className="product-sketch" viewBox="0 0 1000 330" fill="none" aria-hidden="true">
+              <path d="M125 100c42-19 122-23 207-9 46 8 68 33 69 69 2 35-12 72-37 87-27 18-87 22-138 11-54-12-95-44-112-91-8-22-6-51 11-67Zm750 0c-42-19-122-23-207-9-46 8-68 33-69 69-2 35 12 72 37 87 27 18 87 22 138 11 54-12 95-44 112-91 8-22 6-51-11-67Z" />
+              <path d="M401 148c27-19 61-28 99-28s72 9 99 28M110 111 40 83m850 28 70-28M152 92c153-49 307-52 348-47 41-5 195-2 348 47" />
+              <path d="M234 259c-40-2-88-16-111-46m643 46c40-2 88-16 111-46" />
+            </svg>
+            <span>Phác thảo minh họa · Ảnh kính đang được bổ sung</span>
+          </div>
         </section>
         <AIDemo />
         <section className="about section-pad" id="about">
           <div className="belief">
-            <div className="belief-glow" aria-hidden="true">
-              <i />
-              <i />
-              <i />
-            </div>
             <p className="eyebrow">NIỀM TIN CỦA SEEVIA</p>
             <h2>
               Công nghệ
@@ -181,7 +180,6 @@ export default function Home() {
           </div>
         </section>
         <section className="community section-pad" id="community">
-          <Motif variant="braille" />
           <div>
             <p className="eyebrow">GÓC NHÌN TỪ CỘNG ĐỒNG</p>
             <h2>
@@ -222,7 +220,6 @@ export default function Home() {
             </Button>
           </div>
         </section>
-        <Radar />
       </main>
       <Footer />
       <div

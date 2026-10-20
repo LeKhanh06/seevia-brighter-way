@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const COLORS = ["#ffffff", "#6cd6fc", "#b5b6fc", "#e5c6fc"];
+const COLORS = ["#ffffff", "#7fd3de", "#bfc9fc", "#cec4fb"];
 const RINGS = [58, 178, 298, 418]; // cùng đơn vị viewBox với Radar.tsx
 const VIEW = 880;
 

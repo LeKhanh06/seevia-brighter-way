@@ -1,7 +1,7 @@
 .header.header {
   height: 84px;
-  background: linear-gradient(105deg, #721c25, var(--sv-navy));
-  border-bottom: 1px solid #b5b6fc30;
+  background: linear-gradient(105deg, var(--sapphire-800), var(--sv-navy));
+  border-bottom: 1px solid #bfc9fc30;
   padding-inline: 7.5%;
 }
 .header .logo {
@@ -55,8 +55,8 @@
 .hero {
   min-height: clamp(590px, 76svh, 740px);
   background:
-    radial-gradient(ellipse at 78% 48%, #39232b55, transparent 54%), var(--sv-navy);
-  border-bottom: 1px solid #b1636840;
+    radial-gradient(ellipse at 78% 48%, #1b193755, transparent 54%), var(--sv-navy);
+  border-bottom: 1px solid #3447e040;
 }
 .hero-rings {
   inset: 0;
@@ -64,7 +64,7 @@
     circle at 75% 48%,
     transparent 0,
     transparent 98px,
-    #b5b6fc0b 99px,
+    #bfc9fc0b 99px,
     transparent 100px
   );
 }
@@ -75,7 +75,7 @@
   right: 7.5%;
   bottom: 32px;
   height: 1px;
-  background: linear-gradient(90deg, #b5b6fc50, transparent 65%);
+  background: linear-gradient(90deg, #bfc9fc50, transparent 65%);
   pointer-events: none;
 }
 .hero-content {
@@ -99,7 +99,7 @@
   content: "";
   width: 32px;
   height: 1px;
-  background: #b16368;
+  background: var(--sapphire-600);
 }
 .hero h1 {
   font-size: clamp(46px, 4.9vw, 72px);
@@ -113,8 +113,8 @@
   min-height: 80px;
   padding: 10px 18px;
   margin-bottom: 24px;
-  border-left: 1px solid #b16368;
-  background: linear-gradient(90deg, #b5b6fc08, transparent);
+  border-left: 1px solid var(--sapphire-600);
+  background: linear-gradient(90deg, #bfc9fc08, transparent);
 }
 .hero .speech strong {
   font-size: 11px;
@@ -131,21 +131,21 @@
   font-size: 16px;
   min-height: 46px;
   padding: 10px 24px;
-  border: 1px solid #b5b6fc30;
+  border: 1px solid #bfc9fc30;
   background: var(--sv-navy);
-  box-shadow: 0 6px 24px #0002;
+  box-shadow: 0 6px 24px #1b193722;
 }
 .hero .button:hover {
-  background: #8b2230;
-  border-color: #b5b6fc80;
+  background: var(--sapphire-800);
+  border-color: #bfc9fc80;
 }
 .hero-object {
   font-size: 12px;
   letter-spacing: 0.06em;
   padding: 8px 12px;
-  border: 1px solid #b5b6fc25;
+  border: 1px solid #bfc9fc25;
   border-radius: 2px;
-  background: #211c20b3;
+  background: #1b1937b3;
   color: var(--sv-lavender);
 }
 .hero-object span {
@@ -232,8 +232,8 @@
 }
 .hero {
   background:
-    radial-gradient(ellipse at 76% 42%, #5c1c2820, transparent 58%),
-    linear-gradient(115deg, var(--sv-navy), #191719);
+    radial-gradient(ellipse at 76% 42%, #29265020, transparent 58%),
+    linear-gradient(115deg, var(--sv-navy), var(--ink-900));
 }
 .hero-rings {
   opacity: 0.65;
@@ -241,16 +241,16 @@
 .hero .light {
   background: radial-gradient(
     circle 280px at var(--lx, 66%) var(--ly, 34%),
-    #426af852 0%,
-    #3158e229 45%,
-    #02023808 75%,
+    #405ffa52 0%,
+    #3447e029 45%,
+    #1b193708 75%,
     transparent 100%
   );
 }
 .hero-object {
   opacity: var(--visibility, 0);
-  background: #201a1d80;
-  border-color: #b5b6fc20;
+  background: #1b193780;
+  border-color: #bfc9fc20;
   border-radius: 3px;
   backdrop-filter: blur(4px);
 }

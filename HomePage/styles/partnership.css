@@ -1,7 +1,7 @@
 .partnership.section-pad {
   min-height: 617px;
   padding: 110px 9% 115px;
-  background: radial-gradient(ellipse at 50% 45%, var(--sv-navy) 0%, #451723 100%);
+  background: radial-gradient(ellipse at 50% 45%, var(--sv-navy) 0%, var(--ink-900) 100%);
   color: var(--sv-pearl);
   text-align: center;
   display: flex;

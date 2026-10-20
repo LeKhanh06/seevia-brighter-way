@@ -83,7 +83,7 @@
   gap: 12px;
   padding: 9px 18px;
   min-height: 40px;
-  border: 1px solid #b5b6fc70;
+  border: 1px solid #bfc9fc70;
   border-radius: 24px;
   font: 500 13px/20px var(--sans);
   white-space: nowrap;
@@ -109,7 +109,7 @@
   position: absolute;
   z-index: -1;
   pointer-events: none;
-  border: 1px solid #f5f4ff1a;
+  border: 1px solid #f6f8ff1a;
   border-radius: 50%;
   width: 800px;
   height: 800px;
@@ -152,7 +152,7 @@
   gap: 20px;
   flex-wrap: wrap;
   font: 400 10px/1.7 var(--sans);
-  color: #e5c6fcb3;
+  color: #cec4fbb3;
   padding-top: 10px;
 }
 .cp-hero figcaption a {
@@ -174,7 +174,7 @@
   gap: 32px;
 }
 .cp-principles article {
-  border-top: 1px solid #bd9b94;
+  border-top: 1px solid var(--ink-400);
   padding-top: 20px;
 }
 .cp-principles article > span {
@@ -203,7 +203,7 @@
 }
 .cp-filters button {
   font: 500 12px/1.5 var(--sans);
-  border: 1px solid #cbb6ae;
+  border: 1px solid var(--ink-300);
   border-radius: 20px;
   padding: 8px 16px;
   background: transparent;
@@ -308,7 +308,7 @@
 }
 .cp-ecosystem {
   background:
-    radial-gradient(ellipse at 15% 45%, #ba02236b, transparent 75%), var(--sv-navy);
+    radial-gradient(ellipse at 15% 45%, #2736b56b, transparent 75%), var(--sv-navy);
   color: var(--ivory);
 }
 .cp-ecosystem .cp-eyebrow {
@@ -318,7 +318,7 @@
   color: var(--rose);
 }
 .cp-ecosystem .cp-heading > p:last-child {
-  color: #d4c9c3;
+  color: var(--ink-300);
 }
 .cp-ecosystem-grid {
   display: grid;
@@ -326,7 +326,7 @@
   gap: 32px;
 }
 .cp-ecosystem-grid article {
-  border-top: 1px solid #b5b6fc66;
+  border-top: 1px solid #bfc9fc66;
   padding-top: 22px;
   display: flex;
   flex-direction: column;
@@ -345,20 +345,20 @@
 }
 .cp-ecosystem-grid p {
   font-size: 14px;
-  color: #d4c9c3;
+  color: var(--ink-300);
   margin-bottom: 18px;
 }
 .cp-ecosystem-grid small {
   margin-top: auto;
   font-size: 11px;
-  color: #baaaa3;
+  color: var(--ink-300);
   min-height: 38px;
   display: flex;
   align-items: center;
 }
 .cp-main .cp-ecosystem-note {
   font-size: 11px;
-  color: #baaaa3;
+  color: var(--ink-300);
   margin-top: 24px;
 }
 .cp-reveal {
@@ -475,22 +475,22 @@
   border-radius: 22px;
   background: transparent;
   color: var(--burgundy);
-  border: 1px solid #02023880;
+  border: 1px solid #1b193780;
   width: fit-content;
   max-width: 100%;
 }
 .cp-action:hover {
-  background: #0202380a;
+  background: #1b19370a;
   border-color: var(--burgundy);
 }
 .cp-hero .cp-action,
 .cp-ecosystem .cp-action {
   color: var(--ivory);
-  border-color: #b5b6fc80;
+  border-color: #bfc9fc80;
 }
 .cp-hero .cp-action:hover,
 .cp-ecosystem .cp-action:hover {
-  background: #f5f4ff0c;
+  background: #f6f8ff0c;
   border-color: var(--rose);
 }
 .cp-hero .cp-action {
@@ -593,7 +593,7 @@
   left: 24px;
   right: 24px;
   height: 1px;
-  background: #b5b6fc40;
+  background: #bfc9fc40;
 }
 @media (max-width: 900px) {
   .cp-story,

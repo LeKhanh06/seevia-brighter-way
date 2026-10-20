@@ -1,7 +1,9 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import Lenis from "lenis";
-import Sparkles from "../../HomePage/components/Sparkles";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { beforeLanguageChange, useLanguage } from "../i18n/language";
+import { splitHeading } from "./wordReveal";
 import { navigateTo, pageOrder } from "../navigation";
 import { createProgressGlitter } from "./progressGlitter";
 import "./SiteMotion.css";
@@ -55,7 +57,6 @@ const AMBIENT_SECTIONS: Array<{
   { selector: ".np-feature", tone: "light", density: 5 },
   { selector: ".np-journal", tone: "light", density: 5 },
   { selector: ".np-perspective", tone: "dark", density: 7 },
-  { selector: ".np-sources", tone: "dark", density: 7 },
   { selector: ".pt-hero", tone: "dark", density: 10 },
   { selector: ".pt-directions", tone: "light", density: 5 },
   { selector: ".pt-directory", tone: "light", density: 5 },
@@ -68,20 +69,63 @@ const AMBIENT_SECTIONS: Array<{
   { selector: ".qv-overview-closing", tone: "light", density: 5 },
 ];
 
-const STAR_STYLES: CSSProperties[] = Array.from({ length: 18 }, (_, index) => ({
-  left: `${4 + (index * 37) % 92}%`,
-  top: `${8 + (index * 53) % 84}%`,
-  animationDelay: `-${(index * 1.37).toFixed(2)}s`,
-  animationDuration: `${7 + (index % 5) * 1.8}s`,
-  "--star-mid-x": `${index % 2 ? 10 : -8}px`,
-  "--star-mid-y": `${index % 3 ? -7 : 9}px`,
-  "--star-drift-x": `${index % 2 ? 22 : -18}px`,
-  "--star-drift-y": `${index % 3 ? -16 : 20}px`,
-}) as CSSProperties);
+/** Clipped photo frames whose image may drift with scroll. */
+const PARALLAX_FRAMES = [
+  "main .community-placeholder", "main .cp-hero figure", "main .cp-story-image",
+  "main .np-feature figure", "main .np-row-image", "main .tech-closeup-photo",
+];
+
+const GLOW_SELECTORS = [
+  ".capabilities", ".product-viewer", ".ai-demo", ".about", ".community",
+  ".product-design", ".product-technology", ".tech-anatomy", ".tech-processing",
+  ".ab-why", ".cp-hero", ".np-hero", ".pt-hero", ".ct-hero",
+];
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SiteMotion({ routeKey }: { routeKey: string }) {
   const sparkleLayer = useRef<HTMLCanvasElement>(null);
-  const [ambientSections, setAmbientSections] = useState<AmbientSection[]>([]);
+  const language = useLanguage();
+
+  // Every page outside home gets the homepage's title motion: words rise out of a mask, one by one.
+  useLayoutEffect(() => {
+    if (routeKey === "/") return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const headings = Array.from(
+      document.querySelectorAll<HTMLElement>("main h1, main h2"),
+    ).filter((el) => !el.querySelector("a, button, input, select, textarea, img, svg"));
+    const splits = headings.map((el) => ({ el, ...splitHeading(el) }));
+    const ctx = gsap.context(() => {
+      splits.forEach(({ el, words }) => {
+        const intro = el.tagName === "H1" || el.getBoundingClientRect().top < innerHeight * 0.9;
+        gsap.from(words, {
+          yPercent: 115,
+          rotate: 4,
+          transformOrigin: "0% 100%",
+          duration: 1.15,
+          ease: "expo.out",
+          stagger: 0.06,
+          delay: el.tagName === "H1" ? 0.1 : 0,
+          ...(intro ? {} : { scrollTrigger: { trigger: el, start: "top 88%", once: true } }),
+        });
+      });
+    });
+    const restore = () => {
+      ctx.revert();
+      splits.forEach(({ restore }) => restore());
+      splits.length = 0;
+    };
+    // Re-measure trigger positions once images and fonts settle, so nothing fires early.
+    const refresh = () => ScrollTrigger.refresh();
+    addEventListener("load", refresh);
+    void document.fonts?.ready.then(refresh);
+    const stop = beforeLanguageChange(restore);
+    return () => {
+      removeEventListener("load", refresh);
+      stop();
+      restore();
+    };
+  }, [routeKey, language]);
 
   useLayoutEffect(() => {
     const sections = AMBIENT_SECTIONS.flatMap(({ selector, tone, density }) => {
@@ -91,9 +135,35 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
     const footer = document.querySelector<HTMLElement>("#root .footer");
     if (footer) sections.push({ host: footer, tone: "dark", density: 5 });
     sections.forEach(({ host }) => host.classList.add("site-ambient-section"));
-    setAmbientSections(sections);
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const glowSections = sections.filter(({ host }) => host.matches(GLOW_SELECTORS.join(",")));
+    const glows = glowSections.map(({ host, tone }) => {
+      const glow = document.createElement("div");
+      glow.className = `site-ambient-glow site-ambient-glow--${tone}`;
+      glow.setAttribute("aria-hidden", "true");
+      glow.append(document.createElement("i"), document.createElement("i"));
+      host.prepend(glow);
+      return glow;
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        target.classList.toggle("site-motion-in-view", isIntersecting);
+      });
+    }, { rootMargin: "100px 0px", threshold: 0.01 });
+    const syncMotion = () => {
+      observer.disconnect();
+      glowSections.forEach(({ host }) => {
+        host.classList.remove("site-motion-in-view");
+        if (!reducedMotion.matches) observer.observe(host);
+      });
+    };
+    syncMotion();
+    reducedMotion.addEventListener("change", syncMotion);
     return () => {
-      sections.forEach(({ host }) => host.classList.remove("site-ambient-section"));
+      observer.disconnect();
+      reducedMotion.removeEventListener("change", syncMotion);
+      glows.forEach((glow) => glow.remove());
+      sections.forEach(({ host }) => host.classList.remove("site-ambient-section", "site-motion-in-view"));
     };
   }, [routeKey]);
 
@@ -133,14 +203,19 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
     // Animate content, never section wrappers that contain sticky layouts.
     const elements = Array.from(
       document.querySelectorAll<HTMLElement>(
-        "main h2, main h3, main article, main figure, main .ab-evidence-story, main .cp-story-image, main .np-row-image, main .tech-closeup-photo, main .technology-cards article, main .ct-form, main .ct-note, main .pt-direction, main .pt-step",
+        "main h3, main p, main li, main small, main .eyebrow, main article, main figure, main .ab-evidence-story, main .cp-story-image, main .np-row-image, main .tech-closeup-photo, main .technology-cards article, main .ct-form, main .ct-note, main .pt-direction, main .pt-step",
       ),
     );
+    // Masked headings have no visible area while pending, so they are watched through their parent.
+    const proxies = new Map<Element, HTMLElement[]>();
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ target, isIntersecting }) => {
           if (isIntersecting) {
-            target.classList.remove("site-motion-pending");
+            (proxies.get(target) ?? [target]).forEach((item) =>
+              item.classList.remove("site-motion-pending"),
+            );
+            proxies.delete(target);
             observer.unobserve(target);
           }
         }),
@@ -152,11 +227,14 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
       );
     const setup = () => {
       observer.disconnect();
+      proxies.clear();
       reveal();
       if (motion.matches) return;
       elements.forEach((element) => {
         // The homepage headings and sections use their own GSAP timelines.
         if (routeKey === "/") return;
+        // Live regions, dialogs and form controls must never be hidden.
+        if (element.closest("dialog, [aria-live], form, nav, .header")) return;
         if (element.matches("figure, .cp-story-image, .np-row-image")) {
           element.classList.add("site-motion-media");
         }
@@ -172,10 +250,15 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
           const siblings = Array.from(element.parentElement?.children ?? []);
           element.style.setProperty(
             "--motion-delay",
-            `${Math.min(siblings.indexOf(element), 3) * 65}ms`,
+            `${Math.min(siblings.indexOf(element), 3) * 70}ms`,
           );
           element.classList.add("site-motion-target", "site-motion-pending");
-          observer.observe(element);
+          const heading = element.matches("h2, h3") && element.parentElement;
+          if (heading) {
+            element.classList.add("site-motion-heading");
+            proxies.set(heading, [...(proxies.get(heading) ?? []), element]);
+            observer.observe(heading);
+          } else observer.observe(element);
         }
       });
     };
@@ -200,6 +283,43 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
     };
   }, [routeKey]);
 
+  // Photographs drift a few pixels against the scroll, giving each page quiet depth.
+  useEffect(() => {
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches) return;
+    const frames = Array.from(
+      document.querySelectorAll<HTMLElement>(PARALLAX_FRAMES.join(",")),
+    ).filter((frame) => frame.querySelector("img"));
+    frames.forEach((frame) => frame.classList.add("site-parallax"));
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const middle = innerHeight / 2;
+      frames.forEach((frame) => {
+        const box = frame.getBoundingClientRect();
+        if (box.bottom < -120 || box.top > innerHeight + 120) return;
+        const offset = (box.top + box.height / 2 - middle) / innerHeight;
+        const travel = Math.min(28, box.height * 0.04);
+        frame.style.setProperty("--parallax-y", `${(offset * -travel).toFixed(2)}px`);
+      });
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    addEventListener("scroll", schedule, { passive: true });
+    addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(raf);
+      removeEventListener("scroll", schedule);
+      removeEventListener("resize", schedule);
+      frames.forEach((frame) => {
+        frame.classList.remove("site-parallax");
+        frame.style.removeProperty("--parallax-y");
+      });
+    };
+  }, [routeKey]);
+
   useEffect(() => {
     const canvas = sparkleLayer.current;
     const context = canvas?.getContext("2d");
@@ -218,7 +338,7 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
       color: string;
     };
     const sparkles: Sparkle[] = [];
-    const palette = ["#426af8", "#6cd6fc", "#b5b6fc", "#e5c6fc"];
+    const palette = ["#405ffa", "#7fd3de", "#bfc9fc", "#cec4fb"];
     let frame = 0;
     let lastSpawn = 0;
     let lastFrame = 0;
@@ -264,7 +384,7 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
         context.lineTo(-sparkle.size * 0.45, -sparkle.size * 0.45);
         context.closePath();
         context.fill();
-        context.strokeStyle = "#f5f4ff";
+        context.strokeStyle = "#f6f8ff";
         context.lineWidth = 0.55;
         context.stroke();
         context.restore();
@@ -300,7 +420,8 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
       context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     };
 
-    const glitterEnabled = () => !reducedMotion.matches;
+    // Cursor sparkles are switched off; the canvas stays for the swipe handler below.
+    const glitterEnabled = () => false;
     const syncGlitter = () => {
       clearSparkles();
       if (glitterEnabled()) {
@@ -410,24 +531,6 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
 
   return (
     <>
-      {ambientSections.map(({ host, tone, density }) =>
-        createPortal(
-          <>
-            <div className={`site-ambient-glow site-ambient-glow--${tone}`} aria-hidden="true">
-              <i />
-              <i />
-            </div>
-            {tone === "dark" && (
-              <div className="site-ambient-stars" aria-hidden="true">
-                {STAR_STYLES.map((style, index) => <i key={index} style={style} />)}
-              </div>
-            )}
-            <Sparkles tone={tone} density={density} />
-          </>,
-          host,
-          host.className,
-        ),
-      )}
       <canvas
         ref={sparkleLayer}
         className="site-cursor-sparkle"

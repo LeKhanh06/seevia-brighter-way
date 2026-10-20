@@ -22,3 +22,9 @@ Production build, 11 routes, responsive overflow, internal links, keyboard navig
 ## Current trial: Hyper Pink Sky
 
 The new user reference supersedes Iris + Lime: Hyper Pink #E72B88, Electric Sky #38BDF8, Cloud White #F7FAFF, Deep Navy #14213D, Acid Lime #B5F44A and Soft Blush #F7C6DE. Pink is the primary action, sky illuminates simulations, lime remains for scan regions. Body links use a deeper pink #B51765 for contrast. Bright pink buttons use #090B12 text (4.77:1), as navy text did not meet AA normal-text contrast on that fill. Story typography, all gradients, pointer tracking and simulation controls are retained. Full-page responsive screenshots were reviewed; route, hero and simulation control checks passed.
+
+
+## Current: SeeVia Design System
+
+Colours follow the SeeVia Design System. Brand kit: Frozen Water #D9FCED, Electric Sapphire #405FFA (action colour), Strong Cyan #09BBC8, Twilight Indigo #3B3664, Evergreen #07240F, White. Iris #8B6CFF and Lilac #E7E0FF come from the logo tail. Page background is pearl #F6F8FF. Neutrals are Twilight-Indigo-tinted ink: ink-700 #3B3664 body text, ink-800 #292650 headings and the dusk dark ground, ink-600 #514E75 muted text, ink-200 #D6D5E6 hairlines. Every other colour in the stylesheets is a step of the sapphire, cyan, iris, mint or ink scales (see src/styles/iridescent-theme.css for the primitives). Dark chapters keep their layout and use the dusk indigo with sapphire glows. The burgundy swatch in the product colour picker stays #7A1823 because it shows the real frame colour; public/the-seevia-pearl.html is a standalone page and keeps its own palette.
+All colours are defined once in src/styles/tokens.css, grouped like the design system board: brand kit, ink neutrals, sapphire/cyan/iris/mint scales, pillar colours, status, surfaces, gradients and glass. Stylesheets use var(--token) for solid colours; translucent tints are still written as 8-digit hex of a token value.

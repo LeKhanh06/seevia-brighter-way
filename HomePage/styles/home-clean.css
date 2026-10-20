@@ -1,0 +1,320 @@
+/* Homepage: bright, quiet surfaces and stacked sections.
+   Loaded last on the homepage; colours come from src/styles/tokens.css.
+   The `html.sv-home-active body #root` prefix outranks the older `#root .x` theme rules. */
+
+/* ---------- Page ground ---------- */
+html.sv-home-active,
+html.sv-home-active body,
+html.sv-home-active body #root,
+html.sv-home-active main {
+  background: var(--surface-page);
+}
+
+/* ---------- Header: light glass bar ---------- */
+html.sv-home-active body #root .header.header {
+  color: var(--text-heading);
+  background: color-mix(in srgb, var(--surface-page) 86%, transparent);
+  border-bottom: 1px solid var(--line-hairline);
+  box-shadow: none;
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  backdrop-filter: saturate(160%) blur(18px);
+}
+html.sv-home-active body #root .header .main-nav :is(a, button) { color: var(--text-heading); }
+html.sv-home-active body #root .header .main-nav :is(a, button):hover { color: var(--action-primary-hover); }
+html.sv-home-active body #root .header .main-nav button[aria-current="page"]::after { background: var(--nav-ink, #111); }
+html.sv-home-active body #root .header .header-tools { color: var(--text-heading); }
+html.sv-home-active body #root .header .header-tools .menu-toggle::before {
+  background: var(--text-heading);
+  box-shadow: 0 6px var(--text-heading);
+}
+html.sv-home-active body #root .header .header-tools .menu-toggle::after { background: var(--text-heading); }
+html.sv-home-active body #root .header .header-tools .menu-toggle[aria-expanded="true"]::before { box-shadow: none; }
+/* The logo file is white; paint it in ink through a mask so it reads on the light bar. */
+html.sv-home-active body #root .header > .logo {
+  background: var(--text-heading);
+  -webkit-mask: url("/images/260.png") left center / contain no-repeat;
+  mask: url("/images/260.png") left center / contain no-repeat;
+}
+html.sv-home-active body #root .header > .logo img { opacity: 0; }
+
+/* ---------- Stacked sections ---------- */
+html.sv-stack body #root .sv-stack-item {
+  position: sticky;
+  z-index: 1;
+  min-height: calc(100svh - var(--sv-header-h, 0px));
+}
+/* Centre each chapter vertically in the screen it fills. */
+html.sv-stack body #root .sv-stack-item:is(.capabilities, .product-viewer) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+html.sv-stack body #root .sv-stack-item:is(.experience, .ai-demo, .about, .community) {
+  align-content: center;
+}
+/* The covering section casts a soft edge onto the one it slides over. */
+html.sv-stack body #root .sv-stack-item:not(.hero),
+html.sv-stack body #root :is(.partnership, .radar-section) {
+  box-shadow: 0 -1px 0 var(--line-hairline), 0 -24px 48px -28px rgb(27 25 55 / 0.22);
+}
+html.sv-stack body #root :is(.partnership, .radar-section) {
+  position: relative;
+  z-index: 2;
+}
+html.sv-stack body #root .footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Hero ---------- */
+html.sv-home-active body #root .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--text-heading);
+  background:
+    radial-gradient(ellipse at 78% 38%, rgb(112 151 255 / 0.18), transparent 48%),
+    radial-gradient(ellipse at 67% 76%, rgb(146 118 240 / 0.12), transparent 54%),
+    linear-gradient(112deg, var(--ink-900) 0%, var(--ink-800) 54%, #20234b 100%);
+  border-bottom: 0;
+}
+html.sv-home-active body #root .hero-atmosphere {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 82% 46%, rgb(77 121 255 / 0.12), transparent 40%),
+    linear-gradient(90deg, transparent 42%, rgb(193 205 255 / 0.035) 70%, transparent 100%);
+}
+html.sv-home-active body #root .hero-atmosphere__glow {
+  position: absolute;
+  display: block;
+  width: clamp(340px, 48vw, 700px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(16px);
+  will-change: transform, opacity;
+}
+html.sv-home-active body #root .hero-atmosphere__glow--cyan {
+  top: -55%;
+  left: 45%;
+  background: radial-gradient(circle, rgb(100 211 227 / 0.23) 0%, rgb(76 117 255 / 0.13) 34%, transparent 70%);
+  animation: hero-atmosphere-drift 24s ease-in-out infinite alternate;
+}
+html.sv-home-active body #root .hero-atmosphere__glow--iris {
+  right: -6%;
+  bottom: -76%;
+  width: clamp(420px, 55vw, 760px);
+  background: radial-gradient(circle, rgb(150 126 240 / 0.2) 0%, rgb(76 117 255 / 0.1) 38%, transparent 71%);
+  animation: hero-atmosphere-drift 30s ease-in-out -8s infinite alternate-reverse;
+}
+@keyframes hero-atmosphere-drift {
+  from { transform: translate3d(-3%, 2%, 0) scale(0.96); opacity: 0.72; }
+  to { transform: translate3d(5%, -3%, 0) scale(1.06); opacity: 1; }
+}
+html.sv-home-active body #root .hero .light,
+html.sv-home-active body #root .hero .light::after { display: none; }
+html.sv-home-active body #root .hero::after { display: block; }
+html.sv-home-active body #root .hero-content { z-index: 1; }
+html.sv-home-active body #root .hero h1 { color: var(--text-heading); }
+html.sv-home-active body #root .hero h1 em,
+html.sv-home-active body #root .hero h1 em .sv-wi {
+  color: var(--action-primary);
+  background: linear-gradient(100deg, var(--sapphire-500), var(--iris-600));
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: none;
+}
+html.sv-home-active body #root .hero .hero-label { color: var(--cyan-200); }
+html.sv-home-active body #root .hero .hero-label::before { background: var(--cyan-300); }
+html.sv-home-active body #root .hero h1 { color: var(--white); }
+html.sv-home-active body #root .hero .button {
+  color: var(--ink-900);
+  background: var(--cyan-200);
+  border-color: var(--cyan-200);
+  box-shadow: 0 10px 30px -14px rgb(100 211 227 / 0.75);
+}
+html.sv-home-active body #root .hero .button:hover {
+  color: var(--ink-900);
+  background: var(--white);
+  border-color: var(--white);
+}
+@media (max-width: 760px) {
+  html.sv-home-active body #root .hero-atmosphere__glow--cyan { left: 18%; top: -36%; }
+  html.sv-home-active body #root .hero-atmosphere__glow--iris { right: -40%; bottom: -52%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.sv-home-active body #root .hero-atmosphere__glow { animation: none; will-change: auto; }
+}
+
+/* ---------- Colour rhythm ----------
+   Light → bold → light → dark: one flat surface per chapter, no stacked effects.
+   hero aurora · capabilities white + pillar colours · experience sapphire ·
+   product mint · AI demo pearl · about dusk · community lilac · partnership sapphire→iris · radar dusk */
+
+/* ---------- Capabilities: white, each card in its pillar colour ---------- */
+html.sv-home-active body #root .capabilities { background: var(--surface-raised); }
+html.sv-home-active body #root .capabilities::before,
+html.sv-home-active body #root .capabilities::after,
+html.sv-home-active body #root .capabilities .icon-bubble::before,
+html.sv-home-active body #root .capabilities .icon-bubble::after { display: none; }
+html.sv-home-active body #root .capabilities .capability {
+  --pillar: var(--pillar-connect);
+  border-left-color: var(--line-hairline);
+}
+html.sv-home-active body #root .capabilities .capability:nth-child(1) { --pillar: var(--pillar-see-read); }
+html.sv-home-active body #root .capabilities .capability:nth-child(2) { --pillar: var(--pillar-find-understand); }
+html.sv-home-active body #root .capabilities .capability:nth-child(3) { --pillar: var(--pillar-connect); }
+html.sv-home-active body #root .capabilities .capability:nth-child(4) { --pillar: var(--pillar-go); }
+html.sv-home-active body #root .capabilities .capability:nth-child(5) { --pillar: var(--pillar-community); }
+html.sv-home-active body #root .capabilities .icon-bubble {
+  /* Number, icon and text share one left edge in every column. */
+  margin: 14px 0 18px;
+  color: var(--pillar);
+  background: color-mix(in srgb, var(--pillar) 12%, var(--white));
+  box-shadow: none;
+}
+html.sv-home-active body #root .capabilities .number { color: var(--pillar); }
+html.sv-home-active body #root .capabilities .capability h3 { color: var(--text-heading); }
+html.sv-home-active body #root .capabilities .capability p { color: var(--text-muted); }
+html.sv-home-active body #root .capabilities .short-line { background: var(--pillar); }
+html.sv-home-active body #root .capabilities .line-label::after { background: var(--gradient-pillars); }
+
+/* ---------- Experience: the bold sapphire band ---------- */
+html.sv-home-active body #root .experience {
+  color: var(--white);
+  background: var(--sapphire-500);
+}
+html.sv-home-active body #root .experience::before,
+html.sv-home-active body #root .experience::after { display: none; }
+html.sv-home-active body #root .experience h2 { color: var(--white); }
+html.sv-home-active body #root .experience .eyebrow { color: var(--sapphire-100); }
+html.sv-home-active body #root .experience-copy p { color: var(--sapphire-50); }
+html.sv-home-active body #root .experience-copy .short-line { background: var(--white); }
+
+/* ---------- Product viewer: Frozen Water ---------- */
+html.sv-home-active body #root .product-viewer {
+  min-height: 0;
+  padding: clamp(48px, 7vw, 88px) var(--sv-gutter, 6.5%) clamp(56px, 7vw, 96px);
+  color: var(--text-heading);
+  background: var(--brand-frozen-water);
+}
+html.sv-home-active body #root .product-viewer :is(h2, h3) { color: var(--text-heading); }
+html.sv-home-active body #root .product-viewer .eyebrow { color: var(--mint-800); }
+html.sv-home-active body #root .product-viewer > .eyebrow::before { background: var(--mint-600); }
+html.sv-home-active body #root .product-viewer p { color: var(--text-body); }
+html.sv-home-active body #root .product-stage {
+  height: clamp(200px, 36svh, 380px);
+  color: var(--mint-800);
+}
+html.sv-home-active body #root .product-caption {
+  max-width: 760px;
+  padding: 0;
+}
+html.sv-home-active body #root .product-caption p {
+  max-width: 56ch;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.7;
+}
+html.sv-home-active body #root .product-ellipses {
+  border-color: var(--mint-300);
+  background: none;
+}
+html.sv-home-active body #root .product-ellipses::after {
+  border-color: var(--mint-300);
+  background: radial-gradient(ellipse, var(--white) 0%, transparent 70%);
+}
+
+/* ---------- AI demo: pearl ---------- */
+html.sv-home-active body #root .ai-demo { background: var(--surface-page); }
+html.sv-home-active body #root .photo-stage {
+  color: var(--text-heading);
+  background: var(--surface-raised);
+  border: 1px solid var(--line-hairline);
+  box-shadow: 0 24px 48px -32px rgb(27 25 55 / 0.25);
+}
+html.sv-home-active body #root .photo-wrap { background: var(--ink-100); }
+html.sv-home-active body #root :is(.photo-topline, .photo-topline span, .photo-missing) { color: var(--text-muted); }
+html.sv-home-active body #root .ai-copy .speech {
+  background: var(--surface-raised);
+  border-left-color: var(--action-primary);
+}
+
+/* ---------- About: the dusk chapter ---------- */
+html.sv-home-active body #root .about {
+  color: var(--text-inverse);
+  background: var(--gradient-dusk);
+}
+html.sv-home-active body #root .about :is(h2, h3) { color: var(--white); }
+html.sv-home-active body #root .about .about-copy > .eyebrow { color: var(--cyan-300); }
+html.sv-home-active body #root .about .about-copy > p:not(.eyebrow),
+html.sv-home-active body #root .about .about-copy > h3 + p:not(.eyebrow) { color: var(--ink-200); }
+html.sv-home-active body #root .about .about-copy hr { border-top-color: rgb(255 255 255 / 0.16); }
+html.sv-home-active body #root .about .about-copy .button {
+  color: var(--text-heading);
+  background: var(--white);
+  border-color: var(--white);
+}
+html.sv-home-active body #root .about .about-copy .button:hover { background: var(--sapphire-100); }
+html.sv-home-active body #root .about .belief {
+  color: var(--text-heading);
+  background: var(--iris-100);
+  border: 0;
+  box-shadow: none;
+}
+html.sv-home-active body #root .about .belief::before,
+html.sv-home-active body #root .about .belief::after { display: none; }
+html.sv-home-active body #root .about .belief .eyebrow { color: var(--iris-800); }
+html.sv-home-active body #root .about .belief h2 { color: var(--text-heading); }
+html.sv-home-active body #root .about .belief .short-line { background: var(--iris-600); }
+html.sv-home-active body #root .about .belief > div p { color: var(--text-body); }
+
+/* ---------- Community: lilac ---------- */
+html.sv-home-active body #root .community { background: var(--iris-50); }
+html.sv-home-active body #root .community .eyebrow { color: var(--iris-800); }
+html.sv-home-active body #root .community h2 { color: var(--text-heading); }
+html.sv-home-active body #root .community p:not(.eyebrow) { color: var(--text-body); }
+
+/* ---------- Partnership: sapphire → iris call to action ---------- */
+html.sv-home-active body #root .partnership,
+html.sv-home-active.ribbon-on body #root .partnership.section-pad {
+  color: var(--white);
+  background: linear-gradient(120deg, var(--sapphire-600) 0%, var(--sapphire-500) 45%, var(--iris-600) 100%);
+}
+html.sv-home-active body #root .partnership::before { display: none; }
+html.sv-home-active body #root .partnership h2,
+html.sv-home-active body #root .partnership h2 .sv-wi {
+  color: var(--white);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  animation: none;
+}
+html.sv-home-active body #root .partnership > .eyebrow { color: var(--sapphire-100); }
+html.sv-home-active body #root .partnership p:not(.eyebrow) { color: var(--sapphire-50); }
+html.sv-home-active body #root .partnership .button-light {
+  color: var(--sapphire-700);
+  background: var(--white);
+  border-color: var(--white);
+}
+html.sv-home-active body #root .partnership .button-light:hover { background: var(--sapphire-50); }
+html.sv-home-active body #root .partnership .button-outline {
+  color: var(--white);
+  background: transparent;
+  border-color: rgb(255 255 255 / 0.6);
+}
+html.sv-home-active body #root .partnership .button-outline:hover {
+  background: rgb(255 255 255 / 0.12);
+  border-color: var(--white);
+}
+
+/* ---------- Radar: dusk closing band ---------- */
+html.sv-home-active body #root .radar-section {
+  background: var(--gradient-dusk);
+}
+
+/* ---------- Quieter interactions ---------- */
+html.sv-home-active body #root .button::after { display: none; }

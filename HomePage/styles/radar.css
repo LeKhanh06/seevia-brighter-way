@@ -2,10 +2,10 @@
   height: 700px;
   align-items: center;
   padding: 70px 5.4%;
-  background-color: #020238;
+  background-color: var(--ink-900);
   background-image:
-    linear-gradient(#b5b6fc12 1px, transparent 1px),
-    linear-gradient(90deg, #b5b6fc12 1px, transparent 1px);
+    linear-gradient(#bfc9fc12 1px, transparent 1px),
+    linear-gradient(90deg, #bfc9fc12 1px, transparent 1px);
   background-size: 90px 90px;
   background-position: calc(100% - 310px) calc(50% + 45px);
   overflow: hidden;
@@ -41,18 +41,18 @@
   pointer-events: none;
   z-index: 1;
   background:
-    linear-gradient(90deg, #02023825, transparent 48%),
+    linear-gradient(90deg, #1b193725, transparent 48%),
     linear-gradient(
       0deg,
-      #02023850,
+      #1b193750,
       transparent 12%,
       transparent 88%,
-      #02023850
+      #1b193750
     );
 }
 .radar-copy p {
   font: 400 17px/29px var(--sans);
-  color: #e7e8ff;
+  color: var(--sapphire-100);
   max-width: 440px;
   margin-bottom: 30px;
 }
@@ -85,20 +85,20 @@
     from 0deg,
     transparent 0deg,
     transparent 264deg,
-    #3158e20a 278deg,
-    #426af830 299deg,
-    #426af85c 321deg,
-    #6cd6fc7f 341deg,
-    #e5c6fc94 355deg,
-    #b5b6fc70 359deg,
+    #3447e00a 278deg,
+    #405ffa30 299deg,
+    #405ffa5c 321deg,
+    #7fd3de7f 341deg,
+    #cec4fb94 355deg,
+    #bfc9fc70 359deg,
     transparent 360deg
   );
   mask-image: radial-gradient(
     circle,
-    #0005 0%,
-    #000b 25%,
-    #000 70%,
-    #000 99.4%,
+    #1b193755 0%,
+    #1b1937bb 25%,
+    var(--ink-900) 70%,
+    var(--ink-900) 99.4%,
     transparent 100%
   );
   animation: radar-glide 14s linear infinite;
@@ -187,15 +187,15 @@
     linear-gradient(
       90deg,
       transparent calc(var(--radar-center-x) - 0.5px),
-      #b5b6fc14 calc(var(--radar-center-x) - 0.5px),
-      #b5b6fc14 calc(var(--radar-center-x) + 0.5px),
+      #bfc9fc14 calc(var(--radar-center-x) - 0.5px),
+      #bfc9fc14 calc(var(--radar-center-x) + 0.5px),
       transparent calc(var(--radar-center-x) + 0.5px)
     ),
     linear-gradient(
       0deg,
       transparent calc(100% - var(--radar-center-y) - 0.5px),
-      #b5b6fc14 calc(100% - var(--radar-center-y) - 0.5px),
-      #b5b6fc14 calc(100% - var(--radar-center-y) + 0.5px),
+      #bfc9fc14 calc(100% - var(--radar-center-y) - 0.5px),
+      #bfc9fc14 calc(100% - var(--radar-center-y) + 0.5px),
       transparent calc(100% - var(--radar-center-y) + 0.5px)
     );
 }

@@ -2,7 +2,6 @@ import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { createProgressGlitter } from "../src/components/progressGlitter";
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ ignoreMobileResize: true });
@@ -20,32 +19,71 @@ const HEADINGS = [
   ".hero h1",
   ".experience h2",
   ".product-caption h2",
+  ".ai-demo-title",
   ".belief h2",
   ".about-copy h2",
   ".community h2",
   ".partnership h2",
-  ".radar-copy h2",
 ];
 /** Các tiêu đề có timeline riêng, không dùng reveal tự động. */
 const MANUAL = new Set([".hero h1"]);
 
-const AURAS: [string, "light" | "dark"][] = [
-  [".hero", "dark"],
-  [".product-viewer", "dark"],
-  [".about", "dark"],
-  [".partnership", "dark"],
-];
+/**
+ * Các section xếp chồng: section sau trượt lên phủ section trước ngay tại chỗ.
+ * Hai section cuối (partnership, radar) và footer cuộn bình thường.
+ */
+// Kiểu cuộn xếp chồng đã tắt theo yêu cầu: các section cuộn bình thường.
+// Muốn bật lại, liệt kê selector các section ở đây (vd ".capabilities", ".experience").
+export const HOME_STACK: string[] = [];
 
-/** Mỗi section (trừ hero, product-viewer đang pin) "nở" từ thẻ bo góc ra full-bleed. */
-const SEAMS = [
-  ".capabilities",
-  ".experience",
-  ".ai-demo",
-  ".about",
-  ".community",
-  ".partnership",
-  ".radar-section",
-];
+/** Dính mỗi section ngay dưới header; section cao hơn màn hình dính ở mép dưới để vẫn đọc hết. */
+function setupStack(root: HTMLElement, stack: string[]) {
+  const main = document.querySelector<HTMLElement>("main");
+  const header = document.querySelector<HTMLElement>(".header");
+  const secs = stack.map((sel) => document.querySelector<HTMLElement>(sel)).filter(
+    (el): el is HTMLElement => !!el,
+  );
+  if (!main || !secs.length) return () => {};
+  root.classList.add("sv-stack");
+  secs.forEach((s) => s.classList.add("sv-stack-item"));
+
+  const layout = () => {
+    const headerH = header?.offsetHeight ?? 0;
+    root.style.setProperty("--sv-header-h", `${headerH}px`);
+    // Vị trí tự nhiên (khi chưa dính) để dải điều hướng cuộn tới đúng chỗ.
+    let y = main.getBoundingClientRect().top + window.scrollY;
+    Array.from(main.children).forEach((child) => {
+      const el = child as HTMLElement;
+      if (secs.includes(el)) {
+        el.style.top = `${Math.min(headerH, innerHeight - el.offsetHeight)}px`;
+        el.dataset.svScrollTo = String(Math.max(0, Math.round(y - headerH)));
+      }
+      y += el.offsetHeight;
+    });
+  };
+  // offsetTop của section đang dính bị lệch, nên đo lại từ đầu main mỗi lần.
+  layout();
+  const ro = new ResizeObserver(() => layout());
+  secs.forEach((s) => ro.observe(s));
+  if (header) ro.observe(header);
+  addEventListener("resize", layout);
+  addEventListener("load", layout);
+  document.fonts?.ready.then(layout);
+  ScrollTrigger.addEventListener("refresh", layout);
+  return () => {
+    ro.disconnect();
+    removeEventListener("resize", layout);
+    removeEventListener("load", layout);
+    ScrollTrigger.removeEventListener("refresh", layout);
+    root.classList.remove("sv-stack");
+    root.style.removeProperty("--sv-header-h");
+    secs.forEach((s) => {
+      s.classList.remove("sv-stack-item");
+      s.style.removeProperty("top");
+      delete s.dataset.svScrollTo;
+    });
+  };
+}
 
 /**
  * Tách tiêu đề thành từng từ để làm text-mask reveal.
@@ -93,7 +131,8 @@ function splitWords(el: HTMLElement) {
   };
 }
 
-export default function useHomeMotion() {
+/** `stack`: các section xếp chồng khi cuộn (mặc định từ hero tới community). */
+export default function useHomeMotion({ stack = HOME_STACK }: { stack?: string[] } = {}) {
   useLayoutEffect(() => {
     const root = document.documentElement;
     root.classList.add("sv-home-active");
@@ -121,10 +160,6 @@ export default function useHomeMotion() {
       lenis = null;
     });
 
-    /* ---------- Thanh tiến trình cuộn (gradient chữ ký) ---------- */
-    const progressGlitter = createProgressGlitter();
-    cleanups.push(() => progressGlitter.remove());
-
     /* ---------- Tách chữ tiêu đề ---------- */
     const heads = new Map<string, HTMLElement[]>();
     HEADINGS.forEach((sel) => {
@@ -135,86 +170,12 @@ export default function useHomeMotion() {
       cleanups.push(restore);
     });
 
-    /* ---------- Aura gradient chuyển động theo tiến trình cuộn ---------- */
-    AURAS.forEach(([sel, tone]) => {
-      const sec = document.querySelector<HTMLElement>(sel);
-      if (!sec) return;
-      const aura = document.createElement("div");
-      aura.className = `sv-aura sv-aura--${tone}`;
-      aura.setAttribute("aria-hidden", "true");
-      aura.innerHTML = "<i></i><i></i><i></i>";
-      sec.classList.add("sv-has-aura");
-      sec.prepend(aura);
-      cleanups.push(() => {
-        aura.remove();
-        sec.classList.remove("sv-has-aura");
-      });
-    });
+    /* ---------- Xếp chồng section ---------- */
+    cleanups.push(setupStack(root, stack));
 
     const mm = gsap.matchMedia();
 
     const ctx = gsap.context(() => {
-      const progressState = { value: 0 };
-      gsap.to(progressState, {
-        value: 1,
-        ease: "none",
-        onUpdate: () => progressGlitter.update(progressState.value),
-        scrollTrigger: { start: 0, end: "max", scrub: 0.2 },
-      });
-
-      /* Aura: blob trôi ngược chiều nhau khi cuộn */
-      AURAS.forEach(([sel]) => {
-        const sec = document.querySelector<HTMLElement>(sel);
-        const blobs = sec ? q(".sv-aura i", sec) : [];
-        if (!sec || !blobs.length) return;
-        gsap.fromTo(
-          blobs,
-          {
-            xPercent: (i: number) => [-12, 10, -6][i],
-            yPercent: (i: number) => [-8, 10, 6][i],
-            scale: 0.9,
-          },
-          {
-            xPercent: (i: number) => [14, -12, 10][i],
-            yPercent: (i: number) => [10, -10, -8][i],
-            scale: 1.2,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sec,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.2,
-            },
-          },
-        );
-      });
-
-      /* ---------- Chuyển mục: section "nở" ra từ thẻ bo góc ---------- */
-      mm.add({ mob: "(max-width: 760px)" }, (c) => {
-        const mob = !!c.conditions?.mob;
-        SEAMS.forEach((sel) =>
-          gsap.fromTo(
-            sel,
-            {
-              scale: mob ? 0.95 : 0.9,
-              borderRadius: mob ? "22px 22px 0px 0px" : "44px 44px 0px 0px",
-              transformOrigin: "50% 0%",
-            },
-            {
-              scale: 1,
-              borderRadius: "0px 0px 0px 0px",
-              ease: "none",
-              scrollTrigger: {
-                trigger: sel,
-                start: "top bottom",
-                end: "top 30%",
-                scrub: true,
-              },
-            },
-          ),
-        );
-      });
-
       /* ---------- Tiêu đề: text mask reveal ---------- */
       heads.forEach((words, sel) => {
         if (MANUAL.has(sel)) return;
@@ -229,8 +190,9 @@ export default function useHomeMotion() {
         });
       });
 
-      /* ---------- HERO: ribbon + intro ---------- */
+      /* ---------- HERO: ribbon + intro (chỉ khi dùng hero cũ) ---------- */
       const h1 = heads.get(".hero h1") ?? [];
+      if (document.querySelector(".hero")) {
       gsap
         .timeline({ defaults: { ease: "power3.out" }, delay: 0.15 })
         .from(".hero-label", { opacity: 0, x: -30, duration: 0.9 })
@@ -279,119 +241,38 @@ export default function useHomeMotion() {
             yoyo: true,
           });
         });
-
-      /* Skew theo vận tốc cuộn: chữ "kéo" nhẹ khi cuộn nhanh */
-      const words = q(".sv-w");
-      if (lenis && words.length) {
-        const setSkew = gsap.quickSetter(words, "skewY", "deg");
-        const proxy = { v: 0 };
-        lenis.on("scroll", ({ velocity }: { velocity: number }) => {
-          const t = gsap.utils.clamp(-5, 5, velocity * 0.15);
-          if (Math.abs(t) > Math.abs(proxy.v)) {
-            proxy.v = t;
-            setSkew(t);
-            gsap.to(proxy, {
-              v: 0,
-              duration: 0.9,
-              ease: "power3.out",
-              overwrite: true,
-              onUpdate: () => setSkew(proxy.v),
-            });
-          }
-        });
       }
-
-      /* Tiêu đề trôi chậm hơn nội dung: tạo chiều sâu */
-      [
-        ".experience h2",
-        ".community h2",
-        ".partnership h2",
-        ".radar-copy h2",
-      ].forEach((sel) =>
-        gsap.fromTo(
-          sel,
-          { y: 45 },
-          {
-            y: -45,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sel,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          },
-        ),
-      );
 
       /* ---------- CAPABILITIES ---------- */
       gsap.fromTo(
         ".capabilities .line-label",
-        { opacity: 0, y: 20, "--line": 0 },
+        { opacity: 0, y: 8, "--line": 0 },
         {
           opacity: 1,
           y: 0,
           "--line": 1,
-          duration: 1.4,
-          ease: "expo.out",
+          duration: 0.4,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ".capabilities",
-            start: "top 80%",
+            start: "top bottom",
             once: true,
           },
         },
       );
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".capability-grid",
-            start: "top 85%",
-            once: true,
-          },
-        })
-        .from(".capability", {
-          y: 80,
-          opacity: 0,
-          duration: 1.1,
-          ease: "power3.out",
-          stagger: 0.12,
-          clearProps: "transform,opacity",
-        })
-        .from(
-          ".capability .icon-bubble",
-          {
-            scale: 0.4,
-            rotate: -40,
-            opacity: 0,
-            duration: 1,
-            ease: "back.out(1.7)",
-            stagger: 0.12,
-            clearProps: "transform,opacity",
-          },
-          0.15,
-        )
-        .from(
-          ".capability .number",
-          {
-            opacity: 0,
-            x: -18,
-            duration: 0.8,
-            stagger: 0.12,
-            clearProps: "transform,opacity",
-          },
-          0.1,
-        )
-        .from(
-          ".capability .short-line",
-          {
-            scaleX: 0,
-            transformOrigin: "0 50%",
-            duration: 0.9,
-            stagger: 0.12,
-            clearProps: "transform",
-          },
-          0.6,
-        );
+      gsap.from(".capability", {
+        y: 14,
+        opacity: 0,
+        duration: 0.45,
+        ease: "power2.out",
+        stagger: 0.05,
+        clearProps: "transform,opacity",
+        scrollTrigger: {
+          trigger: ".capabilities",
+          start: "top bottom",
+          once: true,
+        },
+      });
 
       /* ---------- EXPERIENCE ---------- */
       gsap
@@ -423,21 +304,6 @@ export default function useHomeMotion() {
           { opacity: 0, y: 30, duration: 1, ease: "power3.out" },
           0.4,
         );
-      gsap.fromTo(
-        ".experience-copy",
-        { y: 50 },
-        {
-          y: -40,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".experience",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        },
-      );
-
       /* ---------- PARTNERSHIP: hành trình, chấm dẫn đi theo tiến trình cuộn ---------- */
       const guide = document.querySelector<SVGPathElement>(".sv-journey-guide");
       const trail = document.querySelector<SVGPathElement>(".sv-journey-trail");
@@ -479,147 +345,97 @@ export default function useHomeMotion() {
       }
 
       /* ---------- PRODUCT VIEWER: sticky storytelling ---------- */
-      mm.add(
-        {
-          pin: "(min-width: 1025px) and (min-height: 860px)",
-          flow: "(max-width: 1024px), (max-height: 859px)",
-        },
-        (c) => {
-          const pin = !!c.conditions?.pin;
-          gsap
-            .timeline({
-              defaults: { ease: "none" },
-              scrollTrigger: pin
-                ? {
-                    trigger: ".product-viewer",
-                    start: "top top",
-                    end: "+=85%",
-                    pin: true,
-                    scrub: 0.6,
-                    anticipatePin: 1,
-                  }
-                : {
-                    trigger: ".product-viewer",
-                    start: "top 70%",
-                    end: "bottom 60%",
-                    scrub: 0.6,
-                  },
-            })
-            .fromTo(
-              ".product-ellipses",
-              { scaleX: 0.6, scaleY: 0.55, opacity: 0.15 },
-              { scaleX: 1.03, scaleY: 1, opacity: 1, duration: 1 },
-              0,
-            )
-            .fromTo(
-              ".product-viewer > .eyebrow",
-              { opacity: 0, x: -30 },
-              { opacity: 1, x: 0, duration: 0.35 },
-              0,
-            )
-            .fromTo(
-              ".product-stage > span",
-              { scale: 0.9, opacity: 0.15 },
-              { scale: 1, opacity: 1, duration: 0.7 },
-              0.1,
-            )
-            .fromTo(
-              ".product-caption p",
-              { opacity: 0, y: 30 },
-              { opacity: 1, y: 0, duration: 0.3 },
-              0.68,
-            );
-        },
-      );
-
-      /* ---------- AI DEMO: Lens Reveal ---------- */
+      // Plays once and stays: scrolling back up must not fade the caption away again.
       gsap
         .timeline({
-          scrollTrigger: { trigger: ".ai-demo", start: "top 72%", once: true },
-        })
-        .from(".ai-copy > *:not(.tabs)", {
-          opacity: 0,
-          y: 30,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: 0.08,
-          clearProps: "transform,opacity",
-        })
-        .from(
-          ".ai-copy .tabs button",
-          {
-            opacity: 0,
-            scale: 0.85,
-            y: 12,
-            duration: 0.7,
-            ease: "back.out(1.5)",
-            stagger: 0.07,
-            clearProps: "transform,opacity",
+          defaults: { ease: "power3.out" },
+          scrollTrigger: {
+            trigger: ".product-viewer",
+            start: "top 75%",
+            once: true,
           },
+        })
+        .fromTo(
+          ".product-viewer > .eyebrow",
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.8 },
+          0,
+        )
+        .fromTo(
+          ".product-caption p",
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.9 },
           0.25,
         )
         .fromTo(
-          ".ai-visual",
-          { clipPath: "circle(0% at 50% 50%)" },
-          {
-            clipPath: "circle(75% at 50% 50%)",
-            duration: 1.5,
-            ease: "power3.inOut",
-            clearProps: "clipPath",
-          },
-          0.1,
+          ".product-ellipses",
+          { scaleX: 0.6, scaleY: 0.55, opacity: 0.15 },
+          { scaleX: 1.03, scaleY: 1, opacity: 1, duration: 1.4, ease: "expo.out" },
+          0.2,
+        )
+        .fromTo(
+          ".product-stage > span",
+          { scale: 0.9, opacity: 0.15 },
+          { scale: 1, opacity: 1, duration: 1 },
+          0.35,
         );
-      gsap.fromTo(
-        ".ai-visual",
-        { y: 40 },
-        {
-          y: -30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".ai-demo",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
+
+      /* ---------- AI DEMO ---------- */
+      gsap
+        .timeline({
+          scrollTrigger: { trigger: ".ai-demo", start: "top 85%", once: true },
+        })
+        // The heading itself rises word by word (HEADINGS); the rest follows in a calm cascade.
+        .from(".ai-demo-heading > :not(h2)", {
+          opacity: 0,
+          y: 22,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.12,
+          clearProps: "transform,opacity",
+        })
+        .from(
+          ".ai-demo .tabs button",
+          {
+            opacity: 0,
+            y: 16,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.08,
+            clearProps: "transform,opacity",
           },
-        },
-      );
-
-      mm.add("(hover: hover) and (pointer: fine)", () => {
-        const box = document.querySelector<HTMLElement>(".ai-visual");
-        if (!box) return;
-        gsap.set(box, { transformPerspective: 900 });
-        const rx = gsap.quickTo(box, "rotationX", {
-          duration: 0.8,
-          ease: "power3",
-        });
-        const ry = gsap.quickTo(box, "rotationY", {
-          duration: 0.8,
-          ease: "power3",
-        });
-        const move = (e: PointerEvent) => {
-          const r = box.getBoundingClientRect();
-          ry(((e.clientX - r.left) / r.width - 0.5) * 7);
-          rx(-((e.clientY - r.top) / r.height - 0.5) * 7);
-        };
-        const leave = () => {
-          rx(0);
-          ry(0);
-        };
-        box.addEventListener("pointermove", move);
-        box.addEventListener("pointerleave", leave);
-        return () => {
-          box.removeEventListener("pointermove", move);
-          box.removeEventListener("pointerleave", leave);
-        };
-      });
-
+          0.35,
+        )
+        .from(
+          ".ai-visual",
+          {
+            opacity: 0,
+            y: 36,
+            scale: 0.98,
+            duration: 1.1,
+            ease: "expo.out",
+            clearProps: "transform,opacity",
+          },
+          0.5,
+        )
+        .from(
+          ".ai-copy > *",
+          {
+            opacity: 0,
+            y: 18,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.08,
+            clearProps: "transform,opacity",
+          },
+          0.7,
+        );
       /* ---------- ABOUT ---------- */
       gsap
         .timeline({
           scrollTrigger: { trigger: ".about", start: "top 70%", once: true },
         })
         .from(".belief", {
-          y: 50,
           opacity: 0,
           duration: 1.2,
           ease: "power3.out",
@@ -659,21 +475,6 @@ export default function useHomeMotion() {
         )
         .from(".about-copy h3", { opacity: 0, y: 20, duration: 0.9 }, 1)
         .from(".about-copy .button", { opacity: 0, y: 20, duration: 0.9 }, 1.2);
-      gsap.fromTo(
-        ".belief",
-        { "--ring": 0 },
-        {
-          "--ring": 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".about",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        },
-      );
-
       /* ---------- COMMUNITY: image reveal ---------- */
       gsap
         .timeline({
@@ -702,22 +503,6 @@ export default function useHomeMotion() {
           },
           0.1,
         );
-      gsap.fromTo(
-        ".community-placeholder img",
-        { scale: 1.28, yPercent: -6 },
-        {
-          scale: 1.14,
-          yPercent: 6,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".community",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        },
-      );
-
       /* ---------- PARTNERSHIP ---------- */
       gsap
         .timeline({
@@ -740,93 +525,6 @@ export default function useHomeMotion() {
           0.8,
         );
 
-      /* ---------- RADAR ---------- */
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".radar-section",
-            start: "top 65%",
-            once: true,
-          },
-        })
-        .from(
-          ".radar g circle",
-          {
-            scale: 0,
-            svgOrigin: "400 400",
-            duration: 1.8,
-            ease: "expo.out",
-            stagger: 0.15,
-          },
-          0,
-        )
-        .from(".radar-trail", { opacity: 0, duration: 1.6 }, 0.3)
-        .from(
-          ".radar-copy p",
-          { opacity: 0, y: 30, duration: 1, ease: "power3.out" },
-          0.3,
-        )
-        .from(
-          ".radar-copy .button",
-          { opacity: 0, y: 24, duration: 0.9, ease: "power3.out" },
-          0.5,
-        );
-      gsap.fromTo(
-        ".radar",
-        { scale: 0.92 },
-        {
-          scale: 1.06,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".radar-section",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        },
-      );
-      gsap.fromTo(
-        ".radar-copy",
-        { y: 30 },
-        {
-          y: -30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".radar-section",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        },
-      );
-
-      /* ---------- Nút "từ tính" (chỉ chuột, không chạm) ---------- */
-      mm.add("(hover: hover) and (pointer: fine)", () => {
-        const off: (() => void)[] = [];
-        q(".button").forEach((btn) => {
-          const xTo = gsap.quickTo(btn, "x", { duration: 0.5, ease: "power3" });
-          const yTo = gsap.quickTo(btn, "y", { duration: 0.5, ease: "power3" });
-          const move = (e: PointerEvent) => {
-            const r = btn.getBoundingClientRect();
-            xTo((e.clientX - (r.left + r.width / 2)) * 0.22);
-            yTo((e.clientY - (r.top + r.height / 2)) * 0.3);
-          };
-          const leave = () => {
-            xTo(0);
-            yTo(0);
-          };
-          btn.addEventListener("pointermove", move);
-          btn.addEventListener("pointerleave", leave);
-          off.push(() => {
-            btn.removeEventListener("pointermove", move);
-            btn.removeEventListener("pointerleave", leave);
-          });
-        });
-        return () => off.forEach((f) => f());
-      });
-
-      // Pin phải được tính trước các trigger phía sau nó.
-      ScrollTrigger.sort();
     }, document.body);
 
     const refresh = () => ScrollTrigger.refresh();

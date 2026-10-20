@@ -16,6 +16,8 @@
       "source": "/api/contact/status",
       "destination": "/api/contact?contact_status=1"
     },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    { "source": "/mo-phong", "destination": "/mo-phong/index.html" },
+    { "source": "/mo-phong/", "destination": "/mo-phong/index.html" },
+    { "source": "/((?!api/|mo-phong/).*)", "destination": "/index.html" }
   ]
 }

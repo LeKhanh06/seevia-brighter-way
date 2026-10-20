@@ -1,6 +1,6 @@
 #root .ct .ct-hero,
 #root .pt .pt-hero {
-  background: linear-gradient(115deg, #020238 0%, #0b1553 58%, #17286e 100%);
+  background: linear-gradient(115deg, var(--ink-900) 0%, var(--ink-900) 58%, var(--ink-800) 100%);
 }
 
 .hero-glows {
@@ -9,8 +9,8 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 38%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, var(--ink-900) 38%);
+  mask-image: linear-gradient(to right, transparent 0%, var(--ink-900) 38%);
 }
 
 .hero-glows i {
@@ -25,7 +25,7 @@
   width: clamp(430px, 38vw, 680px);
   aspect-ratio: 1;
   top: -27%;
-  background: radial-gradient(circle, #6cd6fc63 0%, #426af831 28%, #426af80e 49%, transparent 71%);
+  background: radial-gradient(circle, #7fd3de63 0%, #405ffa31 28%, #405ffa0e 49%, transparent 71%);
   animation: hero-glow-right-to-left 34s linear -9s infinite;
 }
 
@@ -33,7 +33,7 @@
   width: clamp(450px, 42vw, 740px);
   aspect-ratio: 1;
   bottom: -48%;
-  background: radial-gradient(circle, #b5b6fc60 0%, #8c9aff31 31%, #6cd6fc0b 52%, transparent 72%);
+  background: radial-gradient(circle, #bfc9fc60 0%, #9aa8fa31 31%, #7fd3de0b 52%, transparent 72%);
   animation: hero-glow-left-to-right 38s linear -4s infinite;
 }
 

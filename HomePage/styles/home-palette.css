@@ -1,0 +1,516 @@
+/* Home sections after StoryHero: sapphire, cyan, navy and clean light surfaces. */
+html.sv-home-active {
+  --home-sapphire: #305ffa;
+  --home-cyan: #09b8c8;
+  --home-navy: #0b1d3a;
+  --home-ink: #173152;
+  --home-ice: #eef6ff;
+  --home-cyan-ink: #087b88;
+  --home-blue-ink: #234bc9;
+  --home-line: #d5e3f1;
+}
+html.sv-home-active body #root .header .main-nav button[aria-current="page"] { border-bottom-color: var(--nav-ink, #111); }
+html.sv-home-active body #root .header .main-nav button[aria-current="page"]::after {
+  background: var(--nav-ink, #111);
+}
+
+/* The capability cards keep their original five-colour treatment in home-clean.css. */
+
+html.sv-home-active body #root .experience {
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 86% 20%, rgb(9 184 200 / 0.25), transparent 42%),
+    linear-gradient(115deg, var(--home-navy) 0%, #123664 54%, var(--home-sapphire) 100%);
+}
+html.sv-home-active body #root .experience h2 { color: #fff; }
+html.sv-home-active body #root .experience .eyebrow { color: #cdefff; }
+html.sv-home-active body #root .experience-copy p { color: #e9f3ff; }
+html.sv-home-active body #root .experience-copy .short-line { background: var(--home-cyan); }
+
+html.sv-home-active body #root .product-viewer {
+  color: var(--home-ink);
+  background:
+    radial-gradient(ellipse at 72% 34%, rgb(48 95 250 / 0.13), transparent 45%),
+    linear-gradient(140deg, #fff 0%, var(--home-ice) 100%);
+}
+html.sv-home-active body #root .product-viewer :is(h2, h3) { color: var(--home-navy); }
+html.sv-home-active body #root .product-viewer .eyebrow,
+html.sv-home-active body #root .product-viewer p { color: var(--home-ink); }
+html.sv-home-active body #root .product-viewer > .eyebrow::before { background: var(--home-cyan-ink); }
+html.sv-home-active body #root .product-stage {
+  width: min(100%, 1700px);
+  height: clamp(520px, 60svh, 720px);
+  margin-inline: auto;
+  color: var(--home-ink);
+  background: radial-gradient(ellipse 58% 53% at 50% 48%, rgb(48 95 250 / 0.12), transparent 72%);
+}
+html.sv-home-active body #root .product-stage > span {
+  position: relative;
+  z-index: 1;
+  transform: none;
+}
+/* Leave a full-height image area; the ellipses act as a base below the glasses. */
+html.sv-home-active body #root .product-stage > img {
+  position: relative;
+  z-index: 1;
+  width: min(88%, 1250px);
+  max-height: 80%;
+  object-fit: contain;
+}
+html.sv-home-active body #root .product-ellipses {
+  left: 50%;
+  bottom: 7%;
+  translate: -50% 0;
+  width: min(76%, 1100px);
+  height: clamp(100px, 15svh, 170px);
+  border-color: rgb(48 95 250 / 0.22);
+  background: radial-gradient(ellipse, rgb(48 95 250 / 0.15), transparent 68%);
+}
+html.sv-home-active body #root .product-ellipses::after {
+  inset: 18% 10%;
+  border-color: rgb(48 95 250 / 0.16);
+  background: none;
+}
+
+/* Simulation: heading, scenario choices, then an image with a compact response panel. */
+html.sv-home-active body #root .ai-demo.section-pad {
+  display: block;
+  min-height: 0;
+  padding: clamp(56px, 7vw, 96px) var(--sv-gutter, 6.5%);
+  color: var(--home-ink);
+  background:
+    radial-gradient(ellipse at 8% 6%, rgb(9 184 200 / 0.1), transparent 42%),
+    linear-gradient(125deg, #fff 0%, #f3f8ff 100%);
+}
+html.sv-home-active body #root .ai-demo-heading { max-width: 920px; }
+html.sv-home-active body #root .ai-demo-heading .simulation-index {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--home-line);
+  color: var(--home-cyan-ink);
+  font: 600 12px/1.4 var(--sans);
+  letter-spacing: 0.16em;
+}
+/* Same voice as the other chapters: sentence case, with an italic serif turn. */
+html.sv-home-active body #root .ai-demo-heading .ai-demo-title {
+  max-width: 18ch;
+  margin: 0 0 16px;
+  color: var(--home-navy);
+  font: 600 clamp(32px, 3.4vw, 52px)/1.15 var(--sans);
+  letter-spacing: -0.035em;
+  text-transform: none;
+}
+html.sv-home-active body #root .ai-demo-heading .ai-demo-title em {
+  color: var(--brand-sapphire, #305ffa);
+  font-family: "Lora", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+html.sv-home-active body #root .ai-demo-heading .demo-intro {
+  max-width: 65ch;
+  margin: 0;
+  color: var(--home-ink);
+  font: 400 clamp(16px, 1.25vw, 18px)/1.7 var(--sans);
+}
+html.sv-home-active body #root .ai-demo > .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 30px 0 22px;
+}
+html.sv-home-active body #root .ai-demo > .tabs button {
+  min-height: 44px;
+  padding: 10px 17px;
+  border: 1px solid var(--home-line);
+  border-radius: 10px;
+  color: var(--home-ink);
+  background: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+}
+html.sv-home-active body #root .ai-demo > .tabs button:hover { border-color: var(--home-sapphire); }
+html.sv-home-active body #root .ai-demo > .tabs button[aria-selected="true"] {
+  color: #fff;
+  background: var(--home-sapphire);
+  border-color: var(--home-sapphire);
+  box-shadow: none;
+}
+html.sv-home-active body #root .ai-demo-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(340px, .95fr);
+  gap: clamp(18px, 2.5vw, 32px);
+  align-items: stretch;
+  outline-offset: 6px;
+}
+html.sv-home-active body #root .ai-visual { min-width: 0; max-width: none; }
+html.sv-home-active body #root .photo-stage {
+  height: 100%;
+  padding: 14px;
+  color: #e9f5ff;
+  background: var(--home-navy);
+  border: 1px solid var(--home-navy);
+  border-radius: 18px;
+  box-shadow: none;
+}
+html.sv-home-active body #root .photo-topline,
+html.sv-home-active body #root .photo-topline > span { color: #e9f5ff; }
+html.sv-home-active body #root .photo-wrap {
+  border: 0;
+  border-radius: 10px;
+  background: #08182f;
+}
+html.sv-home-active body #root .photo-missing { color: #e9f5ff; }
+html.sv-home-active body #root .photo-box { border-color: var(--home-cyan); background: transparent; }
+html.sv-home-active body #root .photo-box span { color: var(--home-navy); background: var(--home-cyan); }
+html.sv-home-active body #root .photo-scan { background: var(--home-cyan); box-shadow: 0 0 16px var(--home-cyan); }
+html.sv-home-active body #root .simulation-toolbar {
+  padding: 12px 2px 0;
+  color: #e9f5ff;
+  background: transparent;
+}
+html.sv-home-active body #root .ai-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(28px, 3vw, 48px);
+  min-width: 0;
+  padding: clamp(28px, 3vw, 44px);
+  background: #fff;
+  border: 1px solid var(--home-line);
+  border-radius: 18px;
+}
+html.sv-home-active body #root .ai-copy .speech {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--home-ink);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+html.sv-home-active body #root .ai-copy .speech strong {
+  color: var(--home-cyan-ink);
+  font: 700 12px/1.5 var(--sans);
+  letter-spacing: 0.12em;
+}
+html.sv-home-active body #root .ai-copy .speech p {
+  max-width: 48ch;
+  margin: 16px 0 0;
+  color: var(--home-ink);
+  font: 400 clamp(16px, 1.15vw, 18px)/1.65 var(--sans);
+  text-wrap: pretty;
+}
+html.sv-home-active body #root .ai-copy-footer { margin-top: auto; }
+html.sv-home-active body #root .ai-copy .demo-note {
+  max-width: 48ch;
+  margin: 0 0 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--home-line);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-style: normal;
+  line-height: 1.55;
+}
+html.sv-home-active body #root .ai-copy .button {
+  width: fit-content;
+  max-width: 100%;
+  min-height: 46px;
+  padding: 10px 20px;
+  color: #fff;
+  background: var(--home-sapphire);
+  border-color: var(--home-sapphire);
+  box-shadow: none;
+  font: 600 14px/1.2 var(--sans);
+}
+html.sv-home-active body #root .ai-copy .button:hover { background: var(--home-navy); border-color: var(--home-navy); }
+
+html.sv-home-active body #root .about {
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 8% 18%, rgb(9 184 200 / 0.16), transparent 42%),
+    radial-gradient(ellipse at 92% 80%, rgb(48 95 250 / 0.18), transparent 48%),
+    linear-gradient(130deg, #07172f 0%, var(--home-navy) 62%, #173a70 100%);
+}
+html.sv-home-active body #root .about .about-copy > .eyebrow { color: #cdefff; }
+html.sv-home-active body #root .about .about-copy > p:not(.eyebrow),
+html.sv-home-active body #root .about .about-copy > h3 + p:not(.eyebrow) { color: #e5effb; }
+html.sv-home-active body #root .about .belief {
+  color: var(--home-navy);
+  background:
+    radial-gradient(circle at 85% 12%, rgb(48 95 250 / 0.15), transparent 50%),
+    linear-gradient(145deg, #f9fcff 0%, #e7f2ff 100%);
+}
+html.sv-home-active body #root .about .belief .eyebrow,
+html.sv-home-active body #root .about .belief h2,
+html.sv-home-active body #root .about .belief > div p { color: var(--home-navy); }
+html.sv-home-active body #root .about .belief .short-line { background: var(--home-cyan-ink); }
+html.sv-home-active body #root .about .about-copy .button { color: var(--home-navy); background: #fff; border-color: #fff; }
+html.sv-home-active body #root .about .about-copy .button:hover { background: var(--home-ice); }
+
+html.sv-home-active body #root .community {
+  background:
+    radial-gradient(ellipse at 82% 34%, rgb(9 184 200 / 0.1), transparent 40%),
+    linear-gradient(120deg, #fff 0%, #f4f8ff 100%);
+}
+html.sv-home-active body #root .community .eyebrow { color: var(--home-cyan-ink); }
+html.sv-home-active body #root .community h2,
+html.sv-home-active body #root .community p:not(.eyebrow) { color: var(--home-ink); }
+html.sv-home-active body #root .community .button { color: #fff; background: var(--home-navy); }
+html.sv-home-active body #root .community .button:hover { background: var(--home-blue-ink); }
+
+html.sv-home-active body #root .partnership,
+html.sv-home-active.ribbon-on body #root .partnership.section-pad {
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 12% 20%, rgb(9 184 200 / 0.28), transparent 44%),
+    linear-gradient(115deg, #1642a3 0%, var(--home-sapphire) 52%, #0b2b64 100%);
+}
+html.sv-home-active body #root .partnership > .eyebrow { color: #d6f3ff; }
+html.sv-home-active body #root .partnership p:not(.eyebrow) { color: #fff; }
+html.sv-home-active body #root .partnership .button-light { color: var(--home-navy); background: #fff; border-color: #fff; }
+html.sv-home-active body #root .partnership .button-light:hover { background: var(--home-ice); }
+html.sv-home-active body #root .partnership .button-outline { color: #fff; border-color: #fff; }
+
+html.sv-home-active body #root .footer {
+  background: linear-gradient(125deg, #07172f, var(--home-navy));
+}
+
+@media (max-width: 900px) {
+  html.sv-home-active body #root .product-stage { height: clamp(410px, 53svh, 560px); }
+  html.sv-home-active body #root .product-ellipses { width: 84%; bottom: 6%; }
+  html.sv-home-active body #root .ai-demo-workspace { grid-template-columns: minmax(0, 1fr); }
+  html.sv-home-active body #root .ai-copy { gap: 28px; padding: 28px; }
+}
+@media (max-width: 600px) {
+  html.sv-home-active body #root .product-stage { height: clamp(340px, 48svh, 460px); }
+  html.sv-home-active body #root .product-stage > img { width: 94%; max-height: 78%; }
+  html.sv-home-active body #root .product-ellipses { width: 90%; height: 96px; bottom: 8%; }
+  html.sv-home-active body #root .ai-demo.section-pad { padding: 52px 6%; }
+  html.sv-home-active body #root .ai-demo-heading .simulation-index { margin-bottom: 20px; }
+  html.sv-home-active body #root .ai-demo > .tabs { gap: 8px; margin: 24px 0 18px; }
+  html.sv-home-active body #root .ai-demo > .tabs button { flex: 1 1 auto; padding-inline: 12px; font-size: 12px; }
+  html.sv-home-active body #root .ai-copy { padding: 24px; }
+  html.sv-home-active body #root .photo-stage { padding: 10px; }
+}
+
+/* Brand-kit finish. Keep the existing motion layers and five pillar colours. */
+html.sv-home-active {
+  --home-sapphire: var(--brand-sapphire);
+  --home-cyan: var(--brand-cyan);
+  --home-navy: var(--ink-800);
+  --home-ink: var(--text-body);
+  --home-ice: var(--surface-page);
+  --home-cyan-ink: var(--cyan-700);
+  --home-blue-ink: var(--sapphire-700);
+  --home-line: var(--line-hairline);
+}
+html.sv-home-active body #root .experience {
+  background:
+    radial-gradient(ellipse 42% 85% at 95% 5%, rgb(9 187 200 / .28), transparent 75%),
+    linear-gradient(115deg, var(--sapphire-700), var(--brand-sapphire) 68%, var(--sapphire-600));
+}
+html.sv-home-active body #root .product-viewer {
+  min-height: 0;
+  padding: clamp(56px, 7vw, 96px) var(--sv-gutter, 6.5%);
+  color: var(--text-inverse);
+  background: var(--gradient-dusk);
+}
+html.sv-home-active body #root .product-viewer :is(h2, h3) { color: var(--white); }
+html.sv-home-active body #root .product-viewer .eyebrow { color: var(--cyan-200); }
+html.sv-home-active body #root .product-viewer > .eyebrow {
+  justify-content: center;
+  padding-left: 0;
+}
+html.sv-home-active body #root .product-viewer > .eyebrow::before { background: var(--brand-cyan); }
+html.sv-home-active body #root .product-viewer p { color: var(--ink-200); }
+html.sv-home-active body #root .product-viewer > .eyebrow { color: var(--cyan-200); }
+html.sv-home-active body #root .product-caption {
+  display: block;
+  max-width: 1100px;
+  margin: clamp(30px, 4vw, 52px) auto clamp(28px, 3vw, 40px);
+  padding: 0;
+  text-align: center;
+}
+html.sv-home-active body #root .product-caption h2 {
+  max-width: none;
+  margin: 0;
+  font: 600 clamp(36px, 3.6vw, 60px)/1.14 var(--sans);
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+html.sv-home-active body #root .product-caption p {
+  max-width: 64ch;
+  margin: 18px auto 0;
+  font: 400 clamp(16px, 1.1vw, 18px)/1.65 var(--sans);
+  font-style: normal;
+  color: var(--ink-200);
+}
+html.sv-home-active body #root .product-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: min(100%, 1500px);
+  height: clamp(270px, 32vw, 460px);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgb(64 95 250 / .15);
+  border-radius: clamp(22px, 3vw, 36px);
+  color: var(--ink-600);
+  background:
+    radial-gradient(ellipse 45% 50% at 50% 56%, rgb(64 95 250 / .12), transparent 80%),
+    radial-gradient(ellipse 35% 60% at 18% 20%, rgb(9 187 200 / .12), transparent 80%),
+    linear-gradient(135deg, rgb(255 255 255 / .88), rgb(239 241 255 / .76));
+  box-shadow: 0 28px 64px -52px rgb(41 38 80 / .35), inset 0 1px rgb(255 255 255 / .8);
+}
+html.sv-home-active body #root .product-sketch {
+  position: relative;
+  z-index: 1;
+  width: min(78%, 960px);
+  max-height: 78%;
+  stroke: var(--sapphire-600);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 18px 16px rgb(64 95 250 / .16));
+}
+html.sv-home-active body #root .product-stage > span {
+  position: relative;
+  z-index: 1;
+  transform: none;
+  color: var(--ink-600);
+  font: 500 clamp(11px, 1vw, 14px)/1.5 var(--sans);
+  letter-spacing: .04em;
+  text-align: center;
+}
+html.sv-home-active body #root .product-ellipses {
+  left: 50%;
+  bottom: 7%;
+  translate: -50% 0;
+  width: min(72%, 1060px);
+  height: clamp(70px, 9vw, 120px);
+  border-color: rgb(64 95 250 / .18);
+  background: radial-gradient(ellipse, rgb(64 95 250 / .1), transparent 72%);
+}
+html.sv-home-active body #root .product-ellipses::after {
+  border-color: rgb(9 187 200 / .18);
+  background: none;
+}
+html.sv-home-active body #root .ai-demo.section-pad { background: var(--surface-page); }
+html.sv-home-active body #root .ai-demo-heading .ai-demo-title { color: var(--text-heading); }
+html.sv-home-active body #root .ai-demo-heading .simulation-index { color: var(--sapphire-700); }
+html.sv-home-active body #root .ai-demo > .tabs button { border-color: var(--line-hairline); color: var(--text-body); }
+html.sv-home-active body #root .ai-demo > .tabs button[aria-selected="true"] {
+  color: var(--white);
+  background: var(--brand-sapphire);
+  border-color: var(--brand-sapphire);
+}
+html.sv-home-active body #root .photo-stage {
+  color: var(--ink-50);
+  background: var(--gradient-dusk);
+  border-color: rgb(255 255 255 / .3);
+}
+html.sv-home-active body #root .photo-wrap { background: var(--ink-900); }
+html.sv-home-active body #root .photo-box { border-color: var(--brand-cyan); }
+html.sv-home-active body #root .photo-box span { color: var(--brand-evergreen); background: var(--brand-frozen-water); }
+html.sv-home-active body #root .photo-scan { background: var(--brand-cyan); box-shadow: 0 0 16px var(--brand-cyan); }
+html.sv-home-active body #root .ai-copy { background: var(--white); border-color: var(--line-hairline); }
+html.sv-home-active body #root .ai-copy .speech strong { color: var(--sapphire-700); }
+html.sv-home-active body #root .ai-copy .button { color: var(--white); background: var(--brand-sapphire); border-color: var(--brand-sapphire); }
+html.sv-home-active body #root .ai-copy .button:hover { background: var(--sapphire-700); border-color: var(--sapphire-700); }
+html.sv-home-active body #root .about { background: var(--gradient-dusk); }
+html.sv-home-active body #root .about .belief { background: var(--gradient-aurora); }
+html.sv-home-active body #root .community { background: var(--iris-50); }
+html.sv-home-active body #root .community .button { color: var(--white); background: var(--brand-sapphire); }
+html.sv-home-active body #root .partnership,
+html.sv-home-active.ribbon-on body #root .partnership.section-pad {
+  background: linear-gradient(110deg, var(--sapphire-700), var(--brand-sapphire) 55%, var(--iris-600));
+}
+html.sv-home-active body #root .footer { background: var(--gradient-dusk); }
+@media (max-width: 800px) {
+  html.sv-home-active body #root .product-viewer > .eyebrow { justify-content: flex-start; }
+  html.sv-home-active body #root .product-caption { max-width: 620px; text-align: left; }
+  html.sv-home-active body #root .product-caption h2 { max-width: 18ch; }
+  html.sv-home-active body #root .product-caption p { margin-left: 0; }
+  html.sv-home-active body #root .product-stage { height: clamp(245px, 55vw, 340px); }
+  html.sv-home-active body #root .product-sketch { width: 92%; }
+}
+
+/* ---------- AI demo: the spoken reply fills its card as a voice bubble ---------- */
+html.sv-home-active body #root .ai-copy { gap: 24px; }
+html.sv-home-active body #root .ai-copy .speech {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  border-left: 0;
+}
+html.sv-home-active body #root .ai-copy .speech-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+html.sv-home-active body #root .ai-copy .speech-scene {
+  padding: 5px 12px;
+  border: 1px solid rgb(48 95 250 / 0.18);
+  border-radius: 999px;
+  color: var(--sapphire-700);
+  font: 500 12px/1.4 var(--sans);
+  white-space: nowrap;
+}
+html.sv-home-active body #root .ai-copy .speech-bubble {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  padding: clamp(20px, 2vw, 28px);
+  border: 1px solid rgb(48 95 250 / 0.12);
+  border-radius: 22px 22px 22px 6px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgb(9 184 200 / 0.1), transparent 60%),
+    linear-gradient(160deg, #f1f5ff, #f5f2ff);
+}
+html.sv-home-active body #root .ai-copy .speech-bubble p {
+  margin: 0;
+  color: var(--text-heading);
+  font: 400 clamp(17px, 1.3vw, 20px)/1.65 var(--sans);
+  animation: sv-speech-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html.sv-home-active body #root .ai-copy .speech-wave {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 30px;
+}
+html.sv-home-active body #root .ai-copy .speech-wave i {
+  width: 3px;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--cyan-300, #7fd3de), var(--brand-sapphire, #305ffa));
+  opacity: 0.75;
+  transform: scaleY(0.3);
+  animation: sv-speech-wave 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.11s);
+}
+html.sv-home-active body #root .ai-copy .speech-wave i:nth-child(3n) { animation-duration: 0.95s; }
+html.sv-home-active body #root .ai-copy .speech-wave i:nth-child(4n + 1) { animation-duration: 1.45s; }
+@keyframes sv-speech-wave {
+  0%, 100% { transform: scaleY(0.25); }
+  50% { transform: scaleY(1); }
+}
+@keyframes sv-speech-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.sv-home-active body #root .ai-copy .speech-wave i,
+  html.sv-home-active body #root .ai-copy .speech-bubble p { animation: none; transform: scaleY(0.5); }
+  html.sv-home-active body #root .ai-copy .speech-bubble p { transform: none; }
+}

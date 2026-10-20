@@ -65,14 +65,14 @@ export default function Product() {
                   operator="out"
                   result="outline"
                 />
-                <feFlood floodColor="#74798c" />
+                <feFlood floodColor="#6b6890" />
                 <feComposite in2="outline" operator="in" />
               </filter>
             </defs>
             <text
               x="0"
               y="285"
-              fill="#74798c"
+              fill="#6b6890"
               filter="url(#wordmark-outline)"
               style={{
                 fontFamily: "Playfair Display, Georgia, serif",
@@ -107,7 +107,10 @@ export default function Product() {
         <section className="product-design product-container" id="design">
           <div className="product-design-copy">
             <p className="eyebrow">THIẾT KẾ</p>
-            <h2>Công nghệ chỉ có ích khi bạn quên rằng mình đang đeo nó.</h2>
+            <h2>
+              Công nghệ chỉ có ích
+              <em>khi bạn quên rằng mình đang đeo nó.</em>
+            </h2>
             <ol className="design-principles">
               {principles.map((p, i) => (
                 <li key={p.title}>

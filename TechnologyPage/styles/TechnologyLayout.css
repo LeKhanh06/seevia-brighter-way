@@ -14,7 +14,7 @@
 .technology-page .technology-hero {
   min-height: 420px;
   background:
-    radial-gradient(circle 300px at 76% 52%, #02023880, transparent 100%),
+    radial-gradient(circle 300px at 76% 52%, #1b193780, transparent 100%),
     var(--sv-navy);
 }
 .technology-page .technology-hero-layout {
@@ -57,12 +57,12 @@
   gap: 30px;
 }
 .technology-page .tech-flow-grid:before {
-  border-color: #b5b6fc55;
+  border-color: #bfc9fc55;
 }
 .technology-page .flow-icon {
   background: var(--sv-navy);
   color: var(--rose);
-  border-color: #b5b6fc70;
+  border-color: #bfc9fc70;
   animation: tech-step-pulse 8s infinite;
 }
 .technology-page .tech-flow-grid article:nth-child(2) .flow-icon {
@@ -82,15 +82,15 @@
 }
 .technology-page .tech-flow-grid p {
   font-size: 14px;
-  color: #d4c9c3;
+  color: var(--ink-300);
 }
 .technology-page .tech-note {
   font-size: 11px;
-  color: #ab9992;
+  color: var(--ink-300);
   margin-top: 28px;
 }
 .tech-processing {
-  background: linear-gradient(110deg, #982332, var(--sv-navy) 50%, var(--sv-navy));
+  background: linear-gradient(110deg, var(--sapphire-700), var(--sv-navy) 50%, var(--sv-navy));
   color: var(--ivory);
 }
 .technology-page .tech-processing .eyebrow {
@@ -105,7 +105,7 @@
   gap: 36px;
 }
 .tech-processing-grid article {
-  border-top: 1px solid #b5b6fc70;
+  border-top: 1px solid #bfc9fc70;
   padding-top: 22px;
 }
 .tech-processing-grid article > span {
@@ -151,7 +151,7 @@
   transform: translateX(-50%);
   width: calc(100% - 48px);
   height: 1px;
-  background: #b5b6fc40;
+  background: #bfc9fc40;
 }
 .technology-page .tech-transparency h2 {
   color: var(--ivory);
@@ -161,7 +161,7 @@
   color: var(--rose);
 }
 .technology-page .tech-transparency p:not(.eyebrow) {
-  color: #cdbdb5;
+  color: var(--ink-300);
   font-size: 13px;
   max-width: 720px;
 }
@@ -186,7 +186,7 @@
   18% {
     background: var(--sv-navy);
     color: var(--sv-pearl);
-    box-shadow: 0 0 0 5px #b5b6fc12;
+    box-shadow: 0 0 0 5px #bfc9fc12;
   }
   25%,
   100% {
@@ -276,7 +276,7 @@
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 24px;
   align-items: center;
-  border-top: 1px solid #cbb8af;
+  border-top: 1px solid var(--ink-300);
   padding-top: 24px;
 }
 .tech-closeup-photo {
@@ -284,7 +284,7 @@
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  background: #272022;
+  background: var(--ink-900);
 }
 .tech-closeup-photo img {
   width: 100%;
@@ -299,8 +299,8 @@
   justify-content: center;
   gap: 16px;
   padding: 20px;
-  background: linear-gradient(140deg, #442128, var(--sv-navy));
-  color: #d1a39c;
+  background: linear-gradient(140deg, var(--ink-800), var(--sv-navy));
+  color: var(--sapphire-300);
   text-align: center;
 }
 .tech-closeup-placeholder svg {
@@ -323,7 +323,7 @@
 }
 .tech-closeup-copy .tech-closeup-label {
   font: 500 10px/1.6 var(--sans);
-  color: #8b5a55;
+  color: var(--ink-500);
   margin: 0 0 8px;
 }
 .tech-closeup-copy h3 {

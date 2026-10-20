@@ -76,12 +76,17 @@ export default function Technology() {
       <main id="technology-main">
         <section className="technology-hero">
           <div className="technology-hero-rings" aria-hidden="true" />
+          <i className="technology-hero-glow technology-hero-glow--a" aria-hidden="true" />
+          <i className="technology-hero-glow technology-hero-glow--b" aria-hidden="true" />
           <div className="tech-container technology-hero-layout">
-            <h1>
-              Từ điều nhìn thấy,
-              <br />
-              <span>Đến điều nghe hiểu</span>
-            </h1>
+            <div className="technology-hero-title">
+              <h1>
+                Từ điều nhìn thấy,
+                <br />
+                <span>Đến điều nghe hiểu</span>
+              </h1>
+              <p className="technology-hero-tagline">Camera · AI · Giọng nói tiếng Việt</p>
+            </div>
             <p>
               Công nghệ chỉ có ý nghĩa khi thông tin trở nên dễ tiếp cận. SeeVia
               kết hợp camera, AI và giọng nói để chuyển hình ảnh thành lời, theo
@@ -110,11 +115,6 @@ export default function Technology() {
                 </article>
               ))}
             </div>
-            <p className="tech-note">
-              Sơ đồ mô tả luồng hoạt động dự kiến của bản mẫu. Thời gian xử lý
-              và mức độ chính xác chưa được công bố vì còn đang trong quá trình
-              kiểm chứng.
-            </p>
           </div>
         </section>
         <ProcessingOverview />

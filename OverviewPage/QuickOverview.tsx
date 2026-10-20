@@ -4,7 +4,6 @@ import Footer from "../src/components/Footer";
 import { translate, useLanguage } from "../src/i18n/language";
 import { pageRegistry } from "../src/navigation";
 import aboutHero from "../AboutPage/assets/about-hero.jpg";
-import Ribbon from "../HomePage/components/Ribbon";
 import "./styles/QuickOverview.css";
 
 const starStyles = Array.from({ length: 14 }, (_, index) => ({
@@ -129,14 +128,18 @@ export default function QuickOverview() {
       <main id="overview-main" ref={mainRef}>
         <section className="qv-editorial-hero" aria-labelledby="qv-hero-title">
           <Stars />
-          <Ribbon variant="hero" />
           <div className="qv-container qv-hero-layout">
             <div className="qv-hero-content">
               <SectionKicker number="SEEVIA">TỔNG QUAN</SectionKicker>
-              <h1 id="qv-hero-title">Kính trợ lý thị giác SeeVia.</h1>
+              <h1 id="qv-hero-title">Kính trợ lý thị giác <em>SeeVia.</em></h1>
               <p className="qv-hero-intro">Dự án phát triển bản mẫu kính ứng dụng AI, hướng tới việc đọc chữ, nhận biết đồ vật và mô tả xung quanh theo yêu cầu của người dùng.</p>
               <a className="qv-button qv-button-primary" href="#qv-intro">Tìm hiểu dự án <span aria-hidden="true">↗</span></a>
             </div>
+            <ol className="qv-hero-abilities">
+              <li><span>01</span><strong>Đọc chữ</strong><small>Văn bản, nhãn mác, giấy tờ</small></li>
+              <li><span>02</span><strong>Nhận biết đồ vật</strong><small>Đồ dùng quen thuộc, tiền Việt</small></li>
+              <li><span>03</span><strong>Mô tả xung quanh</strong><small>Khung cảnh trước mặt, theo yêu cầu</small></li>
+            </ol>
           </div>
         </section>
 
@@ -149,7 +152,6 @@ export default function QuickOverview() {
             <div className="qv-intro-grid">
               <figure className="qv-documentary qv-reveal">
                 <img src={aboutHero} alt="Các thành viên cơ sở Ánh Dương tại TP.HCM quây quần trò chuyện quanh bàn" loading="lazy" decoding="async" />
-                <figcaption>Ảnh tư liệu tại cơ sở Ánh Dương, TP.HCM; không mô tả hoạt động của SeeVia. Ảnh: Nguyễn Đạt / <a href="https://vietnamnews.vn/sunday/features/427554/blind-man-s-massage-centres-provide-light-to-members.html" target="_blank" rel="noopener noreferrer">Việt Nam News ↗</a></figcaption>
               </figure>
               <StoryCard
                 tag="NIỀM TIN CỦA SEEVIA" number="01 / 04" variant="qv-card-belief" delay={1}

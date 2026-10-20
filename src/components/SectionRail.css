@@ -31,19 +31,19 @@
   width: 8px;
   height: 8px;
   border-radius: 20px;
-  background: #7f8dd3;
-  box-shadow: 0 1px 3px #070c493d;
+  background: var(--sapphire-400);
+  box-shadow: 0 1px 3px #1b19373d;
   transition: width .28s ease, height .28s ease, background .28s ease, box-shadow .28s ease;
 }
 .section-rail__stop:hover span,
-.section-rail__stop:focus-visible span { background: #ccd4ff; }
+.section-rail__stop:focus-visible span { background: var(--sapphire-200); }
 .section-rail__stop.is-active span {
   width: 10px;
   height: 28px;
-  background: linear-gradient(180deg, #8fddff, #5180ff 78%, #4361e9);
-  box-shadow: 0 0 14px #7ab6ff66;
+  background: linear-gradient(180deg, var(--cyan-200), var(--sapphire-500) 78%, var(--sapphire-500));
+  box-shadow: 0 0 14px #a8e5eb66;
 }
-.section-rail__stop:focus-visible { outline: 2px solid #95d7ff; outline-offset: -2px; }
+.section-rail__stop:focus-visible { outline: 2px solid var(--cyan-200); outline-offset: -2px; }
 @media (max-width: 600px) {
   .section-rail { right: 3px; gap: 0; padding: 6px 0; }
   .section-rail__stop { width: 26px; height: 29px; }

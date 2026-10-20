@@ -225,6 +225,8 @@
   "Màu sắc": "Colours",
   "THIẾT KẾ": "DESIGN",
   "Công nghệ chỉ có ích khi bạn quên rằng mình đang đeo nó.": "Technology works best when you forget you are wearing it.",
+  "Công nghệ chỉ có ích": "Technology works best",
+  "khi bạn quên rằng mình đang đeo nó.": "when you forget you are wearing it.",
   "Sơ đồ kính SeeVia với bốn vị trí: camera, microphone, nút điều khiển và phản hồi âm thanh.": "A diagram of SeeVia glasses showing four positions: camera, microphone, control button and audio feedback.",
   "Chọn một vị trí để khám phá thiết kế.": "Select a position to explore the design.",
   "Vùng chờ bộ ảnh kính SeeVia từ nhiều góc": "Space for photographs of SeeVia glasses from different angles",
@@ -790,5 +792,11 @@
   "SEEVIA ? SEE A BRIGHTER WAY": "SEEVIA ? SEE A BRIGHTER WAY",
   "T?m hi?u s?u h?n theo ?i?u b?n quan t?m.": "Explore the topics that matter to you.",
   "T?m hi?u ??nh h??ng c?ng ngh?": "Explore the technology direction",
-  "??c c?u chuy?n SeeVia": "Read SeeVia?s story"
+  "??c c?u chuy?n SeeVia": "Read SeeVia?s story",
+  "Trải nghiệm mô phỏng": "Try the simulation",
+  "Camera · AI · Giọng nói tiếng Việt": "Camera · AI · Vietnamese voice",
+  "Văn bản, nhãn mác, giấy tờ": "Documents, labels, paperwork",
+  "Nhận biết đồ vật": "Recognise objects",
+  "Đồ dùng quen thuộc, tiền Việt": "Everyday items, Vietnamese money",
+  "Khung cảnh trước mặt, theo yêu cầu": "The scene ahead, on request"
 }

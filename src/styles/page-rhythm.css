@@ -1,0 +1,376 @@
+/* Light/dark rhythm for the Product and Technology pages: no two neighbouring
+   chapters share the same pale wash, so each one lands with its own weight. */
+
+/* ================= Product ================= */
+
+/* Design: crisp white, set apart from the tinted hero above it. */
+html body #root .product-page .product-design.product-container,
+html body #root .product-page section.product-design {
+  background:
+    radial-gradient(ellipse 40% 55% at 95% 8%, rgb(64 95 250 / 0.07), transparent 75%),
+    #fff;
+}
+
+/* Colours: one deep sapphire band, so the burgundy frame glows against it. */
+html body #root .product-page section.product-colors {
+  color: #fff;
+  background:
+    radial-gradient(ellipse 45% 70% at 20% 50%, rgb(127 211 222 / 0.18), transparent 70%),
+    radial-gradient(ellipse 50% 70% at 100% 0%, rgb(206 196 251 / 0.22), transparent 70%),
+    linear-gradient(120deg, #172561 0%, #2440b8 55%, #3b2f9a 100%);
+}
+html body #root .product-page section.product-colors::before,
+html body #root .product-page section.product-colors::after { opacity: 0.25; }
+html body #root .product-page section.product-colors .colors-layout h2 { color: #fff; }
+html body #root .product-page section.product-colors .colors-layout .eyebrow { color: var(--cyan-200, #a8e5eb); }
+html body #root .product-page section.product-colors .colors-layout figure {
+  background: rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  box-shadow: 0 40px 80px -40px rgb(8 12 40 / 0.6);
+  backdrop-filter: blur(10px);
+}
+html body #root .product-page section.product-colors .color-option small { color: rgb(255 255 255 / 0.78); }
+html body #root .product-page section.product-colors .color-option:disabled > span {
+  background: rgb(255 255 255 / 0.14);
+  border-color: rgb(255 255 255 / 0.3);
+}
+html body #root .product-page section.product-colors .color-option.selected > span {
+  box-shadow: 0 0 0 3px #fff, 0 0 26px rgb(255 255 255 / 0.35);
+}
+
+/* ================= Technology ================= */
+
+/* Hero: an immersive night band with a large headline and a cyan italic turn. */
+html body #root .technology-page section.technology-hero {
+  min-height: min(78svh, 720px);
+  display: grid;
+  align-items: center;
+  color: #fff;
+  background:
+    radial-gradient(ellipse 45% 60% at 85% 20%, rgb(64 95 250 / 0.38), transparent 70%),
+    radial-gradient(ellipse 40% 55% at 8% 90%, rgb(9 184 200 / 0.2), transparent 70%),
+    linear-gradient(125deg, #14122e, #1f1b4d 55%, #1a2766);
+}
+html body #root .technology-page section.technology-hero .technology-hero-layout h1 {
+  color: #fff;
+  font: 600 clamp(36px, 4.4vw, 66px)/1.1 "Be Vietnam Pro", var(--sans, sans-serif);
+  font-style: normal;
+  letter-spacing: -0.035em;
+  white-space: normal;
+}
+/* Second line only (not the per-word spans of the title animation). */
+html body #root .technology-page section.technology-hero .technology-hero-layout h1 > span:not(.sv-w) {
+  display: inline-block;
+  margin-top: 0.08em;
+  color: var(--cyan-200, #a8e5eb);
+  font-family: "Lora", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+html body #root .technology-page section.technology-hero .technology-hero-tagline {
+  margin: 22px 0 0;
+  color: rgb(255 255 255 / 0.62);
+  font: 600 12px/1.4 "Be Vietnam Pro", var(--sans, sans-serif);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+/* Two soft halos drifting in opposite directions behind the hero copy. */
+html body #root .technology-page section.technology-hero { position: relative; overflow: hidden; isolation: isolate; }
+html body #root .technology-page .technology-hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+html body #root .technology-page .technology-hero-glow--a {
+  left: -14vmax;
+  top: -12vmax;
+  background: radial-gradient(circle, rgb(64 95 250 / 0.75), transparent 65%);
+  animation: tech-glow-right 18s ease-in-out infinite alternate;
+}
+html body #root .technology-page .technology-hero-glow--b {
+  right: -14vmax;
+  bottom: -16vmax;
+  background: radial-gradient(circle, rgb(9 184 200 / 0.55), transparent 65%);
+  animation: tech-glow-left 22s ease-in-out infinite alternate;
+}
+@keyframes tech-glow-right {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(48vw, 10vh, 0) scale(1.12); }
+}
+@keyframes tech-glow-left {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to { transform: translate3d(-48vw, -12vh, 0) scale(0.95); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body #root .technology-page .technology-hero-glow { animation: none; }
+}
+html body #root .technology-page section.technology-hero .technology-hero-layout > p {
+  color: var(--ink-200, #d5d4e8);
+  font-size: clamp(16px, 1.3vw, 19px);
+  border-color: rgb(255 255 255 / 0.18);
+}
+html body #root .technology-page .technology-hero-rings { opacity: 0.5; }
+
+/* Detail: white sheet; part frames read as lit instrument panels, not empty boxes. */
+html body #root .technology-page section.tech-anatomy { background: #fff; }
+html body #root .technology-page .tech-closeup-photo {
+  overflow: hidden;
+  border: 0;
+  border-radius: 20px;
+}
+html body #root .technology-page .tech-closeup-placeholder {
+  position: relative;
+  color: var(--cyan-200, #a8e5eb);
+  background:
+    radial-gradient(circle at 50% 45%, rgb(64 95 250 / 0.45), transparent 55%),
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(140deg, #1b1937, #23306f);
+}
+html body #root .technology-page .tech-closeup-placeholder svg {
+  width: 64px;
+  height: 64px;
+  padding: 14px;
+  border: 1px solid rgb(168 229 235 / 0.45);
+  border-radius: 50%;
+  opacity: 1;
+  box-shadow: 0 0 0 10px rgb(168 229 235 / 0.06), 0 0 40px rgb(127 211 222 / 0.35);
+}
+html body #root .technology-page .tech-closeup-placeholder > span {
+  color: rgb(255 255 255 / 0.7);
+  letter-spacing: 0.08em;
+}
+
+/* Hero balance: the copy sits on the headline's last line, without a floating rule above it. */
+html body #root .technology-page section.technology-hero .technology-hero-layout {
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+html body #root .technology-page section.technology-hero .technology-hero-layout > p {
+  max-width: 40ch;
+  margin-bottom: 0.6em;
+  padding: 0;
+  border: 0;
+}
+
+/* Four steps: a light runs along the line; each step it reaches lights up and stays lit,
+   then the whole path dims and the run starts again. */
+html body #root .technology-page .tech-flow-grid::after {
+  content: "";
+  position: absolute;
+  /* From the first icon's centre to the last: one column (minus its icon half) short of the edge. */
+  left: 28px;
+  right: calc((100% - 3 * var(--flow-gap)) / 4 - 28px);
+  top: 27px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--cyan-300, #7fd3de), var(--brand-sapphire, #305ffa));
+  box-shadow: 0 0 12px rgb(64 95 250 / 0.45);
+  transform-origin: left center;
+  animation: tech-flow-run 8s linear infinite;
+  pointer-events: none;
+}
+html body #root .technology-page .tech-flow-grid { --flow-gap: 30px; column-gap: var(--flow-gap); }
+html body #root .technology-page .tech-flow-grid::before {
+  left: 28px;
+  right: calc((100% - 3 * var(--flow-gap)) / 4 - 28px);
+}
+html body #root .technology-page .tech-flow-grid article .flow-icon {
+  z-index: 1;
+  transition: none;
+  animation: tech-flow-lit-1 8s infinite;
+  animation-delay: 0s;
+}
+html body #root .technology-page .tech-flow-grid article:nth-child(2) .flow-icon { animation-name: tech-flow-lit-2; animation-delay: 0s; }
+html body #root .technology-page .tech-flow-grid article:nth-child(3) .flow-icon { animation-name: tech-flow-lit-3; animation-delay: 0s; }
+html body #root .technology-page .tech-flow-grid article:nth-child(4) .flow-icon { animation-name: tech-flow-lit-4; animation-delay: 0s; }
+@keyframes tech-flow-run {
+  0% { transform: scaleX(0); opacity: 1; }
+  75%, 90% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+/* Lit = sapphire→cyan fill with a glow; unlit = the quiet navy disc. */
+@keyframes tech-flow-lit-1 {
+  0%, 90% { background: linear-gradient(140deg, #305ffa, #09b8c8); color: #fff; border-color: #a8e5eb; box-shadow: 0 0 0 7px rgb(127 211 222 / 0.16), 0 10px 26px -8px rgb(48 95 250 / 0.6); }
+  100% { background: var(--sv-navy); color: var(--rose); border-color: #bfc9fc70; box-shadow: none; }
+}
+@keyframes tech-flow-lit-2 {
+  0%, 25% { background: var(--sv-navy); color: var(--rose); border-color: #bfc9fc70; box-shadow: none; }
+  26%, 90% { background: linear-gradient(140deg, #305ffa, #09b8c8); color: #fff; border-color: #a8e5eb; box-shadow: 0 0 0 7px rgb(127 211 222 / 0.16), 0 10px 26px -8px rgb(48 95 250 / 0.6); }
+  100% { background: var(--sv-navy); color: var(--rose); border-color: #bfc9fc70; box-shadow: none; }
+}
+@keyframes tech-flow-lit-3 {
+  0%, 50% { background: var(--sv-navy); color: var(--rose); border-color: #bfc9fc70; box-shadow: none; }
+  51%, 90% { background: linear-gradient(140deg, #305ffa, #09b8c8); color: #fff; border-color: #a8e5eb; box-shadow: 0 0 0 7px rgb(127 211 222 / 0.16), 0 10px 26px -8px rgb(48 95 250 / 0.6); }
+  100% { background: var(--sv-navy); color: var(--rose); border-color: #bfc9fc70; box-shadow: none; }
+}
+@keyframes tech-flow-lit-4 {
+  0%, 75% { background: var(--sv-navy); color: var(--rose); border-color: #bfc9fc70; box-shadow: none; }
+  76%, 90% { background: linear-gradient(140deg, #305ffa, #09b8c8); color: #fff; border-color: #a8e5eb; box-shadow: 0 0 0 7px rgb(127 211 222 / 0.16), 0 10px 26px -8px rgb(48 95 250 / 0.6); }
+  100% { background: var(--sv-navy); color: var(--rose); border-color: #bfc9fc70; box-shadow: none; }
+}
+@media (max-width: 900px) {
+  html body #root .technology-page .tech-flow-grid::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body #root .technology-page .tech-flow-grid::after { display: none; }
+  html body #root .technology-page .tech-flow-grid article .flow-icon { animation: none; }
+}
+
+/* ================= Partner ================= */
+
+/* Hero becomes a deep band so it stands apart from the pale chapter below. */
+html body #root .pt section.pt-hero {
+  color: #fff;
+  background:
+    radial-gradient(ellipse 45% 65% at 88% 15%, rgb(64 95 250 / 0.4), transparent 70%),
+    radial-gradient(ellipse 40% 60% at 5% 95%, rgb(9 184 200 / 0.22), transparent 70%),
+    linear-gradient(125deg, #15133a, #221d55 55%, #1b2a6e);
+}
+html body #root .pt section.pt-hero .pt-hero-copy h1 { color: #fff; }
+html body #root .pt section.pt-hero .pt-hero-copy h1 em { color: var(--cyan-200, #a8e5eb); }
+html body #root .pt section.pt-hero .pt-hero-copy > p { color: var(--ink-200, #d5d4e8); }
+html body #root .pt section.pt-hero .pt-hero-copy .pt-action {
+  color: #fff;
+  background: transparent;
+  border-color: rgb(255 255 255 / 0.55);
+}
+html body #root .pt section.pt-hero .pt-hero-copy .pt-action:hover {
+  color: var(--sv-navy, #1b1937);
+  background: #fff;
+  border-color: #fff;
+}
+
+/* ================= Every page: the hero runs up underneath the floating menu ================= */
+:root { --site-header-h: 84px; }
+@media (max-width: 1100px) { :root { --site-header-h: 78px; } }
+@media (max-width: 640px) { :root { --site-header-h: 68px; } }
+/* A transparent top border the height of the menu: the hero's background paints beneath it
+   (background-origin: border-box), while its content still starts below the menu. */
+html:not(.sv-home-active) body #root main > section:first-of-type,
+html body #root main.site-information {
+  margin-top: calc(-1 * var(--site-header-h));
+  border-top: var(--site-header-h) solid transparent;
+  background-origin: border-box;
+  /* A faint hairline where a pale hero meets the pale chapter below it. */
+  border-bottom: 1px solid rgb(27 25 55 / 0.08);
+}
+
+/* ================= Product: spacing and headline balance ================= */
+/* The technology chapter sized itself to a fixed 943px; let content set its height. */
+html body #root .product-page section.product-technology {
+  min-height: 0;
+  padding-block: var(--sv-section-y, 72px);
+}
+html body #root .product-page section.product-technology .technology-cards { margin-bottom: 40px; }
+/* Design headline: a plain first line and an italic serif turn, like the other chapters. */
+html body #root .product-page .product-design-copy h2 {
+  max-width: 16ch;
+  font-size: clamp(32px, 3.3vw, 48px);
+  line-height: 1.18;
+  text-wrap: balance;
+}
+html body #root .product-page .product-design-copy h2 em {
+  display: block;
+  color: var(--brand-sapphire, #305ffa);
+  font-family: "Lora", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ================= Separators ================= */
+/* Dark band → dark footer, and any two neighbouring chapters, get a faint dividing line. */
+html body #root .footer { border-top: 1px solid rgb(255 255 255 / 0.1); }
+html:not(.sv-home-active) body #root main > section + section {
+  border-top: 1px solid rgb(127 127 170 / 0.16);
+}
+
+/* ================= Overview hero: copy left, three abilities right ================= */
+html body #root .quick-overview-page .qv-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 96px);
+}
+html body #root .quick-overview-page .qv-hero-content {
+  display: block;
+  max-width: 620px;
+  margin: 0;
+  text-align: left;
+}
+html body #root .quick-overview-page .qv-hero-content > .qv-section-kicker { justify-content: flex-start; margin-bottom: 22px; }
+html body #root .quick-overview-page .qv-editorial-hero h1 {
+  max-width: none;
+  font-size: clamp(36px, 4.2vw, 60px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+html body #root .quick-overview-page .qv-editorial-hero h1 em {
+  display: block;
+  color: var(--cyan-200, #a8e5eb);
+  font-family: "Lora", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+html body #root .quick-overview-page .qv-hero-intro {
+  max-width: 46ch;
+  margin: 22px 0 0;
+  font-size: clamp(15px, 1.2vw, 18px);
+}
+html body #root .quick-overview-page .qv-hero-content > .qv-button { margin-top: 30px; }
+html body #root .quick-overview-page .qv-hero-abilities {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+html body #root .quick-overview-page .qv-hero-abilities li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: center;
+  padding: 18px 22px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 0.06);
+  backdrop-filter: blur(10px);
+}
+html body #root .quick-overview-page .qv-hero-abilities li:nth-child(2) { margin-left: 28px; }
+html body #root .quick-overview-page .qv-hero-abilities span {
+  grid-row: span 2;
+  color: var(--cyan-200, #a8e5eb);
+  font: italic 400 24px/1 "Lora", Georgia, serif;
+}
+html body #root .quick-overview-page .qv-hero-abilities strong {
+  color: #fff;
+  font: 600 17px/1.3 "Be Vietnam Pro", var(--sans, sans-serif);
+}
+html body #root .quick-overview-page .qv-hero-abilities small {
+  color: rgb(255 255 255 / 0.62);
+  font-size: 13px;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  html body #root .quick-overview-page .qv-hero-layout { grid-template-columns: 1fr; }
+  html body #root .quick-overview-page .qv-hero-abilities li:nth-child(2) { margin-left: 0; }
+}
+
+/* ================= Word-by-word titles ================= */
+/* Animated words always take colour and type from the line they sit in, never from
+   older page rules written for "h1 span" / "h2 span". */
+html:not(.sv-home-active) body #root main :is(h1, h2) :is(.sv-w, .sv-wi) {
+  color: inherit !important;
+  font-family: inherit !important;
+  font-style: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  -webkit-text-fill-color: currentColor;
+}
