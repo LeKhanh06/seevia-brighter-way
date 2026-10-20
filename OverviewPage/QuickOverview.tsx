@@ -135,11 +135,6 @@ export default function QuickOverview() {
               <p className="qv-hero-intro">Dự án phát triển bản mẫu kính ứng dụng AI, hướng tới việc đọc chữ, nhận biết đồ vật và mô tả xung quanh theo yêu cầu của người dùng.</p>
               <a className="qv-button qv-button-primary" href="#qv-intro">Tìm hiểu dự án <span aria-hidden="true">↗</span></a>
             </div>
-            <ol className="qv-hero-abilities">
-              <li><span>01</span><strong>Đọc chữ</strong><small>Văn bản, nhãn mác, giấy tờ</small></li>
-              <li><span>02</span><strong>Nhận biết đồ vật</strong><small>Đồ dùng quen thuộc, tiền Việt</small></li>
-              <li><span>03</span><strong>Mô tả xung quanh</strong><small>Khung cảnh trước mặt, theo yêu cầu</small></li>
-            </ol>
           </div>
         </section>
 
