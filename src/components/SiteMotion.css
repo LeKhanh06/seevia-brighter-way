@@ -399,8 +399,10 @@ html body #root .site-ambient-section > .site-ambient-glow {
 }
 /* Page change = a viewport-sized crossfade of the root. Naming <main> made the browser
    snapshot the whole (often 5000px+) page twice per navigation, which caused the stutter.
-   The floating menu gets its own name so it stays perfectly still. */
-.header {
+   The floating menu capsule gets its own name so it stays perfectly still. */
+/* Named on the frosted capsule itself: naming .header made it a backdrop root,
+   so the capsule's backdrop blur could no longer see the page scrolling beneath it. */
+.header .header-menu {
   view-transition-name: seevia-header;
 }
 main img.site-media-loading {
