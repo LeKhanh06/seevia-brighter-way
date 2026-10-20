@@ -1,23 +1,28 @@
-/* SeeVia / Iridescent Pastel. Color-only layer; page structure and motion stay in their own stylesheets. */
+/* SeeVia theme layer. Every colour comes from src/styles/tokens.css (the design system);
+   the --sv-* names below are the roles the page stylesheets already use.
+   Color-only layer; page structure and motion stay in their own stylesheets. */
 :root {
-  /* Brand primitives */
-  --sv-navy: #020238;
-  --sv-night-mid: #0c155f;
-  --sv-cyan: #6cd6fc;
-  --sv-vision: #426af8;
-  --sv-lavender: #b5b6fc;
-  --sv-orchid: #e5c6fc;
-  --sv-pearl: #f5f4ff;
+  /* Roles used across the pages */
+  --sv-navy: var(--surface-dark);        /* headings and the dusk dark ground */
+  --sv-night-mid: var(--brand-twilight);
+  --sv-cyan: var(--brand-cyan);          /* accent on dark */
+  --sv-vision: var(--action-primary);    /* Electric Sapphire */
+  --sv-lavender: var(--sapphire-200);
+  --sv-orchid: var(--iris-100);          /* Lilac */
+  --sv-pearl: var(--surface-page);
+  --sv-iris: var(--iris-500);
+  --sv-mint: var(--brand-frozen-water);
+  --sv-evergreen: var(--brand-evergreen);
   /* Accessible text companions for pale surfaces */
-  --sv-vision-ink: #3158e2;
-  --sv-muted: #3e4265;
+  --sv-vision-ink: var(--action-primary-hover);  /* hover and small text, 6.5:1 on pearl */
+  --sv-muted: var(--text-muted);                 /* 7.8:1 on white */
   /* Shared semantics */
-  --sv-surface: var(--sv-pearl);
-  --sv-text: var(--sv-navy);
-  --sv-text-inverse: var(--sv-pearl);
+  --sv-surface: var(--surface-page);
+  --sv-text: var(--text-body);
+  --sv-text-inverse: var(--text-inverse);
   --sv-accent: var(--sv-cyan);
-  --sv-grad: linear-gradient(100deg, var(--sv-cyan), var(--sv-vision) 38%, var(--sv-lavender) 68%, var(--sv-orchid));
-  --sv-border: #b5b6fc9c;
+  --sv-grad: linear-gradient(100deg, var(--sv-cyan), var(--sv-vision) 42%, var(--sv-iris) 74%, var(--sv-orchid));
+  --sv-border: var(--line-hairline);
   --burgundy: var(--sv-navy);
   --charcoal: var(--sv-navy);
   --rose: var(--sv-lavender);
@@ -26,15 +31,15 @@
   background: var(--sv-surface);
 }
 
-body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
+body, #root { background: var(--sv-pearl); color: var(--sv-text); }
 :is(a, button, textarea, input, select, summary, [tabindex]):focus-visible {
   outline-color: var(--sv-vision-ink);
 }
 .button-light:hover { background: var(--sv-orchid); }
 .header.header {
-  background: linear-gradient(108deg, var(--sv-navy) 0%, #0d1763 76%, #1e3292 100%);
-  border-bottom-color: #b5b6fc63;
-  box-shadow: 0 8px 28px #02023826;
+  background: linear-gradient(108deg, var(--sv-navy) 0%, var(--ink-800) 76%, var(--sapphire-800) 100%);
+  border-bottom-color: #bfc9fc63;
+  box-shadow: 0 8px 28px #1b193726;
 }
 .header .main-nav button:hover { color: var(--sv-cyan); }
 
@@ -49,9 +54,9 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 #root .quick-overview-page .qv-overview-hero {
   color: var(--sv-pearl);
   background:
-    radial-gradient(ellipse at 86% 20%, #426af852, transparent 44%),
-    radial-gradient(ellipse at 60% 96%, #6cd6fc29, transparent 48%),
-    linear-gradient(118deg, var(--sv-navy) 12%, #10185a 71%, #222d82 100%);
+    radial-gradient(ellipse at 86% 20%, #405ffa52, transparent 44%),
+    radial-gradient(ellipse at 60% 96%, #7fd3de29, transparent 48%),
+    linear-gradient(118deg, var(--sv-navy) 12%, var(--ink-800) 71%, var(--sapphire-800) 100%);
 }
 #root .product-viewer,
 #root .product-design,
@@ -67,14 +72,13 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 #root .about-editorial .ab-connect,
 #root .cp-ecosystem,
 #root .np-perspective,
-#root .np-sources,
 #root .pt-process,
 #root .pt-connect,
 #root .ct-explore {
   color: var(--sv-pearl);
   background:
-    radial-gradient(ellipse at 82% 16%, #426af833, transparent 50%),
-    linear-gradient(130deg, var(--sv-navy), #0d1554 74%, #1d2671);
+    radial-gradient(ellipse at 82% 16%, #405ffa33, transparent 50%),
+    linear-gradient(130deg, var(--sv-navy), var(--ink-900) 74%, var(--sapphire-800));
 }
 
 /* Pearl chapters are kept bright; lavender and cyan give each page rhythm. */
@@ -99,7 +103,7 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 #root .ct-letter,
 #root .quick-overview-page .qv-overview-closing {
   color: var(--sv-navy);
-  background: linear-gradient(126deg, var(--sv-pearl) 0%, #f3f2ff 64%, #e9ebff 100%);
+  background: linear-gradient(126deg, var(--sv-pearl) 0%, var(--ink-50) 64%, var(--sapphire-50) 100%);
 }
 #root .experience,
 #root .product-colors,
@@ -108,7 +112,7 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 #root .cp-stories,
 #root .np-journal,
 #root .pt-directory {
-  background: linear-gradient(122deg, #f5f4ff 3%, #e5c6fc45 53%, #6cd6fc24 100%);
+  background: linear-gradient(122deg, var(--ink-50) 3%, #cec4fb45 53%, #7fd3de24 100%);
 }
 
 /* Text and calls to action, with enough contrast on the Pearl and navy surfaces. */
@@ -116,21 +120,21 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
   .product-viewer, .product-design, .product-technology, .product-progress,
   .tech-flow, .tech-processing, .tech-transparency, .about, .partnership,
   .ab-why, .ab-direction, .ab-connect, .cp-ecosystem, .np-perspective,
-  .np-sources, .pt-process, .pt-connect, .ct-explore) :is(h1, h2, h3) {
+  .pt-process, .pt-connect, .ct-explore) :is(h1, h2, h3) {
   color: var(--sv-pearl);
 }
 #root :is(.hero, .product-hero, .technology-hero, .cp-hero, .np-hero, .pt-hero, .ct-hero,
   .product-viewer, .product-design, .product-technology, .product-progress,
   .tech-flow, .tech-processing, .tech-transparency, .about, .partnership,
   .ab-why, .ab-direction, .ab-connect, .cp-ecosystem, .np-perspective,
-  .np-sources, .pt-process, .pt-connect, .ct-explore) :is(.eyebrow, .cp-eyebrow, .np-eyebrow, .pt-eyebrow, .ct-eyebrow, em) {
+  .pt-process, .pt-connect, .ct-explore) :is(.eyebrow, .cp-eyebrow, .np-eyebrow, .pt-eyebrow, .ct-eyebrow, em) {
   color: var(--sv-cyan);
 }
 #root :is(.product-hero, .technology-hero, .cp-hero, .np-hero, .pt-hero, .ct-hero,
   .product-design, .product-technology, .tech-flow, .tech-processing,
   .tech-transparency, .about, .ab-why, .ab-direction, .ab-connect,
-  .cp-ecosystem, .np-perspective, .np-sources, .pt-process, .pt-connect, .ct-explore) p {
-  color: #e7e8ff;
+  .cp-ecosystem, .np-perspective, .pt-process, .pt-connect, .ct-explore) p {
+  color: var(--sapphire-100);
 }
 #root .hero .button,
 #root .product-hero .button,
@@ -151,20 +155,20 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
   background: transparent;
   border-color: var(--sv-lavender);
 }
-#root .product-hero .button-outline:hover { background: #b5b6fc24; }
-#root .belief { background: linear-gradient(126deg, #0a1154, #202a82); }
+#root .product-hero .button-outline:hover { background: #bfc9fc24; }
+#root .belief { background: linear-gradient(126deg, var(--ink-900), var(--sapphire-800)); }
 #root .about .belief {
-  background: linear-gradient(145deg, var(--sv-lavender), #d8d8fd 48%, var(--sv-pearl));
+  background: linear-gradient(145deg, var(--sv-lavender), var(--sapphire-100) 48%, var(--sv-pearl));
   color: var(--sv-navy);
 }
-#root .about .belief .eyebrow { color: #1d2fa8; }
+#root .about .belief .eyebrow { color: var(--sapphire-700); }
 #root .about .belief h2 { color: var(--sv-navy); }
-#root .about .belief > div p { color: #1c2260; }
+#root .about .belief > div p { color: var(--ink-800); }
 #root .about .belief > :not(.belief-glow) {
   position: relative;
   z-index: 2;
 }
-#root .hero-object { background: #0c155fdb; color: var(--sv-pearl); border-color: #6cd6fc70; }
+#root .hero-object { background: #292650db; color: var(--sv-pearl); border-color: #7fd3de70; }
 #root .hero .speech { border-color: var(--sv-cyan); }
 #root .hero .speech strong { color: var(--sv-cyan); }
 #root .hero-label::before { background: var(--sv-cyan); }
@@ -184,22 +188,22 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 #root .tabs button { border-color: var(--sv-vision-ink); color: var(--sv-navy); }
 #root .tabs button[aria-selected="true"] { background: var(--sv-navy); color: var(--sv-pearl); }
 #root .radar-section { background-color: var(--sv-navy); }
-#root .radar-copy .button { background: var(--sv-vision); color: #fff; }
+#root .radar-copy .button { background: var(--sv-vision); color: var(--white); }
 #root .radar-copy .button:hover { background: var(--sv-vision-ink); }
 #root .product-progress li {
-  background: linear-gradient(135deg, #426af84d, #b5b6fc38);
+  background: linear-gradient(135deg, #405ffa4d, #bfc9fc38);
   color: var(--sv-pearl);
-  box-shadow: inset 0 0 0 1px #b5b6fc52;
+  box-shadow: inset 0 0 0 1px #bfc9fc52;
 }
 #root .product-page .product-progress {
   background:
-    radial-gradient(ellipse at 82% 14%, #b5b6fc3d 0%, transparent 48%),
-    radial-gradient(ellipse at 5% 90%, #6cd6fc14 0%, transparent 46%),
-    linear-gradient(118deg, #1b174d 0%, #33246a 56%, #514084 100%);
+    radial-gradient(ellipse at 82% 14%, #bfc9fc3d 0%, transparent 48%),
+    radial-gradient(ellipse at 5% 90%, #7fd3de14 0%, transparent 46%),
+    linear-gradient(118deg, var(--ink-800) 0%, var(--ink-700) 56%, var(--sapphire-700) 100%);
 }
 #root .product-page .product-progress li:not([aria-current="step"]) {
-  background: linear-gradient(140deg, #f5f4ff14, #b5b6fc20);
-  box-shadow: inset 0 0 0 1px #e5c6fc4a;
+  background: linear-gradient(140deg, #f6f8ff14, #bfc9fc20);
+  box-shadow: inset 0 0 0 1px #cec4fb4a;
 }
 #root .product-progress li[aria-current="step"] {
   background: linear-gradient(135deg, var(--sv-cyan), var(--sv-lavender));
@@ -210,8 +214,8 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 #root .product-progress li:not([aria-current="step"]) :is(h3, p) { color: var(--sv-pearl); }
 #root .tech-closeup-placeholder {
   color: var(--sv-lavender);
-  border-color: #b5b6fc80;
-  background: linear-gradient(140deg, #131b68, var(--sv-navy));
+  border-color: #bfc9fc80;
+  background: linear-gradient(140deg, var(--ink-800), var(--sv-navy));
 }
 #root .tech-closeup-copy .tech-closeup-label,
 #root .pt-direction .pt-index,
@@ -221,8 +225,8 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 /* The memory deck uses the same brand materials without changing its canvas motion. */
 #root .quick-overview-page {
   --qv-night: var(--sv-navy);
-  --qv-night-wine: #11175c;
-  --qv-panel: rgb(10 16 77 / 88%);
+  --qv-night-wine: var(--ink-800);
+  --qv-panel: rgba(27, 25, 55, 88%);
   --qv-white: var(--sv-pearl);
   --qv-soft: var(--sv-lavender);
   background: var(--sv-navy);
@@ -230,29 +234,29 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 #root .quick-overview-page .qv-hero-eyebrow { color: var(--sv-cyan); }
 #root .quick-overview-page .qv-closing-eyebrow { color: var(--sv-vision-ink); }
 #root .quick-overview-page .qv-hero-intro,
-#root .quick-overview-page .qv-hero-count { color: #e7e8ff; }
+#root .quick-overview-page .qv-hero-count { color: var(--sapphire-100); }
 #root .quick-overview-page .qv-hero-optic {
-  border-color: #6cd6fc4a;
+  border-color: #7fd3de4a;
   background:
-    radial-gradient(circle, #6cd6fc9a 0 2%, transparent 3% 100%),
-    radial-gradient(circle, transparent 0 26%, #b5b6fc61 26.2% 26.5%, transparent 26.8% 44%, #6cd6fc45 44.2% 44.5%, transparent 44.8%),
-    radial-gradient(circle at 50% 50%, #426af870, #02023824 67%);
-  box-shadow: 0 0 0 35px #6cd6fc0b, 0 0 0 75px #b5b6fc0b, inset 0 0 90px #6cd6fc30;
+    radial-gradient(circle, #7fd3de9a 0 2%, transparent 3% 100%),
+    radial-gradient(circle, transparent 0 26%, #bfc9fc61 26.2% 26.5%, transparent 26.8% 44%, #7fd3de45 44.2% 44.5%, transparent 44.8%),
+    radial-gradient(circle at 50% 50%, #405ffa70, #1b193724 67%);
+  box-shadow: 0 0 0 35px #7fd3de0b, 0 0 0 75px #bfc9fc0b, inset 0 0 90px #7fd3de30;
 }
 #root .quick-overview-page .qv-hero-optic::before,
-#root .quick-overview-page .qv-hero-optic::after { border-color: #6cd6fc75; }
-#root .quick-overview-page .qv-hero-optic-core { color: var(--sv-pearl); text-shadow: 0 0 35px #6cd6fc78; }
+#root .quick-overview-page .qv-hero-optic::after { border-color: #7fd3de75; }
+#root .quick-overview-page .qv-hero-optic-core { color: var(--sv-pearl); text-shadow: 0 0 35px #7fd3de78; }
 #root .quick-overview-page .qv-memory-glow-one {
-  background: radial-gradient(circle, #6cd6fc33 0%, #6cd6fc0d 40%, transparent 70%);
+  background: radial-gradient(circle, #7fd3de33 0%, #7fd3de0d 40%, transparent 70%);
 }
 #root .quick-overview-page .qv-memory-glow-two {
-  background: radial-gradient(circle, #b5b6fc44 0%, #b5b6fc0d 44%, transparent 72%);
+  background: radial-gradient(circle, #bfc9fc44 0%, #bfc9fc0d 44%, transparent 72%);
 }
-#root .quick-overview-page .qv-memory-lines { stroke: #b5b6fc25; }
-#root .quick-overview-page .qv-memory-lines path:nth-child(even) { stroke: #6cd6fc1e; }
-#root .quick-overview-page .qv-memory-card { border-color: #b5b6fc73; scrollbar-color: var(--sv-lavender) transparent; }
+#root .quick-overview-page .qv-memory-lines { stroke: #bfc9fc25; }
+#root .quick-overview-page .qv-memory-lines path:nth-child(even) { stroke: #7fd3de1e; }
+#root .quick-overview-page .qv-memory-card { border-color: #bfc9fc73; scrollbar-color: var(--sv-lavender) transparent; }
 #root .quick-overview-page .qv-memory-number,
-#root .quick-overview-page .qv-memory-hint { color: #e7e8ff; }
+#root .quick-overview-page .qv-memory-hint { color: var(--sapphire-100); }
 #root .quick-overview-page .qv-memory-hint span { color: var(--sv-cyan); }
 #root .quick-overview-page .qv-overview-closing h2 { color: var(--sv-navy); }
 #root .quick-overview-page .qv-overview-closing p:not(.qv-closing-eyebrow) { color: var(--sv-muted); }
@@ -264,14 +268,14 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
   --support-rose: var(--sv-lavender);
   --support-paper: var(--sv-pearl);
   --support-muted: var(--sv-muted);
-  --support-line: #b5b6fc92;
+  --support-line: #bfc9fc92;
 }
 .sv-support .sv-support-launcher,
 .sv-support .sv-support-header,
 .sv-support .sv-support-turn-user {
   color: var(--sv-pearl);
-  background: linear-gradient(125deg, var(--sv-navy), #1b2d92);
-  border-color: #b5b6fc80;
+  background: linear-gradient(125deg, var(--sv-navy), var(--sapphire-800));
+  border-color: #bfc9fc80;
 }
 .sv-support .sv-support-panel,
 .sv-support .sv-support-transcript,
@@ -280,13 +284,13 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
 .sv-support .sv-support-intro,
 .sv-support .sv-support-turn-assistant {
   color: var(--sv-navy);
-  background: linear-gradient(130deg, #ffffff, #f1f0ff);
-  border-color: #b5b6fc9c;
+  background: linear-gradient(130deg, var(--white), var(--ink-50));
+  border-color: #bfc9fc9c;
 }
-.sv-support .sv-support-input-row textarea { color: var(--sv-navy); background: #ffffff; border-color: var(--sv-lavender); }
+.sv-support .sv-support-input-row textarea { color: var(--sv-navy); background: var(--white); border-color: var(--sv-lavender); }
 .sv-support .sv-support-input-row button { color: var(--sv-pearl); background: var(--sv-navy); border-color: var(--sv-navy); }
-.sv-support .sv-support-suggestions button { color: var(--sv-navy); background: #ffffff; border-color: var(--sv-lavender); }
-.sv-support .sv-support-suggestions button:hover { background: #e5c6fc65; border-color: var(--sv-vision-ink); }
+.sv-support .sv-support-suggestions button { color: var(--sv-navy); background: var(--white); border-color: var(--sv-lavender); }
+.sv-support .sv-support-suggestions button:hover { background: #cec4fb65; border-color: var(--sv-vision-ink); }
 .sv-support :is(a, button, textarea, [tabindex], summary):focus-visible { outline-color: var(--sv-vision-ink); }
 
 /* Keep the full AI assistant, including its launcher, in the same cool palette. */
@@ -298,88 +302,88 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
   padding: 0;
   grid-template-columns: 1fr;
   place-items: center;
-  border: 2px solid #fff;
+  border: 2px solid var(--white);
   border-radius: 50%;
-  background: linear-gradient(135deg, #8ed8ff, #b5b6fc);
+  background: linear-gradient(135deg, var(--cyan-200), var(--sapphire-200));
   color: var(--sv-navy);
-  box-shadow: 0 8px 26px #02023855;
+  box-shadow: 0 8px 26px #1b193755;
 }
 .sv-support .sv-support-launcher svg { width: 36px; height: 36px; grid-row: auto; }
 .sv-support .sv-support-launcher:hover {
-  background: linear-gradient(135deg, #6cd6fc, #e5c6fc);
+  background: linear-gradient(135deg, var(--cyan-300), var(--iris-200));
   color: var(--sv-navy);
 }
 .sv-support .sv-support-panel {
-  border-color: #b5b6fc;
-  box-shadow: 0 20px 70px #02023840;
+  border-color: var(--sapphire-200);
+  box-shadow: 0 20px 70px #1b193740;
 }
 .sv-support .sv-support-header {
-  background: linear-gradient(120deg, #020238, #1b2d92 72%, #3446b8);
+  background: linear-gradient(120deg, var(--ink-900), var(--sapphire-800) 72%, var(--sapphire-700));
 }
-.sv-support .sv-support-overline { color: #8ed8ff; }
-.sv-support .sv-support-icon-button { border-color: #b5b6fc80; }
-.sv-support .sv-support-ai-topline { border-bottom: 1px solid #b5b6fc55; }
+.sv-support .sv-support-overline { color: var(--cyan-200); }
+.sv-support .sv-support-icon-button { border-color: #bfc9fc80; }
+.sv-support .sv-support-ai-topline { border-bottom: 1px solid #bfc9fc55; }
 .sv-support .sv-support-connection { color: var(--sv-muted); }
 .sv-support .sv-support-intro,
 .sv-support .sv-support-turn-assistant {
-  border-color: #b5b6fc;
-  background: linear-gradient(135deg, #fff, #f1f0ff);
+  border-color: var(--sapphire-200);
+  background: linear-gradient(135deg, var(--white), var(--ink-50));
   color: var(--sv-navy);
 }
 .sv-support .sv-support-turn-user {
-  border-color: #426af8;
-  background: linear-gradient(135deg, #263ea8, #426af8);
-  color: #fff;
+  border-color: var(--sapphire-500);
+  background: linear-gradient(135deg, var(--sapphire-700), var(--sapphire-500));
+  color: var(--white);
 }
 .sv-support .sv-support-availability,
-.sv-support .sv-support-error { border-color: #b5b6fc; }
-.sv-support .sv-support-page-links a { color: #243fa8; border-color: #b5b6fc; }
-.sv-support .sv-support-composer { border-top: 1px solid #b5b6fc70; }
-.sv-support .sv-support-input-row textarea:focus { box-shadow: 0 0 0 3px #b5b6fc70; }
-.sv-support .sv-support-footer { border-top: 1px solid #b5b6fc55; }
+.sv-support .sv-support-error { border-color: var(--sapphire-200); }
+.sv-support .sv-support-page-links a { color: var(--sapphire-700); border-color: var(--sapphire-200); }
+.sv-support .sv-support-composer { border-top: 1px solid #bfc9fc70; }
+.sv-support .sv-support-input-row textarea:focus { box-shadow: 0 0 0 3px #bfc9fc70; }
+.sv-support .sv-support-footer { border-top: 1px solid #bfc9fc55; }
 .sv-support .sv-support-transcript {
-  background: linear-gradient(180deg, #eaf5ff 0%, #f1efff 54%, #f5f2ff 100%);
+  background: linear-gradient(180deg, var(--cyan-50) 0%, var(--ink-50) 54%, var(--ink-50) 100%);
 }
-.sv-support .sv-support-ai-topline { background: #e6f1ff; }
+.sv-support .sv-support-ai-topline { background: var(--cyan-50); }
 .sv-support .sv-support-intro,
 .sv-support .sv-support-turn-assistant {
-  background: linear-gradient(135deg, #f0faff 0%, #e9eaff 100%);
+  background: linear-gradient(135deg, var(--cyan-50) 0%, var(--sapphire-50) 100%);
 }
 .sv-support .sv-support-composer,
 .sv-support .sv-support-footer {
-  background: #edf2ff;
+  background: var(--sapphire-50);
 }
 .sv-support .sv-support-input-row textarea {
-  background: #fff;
-  border-color: #879bff;
+  background: var(--white);
+  border-color: var(--sapphire-300);
 }
 .sv-support .sv-support-input-row button {
-  background: linear-gradient(135deg, #3157e8, #526cf2);
-  border-color: #3157e8;
+  background: linear-gradient(135deg, var(--sapphire-600), var(--sapphire-500));
+  border-color: var(--sapphire-600);
 }
 .sv-support .sv-support-input-row button:hover {
-  background: linear-gradient(135deg, #2647cc, #4659da);
+  background: linear-gradient(135deg, var(--sapphire-700), var(--sapphire-600));
 }
 
 /* Shared footer, drawers and information overlays. */
 #root .footer {
-  background: linear-gradient(120deg, var(--sv-navy), #111963);
+  background: linear-gradient(120deg, var(--sv-navy), var(--ink-800));
   color: var(--sv-pearl);
 }
 #root .extra-menu {
   background:
-    radial-gradient(ellipse at 82% 12%, #426af84a, transparent 43%),
-    radial-gradient(ellipse at 12% 78%, #6cd6fc24, transparent 52%),
-    linear-gradient(155deg, #020238 0%, #0c1559 50%, #1a2d80 100%);
+    radial-gradient(ellipse at 82% 12%, #405ffa4a, transparent 43%),
+    radial-gradient(ellipse at 12% 78%, #7fd3de24, transparent 52%),
+    linear-gradient(155deg, var(--ink-900) 0%, var(--ink-800) 50%, var(--sapphire-800) 100%);
   color: var(--sv-pearl);
-  border-color: #b5b6fc7a;
+  border-color: #bfc9fc7a;
 }
 
 /* Match the selected information panels to the assistant launcher's blue-lavender gradient. */
 #root .technology-page .tech-transparency,
 #root .about-editorial .ab-connect,
 #root .ct .ct-explore {
-  background: linear-gradient(135deg, #8ed8ff, #b5b6fc);
+  background: linear-gradient(135deg, var(--cyan-200), var(--sapphire-200));
   color: var(--sv-navy);
 }
 /* Pearl base with a slow, soft color wash behind the product opening. */
@@ -394,9 +398,9 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 36% 42% at 22% 30%, #b5b6fc4d, transparent 76%),
-    radial-gradient(ellipse 34% 40% at 78% 30%, #e5c6fc59, transparent 76%),
-    radial-gradient(ellipse 38% 44% at 62% 82%, #6cd6fc2b, transparent 78%);
+    radial-gradient(ellipse 36% 42% at 22% 30%, #bfc9fc4d, transparent 76%),
+    radial-gradient(ellipse 34% 40% at 78% 30%, #cec4fb59, transparent 76%),
+    radial-gradient(ellipse 38% 44% at 62% 82%, #7fd3de2b, transparent 78%);
   animation: sv-product-pearl-wash 20s ease-in-out infinite alternate;
 }
 @keyframes sv-product-pearl-wash {
@@ -414,7 +418,7 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
   color: var(--sv-navy);
 }
 #root .technology-page .tech-transparency .eyebrow {
-  color: #1d2fa8;
+  color: var(--sapphire-700);
 }
 #root .product-page .product-hero .button:not(.button-outline) {
   background: var(--sv-navy);
@@ -422,41 +426,41 @@ body, #root { background: var(--sv-pearl); color: var(--sv-navy); }
   color: var(--sv-pearl);
 }
 #root .product-page .product-hero .button:not(.button-outline):hover {
-  background: #1d2fa8;
-  border-color: #1d2fa8;
+  background: var(--sapphire-700);
+  border-color: var(--sapphire-700);
 }
 #root .product-page .product-hero .button-outline,
 #root .product-page .product-hero .button-outline:hover,
 #root .about-editorial .ab-connect .ab-action-outline,
 #root .ct .ct-explore .ct-action {
   color: var(--sv-navy);
-  border-color: #02023880;
+  border-color: #1b193780;
 }
 #root .about-editorial .ab-connect .ab-action-outline:hover,
 #root .ct .ct-explore .ct-action:hover {
-  background: #02023812;
+  background: #1b193712;
 }
 
 /* Separate the product FAQ from its closing call to action with the same palette. */
 #root .product-page .product-faq {
-  background: linear-gradient(125deg, var(--sv-pearl) 0%, #eef8ff 55%, #ecebff 100%);
+  background: linear-gradient(125deg, var(--sv-pearl) 0%, var(--cyan-50) 55%, var(--sapphire-50) 100%);
 }
 #root .product-page .product-contact {
-  background: linear-gradient(135deg, #8ed8ff, #b5b6fc);
-  border-top-color: #0202382e;
+  background: linear-gradient(135deg, var(--cyan-200), var(--sapphire-200));
+  border-top-color: #1b19372e;
 }
 
 /* The technology flow uses the same light brand gradient as the adjacent panels. */
 #root .technology-page .tech-flow {
-  background: linear-gradient(135deg, #8ed8ff, #b5b6fc);
+  background: linear-gradient(135deg, var(--cyan-200), var(--sapphire-200));
   color: var(--sv-navy);
 }
 #root .technology-page .tech-flow :is(h2, h3, p, small) {
   color: var(--sv-navy);
 }
 #root .technology-page .tech-flow .eyebrow {
-  color: #1d2fa8;
+  color: var(--sapphire-700);
 }
 #root .technology-page .tech-flow-grid::before {
-  border-color: #0202384d;
+  border-color: #1b19374d;
 }

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14122e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap&subset=vietnamese" rel="stylesheet">
+<title>Mô phỏng SeeVia</title>
+<link rel="icon" href="/images/seevia-favicon.png">
+<meta name="description" content="Trải nghiệm mô phỏng cách kính SeeVia giúp người khiếm thị cảm nhận môi trường xung quanh trên một con phố Việt Nam buổi sáng.">
+<style>
+  :root {
+    --ink: #14122e;
+    --panel: rgba(20, 18, 46, 0.62);
+    --panel-hi: rgba(27, 25, 55, 0.86);
+    --panel-solid: #1b1937;
+    --line: rgba(255, 255, 255, 0.16);
+    --line-hi: rgba(255, 255, 255, 0.3);
+    --text: #f6f8ff;
+    --muted: #b8bde0;
+    --accent: #7fd3de;
+    --accent-2: #a8e5eb;
+    --ring: #e6f9fb;
+    --ok: #7ad9a2;
+    --blue: #8cc4ff;
+    --danger: #ff8f7e;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--ink); color: var(--text); overflow: hidden;
+    font-family: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    -webkit-font-smoothing: antialiased; touch-action: none; user-select: none;
+  }
+  [hidden] { display: none !important; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  #stage, #stage canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  #stage canvas { outline: none; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  kbd {
+    display: inline-block; min-width: 1.9em; padding: 0.12em 0.5em; border-radius: 7px;
+    border: 1px solid var(--line-hi); border-bottom-width: 2px; background: rgba(255,255,255,0.12);
+    font: 700 0.8em/1.45 inherit; text-align: center; color: var(--text); letter-spacing: 0.02em;
+  }
+
+  /* ───────── Màn hình giới thiệu ───────── */
+  #intro {
+    position: fixed; inset: 0; z-index: 50; overflow-y: auto; touch-action: pan-y; user-select: text;
+    display: flex; align-items: flex-start; justify-content: center; padding: 28px 16px 40px;
+    background:
+      radial-gradient(1200px 600px at 75% -10%, rgba(127,211,222,0.26), rgba(0,0,0,0) 60%),
+      linear-gradient(180deg, rgba(20,18,46,0.8), rgba(12,11,30,0.94));
+    backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  }
+  .card { width: min(900px, 100%); margin: auto 0; }
+  .eyebrow { color: var(--accent); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.78rem; }
+  h1 { margin: 0.35rem 0 0.6rem; font-size: clamp(1.9rem, 5.2vw, 3rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.01em; }
+  h2.sec-title { margin: 1.3rem 0 0.6rem; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-2); font-weight: 700; }
+  .lead { color: #e3e6f6; font-size: 1.05rem; line-height: 1.6; margin: 0 0 0.4rem; max-width: 62ch; }
+  .how { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+  .how li { counter-increment: s; position: relative; padding: 12px 14px 12px 14px; border-radius: 14px; background: rgba(255,255,255,0.06); border: 1px solid var(--line); font-size: 0.9rem; line-height: 1.45; color: #d5d4e8; }
+  .how li::before { content: counter(s); display: inline-grid; place-items: center; width: 24px; height: 24px; margin-bottom: 6px; border-radius: 50%; background: var(--accent); color: #14122e; font-weight: 800; font-size: 0.82rem; }
+  .how b { display: block; color: var(--text); font-size: 0.98rem; margin-bottom: 2px; }
+  .groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .groups li { padding: 11px 13px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--line); font-size: 0.85rem; line-height: 1.45; color: #d6cfc1; }
+  .groups b { display: flex; align-items: center; gap: 8px; color: var(--text); font-size: 0.95rem; margin-bottom: 3px; }
+  .groups b kbd { font-size: 0.72em; }
+  .groups small { display: block; color: var(--muted); font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+  .note {
+    border-left: 3px solid var(--accent); padding: 0.55rem 0.9rem; margin: 1.1rem 0 1.2rem;
+    background: rgba(255,255,255,0.05); border-radius: 0 10px 10px 0; color: #d5d4e8; font-size: 0.92rem; line-height: 1.55;
+  }
+  #start-btn {
+    min-height: 56px; padding: 0 32px; border: 0; border-radius: 999px; font-weight: 800; font-size: 1.1rem;
+    color: #fff; background: linear-gradient(180deg, #5b7dff, #305ffa);
+    box-shadow: 0 8px 28px rgba(127,211,222,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+  }
+  #start-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 12px 34px rgba(127,211,222,0.4), inset 0 1px 0 rgba(255,255,255,0.5); }
+  #start-btn:disabled { opacity: 0.55; cursor: progress; }
+  .row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .free { margin: 0.2rem 0 1rem; color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
+  .row a { color: var(--muted); font-size: 0.95rem; }
+  #load-status { min-height: 1.4em; margin-top: 0.9rem; color: var(--muted); font-size: 0.92rem; }
+  #load-status.error { color: var(--danger); }
+  #voice-warning {
+    margin: 1rem 0 0; padding: 0.65rem 0.9rem; border-radius: 10px; font-size: 0.92rem; line-height: 1.5;
+    background: rgba(127,211,222,0.14); border: 1px solid rgba(127,211,222,0.4); color: #c9eef2;
+  }
+
+  /* ───────── Khung nhìn kính (lớp phủ trên cảnh 3D) ───────── */
+  #lens { position: fixed; inset: 0; z-index: 6; pointer-events: none; }
+  #rim {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 78% 74% at 50% 46%, rgba(0,0,0,0) 62%, rgba(10,7,4,0.36) 100%);
+  }
+  #rim::after {
+    content: ""; position: absolute; inset: 9px; border-radius: 34px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), inset 0 0 60px rgba(168,229,235,0);
+    transition: box-shadow 0.25s;
+  }
+  #lens.cam #rim::after { box-shadow: inset 0 0 0 1.5px rgba(168,229,235,0.65), inset 0 0 90px rgba(127,211,222,0.22); }
+
+  /* vùng nhận diện: đúng vùng mà các tia nhận diện quét qua */
+  #aim {
+    position: absolute; left: 50%; top: 46%; width: min(30vh, 260px); height: min(30vh, 260px);
+    transform: translate(-50%, -50%); transition: transform 0.25s cubic-bezier(.2,.8,.3,1), opacity 0.4s;
+    opacity: 0.8;
+  }
+  #aim .c { position: absolute; width: 22px; height: 22px; border: 0 solid rgba(255,255,255,0.78); filter: drop-shadow(0 0 3px rgba(0,0,0,0.55)); transition: border-color 0.2s; }
+  #aim .tl { left: 0; top: 0; border-width: 2px 0 0 2px; border-top-left-radius: 9px; }
+  #aim .tr { right: 0; top: 0; border-width: 2px 2px 0 0; border-top-right-radius: 9px; }
+  #aim .bl { left: 0; bottom: 0; border-width: 0 0 2px 2px; border-bottom-left-radius: 9px; }
+  #aim .br { right: 0; bottom: 0; border-width: 0 2px 2px 0; border-bottom-right-radius: 9px; }
+  #aim::before { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px;
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)) center / 100% 1.5px no-repeat, linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)) center / 1.5px 100% no-repeat; opacity: 0.8; }
+  #aim .aim-label {
+    position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%); white-space: nowrap;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.82);
+    padding: 3px 10px; border-radius: 999px; background: rgba(14,15,18,0.5); border: 1px solid var(--line);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: opacity 0.4s;
+  }
+  #aim.quiet { opacity: 0.45; }
+  #aim.quiet .aim-label { opacity: 0; }
+  #lens.cam #aim { transform: translate(-50%, -50%) scale(0.94); opacity: 1; }
+  #lens.cam #aim .c { border-color: var(--accent-2); }
+  #aim .scan {
+    position: absolute; left: 6px; right: 6px; top: 0; height: 2px; opacity: 0;
+    background: linear-gradient(90deg, rgba(168,229,235,0), rgba(191,236,242,0.95), rgba(168,229,235,0));
+    box-shadow: 0 0 14px 3px rgba(127,211,222,0.55);
+  }
+  #lens.cam #aim .scan { animation: scan 0.62s ease-in-out both; }
+  @keyframes scan { 0% { top: 4%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 96%; opacity: 0; } }
+  #shutter { position: absolute; inset: 0; background: rgba(255,248,232,0.5); opacity: 0; }
+  #shutter.go { animation: flash 0.28s ease-out both; }
+  @keyframes flash { 0% { opacity: 0.7; } 100% { opacity: 0; } }
+  #sweep {
+    position: absolute; left: 50%; bottom: -30vh; width: 140vh; height: 140vh; margin-left: -70vh; border-radius: 50%;
+    border: 2px solid rgba(168,229,235,0.7); opacity: 0; transform: scale(0.1);
+    box-shadow: 0 0 40px rgba(127,211,222,0.3), inset 0 0 60px rgba(127,211,222,0.16);
+  }
+  #sweep.go { animation: sweep 1s ease-out both; }
+  @keyframes sweep { 0% { opacity: 0.9; transform: scale(0.1); } 100% { opacity: 0; transform: scale(1); } }
+
+  /* Lớp phủ nhẹ cho cảm giác ban mai: ánh vàng mỏng từ trên xuống và viền tối rất nhẹ ở góc, không che chi tiết cảnh. */
+  #dream { position: fixed; inset: 0; z-index: 5; pointer-events: none;
+    background:
+      radial-gradient(130% 95% at 50% 42%, rgba(27, 25, 55, 0) 58%, rgba(27, 25, 55, 0.16) 100%),
+      linear-gradient(180deg, rgba(255, 228, 176, 0.10) 0%, rgba(255, 228, 176, 0) 38%); }
+  #stage canvas { display: block; width: 100% !important; height: 100% !important; }
+  #sunflare { position: fixed; inset: 0; z-index: 6; pointer-events: none; overflow: hidden; mix-blend-mode: screen; opacity: 0; }
+  #sunflare .core { position: absolute; left: 0; top: 0; width: 640px; height: 640px; margin: -320px 0 0 -320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,246,222,0.9) 0, rgba(255,224,160,0.5) 9%, rgba(255,196,118,0.2) 30%, rgba(255,176,96,0.07) 52%, rgba(255,170,90,0) 70%); }
+  #sunflare .g { position: absolute; left: 0; top: 0; border-radius: 50%; }
+
+  /* ───────── HUD tối giản (Immersive Minimal) ───────── */
+  :root {
+    --glass: rgba(20, 22, 27, 0.56);
+    --glass-hi: rgba(22, 24, 30, 0.8);
+    --hair: var(--fill-hi);
+    --r-lg: 22px; --r-md: 14px; --r-sm: 10px;
+    --dock-h: 64px;
+  }
+  /* Tông giao diện: kính mờ trắng ấm khi cảnh sáng nắng, tự chuyển sang kính tối khi cảnh tối (đi qua bóng râm). */
+  #hud {
+    --glass: rgba(246, 248, 255, 0.72); --glass-hi: rgba(250, 251, 255, 0.92); --hair: rgba(48, 60, 140, 0.24);
+    --text: #1b1937; --muted: #55537e; --accent: #305ffa; --accent-2: #2440b8; --on-accent: #ffffff;
+    --line: rgba(48, 60, 140, 0.2); --line-hi: rgba(48, 60, 140, 0.34);
+    --fill: rgba(27, 25, 55, 0.07); --fill-hi: rgba(27, 25, 55, 0.15);
+    --ok: #2f8f5b; --blue: #2b6cb0; --danger: #b3261e;
+    color: var(--text);
+  }
+  #hud[data-tone="dark"] {
+    --glass: rgba(20, 18, 46, 0.62); --glass-hi: rgba(27, 25, 55, 0.86); --hair: rgba(255, 255, 255, 0.16);
+    --text: #f6f8ff; --muted: #b8bde0; --accent: #7fd3de; --accent-2: #a8e5eb; --on-accent: #14122e;
+    --line: rgba(255, 255, 255, 0.16); --line-hi: rgba(255, 255, 255, 0.3);
+    --fill: rgba(255, 255, 255, 0.07); --fill-hi: rgba(255, 255, 255, 0.15);
+    --ok: #7ad9a2; --blue: #8cc4ff; --danger: #ff8f7e;
+  }
+  #hud, #hud .glass { transition: background-color 0.6s, color 0.6s, border-color 0.6s; }
+  #hud { position: fixed; inset: 0; z-index: 20; pointer-events: none; }
+  #hud :is(button, input, a, label, ol.interactive) { pointer-events: auto; }
+  .glass {
+    background: var(--glass); border: 1px solid var(--hair);
+    backdrop-filter: blur(16px) saturate(1.25); -webkit-backdrop-filter: blur(16px) saturate(1.25);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  .glass-hi { background: var(--glass-hi); }
+  .ic svg, .dk svg, .icon-btn svg, .tab svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+
+  /* Đầu trang: thương hiệu bên trái, trạng thái bên phải */
+  #top { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    padding: max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left)); }
+  #brand { display: inline-flex; align-items: baseline; gap: 10px; min-height: 40px; padding: 0 16px; align-self: flex-start; align-items: center; border-radius: 999px; }
+  #brand b { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.01em; }
+  #brand span { font-size: 0.78rem; color: #dcd6c9; white-space: nowrap; }
+  #top-right { display: flex; align-items: center; gap: 8px; }
+  #status { display: inline-flex; align-items: center; gap: 9px; min-height: 40px; padding: 0 16px; border-radius: 999px; font-size: 0.86rem; font-weight: 600; max-width: min(300px, 46vw); transition: border-color 0.25s, background 0.25s; }
+  #status.cam { border-color: rgba(168,229,235,0.75); background: rgba(27, 25, 55, 0.7); }
+  #status.svc { border-color: rgba(140,196,255,0.6); }
+  #st-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .led { width: 9px; height: 9px; border-radius: 50%; background: #8a8f98; flex: 0 0 auto; transition: background 0.2s, box-shadow 0.2s; }
+  #status.busy .led { background: var(--blue); box-shadow: 0 0 9px rgba(140,196,255,0.9); animation: pulse 1.1s ease-in-out infinite; }
+  #status.cam .led { background: var(--accent); box-shadow: 0 0 10px rgba(127,211,222,0.95); }
+  @keyframes pulse { 50% { opacity: 0.4; } }
+  #steps { display: none; margin: 0; padding: 0; list-style: none; gap: 4px; }
+  #status.busy #steps { display: inline-flex; }
+  #steps li { width: 6px; height: 6px; border-radius: 50%; background: var(--fill-hi); transition: background 0.2s, transform 0.2s; }
+  #steps li.done { background: rgba(255,255,255,0.75); }
+  #steps li.now { background: var(--accent-2); transform: scale(1.35); }
+  #st-sub { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .icon-btn { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: var(--text); transition: background 0.15s, border-color 0.15s; }
+  .icon-btn:hover { background: var(--fill-hi); }
+  #btn-voice .slash { opacity: 0; }
+  #btn-voice[aria-pressed="false"] .slash { opacity: 1; }
+  #btn-voice[aria-pressed="false"] { color: #ffb4a6; }
+  .sr-lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Cột trái: dịch vụ đang chạy + hướng dẫn nhiệm vụ */
+  #leftcol { position: absolute; left: max(16px, env(safe-area-inset-left)); top: calc(70px + env(safe-area-inset-top)); display: flex; flex-direction: column; gap: 10px; align-items: flex-start; pointer-events: none; }
+  #leftcol > * { pointer-events: auto; }
+  #chips { display: flex; flex-direction: column; gap: 7px; align-items: flex-start; max-width: min(320px, calc(100vw - 32px)); }
+  .chip { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; max-width: 100%; padding: 4px 6px 4px 14px; border-radius: 999px; font-size: 0.86rem; background: var(--glass-hi); border: 1px solid var(--hair); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); animation: rise 0.25s ease-out both; }
+  .chip .tx { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chip .x { min-height: 30px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--hair); background: var(--fill-hi); font-size: 0.78rem; font-weight: 650; }
+  .chip .x:hover { background: var(--fill-hi); }
+  .chip.sos { border-color: rgba(255,143,126,0.7); }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  /* Hướng dẫn theo ngữ cảnh: mỗi lần một bước */
+
+  /* Radar vị trí tương đối (xuất hiện khi cần) */
+  #radar-wrap { position: absolute; left: max(16px, env(safe-area-inset-left)); bottom: calc(var(--dock-h) + 36px + env(safe-area-inset-bottom)); width: 156px; padding: 8px 8px 9px; border-radius: var(--r-md); transition: opacity 0.5s; }
+  #radar-wrap.fade { opacity: 0; }
+  #radar { display: block; width: 140px; height: 140px; }
+  #radar-legend { margin: 5px 3px 0; padding: 0; list-style: none; font-size: 0.74rem; line-height: 1.5; color: var(--text); }
+  #radar-title { margin: 0 3px 3px; font-size: 0.76rem; font-weight: 600; color: var(--muted); }
+
+  /* Phụ đề: viên thuốc phía trên thanh điều khiển */
+  #subtitle {
+    position: absolute; left: 50%; bottom: calc(var(--dock-h) + 36px + env(safe-area-inset-bottom)); transform: translate(-50%, 8px);
+    width: min(620px, calc(100% - 32px)); display: flex; gap: 8px; align-items: flex-start; padding: 10px 10px 10px 20px; border-radius: 26px;
+    background: var(--glass-hi); opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s;
+  }
+  #subtitle.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+  .sub-body { flex: 1; min-width: 0; padding: 4px 0; }
+  #sub-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: 1.02rem; line-height: 1.45; font-weight: 500; cursor: pointer; }
+  #subtitle.expanded #sub-text { -webkit-line-clamp: unset; max-height: 30vh; overflow-y: auto; }
+  #sub-hist { display: none; margin: 8px 0 0; padding: 8px 0 0; list-style: none; border-top: 1px solid var(--hair); color: var(--muted); font-size: 0.86rem; line-height: 1.4; max-height: 22vh; overflow-y: auto; }
+  #sub-hist li + li { margin-top: 6px; }
+  #subtitle.expanded #sub-hist:not(:empty) { display: block; }
+  .sub-btns { display: flex; gap: 2px; }
+  .sub-btn { width: 36px; height: 36px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; color: var(--text); }
+  .sub-btn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .sub-btn:hover { background: var(--fill-hi); }
+  .sub-btn[aria-pressed="true"] { color: var(--accent-2); background: rgba(127,211,222,0.2); }
+  #hud.sheet-open #subtitle { bottom: calc(var(--dock-h) + 34px + var(--sheet-h, 0px) + 14px + env(safe-area-inset-bottom)); }
+  #hud.sheet-open #radar-wrap { bottom: calc(var(--dock-h) + 34px + var(--sheet-h, 0px) + 14px + env(safe-area-inset-bottom)); }
+
+  /* Khung tiêu điểm quanh MỘT vật thể */
+  #focus { position: absolute; left: 0; top: 0; width: 0; height: 0; opacity: 0; will-change: transform; }
+  #focus.on { opacity: 1; transition: opacity 0.25s; }
+  #focus.off { opacity: 0; transition: opacity 0.8s; }
+  #focus .box { position: absolute; left: 0; top: 0; width: var(--w, 140px); height: var(--h, 140px); transform: translate(-50%, -50%); }
+  #focus.pop .box { animation: pop 0.42s cubic-bezier(.2,.8,.3,1) both; }
+  #focus .box .c { position: absolute; width: 22px; height: 22px; border: 0 solid var(--ring); filter: drop-shadow(0 0 4px rgba(0,0,0,0.55)); }
+  #focus .tl { left: 0; top: 0; border-width: 2.5px 0 0 2.5px; border-top-left-radius: 9px; }
+  #focus .tr { right: 0; top: 0; border-width: 2.5px 2.5px 0 0; border-top-right-radius: 9px; }
+  #focus .bl { left: 0; bottom: 0; border-width: 0 0 2.5px 2.5px; border-bottom-left-radius: 9px; }
+  #focus .br { right: 0; bottom: 0; border-width: 0 2.5px 2.5px 0; border-bottom-right-radius: 9px; }
+  #focus .box::after { content: ""; position: absolute; inset: 6px; border-radius: 12px; background: radial-gradient(closest-side, rgba(214,244,248,0.08), rgba(214,244,248,0)); }
+  @keyframes pop { from { opacity: 0; transform: translate(-50%, -50%) scale(1.3); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+
+
+
+  /* Thanh điều khiển nổi duy nhất */
+  #dock { position: absolute; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; gap: 4px; padding: 6px; border-radius: 999px; pointer-events: auto; z-index: 28; }
+  .dk { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 18px 0 15px; border-radius: 999px; border: 0; background: transparent; color: var(--text); font-weight: 650; font-size: 0.92rem; white-space: nowrap; transition: background 0.15s, transform 0.1s; }
+  .dk:hover { background: var(--fill-hi); }
+  .dk:active { transform: scale(0.97); }
+  .dk[aria-pressed="true"] { background: var(--fill-hi); }
+  .dk.primary { background: var(--accent); color: #14122e; }
+  .dk.primary:hover { filter: brightness(1.07); }
+  .dk[data-tip]::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 14px); transform: translate(-50%, 4px); padding: 6px 11px; border-radius: 9px; background: rgba(30,24,16,0.94); border: 1px solid rgba(255,255,255,0.14); color: #f6f8ff; font-size: 0.78rem; font-weight: 500; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s, transform 0.15s; }
+  .dk:hover::after, .dk:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+  .dk.rec { background: #b3261e; color: #fff; animation: pulse 1s infinite; }
+
+  /* Dải tính năng: nằm ngang ngay trên thanh điều khiển */
+  #sheet {
+    position: absolute; left: 50%; bottom: calc(var(--dock-h) + 34px + env(safe-area-inset-bottom)); transform: translateX(-50%);
+    width: min(940px, calc(100% - 32px)); max-height: min(46vh, 420px); z-index: 26; pointer-events: auto; display: flex; flex-direction: column;
+    padding: 10px 14px 10px; border-radius: var(--r-lg); background: var(--glass-hi);
+    touch-action: pan-y; user-select: text; animation: lift 0.22s ease-out both; overflow-y: auto; overscroll-behavior: contain;
+  }
+  @keyframes lift { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+  #sheet header { display: flex; align-items: center; gap: 10px; }
+  #sheet-tabs { display: flex; gap: 4px; flex: 0 1 auto; padding: 3px; border-radius: 999px; background: var(--fill); }
+  #sheet-tabs button { flex: 0 0 auto; min-height: 38px; padding: 0 14px 0 11px; border-radius: 999px; border: 0; background: transparent; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; font-weight: 650; font-size: 0.86rem; white-space: nowrap; }
+  #sheet-tabs button::after { content: attr(data-l); }
+  #sheet-tabs button svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  #sheet-tabs button:hover { color: var(--text); }
+  #sheet-tabs button[aria-selected="true"] { background: var(--accent); color: var(--on-accent); }
+  #sheet-close { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 12px 0 14px; border-radius: 999px; border: 1px solid var(--line-hi); background: var(--fill); color: var(--text); font-weight: 650; font-size: 0.86rem; }
+  #sheet-close kbd { font-size: 0.7rem; padding: 1px 6px; }
+  .hp-close { white-space: nowrap; display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; }
+  .hp-close kbd { font-size: 0.7rem; padding: 1px 6px; }
+  @media (max-width: 640px) { #sheet-close kbd, .hp-close kbd { display: none; } }
+  #sheet-close:hover { background: var(--fill-hi); }
+  #sheet-title { margin: 8px 0 0; font-size: 1.02rem; }
+  #sheet-sub { margin: 2px 0 8px; color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
+  #sheet.has-body #sheet-sub { display: none; }
+  #sheet.has-body #sheet-items button small { display: none; }
+  #sheet-items { margin: 0; padding: 2px 0 4px; list-style: none; display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; }
+  #sheet-items li { flex: 0 0 auto; width: clamp(176px, 21vw, 232px); scroll-snap-align: start; }
+  #sheet-items button { width: 100%; display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 6px 12px 6px 8px; border-radius: 12px; border: 1px solid transparent; background: var(--fill); text-align: left; }
+  #sheet-items button:hover { background: var(--fill-hi); }
+  #sheet-items button.sel { border-color: rgba(127,211,222,0.7); background: rgba(127,211,222,0.14); }
+  #sheet-items button span { display: flex; flex-direction: column; line-height: 1.25; font-size: 0.9rem; font-weight: 600; }
+  #sheet-items button small { font-weight: 400; color: var(--muted); font-size: 0.76rem; }
+  #sheet-body { flex: 0 0 auto; margin: 10px 0 8px; padding-right: 2px; display: flex; flex-direction: column; gap: 8px; }
+  .card2 { padding: 11px 13px; border-radius: 14px; background: var(--fill); border: 1px solid var(--line); font-size: 0.88rem; line-height: 1.5; }
+  .card2 h4 { margin: 0 0 4px; font-size: 0.95rem; }
+  .card2 .m { color: var(--muted); font-size: 0.78rem; }
+  .card2 .kv { display: grid; grid-template-columns: 110px 1fr; gap: 3px 8px; }
+  .card2 .kv dt { color: var(--muted); font-size: 0.8rem; }
+  .card2 .kv dd { margin: 0; }
+  .card2 ul { margin: 4px 0 0; padding-left: 18px; }
+  .card2 .btns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .btn { min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-hi); background: var(--fill-hi); font-weight: 600; font-size: 0.84rem; }
+  .btn:hover { background: var(--fill-hi); }
+  .btn.pri { background: linear-gradient(180deg, #5b7dff, #305ffa); color: #fff; border-color: transparent; }
+  .btn.primary { background: linear-gradient(180deg, #5b7dff, #305ffa); color: #fff; border-color: transparent; }
+  .btn.sm { min-height: 32px; padding: 0 12px; font-size: 0.8rem; }
+  .btn.on { background: #3f8f55; border-color: #7fcf93; color: #fff; }
+  .seg { display: flex; gap: 4px; padding: 3px; border-radius: 12px; background: var(--fill); border: 1px solid var(--line); }
+  .seg button { flex: 1; background: transparent; border: 0; color: #d6d2c8; min-height: 34px; border-radius: 9px; font-weight: 650; font-size: 0.84rem; color: var(--muted); }
+  .seg button[aria-pressed="true"], .seg button[aria-selected="true"] { background: var(--accent); color: #14122e; }
+  .seg button:not([aria-pressed="true"]):not([aria-selected="true"]):hover { background: var(--fill-hi); }
+  .avatar { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #496a8f; color: #fff; font-weight: 750; }
+  .avatar.big { width: 54px; height: 54px; font-size: 1.3rem; background: #5f8a6a; }
+  .profile { display: flex; gap: 10px; align-items: center; }
+  .people { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .people li { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 12px; background: var(--fill); border: 1px solid var(--line); }
+  .people li.post { display: block; }
+  .people li.post p { margin: 4px 0 8px; font-size: 0.86rem; line-height: 1.45; }
+  .grow { flex: 1; min-width: 0; }
+  .sw { display: inline-flex; align-items: center; gap: 5px; font-size: 0.76rem; color: var(--muted); }
+  .sw input { width: 18px; height: 18px; accent-color: #7fd3de; }
+  .card2 ul.plain { padding-left: 18px; }
+  .batt { display: flex; align-items: center; gap: 10px; margin: 4px 0 8px; }
+  .batt-bar { position: relative; flex: 1; height: 14px; border-radius: 7px; background: var(--fill-hi); overflow: hidden; }
+  .batt-bar i { display: block; height: 100%; background: #6cc47c; }
+  .batt-bar.low i { background: #e0685f; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: #888; }
+  .dot.ok { background: #6cc47c; } .dot.off { background: #888; }
+  .card2.live { border-color: #6cc47c; }
+  .vcall { display: flex; gap: 12px; align-items: center; margin: 6px 0; }
+  .btn.danger { background: #b3261e; border-color: #e0685f; color: #fff; }
+  .chat { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }
+  .bub { max-width: 86%; padding: 7px 11px; border-radius: 14px; font-size: 0.88rem; line-height: 1.45; }
+  .bub.me { align-self: flex-end; background: rgba(127,211,222,0.22); border: 1px solid rgba(127,211,222,0.5); }
+  .bub.bot { align-self: flex-start; background: var(--fill); border: 1px solid var(--line); }
+  .callbox { text-align: center; }
+  .avatar { width: 56px; height: 56px; margin: 2px auto 6px; border-radius: 50%; display: grid; place-items: center; font-size: 1.5rem; background: linear-gradient(135deg, #7fd3de, #305ffa); color: #2a1604; font-weight: 800; }
+  #cmd-form { display: flex; gap: 6px; margin-top: 4px; padding: 6px 0 0; border-top: 1px solid var(--hair); }
+  #cmd-input { flex: 1 1 auto; min-width: 0; min-height: 42px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--hair); background: var(--fill); color: var(--text); font: inherit; font-size: 0.9rem; user-select: text; }
+  #cmd-input::placeholder { color: var(--muted); opacity: 0.8; }
+  #cmd-form .btn { min-height: 42px; }
+  #btn-mic.rec { background: #b3261e; border-color: #e0685f; animation: pulse 1s infinite; }
+  .sim-note { margin: 7px 2px 0; font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+  /* Hộp thoại hướng dẫn (mở theo yêu cầu) */
+  #help { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 16px; background: rgba(8,9,11,0.42); pointer-events: auto; }
+  #help .box { width: min(560px, 100%); max-height: calc(100vh - 32px); overflow-y: auto; padding: 20px 22px 18px; border-radius: 26px; background: rgba(24,26,32,0.94); border: 1px solid var(--hair); box-shadow: 0 24px 70px rgba(0,0,0,0.5); touch-action: pan-y; user-select: text; }
+  #help h2 { margin: 0 0 4px; font-size: 1.3rem; }
+  #help p.lead2 { margin: 0 0 14px; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  #help dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; margin: 0 0 16px; align-items: center; }
+  #help dt { text-align: right; white-space: nowrap; }
+  #help dd { margin: 0; font-size: 0.92rem; }
+  #help .hp-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  #help .hp-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+
+  /* ───────── Tạm dừng ───────── */
+  #pause { position: fixed; inset: 0; z-index: 24; display: flex; align-items: flex-start; justify-content: center; padding: 84px 16px 0; pointer-events: none; }
+  #pause .box { pointer-events: auto; width: min(480px, 100%); padding: 18px 20px; border-radius: 22px; background: rgba(22,24,28,0.92); border: 1px solid var(--hair); box-shadow: 0 18px 50px rgba(0,0,0,0.45); }
+  #pause h2 { margin: 0 0 6px; font-size: 1.2rem; }
+  #pause p { margin: 0 0 14px; color: #d9d2c4; line-height: 1.55; font-size: 0.92rem; }
+  #pause .row { gap: 10px; }
+  #pause .btn2 { min-height: 46px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--hair); background: var(--fill); text-decoration: none; display: inline-flex; align-items: center; color: var(--text); font-weight: 600; }
+  #btn-resume { background: var(--accent); color: #14122e; border-color: transparent; }
+
+  /* ───────── Cảm ứng + màn hình nhỏ ───────── */
+  #stick { display: none; position: absolute; left: max(22px, env(safe-area-inset-left)); bottom: calc(var(--dock-h) + 44px + env(safe-area-inset-bottom)); width: 112px; height: 112px; border-radius: 50%; background: var(--fill); border: 2px solid var(--fill-hi); pointer-events: auto; touch-action: none; }
+  #stick-knob { position: absolute; left: 50%; top: 50%; width: 50px; height: 50px; margin: -25px 0 0 -25px; border-radius: 50%; background: rgba(255,255,255,0.32); }
+  @media (pointer: coarse) { #stick { display: block; } }
+  @media (max-width: 860px) {
+    #brand span { display: none; }
+    #radar-wrap { width: 132px; } #radar { width: 116px; height: 116px; }
+    #aim { width: min(34vw, 190px); height: min(34vw, 190px); }
+  }
+  @media (max-width: 640px) {
+    .dk { padding: 0 14px; } .dk .lbl { display: none; } .dk.primary .lbl { display: inline; }
+    #status { max-width: 52vw; }
+    #sheet { width: calc(100% - 16px); max-height: 56vh; padding: 8px 10px; }
+    #sheet-tabs button { padding: 0 11px; } #sheet-tabs button::after { display: none; } #sheet-tabs button[aria-selected="true"]::after { display: inline; }
+    #sheet-items { flex-direction: column; overflow-x: visible; } #sheet-items li { width: auto; }
+    #subtitle { bottom: calc(var(--dock-h) + 30px + env(safe-area-inset-bottom)); }
+    #leftcol { top: calc(62px + env(safe-area-inset-top)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #status .led, .dk.rec { animation: none !important; }
+    #focus.pop .box, #lens.cam #aim .scan, #sweep.go, #shutter.go { animation-duration: 0.01ms !important; }
+    * { transition-duration: 0.01ms !important; }
+  }
+  @media (prefers-contrast: more) {
+    :root { --glass: rgba(10,11,14,0.9); --glass-hi: rgba(10,11,14,0.96); --hair: rgba(255,255,255,0.5); }
+  }
+
+  /* Dấu ngắm mảnh ở trung tâm */
+  #aim { width: min(24vh, 210px); height: min(24vh, 210px); opacity: 0.55; }
+  #aim .c { width: 14px; height: 14px; border-color: rgba(255,255,255,0.7); }
+  #aim .aim-label { display: none; }
+  #aim.quiet { opacity: 0.3; }
+
+  /* ───────── Giao diện kiểu game: phím tắt dạng phím bấm, thanh kỹ năng, la bàn ───────── */
+  .kc { display: inline-flex; align-items: center; justify-content: center; min-width: 2.5rem; height: 2.5rem; padding: 0 0.8rem; margin: 0 2px; border-radius: 10px;
+    font: 800 0.95rem/1 "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif; letter-spacing: 0.02em; color: #eef2ff; vertical-align: middle;
+    background: linear-gradient(180deg, #3a3670 0%, #1f1b4d 100%); border: 1px solid rgba(191,201,252,0.28); border-bottom: 4px solid #0e0c24;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.22); text-shadow: 0 1px 0 rgba(0,0,0,0.5); }
+  .kc.wide { padding: 0 1rem; }
+  .kc.sm { min-width: 1.9rem; height: 1.9rem; padding: 0 0.5rem; font-size: 0.78rem; border-radius: 8px; border-bottom-width: 3px; }
+  .or { color: var(--muted); font-size: 0.8rem; margin: 0 2px; }
+  .core { list-style: none; margin: 0 0 14px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .core li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 2px; align-content: flex-start; padding: 14px 14px 13px; border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04)); border: 1px solid var(--line); }
+  .core li b { flex: 1 0 100%; margin-top: 9px; font-size: 0.98rem; }
+  .core li small { flex: 1 0 100%; color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
+  .core small kbd { font-size: 0.85em; }
+  #intro .free { display: block; line-height: 2.1; }
+  #intro .free .kc { margin: 0 2px; vertical-align: middle; }
+  #intro h1 { text-shadow: 0 2px 30px rgba(127,211,222,0.35); }
+  #start-btn:not(:disabled) { animation: glow 2.4s ease-in-out infinite; }
+  @keyframes glow { 50% { box-shadow: 0 8px 40px rgba(127,211,222,0.55), inset 0 1px 0 rgba(255,255,255,0.5); } }
+
+  #hud .glass { box-shadow: 0 10px 34px rgba(20,18,46,0.22), inset 0 1px 0 rgba(255,255,255,0.4), inset 0 0 0 1px rgba(255,255,255,0.06); }
+  #brand .mark { width: 22px; height: 22px; border-radius: 50%; flex: 0 0 auto; margin-right: -2px;
+    background: radial-gradient(circle at 36% 34%, #e6f9fb 0 12%, transparent 13%), radial-gradient(circle, #14122e 0 38%, transparent 40%), conic-gradient(from 200deg, #5b7dff, #305ffa, #305ffa, #f8c97c);
+    box-shadow: 0 0 12px rgba(127,211,222,0.6); }
+  #brand span { color: var(--muted); }
+
+  /* La bàn */
+  #compass { position: absolute; left: 50%; top: max(14px, env(safe-area-inset-top)); width: min(300px, 30vw); height: 40px; transform: translateX(-50%); overflow: hidden; border-radius: 999px;
+    background: var(--glass); border: 1px solid var(--hair); backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); }
+  #compass-tape { position: absolute; left: 50%; top: 0; height: 100%; display: flex; will-change: transform; }
+  #compass-tape span { flex: 0 0 72px; width: 72px; text-align: center; line-height: 40px; font-size: 0.84rem; font-weight: 800; letter-spacing: 0.04em; color: var(--text); }
+  #compass-tape span.s { font-weight: 600; font-size: 0.7rem; color: var(--muted); }
+  #compass::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, var(--glass) 0, transparent 28%, transparent 72%, var(--glass) 100%); }
+  #compass .needle { position: absolute; left: 50%; bottom: 3px; z-index: 2; width: 0; height: 0; margin-left: -5px; border: 5px solid transparent; border-bottom: 7px solid var(--accent); }
+  @media (max-width: 900px) { #compass { display: none; } }
+
+  /* Thanh kỹ năng (hotbar) */
+  #dock { gap: 10px; padding: 16px 14px 10px; border-radius: 30px; align-items: flex-end; }
+  .dk { flex-direction: column; justify-content: center; gap: 5px; min-width: 76px; min-height: 66px; padding: 8px 10px 7px; border-radius: 18px;
+    background: linear-gradient(180deg, var(--fill-hi), var(--fill)); border: 1px solid var(--line); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); }
+  .dk svg { width: 26px; height: 26px; }
+  .dk .lbl { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.02em; }
+  .dk:hover { background: linear-gradient(180deg, var(--fill-hi), var(--fill-hi)); transform: translateY(-3px); }
+  .dk:active { transform: translateY(0) scale(0.97); }
+  .dk .key { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); min-width: 26px; padding: 2px 7px; border-radius: 7px; font-size: 0.66rem; font-weight: 800; line-height: 1.35; letter-spacing: 0.03em; text-align: center;
+    color: #eef2ff; background: linear-gradient(180deg, #3a3670, #1f1b4d); border: 1px solid rgba(191,201,252,0.28); border-bottom-width: 3px; border-bottom-color: #0e0c24; box-shadow: 0 2px 6px rgba(0,0,0,0.3); pointer-events: none; }
+  .dk.primary { min-width: 94px; min-height: 80px; margin-top: -10px; border: 1px solid rgba(255,255,255,0.45);
+    background: radial-gradient(120% 90% at 50% 0%, #d8f5f8 0%, #7fd3de 55%, #4f8ff7 100%); color: #14122e;
+    box-shadow: 0 8px 26px rgba(240,162,60,0.5), inset 0 1px 0 rgba(255,255,255,0.7); }
+  .dk.primary svg { width: 32px; height: 32px; }
+  .dk.primary:hover { transform: translateY(-4px); filter: brightness(1.06); }
+  .dk[aria-pressed="true"] { background: linear-gradient(180deg, var(--accent), var(--accent)); color: var(--on-accent); }
+  .dk[data-tip]::after { bottom: calc(100% + 18px); }
+  .dk.rec { background: #b3261e; color: #fff; }
+
+  /* Bảng phím tắt ở góc */
+  #keyhint { position: absolute; right: max(16px, env(safe-area-inset-right)); bottom: calc(var(--dock-h) + 36px + env(safe-area-inset-bottom)); display: grid; gap: 7px; padding: 12px 14px; border-radius: 18px; opacity: 0; transform: translateY(6px); transition: opacity 0.6s, transform 0.6s; pointer-events: none; }
+  #keyhint.on { opacity: 1; transform: none; }
+  #keyhint div { display: flex; align-items: center; gap: 3px; }
+  #keyhint em { font-style: normal; margin-left: 6px; font-size: 0.8rem; font-weight: 600; color: var(--text); }
+  #hud.sheet-open #keyhint { opacity: 0; }
+  @media (max-width: 1100px), (pointer: coarse) { #keyhint { display: none; } }
+
+  /* Hộp thoại theo tông sáng/tối của cảnh */
+  #help .box { background: var(--glass-hi); color: var(--text); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); width: min(640px, 100%); }
+  #help .core li { background: var(--fill); }
+  .hp-core { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 520px) { .hp-core { grid-template-columns: 1fr; } }
+  .hp-move { margin: 0 0 14px; font-size: 0.9rem; line-height: 2.2; color: var(--muted); }
+  .hp-more { margin: 0 0 14px; border-radius: 14px; background: var(--fill); border: 1px solid var(--line); padding: 10px 14px; }
+  .hp-more summary { cursor: pointer; font-weight: 700; font-size: 0.9rem; }
+  .hp-more dl { margin: 10px 0 8px; }
+  .hp-note { margin: 0; color: var(--muted); font-size: 0.82rem; }
+  #subtitle { border-radius: 22px; }
+  #sub-text { font-size: 1.06rem; }
+  @media (max-width: 640px) {
+    #dock { gap: 6px; padding: 14px 8px 8px; }
+    .dk { min-width: 54px; min-height: 56px; padding: 6px 8px; } .dk .lbl { display: block; font-size: 0.64rem; } .dk .key { display: none; }
+    .dk.primary { min-width: 68px; min-height: 66px; } .dk.primary svg { width: 28px; height: 28px; }
+  }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="stage"></div>
+
+<main id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+  <div class="card">
+    <div class="eyebrow">Mô phỏng sản phẩm</div>
+    <h1 id="intro-title">SeeVia Vision Experience</h1>
+    <p class="lead">Đi dạo trên một con phố Việt Nam lúc bảy, tám giờ sáng và thử cách kính SeeVia kể lại thế giới xung quanh bằng giọng nói — chỉ khi bạn yêu cầu.</p>
+
+    <h2 class="sec-title">Kính SeeVia hoạt động thế nào?</h2>
+    <ol class="how">
+      <li><b>Bạn yêu cầu</b>Nhấn nút trên kính hoặc ra lệnh. Cho đến lúc này camera luôn tắt.</li>
+      <li><b>Kính chụp một khung</b>Chỉ một lần rồi tắt lại. Không ghi hình liên tục.</li>
+      <li><b>SeeVia xác định</b>Nhận ra vật thể, đọc chữ, ước lượng hướng và khoảng cách.</li>
+      <li><b>Kính nói cho bạn nghe</b>Qua loa Bluetooth, bằng tiếng Việt. Phụ đề chỉ để hỗ trợ.</li>
+    </ol>
+
+    <p class="note"><strong>Đây là bản mô phỏng.</strong> Kết quả lấy từ dữ liệu mẫu trong cảnh, không phải AI thật. Không đảm bảo an toàn khi di chuyển hay qua đường, và không thay thế gậy trắng.</p>
+    <h2 class="sec-title">Chỉ cần nhớ 4 điều</h2>
+    <ul class="core">
+      <li><span class="kc wide">Space</span><b>Mô tả xung quanh</b></li>
+      <li><span class="kc">E</span><span class="or">hoặc</span><span class="kc wide">Nhấp chuột</span><b>Nhận diện vật phía trước</b></li>
+      <li><span class="kc">Tab</span><b>Mở các tính năng</b></li>
+      <li><span class="kc">Esc</span><b>Đóng bảng / tạm dừng</b></li>
+    </ul>
+    <p class="free">Đi bộ bằng <span class="kc sm">W</span><span class="kc sm">A</span><span class="kc sm">S</span><span class="kc sm">D</span>, nhìn quanh bằng chuột. Mọi thứ khác đều có nút bấm trên màn hình, nên bạn tự do thử theo ý mình, không cần làm theo thứ tự.</p>
+
+    <div class="row">
+      <button id="start-btn" type="button" disabled>Bắt đầu trải nghiệm</button>
+      <a href="/">← Về trang chủ SeeVia</a>
+    </div>
+    <div id="load-status" role="status" aria-live="polite">Đang chuẩn bị…</div>
+    <p id="voice-warning" hidden>Trình duyệt của bạn chưa có giọng đọc tiếng Việt. Phụ đề vẫn hiển thị đầy đủ; bạn có thể cài giọng tiếng Việt trong cài đặt hệ điều hành để nghe rõ hơn.</p>
+    <noscript><p class="note">Trải nghiệm này cần bật JavaScript.</p></noscript>
+  </div>
+</main>
+
+<div id="lens" aria-hidden="true" hidden>
+  <div id="rim"></div>
+  <div id="aim" class="quiet"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><div class="scan"></div><span class="aim-label"></span></div>
+  <div id="sweep"></div>
+  <div id="shutter"></div>
+</div>
+<div id="dream" aria-hidden="true"></div>
+<div id="sunflare" aria-hidden="true">
+  <div class="core"></div><div class="g g1"></div><div class="g g2"></div><div class="g g3"></div>
+</div>
+
+<div id="hud" hidden>
+  <header id="top">
+    <div id="brand" class="glass"><i class="mark" aria-hidden="true"></i><b>SeeVia</b><span>Vision simulation</span></div>
+    <div id="compass" aria-hidden="true"><div id="compass-tape"></div><i class="needle"></i></div>
+    <div id="top-right">
+      <div id="status" class="glass" role="status" aria-live="off">
+        <span class="led" aria-hidden="true"></span><span id="st-text">Camera tắt</span>
+        <ol id="steps" aria-hidden="true"><li data-s="request"></li><li data-s="capture"></li><li data-s="detect"></li><li data-s="speak"></li></ol>
+        <span id="st-sub">Camera đang tắt, chỉ bật khi bạn yêu cầu</span>
+      </div>
+      <button type="button" class="icon-btn glass" id="btn-voice" data-act="voice" aria-pressed="true" title="Tắt giọng nói (V)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11"/><path class="slash" d="M3 3l18 18"/></svg>
+        <span class="label sr-lbl">Giọng nói đang bật. Bấm để tắt.</span>
+      </button>
+      <button type="button" class="icon-btn glass" data-act="help" aria-label="Mở hướng dẫn và phím tắt (H)" title="Hướng dẫn (H)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1.1 1-1.1 1.8M12 17h.01"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="leftcol">
+    <div id="chips" aria-live="polite"></div>
+  </div>
+
+  <div id="radar-wrap" class="glass fade" hidden>
+    <div id="radar-title">Vị trí so với bạn</div>
+    <canvas id="radar" width="308" height="308" aria-hidden="true"></canvas>
+    <ul id="radar-legend"></ul>
+  </div>
+
+  <div id="focus" aria-hidden="true">
+    <div class="box"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div>
+  </div>
+
+  <div id="subtitle" class="glass" role="status" aria-live="polite">
+    <div class="sub-body">
+      <div id="sub-text" role="button" tabindex="0" aria-expanded="false" title="Bấm để xem đầy đủ và các câu trước"></div>
+      <ul id="sub-hist" aria-label="Các câu trước"></ul>
+    </div>
+    <div class="sub-btns">
+      <button type="button" class="sub-btn" id="sub-replay" aria-label="Nghe lại câu vừa nói (R)" title="Nghe lại (R)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9M4 4v4h4"/></svg></button>
+      <button type="button" class="sub-btn" id="sub-pin" aria-pressed="false" aria-label="Ghim phụ đề" title="Ghim phụ đề"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l-1 6 3 3v2H7v-2l3-3-1-6zM12 14v7"/></svg></button>
+    </div>
+  </div>
+
+  <aside id="sheet" class="glass" hidden aria-label="Tính năng của kính SeeVia">
+    <header>
+      <div id="sheet-tabs" role="tablist" aria-label="Nhóm tính năng">
+        <button type="button" role="tab" data-g="1" data-l="Nhìn &amp; Đọc" aria-label="Nhóm 1: Nhìn và Đọc" title="Nhìn &amp; Đọc (1)"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <button type="button" role="tab" data-g="2" data-l="Tìm đồ" aria-label="Nhóm 2: Tìm đồ" title="Tìm đồ (2)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg></button>
+        <button type="button" role="tab" data-g="3" data-l="Đi lại" aria-label="Nhóm 3: Đi lại" title="Đi lại (3)"><svg viewBox="0 0 24 24"><path d="M12 3l7 17-7-4-7 4z"/></svg></button>
+        <button type="button" role="tab" data-g="4" data-l="Nhạc" aria-label="Nhóm 4: Nhạc" title="Nhạc (4)"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></button>
+      </div>
+      <button type="button" id="sheet-close" aria-label="Đóng bảng tính năng (Esc)"><span aria-hidden="true">✕</span> Đóng <kbd>Esc</kbd></button>
+    </header>
+    <h2 id="sheet-title"></h2>
+    <p id="sheet-sub"></p>
+    <ol id="sheet-items"></ol>
+    <div id="sheet-body"></div>
+    <form id="cmd-form" autocomplete="off">
+      <label for="cmd-input" class="sr">Ra lệnh cho kính SeeVia</label>
+      <input id="cmd-input" type="text" placeholder="Ra lệnh: “tìm chìa khoá”, “đặt xe”…" enterkeyhint="send">
+      <button type="button" class="btn" id="btn-mic" aria-label="Nói lệnh bằng micro">🎤</button>
+      <button type="submit" class="btn pri">Gửi</button>
+    </form>
+    <p class="sim-note"><kbd>Tab</kbd> đổi nhóm · <kbd>1</kbd>–<kbd>9</kbd> chọn nhanh · <kbd>Esc</kbd> đóng, hoặc bấm chuột vào bất kỳ mục nào. Mô phỏng: không có bản đồ, xe hay AI thật.</p>
+  </aside>
+
+  <nav id="dock" class="glass" aria-label="Điều khiển chính của kính">
+    <button type="button" class="dk" data-act="scan" data-tip="Mô tả xung quanh (Space)">
+      <span class="key">Space</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="lbl">Mô tả</span>
+    </button>
+    <button type="button" class="dk primary" data-act="identify" data-tip="Nhận diện vật phía trước (E hoặc nhấp chuột)">
+      <span class="key">E</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V6a2 2 0 0 1 2-2h3M15 4h3a2 2 0 0 1 2 2v3M20 15v3a2 2 0 0 1-2 2h-3M9 20H6a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="2.6"/></svg><span class="lbl">Nhận diện</span>
+    </button>
+    <button type="button" class="dk" data-act="read" data-tip="Đọc chữ trên biển hiệu (Q)">
+      <span class="key">Q</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v10H9l-4 4V5z"/><path d="M9 9h6M9 12h4"/></svg><span class="lbl">Đọc biển</span>
+    </button>
+    <button type="button" class="dk" id="btn-cmd" data-act="command" data-tip="Ra lệnh bằng chữ hoặc giọng nói">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="lbl">Ra lệnh</span>
+    </button>
+    <button type="button" class="dk" id="btn-features" data-act="features" aria-pressed="false" aria-expanded="false" data-tip="Mở các nhóm tính năng (Tab)">
+      <span class="key">Tab</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></svg><span class="lbl">Tính năng</span>
+    </button>
+  </nav>
+
+  <aside id="keyhint" class="glass" aria-hidden="true">
+    <div><span class="kc sm">W</span><span class="kc sm">A</span><span class="kc sm">S</span><span class="kc sm">D</span><em>Đi bộ</em></div>
+    <div><span class="kc sm wide">Chuột</span><em>Nhìn quanh</em></div>
+    <div><span class="kc sm wide">Space</span><em>Mô tả xung quanh</em></div>
+    <div><span class="kc sm">E</span><span class="kc sm wide">Nhấp</span><em>Nhận diện</em></div>
+    <div><span class="kc sm">Tab</span><em>Tính năng</em></div>
+    <div><span class="kc sm">Esc</span><em>Đóng / tạm dừng</em></div>
+  </aside>
+
+  <div id="stick" aria-hidden="true"><div id="stick-knob"></div></div>
+
+  <div id="help" hidden role="dialog" aria-modal="true" aria-labelledby="help-title">
+    <div class="box">
+      <div class="hp-head">
+        <div><h2 id="help-title">Điều khiển</h2><p class="lead2">Mọi chức năng đều có nút bấm trên màn hình. Camera của kính chỉ bật khi bạn yêu cầu.</p></div>
+        <button type="button" class="btn hp-close" data-act="help-close" aria-label="Đóng hướng dẫn (Esc)"><span aria-hidden="true">✕</span> Đóng <kbd>Esc</kbd></button>
+      </div>
+      <ul class="core hp-core">
+        <li><span class="kc wide">Space</span><b>Mô tả xung quanh</b><small>Tối đa 3 ý, từ gần đến xa</small></li>
+        <li><span class="kc">E</span><span class="or">hoặc</span><span class="kc wide">Nhấp chuột</span><b>Nhận diện vật phía trước</b><small>Chỉ chụp một khung rồi tắt camera</small></li>
+        <li><span class="kc">Tab</span><b>Mở các tính năng</b><small>Nhấn tiếp để đổi nhóm, <kbd>1</kbd>–<kbd>9</kbd> để chọn</small></li>
+        <li><span class="kc">Esc</span><b>Đóng bảng hoặc tạm dừng</b><small>Hiện lại con trỏ chuột</small></li>
+      </ul>
+      <p class="hp-move"><span class="kc sm">W</span><span class="kc sm">A</span><span class="kc sm">S</span><span class="kc sm">D</span> đi bộ, giữ <span class="kc sm wide">Shift</span> để đi nhanh hơn. Chuột để nhìn quanh (hoặc kéo trên màn hình cảm ứng).</p>
+      <details class="hp-more">
+        <summary>Phím phụ (không bắt buộc)</summary>
+        <dl>
+          <dt><kbd>Q</kbd></dt><dd>Đọc chữ trên biển hiệu</dd>
+          <dt><kbd>R</kbd></dt><dd>Nghe lại câu vừa nói</dd>
+          <dt><kbd>V</kbd></dt><dd>Bật hoặc tắt giọng nói</dd>
+          <dt><kbd>M</kbd></dt><dd>Ra lệnh bằng chữ hoặc micro</dd>
+          <dt><kbd>1</kbd>–<kbd>4</kbd></dt><dd>Mở thẳng nhóm Nhìn &amp; Đọc, Tìm đồ, Đi lại, Nhạc</dd>
+          <dt><kbd>H</kbd></dt><dd>Mở hoặc đóng hướng dẫn này</dd>
+        </dl>
+        <p class="hp-note">Tất cả đều có nút trên màn hình, bạn không cần nhớ phím nào ngoài bốn điều ở trên.</p>
+      </details>
+      <div class="hp-row">
+        <button type="button" class="btn" data-act="pause">Tạm dừng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pause" hidden role="dialog" aria-labelledby="pause-title">
+  <div class="box">
+    <h2 id="pause-title">Đã tạm dừng</h2>
+    <p>Bạn đã thoát chế độ điều khiển camera. Con trỏ chuột đã hiện nên bạn có thể bấm các nút bên dưới. Đây chỉ là mô phỏng — nó không thay thế gậy trắng hay kỹ năng định hướng thực tế.</p>
+    <div class="row">
+      <button class="btn2" id="btn-resume" type="button">Tiếp tục trải nghiệm</button>
+      <a class="btn2" href="/">Về trang chủ SeeVia</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Nếu thư viện 3D không tải được (mạng, tường lửa), báo rõ cho người dùng thay vì để trống.
+  setTimeout(function () {
+    if (!window.__seeviaLoaded) {
+      var s = document.getElementById('load-status');
+      if (s) { s.textContent = 'Không tải được thư viện đồ hoạ 3D. Hãy kiểm tra kết nối mạng rồi tải lại trang.'; s.className = 'error'; }
+    }
+  }, 9000);
+</script>
+<script type="module" src="./vision/main.js"></script>
+</body>
+</html>

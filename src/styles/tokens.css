@@ -1,0 +1,140 @@
+/* SeeVia Design System: colour tokens.
+   One source for every colour on the site. Other stylesheets refer to these
+   names instead of hex codes. Groups follow the design system board:
+   brand kit → ink neutrals → scales → pillars → status → surfaces → gradients → glass. */
+:root {
+  /* ---------- Brand kit: the six brand colours ---------- */
+  --brand-frozen-water: #d9fced;
+  --brand-sapphire: #405ffa;   /* Electric Sapphire: the action colour */
+  --brand-cyan: #09bbc8;       /* Strong Cyan */
+  --brand-twilight: #3b3664;   /* Twilight Indigo: body text */
+  --brand-evergreen: #07240f;  /* ink on mint only */
+  --white: #ffffff;
+
+  /* ---------- Ink neutrals: Twilight-Indigo-tinted, never flat grey ---------- */
+  --ink-0: #ffffff;
+  --ink-25: #fafbff;
+  --ink-50: #f6f8ff;
+  --ink-100: #e8e8f2;
+  --ink-200: #d6d5e6;
+  --ink-300: #b5b2d1;
+  --ink-400: #8f8bad;
+  --ink-500: #6b6890;
+  --ink-600: #514e75;          /* muted text, ≥ 4.5:1 on white */
+  --ink-700: #3b3664;          /* = Twilight Indigo, body text */
+  --ink-800: #292650;          /* headings, dark surface */
+  --ink-900: #1b1937;
+
+  /* ---------- Scales ---------- */
+  --sapphire-50: #eff1ff;
+  --sapphire-100: #e0e5ff;
+  --sapphire-200: #bfc9fc;
+  --sapphire-300: #9aa8fa;
+  --sapphire-400: #6f82f8;
+  --sapphire-500: #405ffa;
+  --sapphire-600: #3447e0;
+  --sapphire-700: #2736b5;
+  --sapphire-800: #1e2b7c;
+  --sapphire-900: #1a2160;
+
+  --cyan-50: #ecfafb;
+  --cyan-100: #cff2f5;
+  --cyan-200: #a8e5eb;
+  --cyan-300: #7fd3de;
+  --cyan-400: #4cc5d1;
+  --cyan-500: #09bbc8;
+  --cyan-600: #0a96a3;
+  --cyan-700: #0b7580;
+  --cyan-800: #0b5a63;
+  --cyan-900: #0d4248;
+
+  --iris-50: #f4f1ff;
+  --iris-100: #e7e0ff;
+  --iris-200: #cec4fb;
+  --iris-300: #b3a2f8;
+  --iris-400: #9a85f8;
+  --iris-500: #8b6cff;
+  --iris-600: #6d4fe6;
+  --iris-700: #5a3dc4;
+  --iris-800: #44308e;
+  --iris-900: #32246a;
+
+  --mint-50: #effdf6;
+  --mint-100: #d9fced;
+  --mint-200: #bff0d9;
+  --mint-300: #97e3c0;
+  --mint-600: #3f8f5f;
+  --mint-800: #285c3b;
+
+  /* ---------- Pillar colours: five function groups, cyan → violet ---------- */
+  --pillar-see-read: #0fa3b1;
+  --pillar-find-understand: #2f86ea;
+  --pillar-connect: #405ffa;
+  --pillar-go: #6a5cf2;
+  --pillar-community: #9461e6;
+  --gradient-pillars: linear-gradient(90deg, var(--pillar-see-read), var(--pillar-find-understand), var(--pillar-connect), var(--pillar-go), var(--pillar-community));
+
+  /* ---------- Semantic status ---------- */
+  --status-success: var(--mint-600);
+  --status-success-ink: var(--brand-evergreen);
+  --status-success-bg: var(--mint-100);
+  --status-info: var(--cyan-700);
+  --status-info-bg: var(--cyan-50);
+  --status-warning: #a8702a;
+  --status-warning-ink: #8a5a1c;
+  --status-warning-bg: #fbf2e0;
+  --status-danger: #c94a55;
+  --status-danger-ink: #9b2c3a;
+  --status-danger-bg: #fbecee;
+  --status-sos: #d4524f;
+  --status-sos-ink: var(--white);
+
+  /* ---------- Surfaces ---------- */
+  --surface-page: var(--ink-50);
+  --surface-raised: var(--white);
+  --surface-tint-sapphire: var(--sapphire-50);
+  --surface-tint-mint: var(--mint-100);
+  --surface-glass: rgba(255, 255, 255, 0.58);
+  --surface-dark: var(--ink-800);
+
+  /* ---------- Text, lines, actions ---------- */
+  --text-body: var(--ink-700);
+  --text-heading: var(--ink-800);
+  --text-muted: var(--ink-600);
+  --text-inverse: var(--ink-50);
+  --text-link: var(--sapphire-600);
+  --line-hairline: var(--ink-200);
+  --action-primary: var(--sapphire-500);
+  --action-primary-hover: var(--sapphire-600);
+  --action-secondary: var(--ink-700);
+  --focus-ring: var(--sapphire-600);
+
+  /* ---------- Gradients ---------- */
+  --gradient-pearl: linear-gradient(135deg, var(--cyan-200) 0%, var(--sapphire-400) 45%, var(--sapphire-500) 62%, var(--iris-400) 100%);
+  --gradient-ribbon: linear-gradient(100deg, var(--cyan-200) 0%, var(--sapphire-400) 40%, var(--iris-400) 75%, var(--iris-100) 100%);
+  --gradient-aurora:
+    radial-gradient(ellipse 45% 40% at 12% 12%, var(--mint-100), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 88% 12%, var(--iris-100), transparent 70%),
+    radial-gradient(ellipse 40% 45% at 15% 88%, var(--cyan-100), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 70% 82%, var(--sapphire-100), transparent 70%),
+    var(--ink-50);
+  --gradient-dusk:
+    radial-gradient(ellipse 60% 55% at 12% 0%, var(--iris-800), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 100% 100%, var(--sapphire-800), transparent 70%),
+    var(--ink-800);
+
+  /* ---------- Glass & blur ---------- */
+  --glass-bg: var(--surface-glass);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-blur: saturate(160%) blur(22px);
+  --glass-sheen: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Frosted panel over an aurora background. */
+.sv-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-sheen);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}

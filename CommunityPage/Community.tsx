@@ -136,16 +136,6 @@ export default function Community() {
                 alt="Thành viên CLB Blind Runners cùng người đồng hành chạy qua Nhà hát Lớn Hà Nội"
                 fetchPriority="high"
               />
-              <figcaption>
-                <span>CLB Blind Runners, Hà Nội · 2024</span>
-                <a
-                  href={storyLinks[0]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Ảnh: Tất Sơn / Báo ảnh Việt Nam <Arrow />
-                </a>
-              </figcaption>
             </figure>
           </div>
         </section>

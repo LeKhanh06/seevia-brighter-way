@@ -64,15 +64,15 @@ function Journey() {
     >
       <defs>
         <linearGradient id="sv-journey-grad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#6CD6FC" />
-          <stop offset=".5" stopColor="#B5B6FC" />
-          <stop offset="1" stopColor="#E5C6FC" />
+          <stop offset="0" stopColor="#7fd3de" />
+          <stop offset=".5" stopColor="#bfc9fc" />
+          <stop offset="1" stopColor="#cec4fb" />
         </linearGradient>
       </defs>
-      <path className="sv-journey-guide" d={d} fill="none" stroke="#B5B6FC" strokeOpacity=".35" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 14" />
+      <path className="sv-journey-guide" d={d} fill="none" stroke="#bfc9fc" strokeOpacity=".35" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 14" />
       <path className="sv-journey-trail" d={d} pathLength={1} fill="none" stroke="url(#sv-journey-grad)" strokeWidth="3" strokeLinecap="round" />
-      <circle className="sv-journey-halo" cx="1240" cy="130" r="14" fill="#6CD6FC" />
-      <circle className="sv-journey-dot" cx="1240" cy="130" r="7" fill="#F5F4FF" />
+      <circle className="sv-journey-halo" cx="1240" cy="130" r="14" fill="#7fd3de" />
+      <circle className="sv-journey-dot" cx="1240" cy="130" r="7" fill="#f6f8ff" />
     </svg>
   );
 }

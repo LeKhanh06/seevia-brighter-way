@@ -10,7 +10,7 @@ SeeVia đang trong giai đoạn phát triển bản mẫu, chưa có mô hình k
 
 ## Điểm chính
 
-- Giao diện responsive với bảng màu đỏ đô, đen than và kem; hiệu ứng có hỗ trợ giảm chuyển động.
+- Giao diện responsive theo SeeVia Design System (nền pearl #F6F8FF, sapphire #405FFA, cyan #09BBC8, mint #D9FCED, ink Twilight Indigo #3B3664); hiệu ứng có hỗ trợ giảm chuyển động.
 - Chuyển **VI | EN** ngay trên trang, ghi nhớ lựa chọn ngôn ngữ và giữ nguyên lời nhắn đang soạn.
 - Khám phá thiết kế kính, luồng xử lý thông tin và hội thoại minh họa.
 - Câu chuyện cộng đồng, tin tức có nguồn dẫn, bộ lọc và tìm kiếm bằng cả hai ngôn ngữ.

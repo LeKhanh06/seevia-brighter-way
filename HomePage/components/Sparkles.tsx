@@ -9,8 +9,8 @@ type Props = {
   /** vẽ thêm một hạt sáng ngọc trai tại điểm đó */
   orb?: boolean;
 };
-const DARK = ["#ffffff", "#dff6ff", "#6cd6fc", "#b5b6fc", "#e5c6fc"];
-const LIGHT = ["#426af8", "#8a96f5", "#b5b6fc", "#e5a8fc", "#6cd6fc"];
+const DARK = ["#ffffff", "#ecfafb", "#7fd3de", "#bfc9fc", "#cec4fb"];
+const LIGHT = ["#405ffa", "#9aa8fa", "#bfc9fc", "#b3a2f8", "#7fd3de"];
 type P = {
   x: number; y: number; vx: number; vy: number; age: number; max: number;
   size: number; color: string; phase: number; star: boolean; tw: number; amb: boolean;
@@ -105,9 +105,9 @@ export default function Sparkles({ tone = "dark", density = 8, getPoint, orb }: 
         // hạt ngọc trai: quầng iridescent mềm + lõi trắng
         const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, 26);
         g.addColorStop(0, "rgba(255,255,255,0.95)");
-        g.addColorStop(0.25, "rgba(108,214,252,0.45)");
-        g.addColorStop(0.6, "rgba(181,182,252,0.16)");
-        g.addColorStop(1, "rgba(181,182,252,0)");
+        g.addColorStop(0.25, "rgba(127, 211, 222, 0.45)");
+        g.addColorStop(0.6, "rgba(191, 201, 252, 0.16)");
+        g.addColorStop(1, "rgba(191, 201, 252, 0)");
         ctx.globalAlpha = o.a;
         ctx.fillStyle = g;
         ctx.beginPath(); ctx.arc(o.x, o.y, 26, 0, 6.2832); ctx.fill();

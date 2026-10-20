@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   color: var(--sv-pearl);
-  background: linear-gradient(110deg, var(--sv-navy) 0%, #76101a 52%, #ba0223 100%);
+  background: linear-gradient(110deg, var(--sv-navy) 0%, var(--ink-800) 52%, var(--sapphire-700) 100%);
   isolation: isolate;
 }
 .product-hero .product-container {
@@ -47,11 +47,11 @@
 }
  .product-hero-rings {
   position:absolute; width:850px; height:850px; left:-257px; top:141px;
-  border:2px solid #f5f4ff33; border-radius:50%; pointer-events:none; z-index:0;
+  border:2px solid #f6f8ff33; border-radius:50%; pointer-events:none; z-index:0;
 }
 .product-hero-rings:after {
   content:''; position:absolute; width:600px; height:600px; left:123px; top:123px;
-  border:2px solid #f5f4ff33; border-radius:50%;
+  border:2px solid #f6f8ff33; border-radius:50%;
 }
 .product-watermark {
   position:absolute; right:-35px; top:155px;
@@ -68,9 +68,9 @@
   font: 600 18px/30px var(--sans);
   min-height: 40px;
   padding: 5px 28px;
-  color: #a71823;
+  color: var(--sapphire-700);
 }
-.product-hero-actions .button-outline { font-weight:600; color:var(--sv-pearl); border-color:#f5f4ffaa; }
+.product-hero-actions .button-outline { font-weight:600; color:var(--sv-pearl); border-color:#f6f8ffaa; }
 .product-hero-actions .button>span { display:none; }
 .product-design {
   display: grid;
@@ -98,7 +98,7 @@
 .design-principles li {
   display: flex;
   gap: 28px;
-  border-top: 1px solid #b5b6fc50;
+  border-top: 1px solid #bfc9fc50;
   padding: 23px 0;
 }
 .design-principles li > span {
@@ -118,22 +118,22 @@
   margin: 0;
 }
 .device-card {
-  background: #151112;
-  border: 1px solid #b5b6fc17;
+  background: var(--ink-900);
+  border: 1px solid #bfc9fc17;
   border-radius: 40px;
   padding: 30px;
   overflow: hidden;
   background-image:
-    linear-gradient(#dda7aa07 1px, transparent 1px),
-    linear-gradient(90deg, #dda7aa07 1px, transparent 1px);
+    linear-gradient(#9aa8fa07 1px, transparent 1px),
+    linear-gradient(90deg, #9aa8fa07 1px, transparent 1px);
   background-size: 100px 100px;
 }
 .device-illustration {
   position: relative;
-  border: 24px solid #c4c4c4;
+  border: 24px solid var(--ink-300);
   border-radius: 35px;
   overflow: hidden;
-  background: #151112;
+  background: var(--ink-900);
 }
 .device-illustration img {
   width: 100%;
@@ -154,7 +154,7 @@
 .device-hotspot.selected {
   background: var(--sv-pearl);
   color: var(--sv-navy);
-  box-shadow: 0 0 0 5px #426af845;
+  box-shadow: 0 0 0 5px #405ffa45;
 }
 .device-features {
   display: grid;
@@ -173,8 +173,8 @@
   color: var(--sv-lavender);
 }
 .device-features button.selected {
-  background: #0202382b;
-  border-color: #426af855;
+  background: #1b19372b;
+  border-color: #405ffa55;
 }
 .device-features button > span {
   font-size: 14px;
@@ -191,18 +191,18 @@
   font-size: 13px;
   line-height: 1.6;
   margin: 0;
-  color: #aaa09a;
+  color: var(--ink-300);
 }
 .feature-feedback {
   font-size: 12px;
-  color: #bdaba4;
+  color: var(--ink-300);
   min-height: 40px;
   margin: 24px 10px 0;
 }
 .product-angle-placeholder {
   height: 350px;
-  background: #c4c4c4;
-  color: #5e554f;
+  background: var(--ink-300);
+  color: var(--ink-700);
   border-radius: 40px;
   margin-top: 55px;
   display: grid;
@@ -214,7 +214,7 @@
 .product-colors {
   background: var(--sv-pearl);
   padding: 65px 0;
-  border-block: 1px solid #e0cfc6;
+  border-block: 1px solid var(--sapphire-300);
 }
 .colors-layout {
   display: grid;
@@ -225,7 +225,7 @@
 .colors-layout figure {
   margin: 0;
   padding: 50px;
-  background: #c4c4c4;
+  background: var(--ink-300);
   border-radius: 40px;
 }
 .colors-layout figure img {
@@ -260,9 +260,9 @@
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  border: 3px solid #fff;
+  border: 3px solid var(--white);
   display: block;
-  background: #c4c4c4;
+  background: var(--ink-300);
 }
 .color-option.selected > span {
   outline: 1px solid var(--sv-navy);
@@ -277,7 +277,7 @@
 .product-technology {
   padding: 75px 0 85px;
   background:
-    radial-gradient(ellipse at 50% 42%, #020238a0, transparent 65%), var(--sv-navy);
+    radial-gradient(ellipse at 50% 42%, #1b1937a0, transparent 65%), var(--sv-navy);
   color: var(--sv-pearl);
 }
 .product-technology > .product-container > .eyebrow {
@@ -302,14 +302,14 @@
 }
 .technology-cards article {
   padding: 28px;
-  border: 1px solid #b5b6fc15;
+  border: 1px solid #bfc9fc15;
   border-radius: 26px;
-  background: #b5b6fc12;
+  background: #bfc9fc12;
   min-height: 260px;
 }
 .technology-cards .eyebrow {
   font-size: 13px;
-  color: #e2b8ad;
+  color: var(--sapphire-300);
 }
 .technology-cards h3 {
   font: 500 20px/1.5 var(--product-serif);
@@ -317,10 +317,10 @@
 }
 .technology-cards article > p:last-child {
   font-size: 15px;
-  color: #e0c8c0;
+  color: var(--sapphire-300);
 }
 .product-progress {
-  background: linear-gradient(110deg, #a10025, #620817);
+  background: linear-gradient(110deg, var(--sapphire-800), var(--ink-800));
   padding: 95px 0;
   color: var(--sv-pearl);
 }
@@ -339,7 +339,7 @@
   gap: 40px;
 }
 .product-progress li {
-  background: #4f101b;
+  background: var(--ink-900);
   border-radius: 27px;
   padding: 30px;
   min-height: 175px;
@@ -376,7 +376,7 @@
   margin: 40px 0 0;
 }
 .faq-questions details {
-  border-top: 1px solid #a9958d;
+  border-top: 1px solid var(--ink-400);
   padding: 20px 0;
 }
 .faq-questions summary {
@@ -405,7 +405,7 @@
 }
 .product-contact {
   background: var(--sv-orchid);
-  border-top: 1px solid #a9958d;
+  border-top: 1px solid var(--ink-400);
   padding: 65px 0;
 }
 .product-contact > .product-container {
@@ -680,7 +680,7 @@
   width: 850px;
   height: 850px;
   border-width: 1px;
-  border-color: #f5f4ff1c;
+  border-color: #f6f8ff1c;
   box-shadow: none;
 }
 .product-hero .product-hero-rings:after {
@@ -689,14 +689,14 @@
   left: 124px;
   top: 124px;
   border-width: 1px;
-  border-color: #f5f4ff1c;
+  border-color: #f6f8ff1c;
 }
 .product-hero .product-watermark {
   left: 42%;
   right: auto;
   top: 165px;
   font-size: 300px;
-  -webkit-text-stroke: 1px #74798c;
+  -webkit-text-stroke: 1px var(--ink-500);
   opacity: .27;
 }
 @media(max-width:1100px){
@@ -788,29 +788,29 @@
 .product-page .product-technology {
   min-height: 943px;
   padding: 65px 0 90px;
-  background: radial-gradient(ellipse at 50% 51%,var(--sv-navy) 0%,#491d25 30%,var(--sv-navy) 75%);
+  background: radial-gradient(ellipse at 50% 51%,var(--sv-navy) 0%,var(--ink-800) 30%,var(--sv-navy) 75%);
 }
 .product-technology h2 {font-size:60px;line-height:1.45;margin:40px 0 25px}
 .technology-answer {color:var(--sv-lavender)}
 .product-technology .product-tech-intro {font-size:18px;line-height:31px;max-width:660px}
 .product-technology .technology-cards {gap:60px;margin:70px 0 65px}
 .product-technology .technology-cards article {
-  min-height:275px;padding:25px 28px;border:1px solid #b5b6fc17;border-radius:26px;
-  background:linear-gradient(135deg,#f5f4ff0d,#426af812);box-shadow:inset 0 0 0 1px #f5f4ff05;
+  min-height:275px;padding:25px 28px;border:1px solid #bfc9fc17;border-radius:26px;
+  background:linear-gradient(135deg,#f6f8ff0d,#405ffa12);box-shadow:inset 0 0 0 1px #f6f8ff05;
 }
 .product-technology .technology-cards h3{font:600 20px/1.5 'Playfair Display',serif;letter-spacing:.04em;margin:18px 0 12px}
-.product-technology .technology-cards .eyebrow{font-size:16px;font-weight:400;color:#dba99e;letter-spacing:.08em}
-.product-technology .technology-cards article>p:last-child{font-size:16px;line-height:31px;color:#eadbd4}
+.product-technology .technology-cards .eyebrow{font-size:16px;font-weight:400;color:var(--sapphire-400);letter-spacing:.08em}
+.product-technology .technology-cards article>p:last-child{font-size:16px;line-height:31px;color:var(--sapphire-200)}
 .product-technology .button{font-size:20px;min-height:50px;padding:10px 28px}
-.product-page .product-progress{padding:105px 0 115px;background:radial-gradient(ellipse at 0% 50%,#ba2230 0%,var(--sv-navy) 50%,var(--sv-navy) 100%)}
+.product-page .product-progress{padding:105px 0 115px;background:radial-gradient(ellipse at 0% 50%,var(--sapphire-700) 0%,var(--sv-navy) 50%,var(--sv-navy) 100%)}
 .product-progress .eyebrow{font-size:18px;font-weight:600}
 .product-progress h2{font-size:54px;line-height:1.4;margin:15px 0 48px}
 .product-progress ol{gap:38px}
-.product-progress li{min-height:175px;padding:35px 28px;border-radius:26px;background:#32141bd9}
+.product-progress li{min-height:175px;padding:35px 28px;border-radius:26px;background:#1b1937d9}
 .product-progress h3{font-size:17px;font-weight:600;margin-bottom:12px}
-.product-progress li p{font-size:16px;line-height:26px;color:#e3c9c3}
+.product-progress li p{font-size:16px;line-height:26px;color:var(--sapphire-300)}
 .product-progress li[aria-current=step] p{color:var(--sv-navy)}
-.product-page .product-contact{min-height:317px;display:flex;align-items:center;padding:65px 0;background:var(--sv-orchid);border-top:1px solid #a9958d50}
+.product-page .product-contact{min-height:317px;display:flex;align-items:center;padding:65px 0;background:var(--sv-orchid);border-top:1px solid #8f8bad50}
 .product-contact>.product-container{padding-inline:8%}
 .product-contact h2{font-size:50px;line-height:1.4;margin-bottom:18px}
 .product-contact p{font-size:18px;line-height:31px}
@@ -912,8 +912,8 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle 300px at var(--card-glow-x, 50%) var(--card-glow-y, 35%), #6cd6fc61, #426af836 42%, transparent 78%),
-    linear-gradient(135deg, #426af824, #b5b6fc18);
+    radial-gradient(circle 300px at var(--card-glow-x, 50%) var(--card-glow-y, 35%), #7fd3de61, #405ffa36 42%, transparent 78%),
+    linear-gradient(135deg, #405ffa24, #bfc9fc18);
   opacity: 0;
   transition: opacity 300ms ease;
 }
@@ -927,8 +927,8 @@
     transform: translateY(-8px);
     translate: 0 0;
     filter: none;
-    border-color: #6cd6fc9c;
-    box-shadow: 0 20px 44px #02023870, inset 0 1px 0 #e5c6fc55;
+    border-color: #7fd3de9c;
+    box-shadow: 0 20px 44px #1b193770, inset 0 1px 0 #cec4fb55;
   }
   #root .product-technology .technology-cards article:hover::before { opacity: 1; }
   #root .product-technology .technology-cards article:hover .eyebrow { color: var(--sv-cyan); }
@@ -939,6 +939,6 @@
   #root .product-technology .technology-cards article::before { transition: none; }
   #root .product-technology .technology-cards article:hover { transform: none; }
   #root .product-technology .technology-cards article::before {
-    background: linear-gradient(135deg, #426af824, #b5b6fc18);
+    background: linear-gradient(135deg, #405ffa24, #bfc9fc18);
   }
 }

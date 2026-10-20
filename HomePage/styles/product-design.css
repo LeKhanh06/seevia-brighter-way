@@ -1,9 +1,9 @@
 .product-viewer {
   position: relative;
   background:
-    radial-gradient(circle 470px at 12% 40%, #9b344e54, transparent 100%),
-    radial-gradient(circle 370px at 93% 29%, #e8c3ad29, transparent 100%),
-    #1b191b;
+    radial-gradient(circle 470px at 12% 40%, #44308e54, transparent 100%),
+    radial-gradient(circle 370px at 93% 29%, #9aa8fa29, transparent 100%),
+    var(--ink-900);
   padding: 36px 1.4% 30px;
   min-height: 835px;
   color: var(--sv-pearl);
@@ -28,7 +28,7 @@
 .product-stage {
   height: 635px;
   position: relative;
-  color: #80736b;
+  color: var(--ink-500);
   font: 400 18px/1.5 var(--sans);
 }
 .product-stage > span {
@@ -39,17 +39,17 @@
   height: 170px;
   left: 1.5%;
   bottom: 76px;
-  border: 1px solid #c58d8714;
+  border: 1px solid #405ffa14;
   border-radius: 50%;
   background: none;
 }
 .product-ellipses:after {
   inset: 25px 8%;
-  border: 1px solid #c58d8726;
+  border: 1px solid #405ffa26;
   background: radial-gradient(
     ellipse,
-    #c58d8742 0%,
-    #c58d8714 30%,
+    #405ffa42 0%,
+    #405ffa14 30%,
     transparent 70%
   );
   border-radius: 50%;

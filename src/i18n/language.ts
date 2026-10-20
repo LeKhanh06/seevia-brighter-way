@@ -33,8 +33,18 @@ const subscribe = (listener: () => void) => {
 export const getLanguage = () => store.language;
 export const useLanguage = () =>
   useSyncExternalStore(subscribe, getLanguage, () => "vi" as Language);
+/** Called synchronously before React hears about a language change, so DOM that was
+ *  rearranged for animation can be put back before React updates its text. */
+const beforeChange = new Set<() => void>();
+export function beforeLanguageChange(listener: () => void) {
+  beforeChange.add(listener);
+  return () => {
+    beforeChange.delete(listener);
+  };
+}
 export function setLanguage(next: Language) {
   if (next === store.language) return;
+  beforeChange.forEach((listener) => listener());
   store.language = next;
   document.documentElement.lang = next;
   try {

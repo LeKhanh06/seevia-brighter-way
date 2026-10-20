@@ -63,7 +63,7 @@
   gap: 14px;
   min-height: 38px;
   padding: 8px 16px;
-  border: 1px solid #0202385c;
+  border: 1px solid #1b19375c;
   border-radius: 24px;
   background: transparent;
   color: inherit;
@@ -82,14 +82,14 @@
   flex-shrink: 0;
 }
 .ct-action:hover {
-  background: #0202380d;
+  background: #1b19370d;
   transform: translateY(-2px);
 }
 .ct-hero .ct-action {
-  border-color: #b5b6fc66;
+  border-color: #bfc9fc66;
 }
 .ct-hero .ct-action:hover {
-  background: #f5f4ff10;
+  background: #f6f8ff10;
 }
 .ct-letter {
   display: grid;
@@ -112,7 +112,7 @@
   max-width: 440px;
 }
 .ct-note {
-  border-top: 1px solid #02023838;
+  border-top: 1px solid #1b193738;
   margin-top: 30px;
   padding-top: 22px;
 }
@@ -135,6 +135,15 @@
 }
 .ct-form {
   min-width: 0;
+  align-self: start;
+  padding: 36px 40px 40px;
+  border: 1px solid #1b193720;
+  border-radius: 16px;
+}
+@media (max-width: 640px) {
+  .ct-form {
+    padding: 24px 20px 28px;
+  }
 }
 .ct-form fieldset {
   margin: 0 0 26px;
@@ -177,7 +186,7 @@
 .ct-fields label > span {
   display: block;
   font-size: 11px;
-  color: #786a62;
+  color: var(--ink-600);
   font-weight: 400;
   margin-top: 4px;
 }
@@ -185,7 +194,7 @@
 .ct textarea {
   display: block;
   width: 100%;
-  border: 1px solid #02023838;
+  border: 1px solid #1b193738;
   border-radius: 4px;
   background: var(--sv-pearl);
   padding: 12px 14px;
@@ -207,16 +216,16 @@
   justify-content: space-between;
   gap: 12px;
   font-size: 11px;
-  color: #786a62;
+  color: var(--ink-600);
   margin: 10px 0 24px;
 }
 .ct-primary {
-  background: var(--sv-navy) !important;
-  color: var(--sv-pearl) !important;
-  border-color: var(--sv-navy);
+  background: var(--brand-sapphire) !important;
+  color: var(--white) !important;
+  border-color: var(--brand-sapphire);
 }
 .ct-primary:hover {
-  background: #941f2d !important;
+  background: var(--sapphire-700) !important;
 }
 .ct-explore {
   display: flex;
@@ -226,13 +235,13 @@
   padding: 38px max(7%, calc((100% - 1240px) / 2));
   background: var(--sv-navy);
   color: var(--sv-pearl);
-  border-bottom: 1px solid #b5b6fc40;
+  border-bottom: 1px solid #bfc9fc40;
 }
 .ct-explore h2 {
   font-size: 29px;
 }
 .ct-explore p {
-  color: #cfc4bf;
+  color: var(--ink-300);
   margin-top: 10px;
 }
 .ct-explore > div:last-child {
@@ -243,7 +252,7 @@
   flex-shrink: 0;
 }
 .ct-explore .ct-action {
-  border-color: #b5b6fc66;
+  border-color: #bfc9fc66;
 }
 .ct-dialog {
   position: fixed;
@@ -261,7 +270,7 @@
     sans-serif;
 }
 .ct-dialog::backdrop {
-  background: #141010b3;
+  background: #1b1937b3;
   backdrop-filter: blur(4px);
 }
 .ct-dialog h2 {
@@ -297,7 +306,7 @@
 }
 .ct :focus-visible,
 .ct-dialog :focus-visible {
-  outline: 2px solid #a33345;
+  outline: 2px solid var(--sapphire-700);
   outline-offset: 4px;
 }
 .ct-hero-copy {

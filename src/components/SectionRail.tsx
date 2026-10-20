@@ -69,7 +69,11 @@ export default function SectionRail({ routeKey }: { routeKey: string }) {
           aria-current={index === active ? "location" : undefined}
           title={stop.label}
           onClick={() => {
-            const top = stop.target.getBoundingClientRect().top + window.scrollY - 72;
+            // Stacked (sticky) sections report their stuck position, so they carry their own scroll target.
+            const preset = stop.target.dataset.svScrollTo;
+            const top = preset
+              ? Number(preset)
+              : stop.target.getBoundingClientRect().top + window.scrollY - 72;
             window.scrollTo({
               top: Math.max(0, top),
               behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",

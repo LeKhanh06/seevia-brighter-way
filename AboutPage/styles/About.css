@@ -96,10 +96,10 @@
 }
 .about-editorial .ab-hero .ab-action-outline {
   color: var(--burgundy);
-  border-color: #02023880;
+  border-color: #1b193780;
 }
 .about-editorial .ab-hero .ab-action-outline:hover {
-  background: #0202380a;
+  background: #1b19370a;
   border-color: var(--burgundy);
 }
 .about-editorial .ab-hero-copy > p:not(.ab-eyebrow) {
@@ -122,16 +122,16 @@
 .about-editorial .ab-why,
 .about-editorial .ab-direction {
   background:
-    radial-gradient(ellipse at 65% 50%, #02023870, transparent 72%), var(--sv-navy);
+    radial-gradient(ellipse at 65% 50%, #1b193770, transparent 72%), var(--sv-navy);
   color: var(--ivory);
 }
 .about-editorial .ab-why {
   background-color: var(--sv-navy);
   background-image: radial-gradient(
     circle 380px at 78% 46%,
-    #020238b3 0%,
-    #02023852 44%,
-    #02023800 100%
+    #1b1937b3 0%,
+    #1b193752 44%,
+    #1b193700 100%
   );
 }
 .about-editorial .ab-why h2 {
@@ -139,7 +139,7 @@
 }
 .about-editorial .ab-why .ab-section-heading > p,
 .about-editorial .ab-direction-copy > p {
-  color: #d4c9c3;
+  color: var(--ink-300);
   font-size: 14px;
 }
 .about-editorial .ab-needs {
@@ -148,7 +148,7 @@
   gap: 30px;
 }
 .about-editorial .ab-needs article {
-  border-top: 1px solid #b5b6fc66;
+  border-top: 1px solid #bfc9fc66;
   padding-top: 22px;
 }
 .about-editorial .ab-needs h3 {
@@ -158,7 +158,7 @@
 }
 .about-editorial .ab-needs p {
   font-size: 13px;
-  color: #e0d5cf;
+  color: var(--ink-200);
 }
 .about-editorial .ab-evidence {
   background: linear-gradient(110deg, var(--sv-orchid), var(--sv-pearl) 75%);
@@ -220,8 +220,8 @@
   background:
     radial-gradient(
       ellipse at 10% 30%,
-      #ba02238c 0%,
-      #a3212c59 38%,
+      #2736b58c 0%,
+      #2736b559 38%,
       transparent 78%
     ),
     var(--sv-navy);
@@ -235,7 +235,7 @@
   gap: 0;
 }
 .about-editorial .ab-principles article {
-  border-top: 1px solid #b5b6fc55;
+  border-top: 1px solid #bfc9fc55;
   padding-block: 20px;
   display: flex;
   gap: 16px;
@@ -249,11 +249,11 @@
   margin-bottom: 10px;
 }
 .about-editorial .ab-principles p {
-  color: #d4c9c3;
+  color: var(--ink-300);
   font-size: 13px;
 }
 .about-editorial .ab-founders {
-  background: linear-gradient(110deg, var(--sv-pearl), #e5c6fc80);
+  background: linear-gradient(110deg, var(--sv-pearl), #cec4fb80);
 }
 .about-editorial .ab-founder-grid {
   display: grid;
@@ -265,8 +265,8 @@
   aspect-ratio: 4 / 4.5;
   display: grid;
   place-items: center;
-  color: #b5b6fc80;
-  background: linear-gradient(145deg, #382329, var(--sv-navy));
+  color: #bfc9fc80;
+  background: linear-gradient(145deg, var(--ink-900), var(--sv-navy));
 }
 .about-editorial .ab-founder-photo > span {
   position: absolute;
@@ -289,7 +289,7 @@
   margin-top: 6px;
 }
 .about-editorial .ab-connect {
-  background: linear-gradient(110deg, #a3212c, var(--sv-navy) 48%, var(--sv-navy));
+  background: linear-gradient(110deg, var(--sapphire-700), var(--sv-navy) 48%, var(--sv-navy));
   color: var(--ivory);
   padding-block: 40px;
   display: flex;
@@ -341,11 +341,11 @@
 }
 .about-editorial .ab-action-outline {
   background: transparent;
-  border-color: #b5b6fc80;
+  border-color: #bfc9fc80;
   color: var(--ivory);
 }
 .about-editorial .ab-action-outline:hover {
-  background: #f5f4ff0c;
+  background: #f6f8ff0c;
   border-color: var(--rose);
 }
 .about-editorial .ab-action-solid {
@@ -529,4 +529,44 @@
     height: 220px;
     object-position: center top;
   }
+}
+
+/* "Hướng đi" was drawn for a dark band (light eyebrow, outline button, pale numerals);
+   keep it dark on purpose so every element reads, and the page gains a light/dark rhythm. */
+html body #root .about-editorial .ab-direction.ab-section {
+  color: #fff;
+  background:
+    radial-gradient(ellipse 50% 60% at 88% 10%, rgb(64 95 250 / 0.32), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 6% 100%, rgb(9 184 200 / 0.16), transparent 70%),
+    linear-gradient(125deg, #1b1937, #25215a 60%, #1d2a6b);
+}
+html body #root .about-editorial .ab-direction.ab-section h2 { color: #fff; }
+html body #root .about-editorial .ab-direction.ab-section h2 em { color: var(--cyan-200, #a8e5eb); }
+html body #root .about-editorial .ab-direction.ab-section .ab-eyebrow { color: var(--cyan-200, #a8e5eb); }
+html body #root .about-editorial .ab-direction.ab-section .ab-direction-copy > p { color: var(--ink-200, #d5d4e8); }
+html body #root .about-editorial .ab-direction.ab-section .ab-action-outline {
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.6);
+  background: transparent;
+}
+html body #root .about-editorial .ab-direction.ab-section .ab-action-outline:hover {
+  color: var(--sv-navy, #1b1937);
+  background: #fff;
+  border-color: #fff;
+}
+html body #root .about-editorial .ab-direction.ab-section .ab-principles article {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 0;
+  border-top-color: rgb(255 255 255 / 0.14);
+}
+html body #root .about-editorial .ab-direction.ab-section .ab-principles article > span {
+  color: var(--cyan-200, #a8e5eb);
+  font-size: 26px;
+  line-height: 1.3;
+}
+html body #root .about-editorial .ab-direction.ab-section .ab-principles h3 { color: #fff; }
+html body #root .about-editorial .ab-direction.ab-section .ab-principles p { color: var(--ink-200, #d5d4e8); }
+@media (max-width: 640px) {
+  html body #root .about-editorial .ab-direction.ab-section .ab-principles article { grid-template-columns: 48px minmax(0, 1fr); }
 }

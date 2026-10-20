@@ -1,9 +1,9 @@
 .photo-stage {
-  background: #211d1e;
+  background: var(--ink-900);
   border-radius: 28px;
   overflow: hidden;
   padding: 18px;
-  box-shadow: 0 16px 45px #02023812;
+  box-shadow: 0 16px 45px #1b193712;
 }
 .photo-topline {
   display: flex;
@@ -22,7 +22,7 @@
   width: 100%;
   overflow: hidden;
   border-radius: 14px;
-  background: #171516;
+  background: var(--ink-900);
 }
 .ai-visual .photo-wrap img {
   width: 100%;
@@ -40,7 +40,7 @@
   position: absolute;
   border: 2px solid var(--sv-vision);
   border-radius: 5px;
-  background: #426af814;
+  background: #405ffa14;
   pointer-events: none;
 }
 .photo-box span {
@@ -48,7 +48,7 @@
   bottom: 100%;
   left: -2px;
   background: var(--sv-vision);
-  color: #211d1e;
+  color: var(--ink-900);
   font-size: 11px;
   padding: 4px 8px;
   border-radius: 5px 5px 0 0;
@@ -73,7 +73,7 @@
   top: 0;
   height: 2px;
   background: var(--sv-lavender);
-  box-shadow: 0 0 20px 5px #426af866;
+  box-shadow: 0 0 20px 5px #405ffa66;
   animation: photo-sweep 4s ease-in-out infinite;
   pointer-events: none;
 }
@@ -115,7 +115,7 @@
   font-size: 14px;
   letter-spacing: 0.04em;
   max-width: 100%;
-  color: #82776f;
+  color: var(--ink-500);
 }
 @media (max-width: 760px) {
   .ai-copy > .eyebrow {

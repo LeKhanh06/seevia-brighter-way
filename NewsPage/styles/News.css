@@ -75,7 +75,7 @@
   gap: 10px;
   min-height: 38px;
   padding: 8px 16px;
-  border: 1px solid #02023880;
+  border: 1px solid #1b193780;
   border-radius: 22px;
   color: var(--burgundy);
   background: transparent;
@@ -83,16 +83,16 @@
   width: fit-content;
 }
 .np-action:hover {
-  background: #0202380a;
+  background: #1b19370a;
   border-color: var(--burgundy);
 }
 .np-action-light {
   color: var(--ivory);
-  border-color: #b5b6fc80;
+  border-color: #bfc9fc80;
 }
 .np-action-light:hover {
   color: var(--rose);
-  background: #f5f4ff0c;
+  background: #f6f8ff0c;
   border-color: var(--rose);
 }
 .np-hero {
@@ -100,7 +100,7 @@
   isolation: isolate;
   overflow: hidden;
   background:
-    radial-gradient(circle at 18% 70%, #ba022359, transparent 60%), var(--sv-navy);
+    radial-gradient(circle at 18% 70%, #2736b559, transparent 60%), var(--sv-navy);
   color: var(--ivory);
   padding-block: 64px 58px;
 }
@@ -114,8 +114,8 @@
   right: 30%;
   top: -240px;
   transform: rotate(-34deg);
-  border-left: 1px solid #b5b6fc30;
-  background: linear-gradient(180deg, #02023800, #02023826 45%, #b5b6fc29);
+  border-left: 1px solid #bfc9fc30;
+  background: linear-gradient(180deg, #1b193700, #1b193726 45%, #bfc9fc29);
   z-index: -1;
 }
 .np-hero::after {
@@ -123,7 +123,7 @@
   height: 820px;
   right: 8%;
   top: -250px;
-  background: linear-gradient(180deg, #02023800, #02023833 45%, #b5b6fc40);
+  background: linear-gradient(180deg, #1b193700, #1b193733 45%, #bfc9fc40);
 }
 .np-hero h1 {
   animation: np-enter 0.7s both;
@@ -237,7 +237,7 @@
   padding: 4px;
 }
 .np-search:focus-within {
-  outline: 2px solid #02023880;
+  outline: 2px solid #1b193780;
   outline-offset: 4px;
 }
 .np-search input:focus {
@@ -300,13 +300,13 @@
   place-items: center;
   width: 38px;
   height: 38px;
-  border: 1px solid #02023850;
+  border: 1px solid #1b193750;
   border-radius: 50%;
   color: var(--burgundy);
   background: none;
 }
 .np-open:hover {
-  background: #0202380a;
+  background: #1b19370a;
 }
 .np-note-art {
   display: flex;
@@ -316,7 +316,7 @@
   gap: 10px;
   border: 0;
   width: 100%;
-  background: linear-gradient(130deg, var(--sv-navy), #351d22);
+  background: linear-gradient(130deg, var(--sv-navy), var(--ink-900));
   color: var(--ivory);
 }
 .np-note-art > span {
@@ -331,7 +331,7 @@
   letter-spacing: 0.1em;
 }
 .np-note-control {
-  background: radial-gradient(circle, #02023880, transparent 90%), var(--sv-navy);
+  background: radial-gradient(circle, #1b193780, transparent 90%), var(--sv-navy);
 }
 .np-empty {
   padding-block: 42px;
@@ -342,7 +342,7 @@
   margin: 12px 0 20px;
 }
 .np-perspective {
-  background: linear-gradient(110deg, #9c2430, var(--sv-navy) 40%, var(--sv-navy));
+  background: linear-gradient(110deg, var(--sapphire-700), var(--sv-navy) 40%, var(--sv-navy));
   color: var(--ivory);
 }
 .np-perspective .np-eyebrow,
@@ -361,22 +361,6 @@
   gap: 12px;
   margin-top: 24px;
 }
-.np-sources {
-  padding-block: 28px;
-  background: var(--sv-navy);
-  border-bottom: 1px solid #b5b6fc40;
-}
-.np-sources .np-eyebrow {
-  color: var(--rose);
-  font-size: 10px;
-  margin-bottom: 10px;
-}
-.np-sources p:not(.np-eyebrow) {
-  font-size: 11px;
-  line-height: 1.9;
-  color: #b9aaa4;
-  max-width: 1000px;
-}
 .np-dialog {
   width: min(680px, calc(100% - 40px));
   max-height: 85vh;
@@ -385,7 +369,7 @@
   background: var(--sv-pearl);
 }
 .np-dialog::backdrop {
-  background: #141012c9;
+  background: #1b1937c9;
   backdrop-filter: blur(4px);
 }
 .np-dialog-close {

@@ -37,7 +37,7 @@
 }
 .pt a:focus-visible,
 .pt summary:focus-visible {
-  outline: 2px solid #c56f79;
+  outline: 2px solid var(--sapphire-500);
   outline-offset: 6px;
 }
 .pt-section {
@@ -79,7 +79,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  border: 1px solid #0202385c;
+  border: 1px solid #1b19375c;
   border-radius: 24px;
   padding: 8px 16px;
   min-height: 38px;
@@ -97,16 +97,16 @@
   flex-shrink: 0;
 }
 .pt-action:hover {
-  background: #0202380d;
+  background: #1b19370d;
   transform: translateY(-2px);
 }
 .pt-hero .pt-action,
 .pt-connect .pt-action {
-  border-color: #b5b6fc66;
+  border-color: #bfc9fc66;
 }
 .pt-hero .pt-action:hover,
 .pt-connect .pt-action:hover {
-  background: #f5f4ff10;
+  background: #f6f8ff10;
 }
 .pt-heading {
   max-width: 660px;
@@ -131,15 +131,22 @@
   gap: 28px;
   margin-top: 36px;
 }
+/* The theme paints these as raised cards, so they need a card's inner space. */
 .pt-direction {
-  border-top: 1px solid #02023850;
-  padding-top: 20px;
+  padding: 26px 26px 30px;
+  border: 1px solid #1b193720;
+  border-radius: 16px;
+}
+@media (max-width: 640px) {
+  .pt-direction {
+    padding: 22px 20px 24px;
+  }
 }
 .pt-index {
   font:
     italic 20px "Lora",
     serif;
-  color: #985e58;
+  color: var(--ink-500);
 }
 .pt-direction h3,
 .pt-step h3 {
@@ -163,10 +170,10 @@
   min-width: 0;
 }
 .pt-organizations details {
-  border-top: 1px solid #02023842;
+  border-top: 1px solid #1b193742;
 }
 .pt-organizations details:last-child {
-  border-bottom: 1px solid #02023842;
+  border-bottom: 1px solid #1b193742;
 }
 .pt summary {
   display: grid;
@@ -240,20 +247,20 @@
   margin-top: 38px;
 }
 .pt-step {
-  border-top: 1px solid #b5b6fc40;
+  border-top: 1px solid #bfc9fc40;
   padding-top: 22px;
 }
 .pt-step .pt-index {
   color: var(--sv-lavender);
 }
 .pt-step p {
-  color: #cfc4bf;
+  color: var(--ink-300);
 }
 .pt-principles {
   display: flex;
   flex-wrap: wrap;
   gap: 16px 40px;
-  border-top: 1px solid #b5b6fc30;
+  border-top: 1px solid #bfc9fc30;
   margin-top: 36px;
   padding-top: 22px;
   font-size: 12px;
@@ -265,15 +272,15 @@
   justify-content: space-between;
   gap: 30px;
   background:
-    radial-gradient(ellipse at 5% 40%, #a8203480, transparent 75%), var(--sv-navy);
+    radial-gradient(ellipse at 5% 40%, #2736b580, transparent 75%), var(--sv-navy);
   color: var(--sv-pearl);
-  border-top: 1px solid #b5b6fc40;
+  border-top: 1px solid #bfc9fc40;
 }
 .pt-connect h2 {
   font-size: 30px;
 }
 .pt-connect p {
-  color: #d7c7c1;
+  color: var(--ink-300);
   margin-top: 12px;
 }
 .pt-connect-actions {

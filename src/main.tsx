@@ -21,7 +21,6 @@ import "@fontsource/lora/vietnamese-600.css";
 import { createRoot } from "react-dom/client";
 import { flushSync } from "react-dom";
 import Home from "../HomePage/Home";
-import MotionLayer from "../HomePage/components/MotionLayer";
 import QuickOverview from "../OverviewPage/QuickOverview";
 import Product from "../ProductPage/Product";
 import Technology from "../TechnologyPage/Technology";
@@ -35,11 +34,14 @@ import SiteInformation from "./components/SiteInformation";
 import Policy from "../PolicyPage/Policy";
 import LanguageEffects from "./i18n/LanguageEffects";
 import SeeViaSupport from "./components/SeeViaSupport";
-import SectionRail from "./components/SectionRail";
+import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/retained-typography.css";
 import "./styles/iridescent-theme.css";
 import "../HomePage/styles/motion.css";
+import "./styles/brand-finish.css";
+import "./styles/layout-balance.css";
+import "./styles/page-rhythm.css";
 
 const routePath = () => window.location.pathname.replace(/\/$/, "") || "/";
 const entryKey = () =>
@@ -83,10 +85,7 @@ function Page({ path }: { path: string }) {
   ) : path === pageRegistry.productPage.href ? (
     <Product />
   ) : (
-    <>
-      <Home />
-      <MotionLayer />
-    </>
+    <Home />
   );
 }
 
@@ -236,6 +235,8 @@ function App() {
       if (
         !link ||
         link.hasAttribute("download") ||
+        // Standalone pages outside the React app (e.g. /mo-phong/) need a real page load.
+        link.hasAttribute("data-full-load") ||
         (link.target && link.target !== "_self")
       )
         return;
@@ -266,7 +267,6 @@ function App() {
       <SiteMotion routeKey={path} />
       <LanguageEffects path={path} />
       <Page path={path} />
-      <SectionRail routeKey={path} />
       <SeeViaSupport />
     </>
   );

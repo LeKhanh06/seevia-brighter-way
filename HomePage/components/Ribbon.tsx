@@ -14,15 +14,15 @@ export default function Ribbon({ variant }: { variant: "hero" }) {
     >
       <defs>
         <linearGradient id={`${id}-a`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#6CD6FC" />
-          <stop offset=".38" stopColor="#426AF8" />
-          <stop offset=".72" stopColor="#B5B6FC" />
-          <stop offset="1" stopColor="#E5C6FC" />
+          <stop offset="0" stopColor="#7fd3de" />
+          <stop offset=".38" stopColor="#405ffa" />
+          <stop offset=".72" stopColor="#bfc9fc" />
+          <stop offset="1" stopColor="#cec4fb" />
         </linearGradient>
         <linearGradient id={`${id}-b`} x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#E5C6FC" />
-          <stop offset=".5" stopColor="#B5B6FC" />
-          <stop offset="1" stopColor="#6CD6FC" />
+          <stop offset="0" stopColor="#cec4fb" />
+          <stop offset=".5" stopColor="#bfc9fc" />
+          <stop offset="1" stopColor="#7fd3de" />
         </linearGradient>
       </defs>
       <g className="sv-ribbon-g" fill="none" strokeLinecap="round">

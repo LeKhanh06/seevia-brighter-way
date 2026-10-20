@@ -220,9 +220,6 @@ export default function News() {
                     fetchPriority="high"
                   />
                 </a>
-                <figcaption>
-                  Ảnh: Be My Eyes · Sản phẩm trong ảnh không phải kính SeeVia.
-                </figcaption>
               </figure>
               <div className="np-feature-copy">
                 <p className="np-meta">
@@ -246,9 +243,6 @@ export default function News() {
                 >
                   Đọc thông cáo gốc <Arrow />
                 </a>
-                <small>
-                  Tin tham khảo từ Be My Eyes, không phải tính năng của SeeVia.
-                </small>
               </div>
             </article>
           </div>
@@ -422,18 +416,6 @@ export default function News() {
                 Góc nhìn cộng đồng <Arrow />
               </a>
             </div>
-          </div>
-        </section>
-        <section className="np-sources">
-          <div className="np-container">
-            <p className="np-eyebrow">THÔNG TIN BIÊN TẬP</p>
-            <p>
-              Tin tham khảo được tóm tắt từ nguồn ghi kèm, với ngày đăng theo
-              bài gốc. Ghi chú “Từ SeeVia” trình bày định hướng dự án, không
-              phải thông báo ra mắt. Sản phẩm, tổ chức và hình ảnh bên ngoài
-              không hàm ý quan hệ hợp tác với SeeVia. Danh sách này không cập
-              nhật tự động.
-            </p>
           </div>
         </section>
       </main>
