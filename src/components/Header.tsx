@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { navigate, navigateTo, pageRegistry, type Destination } from "../navigation";
 import "./Header.css";
+import { searchSite, searchText } from "../support/siteSearch";
 import { useLanguage, setLanguage } from "../i18n/language";
 import Sparkles from "../../HomePage/components/Sparkles";
 
 const searchPages = Object.values(pageRegistry);
-const searchText = (value: string) =>
-  value.toLocaleLowerCase("vi").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").trim();
 
 export default function Header({
   active = "home",
@@ -35,9 +34,7 @@ export default function Header({
   const searchToggle = useRef<HTMLButtonElement>(null);
   const normalizedQuery = searchText(searchQuery);
   const searchResults = normalizedQuery
-    ? searchPages.filter((page) =>
-        searchText(`${page.title} ${page.description} ${page.aliases.join(" ")}`).includes(normalizedQuery),
-      ).slice(0, 6)
+    ? searchSite(searchQuery)
     : searchPages.filter((page) => ["/san-pham", "/cong-nghe", "/tin-tuc", "/lien-he"].includes(page.href));
   const visitSearchResult = (href: string) => {
     setSearchOpen(false);

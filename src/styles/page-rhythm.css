@@ -276,6 +276,19 @@ html body #root main.site-information {
   /* A faint hairline where a pale hero meets the pale chapter below it. */
   border-bottom: 1px solid rgb(27 25 55 / 0.08);
 }
+/* overflow: hidden clips at the padding box, i.e. right under the menu, so the hero's glows and
+   rings stopped there in a hard line. clip-path clips at the border box instead, letting them
+   reach the top of the screen while staying trimmed at the sides and foot. */
+html:not(.sv-home-active) body #root main > section:first-of-type {
+  overflow: visible;
+  clip-path: inset(0);
+}
+/* clip-path only trims paint, not scroll width: keep stray decoration from adding a sideways scroll. */
+html:not(.sv-home-active) body #root main { overflow-x: clip; }
+/* Full-cover decoration layers start under the menu too. */
+html:not(.sv-home-active) body #root main > section:first-of-type > :is(.site-ambient-glow, .hero-glows, .qv-stars) {
+  top: calc(-1 * var(--site-header-h));
+}
 
 /* ================= Product: spacing and headline balance ================= */
 /* The technology chapter sized itself to a fixed 943px; let content set its height. */

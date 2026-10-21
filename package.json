@@ -13,6 +13,7 @@
     "test:assistant": "node --test contact-backend/assistant.test.mjs",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
+    "zoom-type": "node scripts/zoom-type.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "format": "prettier --write src HomePage ProductPage TechnologyPage AboutPage CommunityPage NewsPage PartnerPage ContactPage PolicyPage index.html vite.config.ts tsconfig.json package.json README.md"
   },

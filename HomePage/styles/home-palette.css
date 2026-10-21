@@ -550,3 +550,59 @@ html.sv-home-active body #root .product-stage:has(> .product-3d) > span {
 @media (max-width: 800px) {
   html.sv-home-active body #root .product-stage:has(> .product-3d) { height: clamp(300px, 78vw, 420px); }
 }
+
+/* ---------- 3D viewer colour picker: four finishes, top-left of the stage (mirrors the V1 note) ---------- */
+html.sv-home-active body #root .glasses-colors {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 3%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px 6px 8px;
+  border: 1px solid rgb(64 95 250 / .3);
+  border-radius: 999px;
+  background: rgb(255 255 255 / .78);
+}
+html.sv-home-active body #root .glasses-color {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+html.sv-home-active body #root .glasses-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: inset 0 0 0 1px rgb(27 25 55 / .18);
+  transition: box-shadow .2s, transform .2s;
+}
+html.sv-home-active body #root .glasses-color:hover .glasses-swatch { transform: scale(1.1); }
+html.sv-home-active body #root .glasses-color[aria-pressed="true"] .glasses-swatch {
+  box-shadow: inset 0 0 0 1px rgb(27 25 55 / .18), 0 0 0 2px #fff, 0 0 0 4px var(--brand-sapphire, #405ffa);
+}
+html.sv-home-active body #root .glasses-color:focus-visible {
+  outline: 2px solid var(--brand-sapphire, #405ffa);
+  outline-offset: 1px;
+}
+html.sv-home-active body #root .glasses-color-name {
+  margin-left: 6px;
+  color: #34345c;
+  font: 600 13px/1.2 var(--sans);
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  /* Phones: the stage grows by a strip under the model for the picker, so it never covers the lens. */
+  html.sv-home-active body #root .product-stage:has(> .product-3d) { height: calc(clamp(300px, 78vw, 420px) + 56px); }
+  html.sv-home-active body #root .product-stage > .product-3d { inset: 0 0 82px; }
+  html.sv-home-active body #root .glasses-colors { top: auto; bottom: 34px; left: 50%; translate: -50% 0; }
+  html.sv-home-active body #root .product-stage:has(> .product-3d) > span { bottom: 4px; margin-bottom: 0; }
+  html.sv-home-active body #root .glasses-color-name { font-size: 12px; }
+}

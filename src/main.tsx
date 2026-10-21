@@ -43,6 +43,9 @@ import "../HomePage/styles/motion.css";
 import "./styles/brand-finish.css";
 import "./styles/layout-balance.css";
 import "./styles/page-rhythm.css";
+import "./styles/device-polish.css";
+import "./styles/zoom-type.css";
+import { setupDevicePolish } from "./support/devicePolish";
 
 const routePath = () => window.location.pathname.replace(/\/$/, "") || "/";
 const entryKey = () =>
@@ -286,6 +289,7 @@ function App() {
   );
 }
 
+setupDevicePolish();
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
