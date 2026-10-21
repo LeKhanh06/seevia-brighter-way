@@ -8,6 +8,7 @@
   --sh-header: 84px;
   --sh-stage-h: 100svh;
   position: relative;
+  overflow-x: clip;
   /* The hero runs up underneath the floating menu, so its colour fills the top of the screen. */
   margin-top: calc(-1 * var(--sh-header));
   color: var(--sh-indigo);
@@ -115,14 +116,14 @@ html body #root .story-hero .sh-cta--primary .button:hover { background: #244bde
 /* 03: close photography and a deliberately separate column of editorial type. */
 /* The fade lives on the frame, not the image: the image zooms for depth, the fade must stay put. */
 .sh-scene--kha-nang .sh-braille {
-  inset: 0 0 0 40%;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / .3) 20%, #000 50%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / .3) 20%, #000 50%);
+  inset: 0 0 0 36%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / .14) 10%, rgb(0 0 0 / .72) 36%, #000 58%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / .14) 10%, rgb(0 0 0 / .72) 36%, #000 58%);
 }
 .sh-scene--kha-nang .sh-braille img { object-position: 58% 54%; }
 .sh-scene--kha-nang .sh-copy {
   position: absolute;
-  left: var(--sv-gutter, 8%);
+  left: max(28px, calc(var(--sv-gutter, 8%) - 24px));
   top: 50%;
   width: min(36%, 560px);
   transform: translateY(-50%);
@@ -191,10 +192,10 @@ html body #root .story-hero .sh-cta--primary .button:hover { background: #244bde
   transform: translateY(-50%);
 }
 .sh-progress__stop { display: grid; width: 32px; height: 34px; padding: 0; place-items: center; border: 0; border-radius: 20px; background: transparent; cursor: pointer; }
-.sh-progress__dot { display: block; width: 8px; height: 8px; border-radius: 20px; background: var(--sapphire-400, #7b8cf5); box-shadow: 0 1px 3px #1b19373d; transition: width .28s ease, height .28s ease, background .28s ease, box-shadow .28s ease; }
+.sh-progress__dot { display: block; width: 8px; height: 8px; border-radius: 20px; background: var(--sapphire-400, #7b8cf5); opacity: .62; box-shadow: 0 1px 3px #1b193722; transition: width .28s ease, height .28s ease, background .28s ease, box-shadow .28s ease, opacity .28s ease; }
 .sh-progress__stop:hover .sh-progress__dot,
-.sh-progress__stop:focus-visible .sh-progress__dot { background: var(--sapphire-200, #bfc9fc); }
-.sh-progress__stop.is-active .sh-progress__dot { width: 10px; height: 28px; background: linear-gradient(180deg, var(--sh-cyan), var(--sh-sapphire) 78%); box-shadow: 0 0 14px #a8e5eb66; }
+.sh-progress__stop:focus-visible .sh-progress__dot { background: var(--sapphire-200, #bfc9fc); opacity: .9; }
+.sh-progress__stop.is-active .sh-progress__dot { width: 10px; height: 28px; background: linear-gradient(180deg, var(--sh-cyan), var(--sh-sapphire) 78%); opacity: .82; box-shadow: 0 0 10px #a8e5eb40; }
 .sh-progress__stop:focus-visible { outline: 2px solid var(--sh-sapphire); outline-offset: -2px; }
 .sh-hint { position: absolute; right: var(--sv-gutter, 9%); bottom: 50px; margin: 0; color: var(--sh-indigo); opacity: .6; font: 500 10px/1 "Be Vietnam Pro", sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 .story-hero:not([data-active="0"]) .sh-hint { opacity: 0; }

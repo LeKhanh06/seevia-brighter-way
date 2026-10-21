@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { STREET, GROUPS } from './data.js';
 import { mat, mesh, box, cyl, tagObject } from './materials.js';
 import { makeAsphalt, makePavement, makeTactile, makePlaster, makeHoarding, rng } from './textures.js';
+import { applyPhoto } from './phototex.js';
+import { swapToReal, placeReal } from './realprops.js';
 import { buildShophouse, buildSimpleBlock } from './buildings.js';
 import { buildMotorbike } from './vehicles.js';
 import { buildPerson, randomLook } from './people.js';
@@ -12,6 +14,12 @@ import {
   buildAFrameSign, buildGoods, buildTrafficLight, buildCabinet, buildSignPole, buildBusStop, buildTrashBags, buildStall, buildPersonalItem,
 } from './props.js';
 
+/** Cột điện (x, z): cũng là nơi gắn đèn đường buổi tối (nightlights.js). */
+export const POLES = [
+  [-4.5, 20], [-4.5, -6], [-4.5, -26], [4.5, 12], [4.5, -14], [4.5, 32],
+  [-4.5, -50], [4.5, -40], [4.5, -66], [-4.5, -76], [4.5, -92],
+];
+export const DECOR_POLES = [[-4.5, 46], [-4.5, 72], [4.5, 56], [4.5, 82], [-4.5, -102], [4.5, -118], [-4.5, -126]];
 const SW = STREET.curbHeight;          // cao độ mặt vỉa hè
 const FRONT = STREET.sideOuter;        // mặt tiền nhà
 const DEPTH = STREET.buildingDepth;
@@ -101,6 +109,8 @@ export function buildWorld(scene, reg) {
   const road = new THREE.Mesh(new THREE.PlaneGeometry(STREET.roadHalf * 2, LEN), new THREE.MeshStandardMaterial({ map: asphalt, roughness: 0.93 }));
   road.rotation.x = -Math.PI / 2;
   road.receiveShadow = true;
+  applyPhoto(road.material, 'duong', [STREET.roadHalf * 2 / 2.6, LEN / 2.6], { normalScale: 0.8 });
+  road.material.color.setHex(0xb8b8bc);   // ảnh nhựa đường hơi sáng: hạ xuống cho giống nhựa Sài Gòn
   scene.add(road);
   reg.add({ id: 'road', type: 'road', pos: [0, 0, 0], size: [STREET.roadHalf * 2, 0.05, LEN] });
   tag(road, 'road');
@@ -108,6 +118,7 @@ export function buildWorld(scene, reg) {
   const pave = makePavement();
   pave.repeat.set(1.8, LEN / 2.0);
   const sideTop = new THREE.MeshStandardMaterial({ map: pave, roughness: 0.88 });
+  applyPhoto(sideTop, 'viahe', [(FRONT - STREET.roadHalf) / 1.4, LEN / 1.4]);
   const sideEdge = mat(0xb9b4aa, { roughness: 0.9 });
   for (const s of [-1, 1]) {
     const w = FRONT - STREET.roadHalf;
@@ -472,11 +483,8 @@ export function buildWorld(scene, reg) {
   }
 
   // ───── Cột điện + dây điện ─────
-  const poleList = [
-    [-4.5, 20], [-4.5, -6], [-4.5, -26], [4.5, 12], [4.5, -14], [4.5, 32],
-    [-4.5, -50], [4.5, -40], [4.5, -66], [-4.5, -76], [4.5, -92],
-  ];
-  const decorPoles = [[-4.5, 46], [-4.5, 72], [4.5, 56], [4.5, 82], [-4.5, -102], [4.5, -118], [-4.5, -126]];
+  const poleList = POLES;
+  const decorPoles = DECOR_POLES;
   poleList.forEach(([x, z], i) => {
     const p = buildUtilityPole(i + 1);
     p.position.set(x, SW, z);
@@ -532,6 +540,16 @@ export function buildWorld(scene, reg) {
           const id = `cafeset-${nCafe++}`;
           reg.add({ id, type: 'cafe_table', pos: [x, SW + 0.6, z], size: [1.5, 1.2, 1.5] });
           tag(set, id);
+          // bộ giữa: thêm một ghế nhựa trống quay vào bàn, phía ngoài đường
+          if (k === 1) {
+            // ghế đẩu phía lòng đường đổi thành ghế nhựa tựa lưng, quay mặt vào bàn
+            const stool = set.children.find((c) => c.isGroup && Math.abs(c.position.length() - 0.58) < 0.02 && Math.sign(c.position.x) === -sgn);
+            if (stool) {
+              stool.visible = false;
+              const { x: sx, z: sz } = stool.position;
+              placeReal(scene, 'chair', x + sx, SW, z + sz, Math.atan2(-sx, -sz));
+            }
+          }
           if (k !== 1) {
             const a = 0.5 + (k === 0 ? 0 : (2 * Math.PI) / 3);
             const ox = Math.cos(a) * 0.58;
@@ -588,6 +606,7 @@ export function buildWorld(scene, reg) {
     const p = buildPlantPot(nPot + 3);
     p.position.set(x, SW, z);
     scene.add(p);
+    swapToReal(p, 'pot', { yaw: pr() * Math.PI * 2 });
     const id = `pot-${nPot++}`;
     reg.add({ id, type: 'plant_pot', pos: [x, SW + 0.4, z], size: [0.6, 0.8, 0.6] });
     tag(p, id);

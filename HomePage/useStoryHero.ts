@@ -5,10 +5,10 @@ import { getLenis } from "./useHomeMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const STEP_SECONDS = 1.45;
-/** An even pace keeps the scene legible throughout the transition. */
-const STEP_EASE = (t: number) => (1 - Math.cos(Math.PI * t)) / 2;
-const AUTOPLAY_MS = 6500;
+const STEP_SECONDS = 0.9;
+/** Responds the moment the swipe lands, then settles softly onto the scene (ease-out cubic). */
+const STEP_EASE = (t: number) => 1 - Math.pow(1 - t, 3);
+const AUTOPLAY_MS = 3400;
 
 /** One scrubbed timeline keeps forward and reverse scene changes in sync with scroll. */
 export default function useStoryHero(count: number) {
@@ -59,7 +59,8 @@ export default function useStoryHero(count: number) {
           trigger: root,
           start: "top top",
           end: "bottom bottom",
-          scrub: .65,
+          // The scroll glide is already eased; extra scrub lag only adds a slow, dragging tail.
+          scrub: true,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             setActive(Math.min(count - 1, Math.round(self.progress * (count - 1))));
@@ -115,7 +116,7 @@ export default function useStoryHero(count: number) {
         trigger: root,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.2,
+        scrub: .7,
         invalidateOnRefresh: true,
       };
       gsap.timeline({ scrollTrigger: scrub, defaults: { ease: "none" } })
@@ -142,9 +143,10 @@ export default function useStoryHero(count: number) {
     if (!st) return;
     const y = st.start + ((st.end - st.start) * index) / (count - 1);
     const currentIndex = Math.round(((scrollY - st.start) / (st.end - st.start)) * (count - 1));
-    const duration = STEP_SECONDS * Math.max(1, Math.abs(index - currentIndex));
+    // Jumping several scenes (progress dots) takes a little longer, never a multiple of one step.
+    const duration = STEP_SECONDS + 0.3 * Math.max(0, Math.abs(index - currentIndex) - 1);
     const lenis = getLenis();
-    if (lenis) lenis.scrollTo(y, { duration, easing: STEP_EASE });
+    if (lenis) lenis.scrollTo(y, { duration, easing: STEP_EASE, force: true });
     else window.scrollTo({ top: y, behavior: "smooth" });
   }, [count]);
 
@@ -159,6 +161,8 @@ export default function useStoryHero(count: number) {
     let lastWheel = 0;
     let wheelUsed = false;
     let lastSize = 0;
+    let peak = 0;
+    let floor = Infinity;
     let touchY: number | null = null;
     let touchUsed = false;
     const inside = (st: ScrollTrigger) => scrollY >= st.start - 4 && scrollY <= st.end + 4;
@@ -173,18 +177,21 @@ export default function useStoryHero(count: number) {
       const next = base(st) + direction;
       return next >= 0 && next <= count - 1;
     };
-    /** Moves one scene if possible. "pass" lets the page scroll normally (before the first / after the last scene). */
-    const step = (direction: 1 | -1): "moved" | "busy" | "pass" => {
+    /** Moves one scene if possible. "pass" lets the page scroll normally (before the first / after the last scene);
+        "edge" swallows a gesture that tries to leave the hero while the last glide is still landing. */
+    const step = (direction: 1 | -1): "moved" | "busy" | "edge" | "pass" => {
       const st = triggerRef.current;
       if (!st || !inside(st)) return "pass";
-      const busy = performance.now() < lockUntil;
+      const now = performance.now();
       const next = base(st) + direction;
-      if (busy) return next < 0 || next > count - 1 ? "pass" : "busy";
-      if (next < 0 || next > count - 1) return "pass";
+      // Leaving the hero only happens once the last glide has fully landed, so a quick
+      // second swipe on the first/last scene can never carry the page into the next section.
+      if (next < 0 || next > count - 1) return now < glideUntil ? "edge" : "pass";
+      if (now < lockUntil) return "busy";
       target = next;
       // Keep one gesture on one chapter until most of its transition has played.
-      lockUntil = performance.now() + STEP_SECONDS * 750;
-      glideUntil = performance.now() + STEP_SECONDS * 1000 + 180;
+      lockUntil = now + STEP_SECONDS * 700;
+      glideUntil = now + STEP_SECONDS * 1000 + 120;
       goTo(next);
       return "moved";
     };
@@ -204,17 +211,28 @@ export default function useStoryHero(count: number) {
       if (event.ctrlKey) return;
       const now = performance.now();
       const size = Math.abs(event.deltaY);
-      // A new swipe starts after a short pause, or when the wheel speeds up again while inertia is fading.
-      const fresh = now - lastWheel > 140 || (now > lockUntil && size > 10 && size > lastSize * 1.5);
-      lastWheel = now;
+      // A new swipe starts after a short pause, or when the wheel clearly speeds up again while
+      // inertia is fading. Small jitter in trackpad inertia must not count as a second swipe, and
+      // neither may a pause caused by a busy frame (the tail then arrives no stronger than before).
+      const paused = event.timeStamp - lastWheel > 160;
+      const fresh = (paused && (now > lockUntil || size > lastSize * 1.5))
+        || (now > lockUntil && size > 24 && size > floor * 3);
+      lastWheel = event.timeStamp;
       lastSize = size;
+      // The floor only follows the fading tail after the peak, never the gentle start of the swipe.
+      if (fresh || size >= peak) {
+        peak = size;
+        floor = size;
+      } else floor = Math.min(floor, size);
       if (fresh) wheelUsed = false;
       // The rest of a gesture that already changed scene is swallowed, even at the first/last scene.
       if (wheelUsed) return hold(event);
       if (Math.abs(event.deltaY) < 2) return;
       const result = step(event.deltaY > 0 ? 1 : -1);
       if (result === "pass") return;
-      wheelUsed = true;
+      // A swipe that lands while the previous scene is still settling is kept alive, so it
+      // moves on as soon as the lock opens instead of being silently dropped.
+      if (result !== "busy") wheelUsed = true;
       hold(event);
     };
     const onTouchStart = (event: TouchEvent) => {
@@ -231,8 +249,9 @@ export default function useStoryHero(count: number) {
         if (delta !== 0 && owns(delta > 0 ? 1 : -1)) event.preventDefault();
         return;
       }
-      if (step(delta > 0 ? 1 : -1) === "pass") return;
-      touchUsed = true;
+      const result = step(delta > 0 ? 1 : -1);
+      if (result === "pass") return;
+      if (result !== "busy") touchUsed = true;
       event.preventDefault();
     };
     const onKey = (event: KeyboardEvent) => {

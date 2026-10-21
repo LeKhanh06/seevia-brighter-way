@@ -29,7 +29,8 @@ import Community from "../CommunityPage/Community";
 import News from "../NewsPage/News";
 import Partner from "../PartnerPage/Partner";
 import Contact from "../ContactPage/Contact";
-import SiteMotion from "./components/SiteMotion";
+import SiteMotion, { getPageLenis } from "./components/SiteMotion";
+import { getLenis } from "../HomePage/useHomeMotion";
 import SiteInformation from "./components/SiteInformation";
 import Policy from "../PolicyPage/Policy";
 import LanguageEffects from "./i18n/LanguageEffects";
@@ -127,16 +128,25 @@ function App() {
           target.scrollIntoView();
         }
       } else {
-        window.scrollTo({
-          left: position?.[0] ?? 0,
-          top: position?.[1] ?? 0,
-          behavior: "instant",
-        });
+        const left = position?.[0] ?? 0;
+        const top = position?.[1] ?? 0;
+        const lenis = getLenis() ?? getPageLenis();
+        if (lenis) {
+          const wasStopped = lenis.isStopped;
+          lenis.stop();
+          if (!wasStopped) lenis.start();
+          lenis.scrollTo(top, { immediate: true, force: true });
+          if (left !== window.scrollX)
+            window.scrollTo({ left, top, behavior: "instant" });
+        } else {
+          window.scrollTo({ left, top, behavior: "instant" });
+        }
       }
     };
     const commit = (
       position?: [number, number],
       direction: "forward" | "back" = "forward",
+      instant = false,
     ) => {
       const id = ++navigationId.current;
       activeTransition.current?.skipTransition();
@@ -162,7 +172,7 @@ function App() {
             image.addEventListener("error", ready);
           });
       };
-      if (document.startViewTransition && !motion.matches) {
+      if (document.startViewTransition && !motion.matches && !instant) {
         const transition = document.startViewTransition(update);
         activeTransition.current = transition;
         // Browsers reject `ready` when a newer navigation skips this transition.
@@ -177,12 +187,16 @@ function App() {
       }
     };
     const onNavigate = (event: Event) => {
-      const request = event as CustomEvent<{ href?: string }>;
+      const request = event as CustomEvent<{ href?: string; instant?: boolean }>;
       if (!request.detail?.href) return;
       const url = new URL(request.detail.href, window.location.href);
       if (url.origin !== window.location.origin) return;
       request.preventDefault();
-      if (url.href === window.location.href) return;
+      if (url.href === window.location.href) {
+        if (request.detail.instant) activeTransition.current?.skipTransition();
+        restorePosition(undefined);
+        return;
+      }
       const previousPath = routePath();
       saveScroll();
       const key = newEntryKey();
@@ -200,7 +214,7 @@ function App() {
       } else {
         const from = pageOrder.indexOf(previousPath);
         const to = pageOrder.indexOf(routePath());
-        commit(undefined, from >= 0 && to >= 0 && to < from ? "back" : "forward");
+        commit(undefined, from >= 0 && to >= 0 && to < from ? "back" : "forward", request.detail.instant);
       }
     };
     const onPopState = () => {
@@ -243,11 +257,11 @@ function App() {
       const url = new URL(link.href, window.location.href);
       if (
         url.origin !== window.location.origin ||
-        url.href === window.location.href
+        (url.href === window.location.href && !link.hasAttribute("data-nav-top"))
       )
         return;
       event.preventDefault();
-      navigateTo(url.href);
+      navigateTo(url.href, { instant: link.hasAttribute("data-nav-top") });
     };
     window.addEventListener("seevia:navigate", onNavigate);
     window.addEventListener("popstate", onPopState);

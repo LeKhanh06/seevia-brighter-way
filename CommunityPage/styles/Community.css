@@ -611,10 +611,14 @@
 }
 @media (max-width: 700px) {
   .cp-filters {
-    gap: 8px 18px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 18px;
   }
   .cp-filters button {
     font-size: 11px;
+    min-height: 44px;
+    text-align: left;
   }
   .cp-story,
   .cp-story-grid.is-filtered .cp-story {

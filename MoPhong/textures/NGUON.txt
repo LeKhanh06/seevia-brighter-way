@@ -1,0 +1,6 @@
+Texture từ Poly Haven (CC0): https://polyhaven.com
+duong = asphalt_04
+viahe = hexagonal_concrete_paving
+tuong = white_plaster_02
+sky/   sang = rustig_koppie_puresky, trua = kloofendal_48d_partly_cloudy_puresky, chieu = belfast_sunset_puresky, toi = qwantani_night_puresky
+models/ (Poly Haven, CC0): potted_plant_02, plastic_monobloc_chair_01

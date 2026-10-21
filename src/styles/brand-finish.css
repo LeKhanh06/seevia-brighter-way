@@ -194,6 +194,20 @@ html body #root .sv-support .sv-support-launcher:focus-visible {
   0%, 100% { opacity: .2; transform: scale(.96); }
   50% { opacity: .58; transform: scale(1.08); }
 }
+@media (max-width: 600px) {
+  html body #root .sv-support .sv-support-launcher,
+  html body #root .sv-support .sv-support-launcher[data-compact="true"] {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 52px;
+    height: 52px;
+    min-height: 52px;
+  }
+  html body #root .sv-support .sv-support-launcher svg {
+    width: 26px;
+    height: 26px;
+  }
+}
 html body #root .sv-support .sv-support-header { background: var(--gradient-dusk); }
 html body #root .sv-support .sv-support-input-row button { background: var(--brand-sapphire); border-color: var(--brand-sapphire); }
 

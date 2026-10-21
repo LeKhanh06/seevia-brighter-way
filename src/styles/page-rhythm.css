@@ -158,6 +158,12 @@ html body #root .technology-page section.technology-hero .technology-hero-layout
   padding: 0;
   border: 0;
 }
+@media (max-width: 1050px) {
+  html body #root .technology-page section.technology-hero .technology-hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+}
 
 /* Four steps: a light runs along the line; each step it reaches lights up and stays lit,
    then the whole path dims and the run starts again. */
@@ -190,6 +196,10 @@ html body #root .technology-page .tech-flow-grid article .flow-icon {
 html body #root .technology-page .tech-flow-grid article:nth-child(2) .flow-icon { animation-name: tech-flow-lit-2; animation-delay: 0s; }
 html body #root .technology-page .tech-flow-grid article:nth-child(3) .flow-icon { animation-name: tech-flow-lit-3; animation-delay: 0s; }
 html body #root .technology-page .tech-flow-grid article:nth-child(4) .flow-icon { animation-name: tech-flow-lit-4; animation-delay: 0s; }
+html body #root .technology-page .tech-flow-grid::after,
+html body #root .technology-page .tech-flow-grid article .flow-icon { animation-play-state: paused; }
+html body #root .technology-page .tech-flow-grid.is-in-view::after,
+html body #root .technology-page .tech-flow-grid.is-in-view article .flow-icon { animation-play-state: running; }
 @keyframes tech-flow-run {
   0% { transform: scaleX(0); opacity: 1; }
   75%, 90% { transform: scaleX(1); opacity: 1; }
@@ -217,6 +227,11 @@ html body #root .technology-page .tech-flow-grid article:nth-child(4) .flow-icon
 }
 @media (max-width: 900px) {
   html body #root .technology-page .tech-flow-grid::after { display: none; }
+}
+@media (max-width: 480px) {
+  html body #root .technology-page .tech-flow-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html body #root .technology-page .tech-flow-grid::after { display: none; }
@@ -349,7 +364,7 @@ html body #root .quick-overview-page .qv-hero-glow {
   height: 44vmax;
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.55;
+  opacity: 0.63;
   pointer-events: none;
 }
 html body #root .quick-overview-page .qv-hero-glow--a {
@@ -387,3 +402,11 @@ html body #root .pt .hero-glows--partner i:first-child {
 html body #root .pt .hero-glows--partner i:last-child {
   background: radial-gradient(circle, rgb(191 201 252 / 0.5) 0%, rgb(64 95 250 / 0.28) 32%, transparent 72%);
 }
+
+/* Four steps: the rails sit beneath the step columns. Each column becomes its own stacking
+   context while it reveals (opacity/transform), so the icons' z-index alone could not lift
+   them above the running light. */
+html body #root .technology-page .tech-flow-grid { isolation: isolate; }
+html body #root .technology-page .tech-flow-grid::before,
+html body #root .technology-page .tech-flow-grid::after { z-index: 0; }
+html body #root .technology-page .tech-flow-grid > article { position: relative; z-index: 1; }

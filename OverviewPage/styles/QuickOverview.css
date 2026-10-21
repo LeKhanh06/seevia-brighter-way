@@ -99,7 +99,7 @@
   overflow: hidden;
   color: var(--qv-pearl);
   background:
-    radial-gradient(ellipse 52% 62% at 90% 75%, #405ffa38, transparent 75%),
+    radial-gradient(ellipse 52% 62% at 90% 75%, #405ffa46, transparent 75%),
     linear-gradient(115deg, var(--ink-900) 0%, var(--ink-800) 56%, var(--sapphire-800) 100%);
 }
 .quick-overview-page .qv-hero-layout {

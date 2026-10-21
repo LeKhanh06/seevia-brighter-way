@@ -962,3 +962,55 @@ test("concurrency guard caps inference requests and releases slots afterwards", 
   assert.equal((await second).status, 200);
   assert.equal((await send()).status, 200);
 });
+test("image questions use the vision model, carry the image and keep body limits strict", async (t) => {
+  const vision = "command-a-vision-07-2025";
+  const calls = [];
+  const { send, base } = await fixture(t, {
+    fetchImpl: async (url, request) => {
+      calls.push({ url: String(url), request });
+      if (String(url).includes("/v1/models/"))
+        return Response.json({
+          name: decodeURIComponent(String(url).split("/").at(-1)),
+          endpoints: ["chat"],
+          is_deprecated: false,
+        });
+      // The vision model rejecting the JSON schema falls back to prompt-only JSON.
+      if (JSON.parse(request.body).response_format)
+        return new Response("{}", { status: 400 });
+      return Response.json({
+        finish_reason: "COMPLETE",
+        message: {
+          content: [
+            { type: "text", text: "```json\n" + JSON.stringify(output) + "\n```" },
+          ],
+        },
+      });
+    },
+  });
+  const status = await (await fetch(base + "/api/assistant/status")).json();
+  assert.equal(status.images, true);
+  const image = "data:image/jpeg;base64," + "A".repeat(40000);
+  const response = await send({ message: "Ảnh này là gì?", history: [], image });
+  assert.equal(response.status, 200);
+  assert.equal(calls[0].url, `https://api.cohere.com/v1/models/${vision}`);
+  const chats = calls.filter((call) => call.url.endsWith("/v2/chat"));
+  assert.equal(chats.length, 2);
+  const payload = JSON.parse(chats[1].request.body);
+  assert.equal(payload.model, vision);
+  assert.deepEqual(payload.messages.at(-1).content, [
+    { type: "text", text: "Ảnh này là gì?" },
+    { type: "image_url", image_url: { url: image } },
+  ]);
+  assert.match(payload.messages[0].content, /includes one image/);
+  // Large bodies are only accepted when they carry a valid image.
+  assert.equal((await send({ message: "a".repeat(13000) })).status, 413);
+  assert.equal(
+    (await send({ message: "x", image: "data:text/html;base64,AAAA" })).status,
+    400,
+  );
+  assert.equal(
+    (await send({ mode: "welcome", message: "", image })).status,
+    400,
+  );
+  assert.equal(validateQuestion({ message: "x", image: 42 }), null);
+});

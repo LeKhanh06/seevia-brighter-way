@@ -13,6 +13,14 @@ const SIMULATION_TYPES: Record<string, string> = {
   ".json": "application/json",
   ".png": "image/png",
   ".jpg": "image/jpeg",
+  ".ogg": "audio/ogg",
+  ".mp3": "audio/mpeg",
+  ".wav": "audio/wav",
+  ".hdr": "application/octet-stream",
+  ".fbx": "application/octet-stream",
+  ".glb": "model/gltf-binary",
+  ".gltf": "model/gltf+json",
+  ".bin": "application/octet-stream",
 };
 function simulationPage() {
   return {
