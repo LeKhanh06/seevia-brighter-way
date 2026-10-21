@@ -426,24 +426,10 @@ html body #root .product-page .product-design .device-card {
 }
 html body #root .product-page .product-design .device-illustration {
   border-color: transparent;
-  background:
-    var(--ink-900) padding-box,
-    linear-gradient(135deg, var(--cyan-100), var(--sapphire-200)) border-box;
+  background: #111;
 }
 html body #root .product-page .product-design .device-illustration img {
-  filter: hue-rotate(185deg) saturate(1.15);
-}
-html body #root .product-page .product-design .device-hotspot {
-  border-color: var(--cyan-200);
-  background: var(--sapphire-700);
-  color: var(--white);
-  box-shadow: 0 3px 12px rgb(27 25 55 / .26);
-}
-html body #root .product-page .product-design .device-hotspot:is(:hover, :focus-visible, .selected) {
-  border-color: var(--white);
-  background: var(--brand-sapphire);
-  color: var(--white);
-  box-shadow: 0 0 0 5px rgb(64 95 250 / .2), 0 5px 16px rgb(27 25 55 / .22);
+  filter: none;
 }
 html body #root .product-page .product-design .device-features button {
   color: var(--text-body);
@@ -464,14 +450,9 @@ html body #root .product-page .product-design .device-features button > span {
 html body #root .product-page .product-design .device-features h3 {
   color: var(--text-heading);
 }
-html body #root .product-page .product-design .device-features p,
-html body #root .product-page .product-design .feature-feedback {
-  color: var(--text-muted);
+html body #root .product-page .product-design .device-detail-copy h3 {
+  color: var(--white);
 }
-html body #root .product-page .product-design .product-angle-placeholder {
-  color: var(--text-muted);
-  background:
-    radial-gradient(ellipse at 25% 20%, rgb(9 187 200 / .14), transparent 58%),
-    linear-gradient(125deg, var(--white), var(--sapphire-50));
-  border: 1px solid var(--sapphire-200);
+html body #root .product-page .product-design .device-detail-copy p {
+  color: var(--sapphire-100);
 }

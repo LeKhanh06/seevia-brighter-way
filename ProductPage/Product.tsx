@@ -9,13 +9,61 @@ import {
   questions,
   technologies,
 } from "./data/productData";
-import glassesDiagram from "./assets/glasses-diagram.png";
-import glassesBurgundy from "./assets/glasses-burgundy.png";
 import "./styles/Product.css";
 
+const glassesAngles = [
+  { name: "Mặt trước", image: "/images/kinh/mat2.png" },
+  { name: "Mặt trên", image: "/images/kinh/mat1.png?v=20261021-2023" },
+  { name: "Mặt dưới", image: "/images/kinh/mat3.png" },
+  { name: "Bên phải và bên trái", image: "/images/kinh/mat.png" },
+];
+
+const colors = [
+  {
+    name: "Lunar Silver",
+    vi: "Bạc ánh ngọc trai",
+    hex: "#DEE2E8",
+    image: "/images/kinh/mausac1.png",
+    focusY: "39%",
+    description:
+      "Sạch sẽ, tinh tế và nhẹ nhàng. Bề mặt satin giúp kính trông cao cấp mà không quá bóng hay giống thiết bị y tế.",
+  },
+  {
+    name: "Graphite Black",
+    vi: "Đen than chì",
+    hex: "#383A41",
+    image: "/images/kinh/mausac3.png",
+    focusY: "36%",
+    description:
+      "Sang trọng, mạnh mẽ và mang cảm giác công nghệ. Màu chủ đạo của phiên bản tiêu chuẩn.",
+  },
+  {
+    name: "Crimson Rose",
+    vi: "Đỏ rượu trầm",
+    hex: "#A52C48",
+    image: "/images/kinh/mausac2.png",
+    focusY: "46%",
+    description:
+      "Tạo dấu ấn riêng cho SeeVia giữa các dòng kính công nghệ. Có cá tính nhưng không quá chói.",
+  },
+  {
+    name: "Mist Blue",
+    vi: "Xanh lam nhạt",
+    hex: "#8FC7F4",
+    image: "/images/kinh/mausac.png",
+    focusY: "43%",
+    description:
+      "Hiện đại, dịu mắt và thân thiện. Vừa mang tính công nghệ vừa gần gũi với người dùng.",
+  },
+];
+
 export default function Product() {
-  const [feature, setFeature] = useState<number | null>(null);
+  const [feature, setFeature] = useState(0);
   const [notice, setNotice] = useState(false);
+  const [color, setColor] = useState(0);
+  const [angle, setAngle] = useState(0);
+  const illustrationRef = useRef<HTMLDivElement | null>(null);
+  const selectedFeature = features[feature];
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => {
     document.title = "Kính SeeVia — Một chiếc kính, nhiều cách nhìn thế giới";
@@ -28,6 +76,38 @@ export default function Product() {
     return () => {
       window.removeEventListener("seevia:unavailable", show);
       clearTimeout(timer.current);
+    };
+  }, []);
+  useEffect(() => {
+    const illustration = illustrationRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!illustration || reducedMotion.matches) return;
+
+    let visible = false;
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const stop = () => {
+      clearInterval(interval);
+      interval = undefined;
+    };
+    const update = () => {
+      if (!visible || document.hidden) {
+        stop();
+      } else if (!interval) {
+        interval = setInterval(() => {
+          setAngle((current) => (current + 1) % glassesAngles.length);
+        }, 3800);
+      }
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      update();
+    }, { threshold: 0.15 });
+    observer.observe(illustration);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+      stop();
     };
   }, []);
   return (
@@ -125,52 +205,61 @@ export default function Product() {
           </div>
           <div className="product-design-visual">
             <div className="device-card">
-              <div className="device-illustration">
-                <img
-                  src={glassesDiagram}
-                  alt="Sơ đồ kính SeeVia với bốn vị trí: camera, microphone, nút điều khiển và phản hồi âm thanh."
-                />
-                {features.map((f, i) => (
-                  <button
-                    className={`device-hotspot ${feature === i ? "selected" : ""}`}
-                    style={{ left: `${f.x}%`, top: `${f.y}%` }}
-                    key={f.title}
-                    aria-label={`Vị trí ${i + 1}: ${f.title}`}
-                    aria-pressed={feature === i}
-                    onClick={() => setFeature(i)}
+              <div
+                className="device-illustration"
+                ref={illustrationRef}
+                role="img"
+                aria-label={`Kính SeeVia nhìn từ ${glassesAngles[angle].name.toLowerCase()}`}
+              >
+                {glassesAngles.map((view, index) => (
+                  <div
+                    className={`device-angle-slide${angle === index ? " active" : ""}${index === 2 ? " device-angle-slide--underside" : ""}`}
+                    aria-hidden="true"
+                    key={view.name}
                   >
-                    {i + 1}
-                  </button>
+                    <img src={view.image} alt="" decoding="async" />
+                  </div>
                 ))}
+              </div>
+              <div className="device-detail">
+                <div className="device-detail-copy" aria-live="polite">
+                  <span>CHI TIẾT {String(feature + 1).padStart(2, "0")}</span>
+                  <h3>{selectedFeature.title}</h3>
+                  <p>{selectedFeature.description}</p>
+                  {"note" in selectedFeature && selectedFeature.note && (
+                    <p className="device-detail-note">{selectedFeature.note}</p>
+                  )}
+                </div>
+                <div
+                  className="device-detail-photo"
+                  role="img"
+                  aria-label={selectedFeature.title === "Gọng kính"
+                    ? "Ảnh kính SeeVia nhìn từ trên, thể hiện hai càng gọng"
+                    : `Ảnh cận cảnh ${selectedFeature.title} trên kính SeeVia`}
+                >
+                  <img
+                    src={selectedFeature.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
               </div>
               <div className="device-features">
                 {features.map((f, i) => (
                   <button
+                    type="button"
                     key={f.title}
                     className={feature === i ? "selected" : ""}
                     aria-pressed={feature === i}
                     onClick={() => setFeature(i)}
                   >
-                    <span>0{i + 1}</span>
-                    <div>
-                      <h3>{f.title}</h3>
-                      <p>{f.description}</p>
-                    </div>
+                    <span>{String(i + 1).padStart(2, "0")}</span>
+                    <h3>{f.title}</h3>
                   </button>
                 ))}
               </div>
-              <p className="feature-feedback" aria-live="polite">
-                {feature === null
-                  ? "Chọn một vị trí để khám phá thiết kế."
-                  : `${features[feature].title}: ${features[feature].description}`}
-              </p>
-            </div>
-            <div
-              className="product-angle-placeholder"
-              role="img"
-              aria-label="Vùng chờ bộ ảnh kính SeeVia từ nhiều góc"
-            >
-              <span>Ảnh các góc nhìn đang được bổ sung</span>
             </div>
           </div>
         </section>
@@ -178,10 +267,17 @@ export default function Product() {
         <section className="product-colors" id="colors">
           <div className="product-container colors-layout">
             <figure>
-              <img
-                src={glassesBurgundy}
-                alt="Bản vẽ gọng kính SeeVia màu burgundy."
-              />
+              {colors.map((c, i) => (
+                <img
+                  key={c.name}
+                  src={c.image}
+                  alt={i === color ? `Kính SeeVia màu ${c.name}, ${c.vi.toLowerCase()}.` : ""}
+                  aria-hidden={i !== color}
+                  className={i === color ? "active" : undefined}
+                  style={{ objectPosition: `center ${c.focusY}` }}
+                  loading={i === 0 ? undefined : "lazy"}
+                />
+              ))}
             </figure>
             <div>
               <p className="eyebrow">MÀU SẮC</p>
@@ -190,24 +286,24 @@ export default function Product() {
                 <br />
                 trọn vẹn cá tính
               </h2>
+              <div className="color-detail" aria-live="polite">
+                <h3>
+                  {colors[color].name}
+                  <span>{colors[color].vi}</span>
+                </h3>
+                <p>{colors[color].description}</p>
+              </div>
               <div className="color-options" role="group" aria-label="Màu kính">
-                <button
-                  className="color-option selected"
-                  aria-label="Burgundy, màu đang hiển thị"
-                  aria-pressed="true"
-                >
-                  <span style={{ background: "#7a1823" }} />
-                  <small>Burgundy</small>
-                </button>
-                {[1, 2, 3].map((i) => (
+                {colors.map((c, i) => (
                   <button
-                    disabled
-                    className="color-option"
-                    key={i}
-                    aria-label="Màu đang được hoàn thiện"
+                    key={c.name}
+                    type="button"
+                    className={`color-option${i === color ? " selected" : ""}`}
+                    aria-pressed={i === color}
+                    onClick={() => setColor(i)}
                   >
-                    <span />
-                    <small>Chưa có</small>
+                    <span style={{ background: c.hex }} />
+                    <small>{c.name}</small>
                   </button>
                 ))}
               </div>

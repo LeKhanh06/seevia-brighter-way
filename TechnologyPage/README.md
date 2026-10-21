@@ -7,7 +7,7 @@ Sáu phần: Hero, phân tích thành phần kính, luồng hoạt động, xử
 - `Technology.tsx`: bố cục trang và thông báo chức năng chưa hoàn thiện.
 - `styles/Technology.css`: CSS có phạm vi riêng, responsive và reduced motion.
 - `styles/TechnologyLayout.css`: lưới nội dung chung, phối màu và bố cục các phần mới.
-- `components/CloseupParts.tsx`: bốn khối ảnh cận và chú giải hiện sẵn, thay cho sơ đồ chung. Chưa có ảnh chụp thật của bốn thành phần; xem [hướng dẫn ảnh](assets/README.md) để thêm theo tên tương ứng.
+- `components/CloseupParts.tsx`: bốn chi tiết nổi bật theo thứ tự cụm nút, camera, loa và microphone. Ảnh lấy từ `public/images/kinh/SeeVia_*.png`; cụm nút phân biệt nút tròn đa năng và nút dài điều khiển. Nội dung mô tả dựa trên định hướng thiết kế của dự án.
 - `components/ProcessingOverview.tsx`: phân biệt bước OCR, AI và giọng đọc.
 - `data/technologyData.ts`: nội dung các bước, thành phần và tình huống hội thoại.
 - `components/ConversationDemo.tsx`: bốn tình huống có bối cảnh, phản hồi cụ thể và câu hỏi tiếp nối. Mỗi lần đổi tình huống sẽ bắt đầu hội thoại mới; các nút tạm khóa khi đang xử lý.

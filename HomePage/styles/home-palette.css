@@ -514,3 +514,39 @@ html.sv-home-active body #root .ai-copy .speech-wave i:nth-child(4n + 1) { anima
   html.sv-home-active body #root .ai-copy .speech-bubble p { animation: none; transform: scaleY(0.5); }
   html.sv-home-active body #root .ai-copy .speech-bubble p { transform: none; }
 }
+
+/* ---------- Product viewer: 3D glasses model fills the stage above the base ellipses ---------- */
+html.sv-home-active body #root .product-3d {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  cursor: grab;
+  border-radius: inherit;
+}
+html.sv-home-active body #root .product-3d:active { cursor: grabbing; }
+html.sv-home-active body #root .product-3d:focus-visible {
+  outline: 2px solid var(--brand-sapphire);
+  outline-offset: -6px;
+}
+html.sv-home-active body #root .product-3d canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+html.sv-home-active body #root .product-stage > span { margin-bottom: clamp(14px, 2.4svh, 26px); }
+/* Model fills the whole stage; the drag hint floats over its bottom edge. */
+html.sv-home-active body #root .product-stage:has(> .product-3d) { height: clamp(380px, 40vw, 600px); }
+html.sv-home-active body #root .product-stage > .product-3d { position: absolute; inset: 0; }
+html.sv-home-active body #root .product-stage:has(> .product-3d) > span {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+@media (max-width: 800px) {
+  html.sv-home-active body #root .product-stage:has(> .product-3d) { height: clamp(300px, 78vw, 420px); }
+}

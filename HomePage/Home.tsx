@@ -4,6 +4,7 @@ import Footer from "../src/components/Footer";
 import Button from "../src/components/Button";
 import StoryHero from "./components/StoryHero";
 import AIDemo from "./components/AIDemo";
+import GlassesViewer from "./components/GlassesViewer";
 import { capabilities } from "./homeData";
 import "./styles/Home.css";
 import "./styles/hero-effects.css";
@@ -129,18 +130,9 @@ export default function Home() {
               hành giúp cuộc sống trở nên độc lập.
             </p>
           </div>
-          <div
-            className="product-stage"
-            role="img"
-            aria-label="Phác thảo minh họa gọng kính SeeVia; hình ảnh sản phẩm đang được bổ sung"
-          >
+          <div className="product-stage">
             <div className="product-ellipses" aria-hidden="true" />
-            <svg className="product-sketch" viewBox="0 0 1000 330" fill="none" aria-hidden="true">
-              <path d="M125 100c42-19 122-23 207-9 46 8 68 33 69 69 2 35-12 72-37 87-27 18-87 22-138 11-54-12-95-44-112-91-8-22-6-51 11-67Zm750 0c-42-19-122-23-207-9-46 8-68 33-69 69-2 35 12 72 37 87 27 18 87 22 138 11 54-12 95-44 112-91 8-22 6-51-11-67Z" />
-              <path d="M401 148c27-19 61-28 99-28s72 9 99 28M110 111 40 83m850 28 70-28M152 92c153-49 307-52 348-47 41-5 195-2 348 47" />
-              <path d="M234 259c-40-2-88-16-111-46m643 46c40-2 88-16 111-46" />
-            </svg>
-            <span>Phác thảo minh họa · Ảnh kính đang được bổ sung</span>
+            <GlassesViewer />
           </div>
         </section>
         <AIDemo />
