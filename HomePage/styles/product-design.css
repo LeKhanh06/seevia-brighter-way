@@ -34,6 +34,19 @@
 .product-stage > span {
   transform: translateY(-32px);
 }
+.product-version-label {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  right: 3%;
+  max-width: min(280px, 42%);
+  padding: 10px 14px;
+  border: 1px solid rgb(64 95 250 / .3);
+  border-radius: 14px;
+  background: rgb(255 255 255 / .78);
+  color: #34345c;
+  font: 600 13px/1.4 var(--sans);
+}
 .product-ellipses {
   width: 97%;
   height: 170px;
@@ -110,6 +123,12 @@
   .product-stage {
     height: 370px;
     font-size: 13px;
+  }
+  .product-version-label {
+    top: 12px;
+    right: 12px;
+    max-width: 58%;
+    font-size: 11px;
   }
   .product-ellipses {
     height: 90px;

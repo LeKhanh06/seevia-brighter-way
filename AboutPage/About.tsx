@@ -3,13 +3,14 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import "./styles/About.css";
 import markup from "./aboutContent.html?raw";
-const storyImages = import.meta.glob<string>(
+const aboutImages = import.meta.glob<string>(
   [
     "./assets/about-hero.jpg",
     "./assets/story-01.jpg",
     "./assets/story-02.webp",
     "./assets/story-03.png",
     "./assets/story-05.jpg",
+    "./assets/founders/*.jpg",
   ],
   {
     eager: true,
@@ -17,9 +18,18 @@ const storyImages = import.meta.glob<string>(
     import: "default",
   },
 );
+const anonymousFounder = `data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 196"><rect width="196" height="196" fill="#e8eef8"/><circle cx="98" cy="76" r="29" fill="#9ba9c4"/><path d="M34 177c0-35 29-63 64-63s64 28 64 63" fill="#9ba9c4"/></svg>`,
+)}`;
 const content = markup.replace(
-  /src="(\.\/assets\/[^"]+)"/g,
-  (_, path: string) => `src="${storyImages[path]}"`,
+  /<img src="(\.\/assets\/[^"]+)" alt="([^"]+)"([^>]*)>/g,
+  (_, path: string, alt: string, attributes: string) => {
+    const image = aboutImages[path];
+    const isFounder = path.startsWith("./assets/founders/");
+    const source = image ?? (isFounder ? anonymousFounder : path);
+    const description = isFounder && !image ? "Ảnh đại diện ẩn danh" : alt;
+    return `<img src="${source}" alt="${description}"${attributes}>`;
+  },
 );
 
 export default function About() {

@@ -160,6 +160,11 @@
 .device-angle-slide--underside > img {
   transform: translateY(2%) scale(0.9);
 }
+.device-version-note {
+  margin: 12px 4px 0;
+  color: var(--sv-muted);
+  font: italic 500 13px/1.5 var(--sans);
+}
 .device-features button:focus-visible {
   outline: 3px solid var(--sapphire-300);
   outline-offset: 3px;

@@ -221,6 +221,9 @@ export default function Product() {
                   </div>
                 ))}
               </div>
+              <p className="device-version-note">
+                Bản thiết kế V1 · Hình ảnh minh họa, chưa phải phiên bản hoàn thiện.
+              </p>
               <div className="device-detail">
                 <div className="device-detail-copy" aria-live="polite">
                   <span>CHI TIẾT {String(feature + 1).padStart(2, "0")}</span>

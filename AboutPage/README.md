@@ -17,7 +17,7 @@ Trang có sáu phần: mở đầu, lý do phát triển, bốn câu chuyện t�
 
 Ảnh mở đầu là `about-hero.jpg`: sinh hoạt tại cơ sở Ánh Dương, TP.HCM, ghi nguồn Việt Nam News và tác giả Nguyễn Đạt.
 
-Bốn câu chuyện sử dụng `story-01.jpg`, `story-05.jpg`, `story-02.webp` và `story-03.png`, với nguồn và liên kết riêng. Các ảnh đang dùng không có logo báo đóng trên ảnh. Mục nhóm sáng lập trình bày năm thẻ với hình đại diện ẩn danh dạng tròn ở trên, tên, vai trò và phạm vi phụ trách ở dưới.
+Bốn câu chuyện sử dụng `story-01.jpg`, `story-05.jpg`, `story-02.webp` và `story-03.png`, với nguồn và liên kết riêng. Các ảnh đang dùng không có logo báo đóng trên ảnh. Mục nhóm sáng lập dùng năm ảnh chân dung cục bộ trong `assets/founders/`, theo thứ tự Phạm Ngọc Hương, Hồ Hoàng Luân, Lữ Kim Luân, Nguyễn Thị Lệ Khanh và Nguyễn Lý Diệu Anh. Ảnh chân dung không được đưa lên GitHub; khi không có ảnh, trang hiển thị hình đại diện ẩn danh. Tên, vai trò và phạm vi phụ trách được căn thành các hàng đều nhau.
 
 Các anchor chính: `#story`, `#evidence`, `#mission`, `#vision`, `#founders`, `#about-listen`. CTA cuối dẫn tới `/cong-dong` và `/doi-tac`.
 
