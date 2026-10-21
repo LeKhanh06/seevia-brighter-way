@@ -334,10 +334,15 @@
   color: var(--sv-navy);
   margin: 0 0 14px;
 }
-.tech-closeup-copy > p:last-child {
+.tech-closeup-copy .tech-closeup-description {
   font: 400 13px/1.9 var(--sans);
   color: var(--sv-muted);
   margin: 0;
+}
+.tech-closeup-copy .tech-button-note {
+  margin: 10px 0 0;
+  color: var(--sv-muted);
+  font: italic 400 12px/1.6 var(--sans);
 }
 @media (max-width: 1050px) {
   .tech-closeup-grid {

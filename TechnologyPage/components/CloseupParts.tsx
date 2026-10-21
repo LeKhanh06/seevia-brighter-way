@@ -1,40 +1,40 @@
-const photos = import.meta.glob<string>(
-  "../assets/*-closeup.{jpg,jpeg,png,webp,avif}",
-  {
-    eager: true,
-    query: "?url",
-    import: "default",
-  },
-);
-
 const parts = [
   {
-    id: "camera",
-    title: "Camera",
-    label: "Ghi nhận điều trước mắt",
+    id: "buttons",
+    image: "/images/kinh/SeeVia_Nut.png?v=20261021-2204",
+    alt: "Ảnh cận nút tròn đa năng và nút dài điều khiển trên gọng kính SeeVia",
+    title: "Cụm nút điều khiển",
+    label: "Thao tác chủ động trên gọng phải",
     description:
-      "Chụp hình ảnh khi bạn đưa ra yêu cầu. Hình ảnh là đầu vào để đọc chữ, tìm đồ vật và mô tả khung cảnh.",
+      "Cụm nút giúp người đeo chủ động bắt đầu tương tác và đưa yêu cầu bằng giọng nói. Thiết kế có hai nút với hình dạng dễ phân biệt bằng tay.",
+    note: "Nút tròn: nút đa năng · Nút dài bo tròn: nút điều khiển.",
+  },
+  {
+    id: "camera",
+    image: "/images/kinh/SeeVia_Camera.png?v=20261021-2200",
+    alt: "Ảnh cận camera ở đầu phía trước kính SeeVia",
+    title: "Camera",
+    label: "Ghi nhận khi có yêu cầu",
+    description:
+      "Hai camera nằm ở hai đầu phía trước kính. Theo định hướng thiết kế, camera chỉ ghi nhận hình ảnh khi người đeo chủ động yêu cầu để hỗ trợ đọc chữ, tìm đồ vật hoặc mô tả khung cảnh.",
+  },
+  {
+    id: "speaker",
+    image: "/images/kinh/SeeVia_Loa.png?v=20261021-2200",
+    alt: "Ảnh cận khe loa trên gọng kính SeeVia",
+    title: "Loa",
+    label: "Phản hồi bằng tiếng Việt",
+    description:
+      "Các khe loa được bố trí ở hai bên gọng kính. Kết quả xử lý được chuyển thành giọng đọc tiếng Việt để người đeo tiếp nhận thông tin qua âm thanh.",
   },
   {
     id: "microphone",
+    image: "/images/kinh/SeeVia_Microphone.png?v=20261021-2200",
+    alt: "Ảnh cận khe microphone trên gọng kính SeeVia",
     title: "Microphone",
-    label: "Tiếp nhận lời nói",
+    label: "Tiếp nhận yêu cầu bằng giọng nói",
     description:
-      "Thu yêu cầu bằng giọng nói, giúp hệ thống xác định bạn muốn đọc nội dung, tìm đồ vật hay hỏi về xung quanh.",
-  },
-  {
-    id: "button",
-    title: "Nút điều khiển",
-    label: "Bắt đầu bằng một thao tác",
-    description:
-      "Cho phép chủ động kích hoạt tương tác bằng nút bấm, kết hợp với yêu cầu bằng giọng nói.",
-  },
-  {
-    id: "audio",
-    title: "Bộ phận phát âm thanh",
-    label: "Đưa câu trả lời đến bạn",
-    description:
-      "Phát kết quả bằng giọng đọc tiếng Việt để người đeo tiếp nhận thông tin qua âm thanh.",
+      "Khe microphone nằm dọc hai bên gọng kính, tiếp nhận lời nói của người đeo để hệ thống hiểu yêu cầu đọc nội dung, tìm đồ vật hoặc hỏi về môi trường xung quanh.",
   },
 ];
 
@@ -44,53 +44,30 @@ export default function CloseupParts() {
       <div className="tech-container">
         <header className="tech-section-title">
           <p className="eyebrow">THIẾT KẾ & CHỨC NĂNG</p>
-          <h2>Chi tiết công nghệ</h2>
+          <h2>Chi tiết công nghệ nổi bật</h2>
         </header>
         <div className="tech-closeup-grid">
-          {parts.map((part, index) => {
-            const photo = Object.entries(photos).find(([path]) =>
-              path.split("/").pop()?.startsWith(`${part.id}-closeup.`),
-            )?.[1];
-            return (
-              <article className="tech-closeup" key={part.id}>
-                <figure className="tech-closeup-photo">
-                  {photo ? (
-                    <img
-                      src={photo}
-                      alt={`Ảnh chụp cận ${part.title.toLowerCase()} trên kính SeeVia`}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div
-                      className="tech-closeup-placeholder"
-                      role="img"
-                      aria-label={`Khung ảnh cận ${part.title.toLowerCase()}`}
-                    >
-                      <svg
-                        viewBox="0 0 48 48"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                        aria-hidden="true"
-                      >
-                        <path d="M7 14h9l3-5h10l3 5h9v25H7z" />
-                        <circle cx="24" cy="26" r="8" />
-                      </svg>
-                      <span>Ảnh cận {part.title.toLowerCase()}</span>
-                    </div>
-                  )}
-                  <span className="tech-closeup-index" aria-hidden="true">
-                    0{index + 1}
-                  </span>
-                </figure>
-                <div className="tech-closeup-copy">
-                  <p className="tech-closeup-label">{part.label}</p>
-                  <h3>{part.title}</h3>
-                  <p>{part.description}</p>
-                </div>
-              </article>
-            );
-          })}
+          {parts.map((part, index) => (
+            <article className="tech-closeup" key={part.id}>
+              <figure className="tech-closeup-photo">
+                <img
+                  src={part.image}
+                  alt={part.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="tech-closeup-index" aria-hidden="true">
+                  0{index + 1}
+                </span>
+              </figure>
+              <div className="tech-closeup-copy">
+                <p className="tech-closeup-label">{part.label}</p>
+                <h3>{part.title}</h3>
+                <p className="tech-closeup-description">{part.description}</p>
+                {part.note && <p className="tech-button-note">{part.note}</p>}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

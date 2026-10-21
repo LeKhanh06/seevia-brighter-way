@@ -1,12 +1,12 @@
-# Ảnh chụp cận thành phần kính
+# Ảnh cận thành phần kính
 
 [Trang Công nghệ](../README.md)
 
-Đặt bốn ảnh thật vào thư mục này theo tên:
+Trang Công nghệ hiện sử dụng bốn ảnh trong `public/images/kinh/`:
 
-- `camera-closeup.jpg`: camera.
-- `microphone-closeup.jpg`: microphone.
-- `button-closeup.jpg`: nút điều khiển.
-- `audio-closeup.jpg`: bộ phận phát âm thanh.
+- `SeeVia_Nut.png`: cụm nút bên gọng phải.
+- `SeeVia_Camera.png`: camera phía trước.
+- `SeeVia_Loa.png`: khe loa.
+- `SeeVia_Microphone.png`: khe microphone.
 
-Cũng hỗ trợ đuôi `.jpeg`, `.png`, `.webp`, `.avif`. Mỗi bộ phận chỉ cần một ảnh. Component `CloseupParts.tsx` tự nhận ảnh theo tên; khi chưa có ảnh sẽ hiển thị khung giữ chỗ. Ưu tiên ảnh vuông, bộ phận nằm giữa khung.
+Đường dẫn ảnh được khai báo trong `components/CloseupParts.tsx`.

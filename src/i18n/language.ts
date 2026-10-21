@@ -75,9 +75,17 @@ export function translate(
   const position = key.match(/^Vị trí (\d+):\s*(.+)$/);
   if (position)
     return `Position ${position[1]}: ${translate(position[2], locale)}`;
+  const viewImage = key.match(/^Xem ảnh (.+)$/);
+  if (viewImage)
+    return `View image of ${translate(viewImage[1], locale)}`;
+  const detailImage = key.match(/^Ảnh cận cảnh (.+) trên kính SeeVia$/);
+  if (detailImage)
+    return `Close-up of ${translate(detailImage[1], locale)} on SeeVia glasses`;
   const closeup = key.match(/^Ảnh chụp cận (.+) trên kính SeeVia$/);
   if (closeup)
     return `Close-up of ${translate(closeup[1], locale)} on SeeVia glasses`;
+  const colour = key.match(/^Kính SeeVia màu ([^,]+), .+\.$/);
+  if (colour) return `SeeVia glasses in ${colour[1]}.`;
   if (key.endsWith(" — SeeVia"))
     return translate(key.slice(0, -9), locale) + " — SeeVia";
   return text;

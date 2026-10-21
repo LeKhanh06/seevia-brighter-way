@@ -13,30 +13,51 @@ export const principles = [
     description: "Thao tác đơn giản bằng nút bấm và giọng nói.",
   },
 ];
+const detailImageVersion = "20261021-2208";
+const detailImage = (filename: string) =>
+  `/images/kinh/${filename}?v=${detailImageVersion}`;
+
 export const features = [
   {
-    title: "Camera theo yêu cầu",
-    description: "Chỉ chụp khi bạn chủ động yêu cầu.",
-    x: 48.5,
-    y: 22.5,
+    title: "Camera trước",
+    description: "Hai camera tích hợp gọn ở hai đầu phía trước kính.",
+    image: detailImage("ok_cam.png"),
+  },
+  {
+    title: "Đệm mũi",
+    description: "Cặp đệm mũi có thể điều chỉnh để kính ôm vừa khuôn mặt.",
+    image: detailImage("ok_demmui.png"),
+  },
+  {
+    title: "Cụm nút bên phải",
+    description: "Gồm nút đa năng hình tròn và nút điều khiển bo tròn.",
+    image: detailImage("ok_bonut.png"),
   },
   {
     title: "Microphone",
-    description: "Nhận lệnh bằng giọng nói.",
-    x: 6.7,
-    y: 76.5,
+    description: "Khe microphone nằm dọc theo hai bên gọng kính.",
+    image: detailImage("ok_mic.png"),
   },
   {
-    title: "Nút điều khiển",
-    description: "Thao tác đơn giản bằng nút bấm.",
-    x: 90.3,
-    y: 76.5,
+    title: "Loa",
+    description: "Các khe loa được bố trí ở hai bên gọng.",
+    image: detailImage("ok_loa.png"),
   },
   {
-    title: "Phản hồi âm thanh",
-    description: "Đọc kết quả bằng tiếng Việt.",
-    x: 92.2,
-    y: 22.3,
+    title: "Cổng sạc USB-C",
+    description: "Cổng sạc USB-C nằm dưới gọng bên phải.",
+    image: detailImage("ok_sac.png"),
+  },
+  {
+    title: "Đèn báo LED",
+    description: "Đèn báo nhỏ trên gọng kính cho biết trạng thái pin.",
+    note: "Pin chưa đầy: đèn đỏ · Pin đầy: đèn xanh.",
+    image: detailImage("ok_led.png"),
+  },
+  {
+    title: "Gọng kính",
+    description: "Góc nhìn từ trên cho thấy hai càng gọng, cụm nút bên phải và phần đệm mũi.",
+    image: detailImage("mat1.png"),
   },
 ];
 export const technologies = [
