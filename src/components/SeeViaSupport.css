@@ -1413,3 +1413,102 @@
   background: var(--ink-900);
   color: var(--ink-50);
 }
+
+/* Đính kèm ảnh để hỏi. */
+.sv-support-input-row .sv-support-attach {
+  min-width: 76px;
+  width: auto;
+  min-height: 44px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid var(--ink-400);
+  color: var(--support-wine);
+  background: var(--sv-pearl);
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+.sv-support-input-row .sv-support-attach svg {
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+}
+.sv-support-input-row .sv-support-attach:disabled {
+  opacity: 0.5;
+}
+@media (hover: hover) {
+  .sv-support-input-row .sv-support-attach:not(:disabled):hover {
+    border-color: var(--support-wine);
+    background: var(--sapphire-100);
+  }
+}
+.sv-support-attachment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  padding: 6px 6px 6px 6px;
+  border: 1px solid var(--support-line);
+  border-radius: 14px;
+  background: var(--sv-pearl);
+}
+.sv-support-attachment img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.sv-support-attachment span {
+  flex: 1;
+  min-width: 0;
+  color: var(--support-muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sv-support-attachment .sv-support-file-mark {
+  display: grid;
+  flex: 0 0 52px;
+  place-items: center;
+  height: 52px;
+  border-radius: 10px;
+  color: var(--sapphire-700);
+  background: var(--sapphire-100);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.sv-support-attachment button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--support-ink);
+  background: transparent;
+}
+.sv-support-attachment button svg {
+  width: 18px;
+  height: 18px;
+}
+.sv-support-turn-image {
+  display: block;
+  max-width: 100%;
+  max-height: 220px;
+  margin: 4px 0 8px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: #ffffff1a;
+}
+.sv-support-turn-image-note {
+  display: block;
+  margin: 2px 0 6px;
+  font-size: 12px;
+  opacity: 0.8;
+}

@@ -5,6 +5,8 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type ClipboardEvent,
+  type DragEvent,
   type FormEvent,
 } from "react";
 import { destinations } from "../navigation";
@@ -28,6 +30,7 @@ type Turn = {
   sources?: Source[];
   pageIds?: PageId[];
   suggested_questions?: string[];
+  image?: boolean;
 };
 type Reply = {
   ok: boolean;
@@ -40,6 +43,7 @@ type Reply = {
   code?: string;
   retryAfter?: number;
 };
+type TextAttachment = { name: string; content: string };
 const isPageId = (id: unknown): id is PageId =>
   typeof id === "string" && Object.hasOwn(pages, id);
 const apiBase = (
@@ -91,7 +95,62 @@ function toTurn(message: StoredMessage): Turn {
     pageIds: Array.isArray(message.pageIds)
       ? message.pageIds.filter(isPageId)
       : undefined,
+    image: message.image === true,
   };
+}
+// Khớp IMAGE_LIMITS ở contact-backend/assistant.mjs.
+const IMAGE_MAX_CHARS = 1_400_000;
+const IMAGE_MAX_FILE = 15 * 1024 * 1024;
+const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+const TEXT_EXTENSIONS = [".txt", ".md", ".csv", ".json"];
+const TEXT_MAX_CHARS = 720;
+const IMAGE_ONLY_QUESTION = "Bạn xem giúp ảnh này.";
+async function prepareTextFile(file: File): Promise<TextAttachment> {
+  if (!TEXT_EXTENSIONS.some((extension) => file.name.toLowerCase().endsWith(extension)))
+    throw new Error("Chỉ hỗ trợ ảnh hoặc tệp TXT, MD, CSV, JSON.");
+  if (file.size > 16 * 1024)
+    throw new Error("Tệp văn bản quá lớn. Vui lòng chọn tệp tối đa 16 KB.");
+  const content = (await file.text())
+    .replace(/\r\n?/g, "\n")
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, "")
+    .trim();
+  if (!content) throw new Error("Tệp văn bản đang trống.");
+  if (content.length > TEXT_MAX_CHARS)
+    throw new Error("Nội dung tệp dài hơn 720 ký tự. Vui lòng rút gọn trước khi gửi.");
+  return { name: file.name.slice(0, 80), content };
+}
+// Thu nhỏ và nén ảnh ngay trên trình duyệt trước khi gửi.
+async function prepareImage(file: File): Promise<string> {
+  if (!IMAGE_TYPES.includes(file.type))
+    throw new Error("Chỉ hỗ trợ ảnh JPG, PNG, WebP hoặc GIF.");
+  if (file.size > IMAGE_MAX_FILE)
+    throw new Error("Ảnh lớn hơn 15 MB. Vui lòng chọn ảnh nhỏ hơn.");
+  const bitmap = await createImageBitmap(file).catch(() => {
+    throw new Error("Không đọc được ảnh này. Vui lòng thử ảnh khác.");
+  });
+  try {
+    for (const [side, quality] of [
+      [1280, 0.82],
+      [1024, 0.72],
+      [768, 0.65],
+    ]) {
+      const scale = Math.min(1, side / Math.max(bitmap.width, bitmap.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      const context = canvas.getContext("2d");
+      if (!context) break;
+      // Nền trắng cho ảnh PNG trong suốt khi chuyển sang JPEG.
+      context.fillStyle = "#fff";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      const url = canvas.toDataURL("image/jpeg", quality);
+      if (url.length <= IMAGE_MAX_CHARS) return url;
+    }
+  } finally {
+    bitmap.close();
+  }
+  throw new Error("Không nén được ảnh đủ nhỏ. Vui lòng thử ảnh khác.");
 }
 const dayFormat = new Intl.DateTimeFormat("vi-VN", {
   day: "2-digit",
@@ -131,6 +190,10 @@ export default function SeeViaSupport() {
     "checking" | "ready" | "unavailable"
   >("checking");
   const [checkVersion, setCheckVersion] = useState(0);
+  const [imagesReady, setImagesReady] = useState(false);
+  const [attachment, setAttachment] = useState<string | null>(null);
+  const [textAttachment, setTextAttachment] = useState<TextAttachment | null>(null);
+  const [attachNote, setAttachNote] = useState("");
   // Hội thoại nằm trong chatStore (lưu trên thiết bị), không mất khi đóng chatbot,
   // chuyển trang hoặc tải lại. Chỉ "Cuộc trò chuyện mới" mới tạo phiên khác.
   const chat = useSyncExternalStore(chatStore.subscribe, chatStore.getSnapshot);
@@ -159,6 +222,10 @@ export default function SeeViaSupport() {
   const launcher = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
+  // Ảnh chỉ giữ trong bộ nhớ của phiên trang, không ghi vào localStorage.
+  const sentImages = useRef(new Map<string, string>());
+  const lastImage = useRef<string | null>(null);
   const transcript = useRef<HTMLDivElement>(null);
   const pending = useRef<AbortController | null>(null);
   const welcomePending = useRef<AbortController | null>(null);
@@ -187,8 +254,10 @@ export default function SeeViaSupport() {
     })
       .then((response) => (response.ok ? response.json() : null))
       .then((data) => {
-        if (!controller.signal.aborted)
+        if (!controller.signal.aborted) {
           setAvailability(data?.available === true ? "ready" : "unavailable");
+          setImagesReady(data?.images === true);
+        }
       })
       .catch(() => {
         if (!controller.signal.aborted) setAvailability("unavailable");
@@ -297,8 +366,62 @@ export default function SeeViaSupport() {
     setOpen(false);
     launcher.current?.focus({ preventScroll: true });
   }
-  async function send(text = draft, retry = false) {
-    const message = text.trim();
+  async function attach(file: File | undefined) {
+    if (!file || busy) return;
+    setAttachNote("Đang chuẩn bị tệp…");
+    try {
+      if (IMAGE_TYPES.includes(file.type)) {
+        if (!imagesReady)
+          throw new Error("SeeVia AI hiện chưa đọc được ảnh. Bạn có thể gửi tệp văn bản hoặc mô tả bằng chữ.");
+        setAttachment(await prepareImage(file));
+        setTextAttachment(null);
+      } else {
+        setTextAttachment(await prepareTextFile(file));
+        setAttachment(null);
+      }
+      setAttachNote("");
+      setAnnouncement("Đã đính kèm tệp. Nhập câu hỏi hoặc gửi luôn.");
+    } catch (reason) {
+      setAttachNote(
+        reason instanceof Error ? reason.message : "Không đính kèm được tệp.",
+      );
+    }
+    input.current?.focus();
+  }
+  function removeAttachment() {
+    setAttachment(null);
+    setTextAttachment(null);
+    setAttachNote("");
+    setAnnouncement("Đã bỏ tệp đính kèm.");
+    input.current?.focus();
+  }
+  function pasteImage(event: ClipboardEvent<HTMLTextAreaElement>) {
+    const file = [...event.clipboardData.files].find((item) =>
+      item.type.startsWith("image/"),
+    );
+    if (!file) return;
+    event.preventDefault();
+    void attach(file);
+  }
+  function dropImage(event: DragEvent<HTMLFormElement>) {
+    if (!event.dataTransfer.types.includes("Files")) return;
+    event.preventDefault();
+    void attach(event.dataTransfer.files[0]);
+  }
+  async function send(
+    text = draft,
+    retry = false,
+    image: string | null = retry ? lastImage.current : attachment,
+  ) {
+    const file = retry ? null : textAttachment;
+    const question = text.trim() || (image ? IMAGE_ONLY_QUESTION : file ? `Bạn xem giúp tệp ${file.name}.` : "");
+    const message = file
+      ? `${question}\n\n[Tệp ${file.name}]\n${file.content}`
+      : question;
+    if (message.length > 1000) {
+      setAttachNote("Câu hỏi và nội dung tệp vượt 1000 ký tự. Vui lòng rút gọn.");
+      return;
+    }
     if (
       !message ||
       message.length > 1000 ||
@@ -321,9 +444,21 @@ export default function SeeViaSupport() {
     setBusy(true);
     setError("");
     setDraft("");
+    setAttachment(null);
+    setTextAttachment(null);
+    setAttachNote("");
+    lastImage.current = image;
     setAnnouncement("SeeVia AI đang xử lý câu hỏi.");
     stick.current = true;
-    if (!retry) chatStore.append({ role: "user", content: message }, sid);
+    if (!retry) {
+      const stored = chatStore.append(
+        image
+          ? { role: "user", content: message, image: true }
+          : { role: "user", content: message },
+        sid,
+      );
+      if (stored && image) sentImages.current.set(stored.id, image);
+    }
     try {
       const response = await fetch(`${apiBase}/api/assistant`, {
         method: "POST",
@@ -332,10 +467,11 @@ export default function SeeViaSupport() {
           message,
           history,
           recentSuggestions,
+          ...(image ? { image } : {}),
         }),
         signal: AbortSignal.any([
           controller.signal,
-          AbortSignal.timeout(28000),
+          AbortSignal.timeout(image ? 40000 : 28000),
         ]),
       });
       const data = await response.json().catch(() => null);
@@ -356,6 +492,13 @@ export default function SeeViaSupport() {
               ? "Cohere đã tạm hết hạn mức sử dụng. Vui lòng thử lại sau hoặc chọn Liên hệ trực tiếp."
               : "Bạn đã gửi nhiều câu hỏi. Vui lòng chờ trước khi thử lại hoặc chọn Liên hệ trực tiếp.",
           );
+        } else if (data?.code === "images_unavailable") {
+          setImagesReady(false);
+          setError(
+            "SeeVia AI hiện chưa đọc được ảnh. Bạn có thể mô tả ảnh bằng lời và gửi lại.",
+          );
+        } else if (data?.code === "too_large") {
+          setError("Ảnh quá lớn để gửi. Vui lòng chọn ảnh khác.");
         } else if (
           data?.code === "not_configured" ||
           data?.code === "model_unavailable"
@@ -424,6 +567,9 @@ export default function SeeViaSupport() {
   // Cuộc trò chuyện cũ được giữ lại trong Lịch sử, không bị xóa hay ghi đè.
   function newChat() {
     stop();
+    setAttachment(null);
+    setTextAttachment(null);
+    setAttachNote("");
     chatStore.startNewSession();
     welcomeStarted.current = false;
     setWelcomeError(false);
@@ -435,6 +581,9 @@ export default function SeeViaSupport() {
   function openSession(id: string) {
     stop();
     if (chatStore.switchTo(id)) {
+      setAttachment(null);
+      setTextAttachment(null);
+      setAttachNote("");
       welcomeStarted.current = false;
       setWelcomeError(false);
       setHistoryOpen(false);
@@ -471,6 +620,11 @@ export default function SeeViaSupport() {
   const visibleSuggestions = welcomeSuggestions;
   // Trang bị đóng hoặc mất kết nối khi đang chờ: câu hỏi cuối chưa có trả lời.
   const lastTurn = turns.at(-1);
+  // Ảnh của câu hỏi cuối mất sau khi tải lại trang thì không thể gửi lại.
+  const retryLost =
+    lastTurn?.role === "user" &&
+    lastTurn.image === true &&
+    !sentImages.current.has(lastTurn.id);
   const interrupted = !busy && !error && lastTurn?.role === "user";
 
   return (
@@ -672,6 +826,18 @@ export default function SeeViaSupport() {
                     <span className="sv-support-speaker">
                       {turn.role === "user" ? "Bạn" : "SeeVia AI"}
                     </span>
+                    {turn.image &&
+                      (sentImages.current.has(turn.id) ? (
+                        <img
+                          className="sv-support-turn-image"
+                          src={sentImages.current.get(turn.id)}
+                          alt="Ảnh bạn đã gửi kèm câu hỏi"
+                        />
+                      ) : (
+                        <span className="sv-support-turn-image-note">
+                          Đã gửi kèm một ảnh
+                        </span>
+                      ))}
                     {turn.role === "assistant" ? (
                       <AssistantMessage text={turn.content} />
                     ) : (
@@ -705,7 +871,7 @@ export default function SeeViaSupport() {
                     {error ||
                       "Câu hỏi gần nhất chưa nhận được trả lời (trang đã đóng hoặc kết nối bị gián đoạn)."}
                   </p>
-                  {availability === "ready" && (
+                  {availability === "ready" && !retryLost && (
                     <button
                       type="button"
                       disabled={busy || cooling}
@@ -740,7 +906,45 @@ export default function SeeViaSupport() {
                 </div>
               )}
             </div>
-            <form className="sv-support-composer" onSubmit={submit}>
+            <form
+              className="sv-support-composer"
+              onSubmit={submit}
+              onDragOver={(event) => {
+                if (event.dataTransfer.types.includes("Files"))
+                  event.preventDefault();
+              }}
+              onDrop={dropImage}
+            >
+              {attachment && (
+                <div className="sv-support-attachment">
+                  <img src={attachment} alt="Ảnh sẽ gửi kèm câu hỏi" />
+                  <span>Ảnh đính kèm</span>
+                  <button
+                    type="button"
+                    onClick={removeAttachment}
+                    disabled={busy}
+                    aria-label="Bỏ ảnh đính kèm"
+                  >
+                    <Icon close />
+                  </button>
+                </div>
+              )}
+              {textAttachment && (
+                <div className="sv-support-attachment">
+                  <span className="sv-support-file-mark" aria-hidden="true">
+                    {textAttachment.name.split(".").at(-1)?.toUpperCase()}
+                  </span>
+                  <span>{textAttachment.name}</span>
+                  <button
+                    type="button"
+                    onClick={removeAttachment}
+                    disabled={busy}
+                    aria-label="Bỏ tệp đính kèm"
+                  >
+                    <Icon close />
+                  </button>
+                </div>
+              )}
               <label
                 className="sv-support-sr"
                 htmlFor="seevia-support-question"
@@ -748,6 +952,39 @@ export default function SeeViaSupport() {
                 Câu hỏi của bạn
               </label>
               <div className="sv-support-input-row">
+                <input
+                  ref={fileInput}
+                  type="file"
+                  accept={[...IMAGE_TYPES, ...TEXT_EXTENSIONS].join(",")}
+                  className="sv-support-sr"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  onChange={(event) => {
+                    void attach(event.target.files?.[0]);
+                    event.target.value = "";
+                  }}
+                />
+                <button
+                  type="button"
+                  className="sv-support-attach"
+                  aria-label="Thêm ảnh hoặc tệp văn bản"
+                  title="Thêm ảnh hoặc tệp văn bản"
+                  disabled={busy}
+                  onClick={() => fileInput.current?.click()}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m8.5 12.5 5.9-5.9a3.5 3.5 0 0 1 5 5l-8.1 8.1a5 5 0 0 1-7.1-7.1l8.5-8.5" />
+                  </svg>
+                  <span>Thêm</span>
+                </button>
                 <textarea
                   ref={input}
                   id="seevia-support-question"
@@ -755,7 +992,10 @@ export default function SeeViaSupport() {
                   maxLength={1000}
                   value={draft}
                   onChange={(event) => setDraft(event.target.value)}
-                  placeholder="Bạn muốn hỏi gì về SeeVia?"
+                  onPaste={pasteImage}
+                  placeholder={
+                    attachment ? "Hỏi gì về ảnh này?" : textAttachment ? "Hỏi gì về tệp này?" : "Bạn muốn hỏi gì về SeeVia?"
+                  }
                   disabled={busy}
                   aria-describedby="seevia-support-input-note"
                   onKeyDown={(event) => {
@@ -785,17 +1025,22 @@ export default function SeeViaSupport() {
                   <button
                     type="submit"
                     disabled={
-                      !draft.trim() || availability === "checking" || cooling
+                      (!draft.trim() && !attachment && !textAttachment) ||
+                      availability === "checking" ||
+                      cooling
                     }
                   >
                     Gửi<span className="sv-support-sr"> câu hỏi</span>
                   </button>
                 )}
               </div>
-              <p id="seevia-support-input-note">
+              <p id="seevia-support-input-note" role={attachNote ? "status" : undefined}>
                 {cooling
                   ? "Vui lòng chờ trước khi gửi câu hỏi tiếp theo."
-                  : "Không gửi nội dung nhạy cảm"}
+                  : attachNote ||
+                    (imagesReady
+                      ? "Thêm ảnh hoặc tệp TXT, MD, CSV, JSON · Không gửi nội dung nhạy cảm"
+                      : "Thêm tệp TXT, MD, CSV, JSON · Ảnh hiện chưa khả dụng")}
               </p>
             </form>
             <footer className="sv-support-footer">

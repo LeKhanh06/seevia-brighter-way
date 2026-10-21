@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { STREET } from './data.js';
 import { tagObject } from './materials.js';
 import { buildMotorbike, buildCar, buildBicycle } from './vehicles.js';
-import { buildPerson, animateWalk, animateIdle, randomLook } from './people.js';
+import { buildPerson, animateWalk, animateIdle, holdPhone, randomLook } from './people.js';
 import { setTrafficLight } from './props.js';
 import { rng } from './textures.js';
 
@@ -42,7 +42,7 @@ export function targetSpeed(v, others, sig, player) {
   }
   // xe phía trước cùng làn
   for (const o of others) {
-    if (o === v || o.dir !== v.dir || Math.abs(o.baseX - v.baseX) > 0.7) continue;
+    if (o === v || o.active === false || o.dir !== v.dir || Math.abs(o.baseX - v.baseX) > 0.7) continue;
     const ahead = (o.z - v.z) * v.dir;
     if (ahead <= 0) continue;
     const gap = ahead - half - o.half;
@@ -86,6 +86,16 @@ export function createEntities(scene, reg, world) {
     ['moto-8', 'motorbike', -0.9, 1, 8.0, 52, { color: 0xc62828, delivery: true }],
     ['moto-9', 'motorbike', 3.6, -1, 8.4, 6, { color: 0x1e4aa8, passenger: true, shirt: 0xd9a441 }],
     ['bike-1', 'bicycle', -3.7, 1, 3.2, -20, { color: 0x2b5d8a }],
+    // thêm cho giờ cao điểm (chỉ hiện khi đông)
+    ['moto-10', 'motorbike', 0.9, -1, 7.6, -32, { color: 0x2b2d31, shirt: 0x6d8fb3 }],
+    ['moto-11', 'motorbike', 3.6, -1, 7.4, 34, { color: 0xb71c1c, passenger: true, shirt: 0xe0c9a6 }],
+    ['moto-12', 'motorbike', 2.2, -1, 7.9, -78, { color: 0x1565c0, shirt: 0x4a4a4a, helmet: 0xffffff }],
+    ['moto-13', 'motorbike', -0.9, 1, 7.5, -34, { color: 0xf5f5f0, shirt: 0x9c2f2f }],
+    ['moto-14', 'motorbike', -2.2, 1, 8.1, 40, { color: 0x37474f, delivery: true }],
+    ['moto-15', 'motorbike', -3.6, 1, 7.2, -4, { color: 0x6a1b9a, passenger: true, shirt: 0x2e7d32 }],
+    ['moto-16', 'motorbike', 3.6, -1, 7.8, -50, { color: 0xef6c00, shirt: 0x283593 }],
+    ['moto-17', 'motorbike', -2.2, 1, 7.6, 70, { color: 0x1b5e20, shirt: 0xd7ccc8, helmet: 0xe53935 }],
+    ['car-4', 'car', -2.3, 1, 6.5, 10, { color: 0xc0c4ca }],
   ];
   const dims = {
     car: { size: [1.9, 1.55, 4.5], half: 2.25, halfW: 0.95 },
@@ -149,6 +159,7 @@ export function createEntities(scene, reg, world) {
 
   function updatePeople(dt, player) {
     for (const p of people) {
+      if (p.active === false) continue;
       if (p.kind === 'patrol') {
         const target = p.dirSign > 0 ? p.a : p.b;
         const dz = target - p.z;
@@ -216,7 +227,7 @@ export function createEntities(scene, reg, world) {
         p.walkT += dt * (p.v ?? 1.2) * (p.kind === 'patrol' ? p.speedMul : 1) * 4.3 * (p.moving ? 1 : 0);
         animateWalk(p.g, p.walkT, p.amp);
         if (!p.moving) animateIdle(p.g, (p.idleT += dt));
-        if (p.gesture === 'phone' && !p.moving) { const pp = p.g.userData.parts; pp.armR.rotation.x = -1.2; pp.head.rotation.x = 0.35; pp.head.rotation.y = 0; }
+        if (p.gesture === 'phone' && !p.moving) holdPhone(p.g);
       } else if (p.serve) {
         // người bán bánh mì: quay sang xe, với tay lấy bánh, đưa cho khách, rồi nhìn ra đường
         const pp = p.g.userData.parts;
@@ -248,6 +259,7 @@ export function createEntities(scene, reg, world) {
 
   function updateVehicles(dt, player, time) {
     for (const v of vehicles) {
+      if (v.active === false) continue;
       const tgt = targetSpeed(v, vehicles, signal, player);
       const acc = tgt > v.speed ? 2.6 : 6.5;
       v.speed += Math.sign(tgt - v.speed) * Math.min(Math.abs(tgt - v.speed), acc * dt);
@@ -272,9 +284,32 @@ export function createEntities(scene, reg, world) {
     for (const tl of world.trafficLights) setTrafficLight(tl, state);
   }
 
+  // ───── Mật độ theo giờ ─────
+  // Bật/tắt xe và người đi bộ. Đối tượng tắt bị ẩn và đưa ra xa khỏi phố, nên kính không nhận diện được.
+  const FAR = 9000;
+  function park(item, on) {
+    const node = item.model || item.g;
+    item.active = on;
+    node.visible = on;
+    if (!on) { item.rec.pos[0] = FAR; item.rec.pos[2] = FAR; node.position.set(FAR, -50, FAR); }
+    else if (item.model) { item.rec.pos[0] = item.x; item.rec.pos[2] = item.z; }
+  }
+  /** level: 0 vắng … 1 bình thường … 2 cao điểm */
+  function setDensity(level) {
+    const motos = vehicles.filter((v) => v.type === 'motorbike');
+    const cars = vehicles.filter((v) => v.type === 'car');
+    const nMoto = level >= 2 ? motos.length : level >= 1 ? 9 : 4;
+    const nCar = level >= 2 ? cars.length : level >= 1 ? 3 : 1;
+    motos.forEach((v, i) => park(v, i < nMoto));
+    cars.forEach((v, i) => park(v, i < nCar));
+    const walkers = people.filter((p) => p.kind === 'patrol');
+    const nWalk = level >= 2 ? walkers.length : level >= 1 ? 8 : 4;
+    walkers.forEach((p, i) => park(p, i < nWalk));
+  }
+
   let clock = 0;
   return {
-    vehicles, people, signal,
+    vehicles, people, signal, setDensity,
     update(dt, player) {
       clock += dt;
       advanceSignal(signal, dt);

@@ -3,6 +3,7 @@
 // world.js xoay group 180° cho dãy nhà bên phải.
 
 import * as THREE from 'three';
+import { applyPhoto } from './phototex.js';
 import { mat, mesh, box, cyl } from './materials.js';
 import {
   makeFacade, makePlaster, makeShopInterior, makeSign, makeShutter, makeRailing, makeGrille, makeAwning, makeFlag, makeVerticalSign, rng,
@@ -52,7 +53,9 @@ export function buildShophouse(lot) {
   const ow = w - pw * 2;
   const openH = GF - 0.5;
 
-  const wall = new THREE.MeshStandardMaterial({ map: plasterCache.get(color) ?? (plasterCache.set(color, makePlaster(color, seed)), plasterCache.get(color)), roughness: 0.95 });
+  // tường vữa ảnh thật, nhân với màu sơn của căn nhà
+  if (!plasterCache.has(color)) plasterCache.set(color, applyPhoto(new THREE.MeshStandardMaterial({ color }), 'tuong', [2, 2], { normalScale: 0.7 }));
+  const wall = plasterCache.get(color);
   const pierMat = mat(parseInt(trim.slice(1), 16), { roughness: 0.9 });
 
   // Thân phía trên (tầng 2 trở lên)

@@ -84,6 +84,9 @@ const GLOW_SELECTORS = [
 
 gsap.registerPlugin(ScrollTrigger);
 
+let pageLenis: Lenis | null = null;
+export const getPageLenis = () => pageLenis;
+
 export default function SiteMotion({ routeKey }: { routeKey: string }) {
   const sparkleLayer = useRef<HTMLCanvasElement>(null);
   const language = useLanguage();
@@ -182,6 +185,7 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
     if (motion.matches) return;
 
     const lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, anchors: true });
+    pageLenis = lenis;
     const progressGlitter = createProgressGlitter();
 
     let frame = 0;
@@ -203,6 +207,7 @@ export default function SiteMotion({ routeKey }: { routeKey: string }) {
       removeEventListener("scroll", updateProgress);
       removeEventListener("resize", updateProgress);
       progressGlitter.remove();
+      if (pageLenis === lenis) pageLenis = null;
       lenis.destroy();
     };
   }, [routeKey]);

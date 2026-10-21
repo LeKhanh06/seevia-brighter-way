@@ -2,7 +2,7 @@
 // Đây là MÔ PHỎNG trải nghiệm sản phẩm, không phải nhận diện AI thật.
 
 import * as THREE from 'three';
-import { ObjectRegistry, WELCOME, GROUPS, NOT_FOUND } from './data.js';
+import { ObjectRegistry, WELCOME, GROUPS, NOT_FOUND, STREET } from './data.js';
 import { setAnisotropy } from './textures.js';
 import { createSky, createLights, followShadow, applySkyEnvironment, updateFog, HORIZON_COLOR } from './environment.js';
 import { createSunlight, SunFlare } from './sunlight.js';
@@ -16,6 +16,10 @@ import { Hud } from './hud.js';
 import { Lens } from './lens.js';
 import { Sfx, Music } from './audio.js';
 import { Features } from './features.js';
+import { createAvatar } from './avatar.js';
+import { Daytime, PERIODS } from './daytime.js';
+import { createNightLights } from './nightlights.js';
+import { createSoundscape } from './soundscape.js';
 import { directionPhrase, relativeAngle, distanceTo, cap } from './recognition.js';
 
 window.__seeviaLoaded = true;
@@ -59,6 +63,11 @@ async function boot() {
   const camera = new THREE.PerspectiveCamera(68, window.innerWidth / window.innerHeight, 0.2, 600);
   scene.add(camera);
   const baseFov = 68;
+  // `camera` là mắt của Đăng (kính nhìn và nhận diện từ đây). `view` là camera hiển thị sau vai phải.
+  const view = new THREE.PerspectiveCamera(baseFov, window.innerWidth / window.innerHeight, 0.1, 600);
+  scene.add(view);
+  let thirdPerson = true;
+  let activeCam = view;
 
   // ───── Dựng cảnh (chia nhỏ để màn hình giới thiệu vẫn phản hồi) ─────
   setStatus('Đang dựng bầu trời và ánh nắng…');
@@ -68,6 +77,15 @@ async function boot() {
   const sky = createSky();
   scene.add(sky);
   applySkyEnvironment(renderer, scene);
+
+  // Bầu trời theo giờ thật của máy (?gio=sang|trua|chieu|toi để xem thử một buổi)
+  setStatus('Đang tải bầu trời theo giờ hiện tại…');
+  const daytime = new Daytime(renderer, scene, lights, sky);
+  const forced = new URLSearchParams(location.search).get('gio');
+  try {
+    if (forced && PERIODS[forced]) await daytime.set(forced, { instant: true });
+    else await daytime.start();
+  } catch (err) { console.warn('Không đổi được bầu trời theo giờ.', err); }
 
   setStatus('Đang dựng phố, nhà cửa và cây xanh…');
   await tick();
@@ -81,8 +99,41 @@ async function boot() {
   setStatus('Đang thêm người và xe cộ…');
   await tick();
   const ents = createEntities(scene, reg, world);
+  const nightLights = createNightLights(scene);
+
+  // Mật độ xe và người theo giờ: cao điểm đông, trưa và đêm khuya vắng
+  const SAMPLE_HOUR = { sang: 7.5, trua: 12, chieu: 17.5, toi: 20 };
+  const densityFor = (h) => ((h >= 7 && h < 9) || (h >= 17 && h < 19) ? 2 : (h >= 11 && h < 14) || h >= 22 || h < 5 ? 0 : 1);
+  const hourNow = () => {
+    if (forced && SAMPLE_HOUR[forced] !== undefined) return SAMPLE_HOUR[forced];
+    const d = new Date();
+    return d.getHours() + d.getMinutes() / 60;
+  };
+  let density = -1;
+  const applyDensity = () => {
+    const lvl = densityFor(hourNow());
+    if (lvl !== density) { density = lvl; ents.setDensity(lvl); }
+  };
+  applyDensity();
+  setInterval(applyDensity, 60 * 1000);
+
+  setStatus('Đang gọi Đăng ra phố…');
+  let avatar = null;
+  try { avatar = await createAvatar(scene); }
+  catch (err) { console.warn('Không tải được nhân vật, dùng góc nhìn thứ nhất.', err); thirdPerson = false; activeCam = camera; }
 
   // ───── Hệ thống tương tác ─────
+  // Ban đêm: bật đèn đường; HUD chuyển kính tối từ khi trời ngả tối
+  const applyNight = (n) => {
+    nightLights.setNight(n);
+    soundscape?.setNight(n);
+    hudNight = n;
+  };
+  daytime.onNight = applyNight;
+  let hudNight = daytime.night;
+  nightLights.setNight(daytime.night);
+  daytime.refreshMaterials();
+
   const controls = new PlayerControls(camera, renderer.domElement, reg);
   const recognizer = new Recognizer(camera, scene, reg, world.pickables, world.zones);
   const speech = new Speech();
@@ -90,6 +141,8 @@ async function boot() {
   const lens = new Lens();
   const sfx = new Sfx();
   const music = new Music(sfx);
+  const soundscape = createSoundscape(sfx, reg);
+  soundscape.setNight(daytime.night);
   hud.setVoiceButton(true);
 
   const warn = $('voice-warning');
@@ -122,14 +175,14 @@ async function boot() {
         // vị trí điểm trúng (dùng làm dự phòng cho vật quá lớn như nhà, mặt đường)
         v3.copy(local);
         mesh.localToWorld(v3);
-        v3.project(camera);
+        v3.project(activeCam);
         const hit = { x: (v3.x * 0.5 + 0.5) * W, y: (-v3.y * 0.5 + 0.5) * H, ok: v3.z < 1 };
         let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
         let behind = false;
         if (obj.group !== GROUPS.SPACE) {
           box3.setFromObject(mesh);
           for (let i = 0; i < 8; i++) {
-            corner.set(i & 1 ? box3.max.x : box3.min.x, i & 2 ? box3.max.y : box3.min.y, i & 4 ? box3.max.z : box3.min.z).project(camera);
+            corner.set(i & 1 ? box3.max.x : box3.min.x, i & 2 ? box3.max.y : box3.min.y, i & 4 ? box3.max.z : box3.min.z).project(activeCam);
             if (corner.z > 1) { behind = true; break; }
             const sx = (corner.x * 0.5 + 0.5) * W;
             const sy = (-corner.y * 0.5 + 0.5) * H;
@@ -168,9 +221,12 @@ async function boot() {
     lastText = text;
     speaking = true;
     if (subtitle) hud.say(text);
+    // Drives the voice wave beside the subtitle while the glasses are actually talking.
+    hud.subtitle.classList.add('speaking');
     speech.speak(text, {
       onEnd: () => {
         speaking = false;
+        hud.subtitle.classList.remove('speaking');
         if (subtitle) hud.fadeSubtitle(1800);
         flushWaiting();
       },
@@ -337,6 +393,17 @@ async function boot() {
   controls.on.repeat = repeat;
   controls.on.command = () => features.focusCommand();
   controls.on.guide = () => hud.toggleHelp();
+  const setView = (third) => {
+    thirdPerson = third && !!avatar;
+    activeCam = thirdPerson ? view : camera;
+    if (avatar) avatar.visible = thirdPerson;
+    document.getElementById('btn-view')?.setAttribute('aria-pressed', String(thirdPerson));
+    viewSnap = true;
+  };
+  controls.on.view = () => {
+    setView(!thirdPerson);
+    speakNow(thirdPerson ? 'Đã chuyển sang nhìn từ phía sau Đăng.' : 'Đã chuyển sang nhìn qua mắt Đăng.', { queue: true, key: 'view' });
+  };
   controls.on.digit = (n) => features.handleDigit(n);
   // Tab: mở bảng tính năng (như nút "menu" trong game); nhấn tiếp để đổi nhóm, Shift+Tab đi ngược lại.
   controls.on.tab = (dir = 1) => {
@@ -382,6 +449,7 @@ async function boot() {
         case 'read': features.readSign(); break;
         case 'repeat': repeat(); break;
         case 'voice': toggleVoice(); break;
+        case 'view': controls.on.view(); break;
         case 'command': features.voiceCommand(); break;
         case 'features': if (features.isOpen) features.close(); else features.openGroup(features.group || 1, { mouse: e.detail > 0 }); break;
         case 'help': hud.toggleHelp(); break;
@@ -421,6 +489,7 @@ async function boot() {
     controls.hotkeys = true;
     controls.setEnabled(true);
     sfx.unlock();
+    soundscape.start();
     if (!isTouch) controls.requestLock();
     setTimeout(() => {
       speakNow(WELCOME);
@@ -430,8 +499,9 @@ async function boot() {
 
   // ───── Kích thước + tự điều chỉnh độ phân giải theo hiệu năng ─────
   window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = view.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
+    view.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
   let fpsFrames = 0;
@@ -462,8 +532,29 @@ async function boot() {
       const d = lightCx.getImageData(0, 0, 8, 8).data;
       let sum = 0;
       for (let i = 0; i < d.length; i += 4) sum += (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255;
-      hud.setLuminance(sum / 64, now);
+      // trời tối thì coi như cảnh tối để HUD dùng kính đêm
+      hud.setLuminance(hudNight > 0.5 ? Math.min(0.1, sum / 64) : sum / 64, now);
     } catch { /* canvas không đọc được: giữ tông sáng mặc định */ }
+  }
+
+  // Camera sau vai phải: cùng hướng nhìn với mắt Đăng nên tâm màn hình vẫn là nơi kính "nhìn".
+  const statusEl = $('status');
+  const viewPos = new THREE.Vector3();
+  const viewWant = new THREE.Vector3();
+  let viewSnap = true;
+  function placeView(dt, st, floor) {
+    const yaw = controls.viewYaw;
+    const pitch = controls.viewPitch;
+    const fx = -Math.sin(yaw), fz = -Math.cos(yaw);
+    const rx = Math.cos(yaw), rz = -Math.sin(yaw);
+    // lùi xa và cao hơn để thấy trọn người Đăng phía trên phụ đề và thanh điều khiển
+    const back = 3.9 - Math.sin(pitch) * 0.8;
+    viewWant.set(st.x + rx * 0.62 - fx * back, floor + 2.55 - Math.sin(pitch) * 1.3, st.z + rz * 0.62 - fz * back);
+    if (viewSnap) { viewPos.copy(viewWant); viewSnap = false; }
+    else viewPos.lerp(viewWant, 1 - Math.exp(-dt * 14));
+    view.position.copy(viewPos);
+    view.rotation.set(pitch - 0.2, yaw, 0, 'YXZ');
+    if (Math.abs(view.fov - camera.fov) > 0.02) { view.fov = camera.fov; view.updateProjectionMatrix(); }
   }
 
   function frame(now) {
@@ -482,20 +573,29 @@ async function boot() {
       camera.fov = fov;
       camera.updateProjectionMatrix();
     }
-    sky.position.copy(camera.position);
+    if (avatar) {
+      const st = controls.state;
+      const floor = controls.eyeY - STREET.eyeHeight;
+      avatar.update(dt, { x: st.x, z: st.z, yaw: st.yaw, floor, speed: Math.hypot(controls.vx, controls.vz), cameraOn: statusEl.classList.contains('cam') });
+      if (thirdPerson) placeView(dt, st, floor);
+    }
+    sky.position.copy(activeCam.position);
     sky.material.uniforms.time.value += dt;
-    followShadow(lights.sun, camera.position);
-    updateFog(scene, camera);
-    sunlight.update(dt, camera);
-    petals.update(dt, camera);
-    flare.update(dt, camera);
+    followShadow(lights.sun, activeCam.position);
+    if (!daytime.current) updateFog(scene, activeCam);
+    daytime.update(dt);
+    nightLights.update(controls.state.x, controls.state.z);
+    if (started) soundscape.update(controls.state, ents.vehicles);
+    sunlight.update(dt, activeCam);
+    petals.update(dt, activeCam);
+    flare.update(dt, activeCam);
     if (started) {
       features.update(dt, controls.state);
       lens.update(controls.state);
       hud.updateFocus();
       hud.setHeading(controls.state.yaw);
     }
-    renderer.render(scene, camera);
+    renderer.render(scene, activeCam);
     sampleLight(now);
 
     if (started) {
@@ -514,7 +614,7 @@ async function boot() {
   }
   requestAnimationFrame((t) => { last = t; frame(t); });
 
-  window.__seevia = { reg, controls, ents, recognizer, camera, scene, features, lens, hud, speech, music, perform, speakNow, world, started: () => started, t0 };
+  window.__seevia = { daytime, reg, controls, ents, recognizer, camera, view, avatar: () => avatar, scene, features, lens, hud, speech, music, perform, speakNow, world, started: () => started, t0 };
 
   setStatus('');
   startBtn.disabled = false;

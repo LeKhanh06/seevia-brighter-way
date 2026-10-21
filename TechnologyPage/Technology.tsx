@@ -54,6 +54,20 @@ export default function Technology() {
   useTechnologyReveal();
   const [notice, setNotice] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const flowGrid = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const grid = flowGrid.current;
+    if (!grid) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => grid.classList.toggle("is-in-view", entry.isIntersecting),
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
+    );
+    observer.observe(grid);
+    return () => {
+      observer.disconnect();
+      grid.classList.remove("is-in-view");
+    };
+  }, []);
   useEffect(() => {
     document.title = "Công nghệ SeeVia — Từ điều nhìn thấy, đến điều nghe hiểu";
     const show = () => {
@@ -103,7 +117,7 @@ export default function Technology() {
               <br />
               đến một câu trả lời.
             </h2>
-            <div className="tech-flow-grid">
+            <div className="tech-flow-grid" ref={flowGrid}>
               {steps.map((s, i) => (
                 <article key={s.title}>
                   <div className="flow-icon">

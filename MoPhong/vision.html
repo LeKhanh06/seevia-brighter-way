@@ -507,9 +507,144 @@
     .dk { min-width: 54px; min-height: 56px; padding: 6px 8px; } .dk .lbl { display: block; font-size: 0.64rem; } .dk .key { display: none; }
     .dk.primary { min-width: 68px; min-height: 66px; } .dk.primary svg { width: 28px; height: 28px; }
   }
+
+  /* ═════════ HUD: kính thông minh — nét mảnh, bo mềm, dấu góc kiểu khung ngắm ═════════
+     Hai tông vẫn tự đổi theo độ sáng cảnh; chỉ tinh chỉnh vật liệu kính, viền và chữ. */
+  #hud {
+    --glass: rgba(246, 248, 255, 0.74); --glass-hi: rgba(250, 251, 255, 0.9);
+    --hair: rgba(48, 60, 140, 0.16); --line: rgba(48, 60, 140, 0.14); --line-hi: rgba(48, 60, 140, 0.26);
+    --text: #1b1937; --muted: #5a5880; --accent: #305ffa; --accent-2: #2440b8; --on-accent: #ffffff;
+    --signal: #0a9fb0; --tick: rgba(48, 95, 250, 0.55);
+    --fill: rgba(48, 60, 140, 0.06); --fill-hi: rgba(48, 60, 140, 0.11);
+    --shadow: 0 14px 34px -16px rgba(20, 18, 46, 0.38);
+    --dock-h: 86px;   /* chừa chỗ cho ống kính nhô lên khỏi thanh */
+  }
+  #hud[data-tone="dark"] {
+    --glass: rgba(20, 18, 46, 0.6); --glass-hi: rgba(24, 22, 54, 0.84);
+    --hair: rgba(191, 201, 252, 0.18); --line: rgba(191, 201, 252, 0.16); --line-hi: rgba(191, 201, 252, 0.3);
+    --text: #f6f8ff; --muted: #b8bde0; --accent: #7fd3de; --accent-2: #a8e5eb; --on-accent: #14122e;
+    --signal: #7fd3de; --tick: rgba(127, 211, 222, 0.7);
+    --fill: rgba(255, 255, 255, 0.06); --fill-hi: rgba(255, 255, 255, 0.12);
+    --shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.6);
+  }
+  #hud { font-family: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif; }
+  #hud .glass {
+    background: var(--glass); border: 1px solid var(--hair);
+    backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3);
+    box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+  #hud :is(.dk, .icon-btn, .sub-btn, #sheet-tabs button, #sheet-items button, #sheet-close):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Dấu góc khung ngắm: bốn góc chữ L mảnh trên phụ đề và thanh điều khiển */
+  #subtitle::before, #subtitle::after, #dock::before, #dock::after {
+    content: ""; position: absolute; width: 12px; height: 12px; pointer-events: none;
+    border: 0 solid var(--tick);
+  }
+  #subtitle::before, #dock::before { left: -5px; top: -5px; border-left-width: 1.5px; border-top-width: 1.5px; border-top-left-radius: 6px; }
+  #subtitle::after, #dock::after { right: -5px; bottom: -5px; border-right-width: 1.5px; border-bottom-width: 1.5px; border-bottom-right-radius: 6px; }
+
+  /* Trên cùng */
+  #brand { gap: 9px; min-height: 40px; padding: 0 16px 0 10px; }
+  #brand b { font-weight: 700; letter-spacing: -0.01em; }
+  #brand span { font-size: 0.76rem; color: var(--muted); }
+  #status { min-height: 40px; font-weight: 600; font-size: 0.84rem; }
+  #status .led { width: 8px; height: 8px; background: transparent; box-shadow: inset 0 0 0 1.5px var(--muted); }
+  #status.cam .led { background: var(--signal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 22%, transparent), 0 0 10px var(--signal); }
+  #status.busy .led { background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+  #steps li.now { background: var(--accent); }
+  .icon-btn { width: 40px; height: 40px; color: var(--text); }
+  .icon-btn svg { stroke-width: 1.6; }
+  .icon-btn[aria-pressed="true"]#btn-view { color: var(--accent); }
+  #compass { border-color: var(--hair); }
+  #compass .needle { border-bottom-color: var(--accent); }
+
+  /* Phụ đề: lời kính nói — sóng âm bên trái chỉ chạy khi kính đang đọc */
+  #subtitle { gap: 14px; align-items: center; padding: 14px 10px 14px 18px; border-radius: 18px; background: var(--glass-hi); }
+  #sub-text { font-size: 1.02rem; line-height: 1.55; font-weight: 500; color: var(--text); letter-spacing: -0.003em; }
+  #sub-hist { border-top-color: var(--hair); }
+  .sub-wave { display: inline-flex; align-items: center; gap: 3px; height: 22px; flex: 0 0 auto; align-self: flex-start; margin-top: 2px; }
+  .sub-wave i { display: block; width: 3px; height: 30%; border-radius: 2px; background: var(--signal); opacity: 0.55; transform-origin: center; transition: height 0.3s, opacity 0.3s; }
+  #subtitle.speaking .sub-wave i { opacity: 1; animation: sub-wave 0.9s ease-in-out infinite; }
+  #subtitle.speaking .sub-wave i:nth-child(2) { animation-delay: -0.3s; animation-duration: 0.75s; }
+  #subtitle.speaking .sub-wave i:nth-child(3) { animation-delay: -0.55s; animation-duration: 1.05s; }
+  #subtitle.speaking .sub-wave i:nth-child(4) { animation-delay: -0.15s; animation-duration: 0.85s; }
+  @keyframes sub-wave { 0%, 100% { height: 25%; } 50% { height: 100%; } }
+  .sub-btn { width: 34px; height: 34px; color: var(--muted); }
+  .sub-btn:hover { color: var(--text); background: var(--fill-hi); }
+  .sub-btn svg { stroke-width: 1.6; }
+
+  /* Thanh điều khiển: ô kính trong, ống kính "Nhận diện" tròn ở giữa */
+  #dock { gap: 4px; padding: 8px 10px; border-radius: 24px; align-items: center; overflow: visible; }
+  #dock .dk { order: 2; min-width: 84px; min-height: 66px; padding: 17px 12px 7px; gap: 5px; border-radius: 14px;
+    background: transparent; border: 1px solid transparent; box-shadow: none; color: var(--text); }
+  #dock .dk[data-act="scan"] { order: 1; }
+  #dock .dk[data-act="read"] { order: 2; }
+  #dock .dk.primary { order: 3; }
+  #dock .dk[data-act="command"] { order: 4; }
+  #dock .dk[data-act="features"] { order: 5; }
+  #dock .dk svg { width: 22px; height: 22px; stroke-width: 1.6; }
+  #dock .dk .lbl { font-size: 0.72rem; font-weight: 600; letter-spacing: 0; color: var(--muted); }
+  #dock .dk:hover { background: var(--fill-hi); border-color: var(--hair); transform: none; }
+  #dock .dk:hover .lbl { color: var(--text); }
+  #dock .dk:active { transform: scale(0.97); }
+  #dock .dk[aria-pressed="true"] { background: var(--fill-hi); border-color: var(--line-hi); color: var(--accent); }
+  #dock .dk[aria-pressed="true"] .lbl { color: var(--accent); }
+  /* chữ phím nhỏ ở góc trên phải, không nổi khối */
+  #dock .dk .key { top: 6px; right: 9px; left: auto; transform: none; min-width: 0; padding: 0; border: 0; border-radius: 0;
+    background: none; box-shadow: none; color: var(--muted); font: 600 0.6rem/1 "Be Vietnam Pro", sans-serif; letter-spacing: 0.02em; opacity: 0.8; }
+  /* ống kính: vòng tròn sapphire với vành trong mảnh, nhô lên khỏi thanh */
+  #dock .dk.primary { width: 84px; height: 84px; min-width: 84px; min-height: 84px; margin: -26px 8px 0; padding: 0; border-radius: 50%;
+    gap: 2px; color: #fff; border: 0; filter: none;
+    background: radial-gradient(circle at 50% 30%, #6d8bff 0%, #305ffa 55%, #2440b8 100%);
+    box-shadow: 0 0 0 5px var(--glass-hi), 0 0 0 6px var(--hair), 0 14px 30px -10px rgba(48, 95, 250, 0.7); }
+  #dock .dk.primary::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.38); pointer-events: none; }
+  #dock .dk.primary svg { width: 26px; height: 26px; stroke-width: 1.7; }
+  #dock .dk.primary .lbl { color: #fff; font-size: 0.68rem; }
+  #dock .dk.primary .key { top: auto; bottom: -19px; right: 50%; transform: translateX(50%); color: var(--muted); }
+  #dock .dk.primary:hover { background: radial-gradient(circle at 50% 30%, #7d97ff 0%, #3a68ff 55%, #2847c4 100%); border: 0; transform: none; }
+  #dock .dk.rec { background: #b3261e; color: #fff; }
+  .dk[data-tip]::after { border-radius: 10px; font-weight: 500; }
+
+  /* Bảng phím tắt ở góc: phím phẳng, viền mảnh */
+  #keyhint { gap: 6px; padding: 12px 14px; border-radius: 16px; }
+  #keyhint .kc { min-width: 1.7rem; height: 1.7rem; padding: 0 0.45rem; margin: 0; border-radius: 6px; font: 600 0.7rem/1 "Be Vietnam Pro", sans-serif;
+    color: var(--text); background: var(--fill); border: 1px solid var(--line-hi); border-bottom-width: 1px; box-shadow: none; }
+  #keyhint em { font-weight: 500; color: var(--muted); }
+
+  /* Bảng tính năng */
+  #sheet { border-radius: 22px; }
+  #sheet-tabs { background: var(--fill); border: 1px solid var(--hair); }
+  #sheet-tabs button { font-weight: 600; }
+  #sheet-tabs button[aria-selected="true"] { background: var(--accent); color: var(--on-accent); }
+  #sheet-close { border-color: var(--hair); background: transparent; font-weight: 600; }
+  #sheet-close kbd, .sim-note kbd { border: 1px solid var(--line-hi); border-bottom-width: 1px; background: var(--fill); box-shadow: none; color: var(--text); }
+  #sheet-title { font-weight: 700; letter-spacing: -0.01em; }
+  #sheet-items button { border: 1px solid var(--hair); background: transparent; border-radius: 14px; }
+  #sheet-items button:hover { background: var(--fill-hi); border-color: var(--line-hi); }
+  #sheet-items button.sel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  #cmd-input { border-color: var(--hair); background: var(--fill); }
+  #cmd-input:focus { outline: none; border-color: var(--accent); }
+  #cmd-form .btn { border-color: var(--hair); }
+  #cmd-form .btn.pri { border: 0; }
+
+  #radar-wrap { border-radius: 16px; }
+  #radar-title { font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #subtitle.speaking .sub-wave i { animation: none; height: 70%; }
+  }
+  @media (max-width: 640px) {
+    #dock .dk { min-width: 54px; min-height: 54px; } #dock .dk .key { display: none; }
+    #dock .dk.primary { width: 68px; height: 68px; min-width: 68px; min-height: 68px; margin: -20px 4px 0; }
+    /* hàng trên chật: trạng thái chỉ còn đèn, thương hiệu chỉ còn chữ SeeVia */
+    #status { max-width: 40px; padding: 0; justify-content: center; }
+    #status #st-text, #status #steps { display: none !important; }
+    #top-right { gap: 6px; }
+    #brand span { display: none; }
+  }
 </style>
 <script type="importmap">
-{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js" } }
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/" } }
 </script>
 </head>
 <body>
@@ -570,6 +705,9 @@
         <ol id="steps" aria-hidden="true"><li data-s="request"></li><li data-s="capture"></li><li data-s="detect"></li><li data-s="speak"></li></ol>
         <span id="st-sub">Camera đang tắt, chỉ bật khi bạn yêu cầu</span>
       </div>
+      <button type="button" class="icon-btn glass" id="btn-view" data-act="view" aria-pressed="true" aria-label="Đổi góc nhìn: sau lưng Đăng hoặc qua mắt Đăng (C)" title="Đổi góc nhìn (C)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M6.5 20c.6-3.6 2.8-5.5 5.5-5.5s4.9 1.9 5.5 5.5"/><path d="M3 12h2.5M18.5 12H21"/></svg>
+      </button>
       <button type="button" class="icon-btn glass" id="btn-voice" data-act="voice" aria-pressed="true" title="Tắt giọng nói (V)">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11"/><path class="slash" d="M3 3l18 18"/></svg>
         <span class="label sr-lbl">Giọng nói đang bật. Bấm để tắt.</span>
@@ -595,6 +733,7 @@
   </div>
 
   <div id="subtitle" class="glass" role="status" aria-live="polite">
+    <span class="sub-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
     <div class="sub-body">
       <div id="sub-text" role="button" tabindex="0" aria-expanded="false" title="Bấm để xem đầy đủ và các câu trước"></div>
       <ul id="sub-hist" aria-label="Các câu trước"></ul>

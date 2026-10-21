@@ -46,7 +46,7 @@ export default function Header({
   };
   const dismiss = () => {
     setOpen(false);
-    toggle.current?.focus();
+    if (open) toggle.current?.focus({ preventScroll: true });
   };
   useEffect(() => {
     if (!open) return;
@@ -116,7 +116,7 @@ export default function Header({
       }
       onClick={() => {
         dismiss();
-        navigate(to);
+        navigate(to, { instant: true });
       }}
     >
       {to && Object.hasOwn(pageRegistry, to)
@@ -133,14 +133,14 @@ export default function Header({
     <header className="header">
       <div className="header-menu">
         <div className="header-brand">
-          <a className="logo" href="/" aria-label="SeeVia — Trang chủ">
+          <a className="logo" href="/" aria-label="SeeVia — Trang chủ" data-nav-top>
             <img src="/images/260.png" alt="SeeVia" />
           </a>
         </div>
         <nav aria-label="Điều hướng chính" className="main-nav">
           <button
             aria-current={active === "home" ? "page" : undefined}
-            onClick={() => navigate("home")}
+            onClick={() => navigate("home", { instant: true })}
           >
             Trang chủ
           </button>

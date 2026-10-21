@@ -64,6 +64,7 @@ export class PlayerControls {
       else if (code === 'KeyV') { this.on.voice?.(); }
       else if (code === 'KeyM') { e.preventDefault(); this.on.command?.(); }
       else if (code === 'KeyH') { this.on.guide?.(); }
+      else if (code === 'KeyC') { this.on.view?.(); }
       else if (code === 'Tab') { if (this.on.tab?.(e.shiftKey ? -1 : 1)) e.preventDefault(); }
       else if (code === 'Escape') { this.on.pause?.(); }
     });
