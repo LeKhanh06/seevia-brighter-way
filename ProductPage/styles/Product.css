@@ -157,9 +157,6 @@
 .device-angle-slide--underside {
   background: #111214;
 }
-.device-angle-slide--underside > img {
-  transform: translateY(2%) scale(0.9);
-}
 .device-version-note {
   margin: 12px 4px 0;
   color: var(--sv-muted);
