@@ -18,11 +18,13 @@ export function validateContact(body) {
     name.length > 100 ||
     email.length > 200 ||
     message.length > 3000 ||
+    !name.trim() ||
+    !email.trim() ||
     !message.trim() ||
     !TOPICS.includes(topic)
   )
     return null;
-  if (email.trim() && !emailPattern.test(email.trim())) return null;
+  if (!emailPattern.test(email.trim())) return null;
   if (/[\r\n]/.test(name)) return null;
   return {
     name: name.trim(),
@@ -62,9 +64,9 @@ export async function sendContact(data, config, fetchImpl = fetch) {
   body.set("subject", `[SeeVia] ${data.topic}`);
   body.set(
     "text",
-    `LỜI NHẮN TỪ WEBSITE SEEVIA\n\nChủ đề: ${data.topic}\nTên: ${data.name || "Không cung cấp"}\nEmail: ${data.email || "Không cung cấp"}\n\n${data.message}`,
+    `LỜI NHẮN TỪ WEBSITE SEEVIA\n\nChủ đề: ${data.topic}\nTên: ${data.name}\nEmail: ${data.email}\n\n${data.message}`,
   );
-  if (data.email) body.set("h:Reply-To", data.email);
+  body.set("h:Reply-To", data.email);
   body.set("o:tracking", "no");
   body.set("o:tracking-clicks", "no");
   body.set("o:tracking-opens", "no");

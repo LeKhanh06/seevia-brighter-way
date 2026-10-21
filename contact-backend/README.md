@@ -32,7 +32,7 @@ Giới hạn RAM chỉ áp dụng trên từng instance đang hoạt động, kh
 - `node tests/contact-send-check.mjs`: kiểm tra giao diện bằng phản hồi giả lập, không gửi thư.
 - `node --env-file=contact-backend/.env contact-backend/send-test.mjs`: **gửi một thư thật** tới `MAIL_TO`, chỉ chạy khi muốn kiểm tra.
 
-API kiểm tra nội dung, giới hạn 5 lần / 10 phút / IP, giới hạn kích thước, honeypot và origin. Email người gửi là `Reply-To` nếu được nhập; Mailgun luôn dùng địa chỉ From của domain. Theo dõi mở/nhấp bị tắt; lỗi trả về không chứa thông tin bí mật hoặc phản hồi chi tiết của nhà cung cấp.
+API yêu cầu tên, email hợp lệ và lời nhắn; đồng thời giới hạn 5 lần / 10 phút / IP, giới hạn kích thước, honeypot và origin. Email người gửi được dùng làm `Reply-To`; Mailgun luôn dùng địa chỉ From của domain. Theo dõi mở/nhấp bị tắt; lỗi trả về không chứa thông tin bí mật hoặc phản hồi chi tiết của nhà cung cấp.
 
 ## Trợ lý SeeVia AI
 
