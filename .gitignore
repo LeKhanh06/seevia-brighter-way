@@ -12,3 +12,6 @@ test-results/
 
 .playwright-mcp/
 artifacts/
+.claude/
+Hình ảnh thành viên nhóm/
+AboutPage/assets/founders/*.jpg

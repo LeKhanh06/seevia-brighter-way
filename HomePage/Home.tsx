@@ -133,6 +133,7 @@ export default function Home() {
           <div className="product-stage">
             <div className="product-ellipses" aria-hidden="true" />
             <GlassesViewer />
+            <small className="product-version-label">Thiết kế kính SeeVia hiện ở phiên bản V1 và có thể tiếp tục được điều chỉnh.</small>
           </div>
         </section>
         <AIDemo />
