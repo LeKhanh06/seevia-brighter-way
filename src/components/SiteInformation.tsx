@@ -16,7 +16,7 @@ export default function SiteInformation() {
           <p>
             Biểu mẫu Liên hệ cho phép lưu bản nháp hoặc gửi lời nhắn qua Mailgun
             khi kênh gửi sẵn sàng. Nội dung chỉ được chuyển đi khi bạn chọn Gửi
-            lời nhắn. Tên và email không bắt buộc.
+            lời nhắn. Tên và email là thông tin bắt buộc trong biểu mẫu.
           </p>
           <p>
             Khi chọn sao chép hoặc tải về, nội dung được lưu vào bộ nhớ tạm hoặc

@@ -16,8 +16,8 @@ const env = {
   ALLOWED_ORIGIN: "https://seevia.example",
 };
 const message = {
-  name: "",
-  email: "",
+  name: "Người gửi",
+  email: "visitor@example.org",
   topic: TOPICS[0],
   message: "Một lời nhắn tiếng Việt.",
   website: "",
@@ -63,7 +63,7 @@ test("Vercel status rewrite reaches the status endpoint without sending mail", a
     });
   }
 });
-test("validation preserves optional identity and rejects invalid input/header injection", () => {
+test("validation requires identity and rejects invalid input/header injection", () => {
   assert.ok(validateContact(message));
   for (const invalid of [
     { ...message, email: "bad\r\nBcc: attacker@example.org" },
@@ -75,7 +75,7 @@ test("validation preserves optional identity and rejects invalid input/header in
   ])
     assert.equal(validateContact(invalid), null);
 });
-test("Mailgun uses fixed recipient, optional Reply-To, correct region, no tracking", async () => {
+test("Mailgun uses fixed recipient, Reply-To, correct region, no tracking", async () => {
   const config = readConfig({ ...env, MAILGUN_REGION: "eu" });
   const id = await sendContact(
     { ...message, email: "visitor@example.org" },

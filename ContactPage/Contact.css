@@ -184,11 +184,8 @@
   margin-bottom: 24px;
 }
 .ct-fields label > span {
-  display: block;
-  font-size: 11px;
-  color: var(--ink-600);
-  font-weight: 400;
-  margin-top: 4px;
+  color: var(--sapphire-700);
+  font-weight: 600;
 }
 .ct-fields input,
 .ct textarea {
@@ -298,6 +295,22 @@
 .ct-dialog-note {
   color: var(--sv-muted);
   font-size: 12px;
+}
+.ct-success {
+  margin: 20px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--mint-300);
+  border-radius: 12px;
+  background: var(--mint-50);
+  color: var(--sv-navy);
+}
+.ct-success strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.ct-success p {
+  margin: 0;
 }
 .ct-dialog-actions {
   display: flex;

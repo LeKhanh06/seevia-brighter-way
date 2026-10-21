@@ -39,6 +39,7 @@ export default function Contact() {
   const [website, setWebsite] = useState("");
   const sendingLock = useRef(false);
   const preview = useRef<HTMLDialogElement>(null);
+  const nameField = useRef<HTMLInputElement>(null);
   const messageField = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     document.title = "Liên hệ — SeeVia";
@@ -56,6 +57,13 @@ export default function Contact() {
     `${translate("LỜI NHẮN DÀNH CHO SEEVIA")}\n\n${translate("Chủ đề")}: ${translate(topic)}\n${name.trim() ? `${translate("Tên")}: ${name.trim()}\n` : ""}${email.trim() ? `Email: ${email.trim()}\n` : ""}\n${message.trim()}\n\n${translate(sent ? "Lời nhắn đã được Mailgun tiếp nhận để chuyển tới nhóm SeeVia." : "Bản nháp trên thiết bị. Chưa gửi đến SeeVia.")}\n`;
   function review(event: FormEvent) {
     event.preventDefault();
+    if (!name.trim()) {
+      nameField.current?.setCustomValidity(
+        translate("Vui lòng nhập tên của bạn."),
+      );
+      nameField.current?.reportValidity();
+      return;
+    }
     if (!message.trim()) {
       messageField.current?.setCustomValidity(
         translate("Vui lòng nhập lời nhắn."),
@@ -89,9 +97,7 @@ export default function Contact() {
         return;
       }
       setSent(true);
-      setStatus(
-        "Lời nhắn đã được Mailgun tiếp nhận để chuyển tới nhóm SeeVia.",
-      );
+      setStatus("");
     } catch {
       setStatus(
         "Chưa xác nhận được trạng thái gửi. Nội dung vẫn được giữ lại; hãy kiểm tra kết nối trước khi thử lại.",
@@ -215,22 +221,28 @@ export default function Contact() {
             </fieldset>
             <div className="ct-fields">
               <label htmlFor="contact-name">
-                Tên của bạn <span>(không bắt buộc)</span>
+                Tên của bạn <span aria-hidden="true">*</span>
                 <input
+                  ref={nameField}
                   id="contact-name"
                   autoComplete="name"
+                  required
                   maxLength={100}
                   value={name}
-                  onChange={(event) => setName(event.target.value)}
+                  onChange={(event) => {
+                    event.target.setCustomValidity("");
+                    setName(event.target.value);
+                  }}
                   placeholder="Cách bạn muốn được gọi"
                 />
               </label>
               <label htmlFor="contact-email">
-                Email <span>(không bắt buộc)</span>
+                Email <span aria-hidden="true">*</span>
                 <input
                   id="contact-email"
                   type="email"
                   autoComplete="email"
+                  required
                   maxLength={200}
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -255,7 +267,7 @@ export default function Contact() {
               placeholder="Chào SeeVia, mình muốn chia sẻ…"
             />
             <div className="ct-field-note">
-              <span>* Nội dung bắt buộc</span>
+              <span>* Tên, email và lời nhắn bắt buộc</span>
               <span>{message.length} / 3000</span>
             </div>
             <button className="ct-action ct-primary" type="submit">
@@ -283,25 +295,34 @@ export default function Contact() {
         <button
           className="ct-close"
           type="button"
-          aria-label="Đóng bản nháp"
+          aria-label={sent ? "Đóng thông báo" : "Đóng bản nháp"}
           onClick={() => preview.current?.close()}
         >
           ×
         </button>
-        <p className="ct-eyebrow">BẢN NHÁP CỦA BẠN</p>
+        <p className="ct-eyebrow">
+          {sent ? "LỜI NHẮN ĐÃ GỬI" : "BẢN NHÁP CỦA BẠN"}
+        </p>
         <h2>{topic}</h2>
         {name.trim() && <p translate="no">{name.trim()}</p>}
         {email.trim() && <p translate="no">{email.trim()}</p>}
         <p className="ct-message" translate="no">
           {message.trim()}
         </p>
-        <p className="ct-dialog-note">
-          {sent
-            ? "Lời nhắn đã được tiếp nhận để chuyển qua email."
-            : available
+        {sent ? (
+          <div className="ct-success" role="status">
+            <strong>Gửi thành công</strong>
+            <p>
+              Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi trong thời gian sớm nhất.
+            </p>
+          </div>
+        ) : (
+          <p className="ct-dialog-note">
+            {available
               ? "Nội dung chỉ được gửi khi bạn chọn Gửi lời nhắn."
               : "Bản nháp chưa được gửi đến SeeVia."}
-        </p>
+          </p>
+        )}
         <div className="ct-dialog-actions">
           {available && (
             <button
@@ -309,7 +330,7 @@ export default function Contact() {
               disabled={sending || sent}
               onClick={send}
             >
-              {sending ? "Đang gửi…" : sent ? "Đã tiếp nhận" : "Gửi lời nhắn"}
+              {sending ? "Đang gửi…" : sent ? "Gửi thành công" : "Gửi lời nhắn"}
               <Arrow />
             </button>
           )}
@@ -318,7 +339,7 @@ export default function Contact() {
             disabled={sending}
             onClick={download}
           >
-            Tải bản nháp <Arrow />
+            {sent ? "Tải bản sao" : "Tải bản nháp"} <Arrow />
           </button>
           <button className="ct-action" disabled={sending} onClick={copy}>
             Sao chép

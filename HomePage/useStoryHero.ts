@@ -5,10 +5,10 @@ import { getLenis } from "./useHomeMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const STEP_SECONDS = .8;
-/** Ease-out with a soft landing, so a scene change glides instead of snapping. */
-const STEP_EASE = (t: number) => 1 - Math.pow(1 - t, 4);
-const AUTOPLAY_MS = 3000;
+const STEP_SECONDS = 1.45;
+/** An even pace keeps the scene legible throughout the transition. */
+const STEP_EASE = (t: number) => (1 - Math.cos(Math.PI * t)) / 2;
+const AUTOPLAY_MS = 6500;
 
 /** One scrubbed timeline keeps forward and reverse scene changes in sync with scroll. */
 export default function useStoryHero(count: number) {
@@ -49,8 +49,8 @@ export default function useStoryHero(count: number) {
       scenes.forEach((scene, index) => gsap.set(scene, { zIndex: index + 1 }));
 
       gsap.fromTo(parts[0].copy,
-        { autoAlpha: 0, x: (item: number) => item === 1 ? -72 : -38, y: 16, filter: "blur(7px)" },
-        { autoAlpha: 1, x: 0, y: 0, filter: "blur(0px)", duration: .85, stagger: .1, delay: .18, ease: "power3.out" },
+        { autoAlpha: 0, x: (item: number) => item === 1 ? -46 : -26, y: 12, filter: "blur(4px)" },
+        { autoAlpha: 1, x: 0, y: 0, filter: "blur(0px)", duration: 1.1, stagger: .12, delay: .18, ease: "power2.out" },
       );
 
       const timeline = gsap.timeline({
@@ -59,7 +59,7 @@ export default function useStoryHero(count: number) {
           trigger: root,
           start: "top top",
           end: "bottom bottom",
-          scrub: .5,
+          scrub: .65,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             setActive(Math.min(count - 1, Math.round(self.progress * (count - 1))));
@@ -74,32 +74,32 @@ export default function useStoryHero(count: number) {
         const entering = parts[index + 1];
         const at = index;
         const direction = index % 2 === 0 ? 1 : -1;
-        const copyTravel = (item: number) => item === 1 ? 72 : 42;
+        const copyTravel = (item: number) => item === 1 ? 46 : 28;
         timeline.to(leaving.copy, {
-          autoAlpha: 0, x: (item: number) => -direction * copyTravel(item) * .8,
-          y: -14, filter: "blur(6px)", duration: .45, stagger: .025,
+          autoAlpha: 0, x: (item: number) => -direction * copyTravel(item) * .7,
+          y: -10, filter: "blur(4px)", duration: .58, stagger: .025,
         }, at + .08);
         if (leaving.visual) {
-          timeline.to(leaving.visual, { autoAlpha: 0, scale: 1.07, xPercent: direction * 2.5, duration: .65 }, at + .12);
+          timeline.to(leaving.visual, { autoAlpha: 0, scale: 1.035, xPercent: direction * 1.5, duration: .72 }, at + .12);
         }
         timeline.fromTo(entering.scene,
           { autoAlpha: 0 },
-          { autoAlpha: 1, duration: .62, immediateRender: false },
-          at + .24,
+          { autoAlpha: 1, duration: .72, immediateRender: false },
+          at + .2,
         );
         if (entering.visual) {
           timeline.fromTo(entering.visual,
-            { autoAlpha: 0, scale: 1.05, xPercent: -direction * 1.5 },
-            { autoAlpha: 1, scale: 1, xPercent: 0, duration: .7, immediateRender: false },
-            at + .28,
+            { autoAlpha: 0, scale: 1.03, xPercent: -direction * 1 },
+            { autoAlpha: 1, scale: 1, xPercent: 0, duration: .78, immediateRender: false },
+            at + .22,
           );
         }
         timeline.fromTo(entering.copy,
-          { autoAlpha: 0, x: (item: number) => direction * copyTravel(item), y: 16, filter: "blur(7px)" },
-          { autoAlpha: 1, x: 0, y: 0, filter: "blur(0px)", duration: .64, stagger: .045, immediateRender: false },
-          at + .36,
+          { autoAlpha: 0, x: (item: number) => direction * copyTravel(item), y: 12, filter: "blur(4px)" },
+          { autoAlpha: 1, x: 0, y: 0, filter: "blur(0px)", duration: .7, stagger: .045, immediateRender: false },
+          at + .3,
         );
-        timeline.to(leaving.scene, { autoAlpha: 0, duration: .24 }, at + .76);
+        timeline.to(leaving.scene, { autoAlpha: 0, duration: .28 }, at + .72);
       }
       triggerRef.current = timeline.scrollTrigger ?? null;
 
@@ -141,8 +141,10 @@ export default function useStoryHero(count: number) {
     const st = triggerRef.current;
     if (!st) return;
     const y = st.start + ((st.end - st.start) * index) / (count - 1);
+    const currentIndex = Math.round(((scrollY - st.start) / (st.end - st.start)) * (count - 1));
+    const duration = STEP_SECONDS * Math.max(1, Math.abs(index - currentIndex));
     const lenis = getLenis();
-    if (lenis) lenis.scrollTo(y, { duration: STEP_SECONDS, easing: STEP_EASE });
+    if (lenis) lenis.scrollTo(y, { duration, easing: STEP_EASE });
     else window.scrollTo({ top: y, behavior: "smooth" });
   }, [count]);
 
@@ -180,9 +182,9 @@ export default function useStoryHero(count: number) {
       if (busy) return next < 0 || next > count - 1 ? "pass" : "busy";
       if (next < 0 || next > count - 1) return "pass";
       target = next;
-      // Short lock: long enough to absorb one flick, short enough that a second swipe still feels instant.
-      lockUntil = performance.now() + STEP_SECONDS * 650;
-      glideUntil = performance.now() + STEP_SECONDS * 1000 + 120;
+      // Keep one gesture on one chapter until most of its transition has played.
+      lockUntil = performance.now() + STEP_SECONDS * 750;
+      glideUntil = performance.now() + STEP_SECONDS * 1000 + 180;
       goTo(next);
       return "moved";
     };
