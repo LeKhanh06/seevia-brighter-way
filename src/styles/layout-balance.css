@@ -8,7 +8,7 @@
 
 html body #root .header.header,
 html.sv-home-active body #root .header.header {
-  width: min(calc(100% - clamp(10px, 3vw, 48px) - clamp(10px, 3vw, 48px)), 1420px);
+  width: min(calc(100% - clamp(10px, 3vw, 48px) - clamp(10px, 3vw, 48px)), 1280px);
 }
 
 html body #root .footer {
@@ -162,6 +162,23 @@ html body #root .quick-overview-page .qv-closing-layout { gap: var(--sv-column-g
 html body #root .site-information { padding-inline: var(--sv-gutter); }
 html body #root .site-information > * { max-width: 960px; margin-inline: auto; }
 
+@media (min-width: 761px) and (max-width: 1100px) {
+  html.sv-home-active body #root .capability-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    row-gap: 28px;
+  }
+  html.sv-home-active body #root .capabilities .capability {
+    grid-column: span 2;
+    min-height: 220px;
+  }
+  html.sv-home-active body #root .capabilities .capability:nth-child(4) {
+    grid-column: 2 / span 2;
+    border-left: 0;
+    padding-left: 0;
+  }
+  html.sv-home-active body #root .capabilities .capability:nth-child(5) { grid-column: 4 / span 2; }
+}
+
 @media (max-width: 900px) {
   html.sv-home-active body #root .ai-demo-workspace { grid-template-columns: minmax(0, 1fr); }
   html.sv-home-active body #root .ai-demo-workspace > * { min-width: 0; }
@@ -187,6 +204,17 @@ html body #root .site-information > * { max-width: 960px; margin-inline: auto; }
   html body #root .about-editorial .ab-direction,
   html body #root .ct .ct-letter { gap: 30px; }
   html body #root .footer-main { gap: 24px; }
+}
+
+@media (max-width: 600px) {
+  html.sv-home-active body #root .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html.sv-home-active body #root .capabilities .capability:nth-child(odd) { border-left: 0; }
+  html.sv-home-active body #root .capabilities .capability:nth-child(even) { border-left: 1px solid var(--line-hairline); }
+  html.sv-home-active body #root .capabilities .capability:nth-child(5) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 50%;
+  }
 }
 
 @media (max-width: 480px) {
