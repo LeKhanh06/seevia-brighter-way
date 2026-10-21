@@ -109,7 +109,8 @@ export function buildGlasses(T: Three) {
   const M_BEZEL = mat({ color: 0xe2e2df, metalness: 0.9, roughness: 0.18, clearcoat: 1 });
   const M_PADARM = mat({ color: 0x9a9b9e, metalness: 0.85, roughness: 0.4 });
   const M_LENS = mat({ color: 0x1a1d22, metalness: 0.3, roughness: 0.03, clearcoat: 1, envMapIntensity: 1.5, transparent: true, opacity: 0.87, side: T.DoubleSide });
-  const M_INSET = mat({ color: 0x77797d, metalness: 0.75, roughness: 0.3 });
+  // ô lõm quanh ống kính: titan sẫm, giống nhau ở mọi phiên bản màu khung
+  const M_INSET = mat({ color: 0x3a3c41, metalness: 0.85, roughness: 0.32 });
   const M_BLACK = mat({ color: 0x050506, roughness: 0.55 });
   const M_RINGBLK = mat({ color: 0x0a0b0d, roughness: 0.3, clearcoat: 0.6 });
   const M_DARK = mat({ color: 0x141518, roughness: 0.45 });
@@ -290,10 +291,11 @@ export function buildGlasses(T: Three) {
     }
     sweep(pts, [0, 0, 1], (p) => [barH(p.x), BAR_D], M_BODY, 160, 10);
   }
-  // loa: lưới 2×2 khe hình viên thuốc ở mặt dưới thanh mày hai bên, giữa mép tròng và thanh ray; cảm biến nhỏ ở giữa
+  // loa: lưới 2×2 khe hình viên thuốc ở mặt dưới thanh mày hai bên, giữa mép tròng và thanh ray; cảm biến nhỏ ở giữa.
+  // Tâm loa ở |x| = 0.041: tại 0.05 khối cảm biến sau tròng (0.050–0.054) và bậc thanh ray (0.0435–0.0545) che mất loa.
   for (const sx of [-1, 1]) {
-    for (const [dx, dy] of [[-0.0016, -0.0004], [0.0016, -0.0004], [-0.0016, 0.001], [0.0016, 0.001]]) {
-      const x = sx * (0.05 + dx);
+    for (const [dx, dy] of [[-0.0016, -0.0007], [0.0016, -0.0007], [-0.0016, 0.0007], [0.0016, 0.0007]]) {
+      const x = sx * (0.041 + dx);
       rbox([0.0028, 0.0009, 0.0004], [x, barY(x) + dy, topZ(x) - barH(x) - 0.0001], M_BLACK, [0, 0, sx * 0.26], 3);
     }
   }
@@ -559,5 +561,7 @@ export function buildGlasses(T: Three) {
   const pivot = new T.Group();
   root.position.set(0, 0.009, 0.09);
   pivot.add(root);
+  // Vật liệu mang màu khung (thân và viền camera), để khung xem đổi phiên bản màu.
+  pivot.userData.paint = { body: M_BODY, bezel: M_BEZEL };
   return pivot;
 }

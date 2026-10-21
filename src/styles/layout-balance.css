@@ -10,6 +10,19 @@ html body #root .header.header,
 html.sv-home-active body #root .header.header {
   width: min(calc(100% - clamp(10px, 3vw, 48px) - clamp(10px, 3vw, 48px)), 1280px);
 }
+/* From tablet up, size the menu capsule from the page column: its inner padding (+1px border)
+   sits outside the column, so the wordmark and the menu button land on the column's edges. */
+@media (min-width: 641px) {
+  html body #root .header.header,
+  html.sv-home-active body #root .header.header {
+    --nav-pad: clamp(14px, 1.8vw, 28px);
+    width: calc(100% - 2 * (var(--sv-gutter) - var(--nav-pad) - 1px));
+  }
+  html body #root .header .header-menu {
+    max-width: none;
+    padding-inline: var(--nav-pad);
+  }
+}
 
 html body #root .footer {
   padding-inline: var(--sv-gutter);
@@ -54,7 +67,8 @@ html.sv-home-active body #root .experience {
 }
 html.sv-home-active body #root .experience > div:first-child { max-width: 680px; }
 html.sv-home-active body #root .experience .eyebrow { margin-bottom: clamp(20px, 3vw, 36px); }
-html.sv-home-active body #root .experience-copy { max-width: 48ch; }
+/* The copy fills its column so its right edge meets the page column, like the chapters below. */
+html.sv-home-active body #root .experience-copy { max-width: none; }
 
 html.sv-home-active body #root .product-viewer { padding-block: var(--sv-section-y); }
 html.sv-home-active body #root .product-stage {

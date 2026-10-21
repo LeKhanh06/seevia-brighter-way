@@ -1,0 +1,80 @@
+/* Device polish: settings that keep the site consistent across screens and system preferences.
+   Loaded last. Colours, type families and content live elsewhere. */
+
+/* ---------- One light theme everywhere ----------
+   The site is designed light-only. Declaring it stops browsers that auto-darken pages
+   (Samsung Internet, Chrome's auto dark mode) from inverting the palette, and keeps native
+   form controls and scrollbars light on systems set to dark mode. */
+:root { color-scheme: light; }
+
+/* ---------- Calm decoration ----------
+   The large ambient glows drifted forever. Under the frosted menu (backdrop-filter) that forced
+   the browser to re-blur the bar every frame, which made scrolling stutter on integrated GPUs.
+   They now hold still; the frosted menu stays. */
+html body #root .site-ambient-glow i { animation: none; }
+/* Overview page: the same for its hero glows, colour wash and twinkling stars, and its cards
+   reveal with fade + rise only (an 0.8s blur → sharp filter on large cards stuttered too). */
+html body #root .quick-overview-page :is(.qv-hero-glow, .qv-stars i),
+html body #root .quick-overview-page :is(.qv-intro-section, .qv-path-section)::before { animation: none; }
+html body #root .quick-overview-page :is(.qv-reveal, .qv-reveal.qv-pending) { filter: none; }
+
+/* ---------- Phones: readable small print and comfortable tap targets ---------- */
+@media (max-width: 640px) {
+  /* Labels, captions, dates and chips were 8–11px; 12px is the floor on small screens. */
+  html body #root main :is(
+    .sh-eyebrow,
+    .product-stage > span, .product-version-label,
+    .photo-topline, .photo-topline span,
+    .qv-section-kicker, .qv-section-kicker span, .qv-card-tag,
+    .device-detail-copy > span, .color-option small,
+    .tech-closeup-label, .tech-flow-grid small, .tech-processing-grid span,
+    .chat-heading span, .chat-scenarios button, .chat-scene > span, .chat-process span,
+    .chat-empty small, .tech-chat-options > span, .chat-demo-note,
+    .ab-source-note, .ab-founder-role,
+    .cp-filters button, .cp-source, .cp-source-note, .cp-ecosystem-grid small, .cp-ecosystem-note,
+    .np-meta, .np-meta span, .np-filters button, .np-result, .np-row-copy small, .np-note-art small,
+    .ct-field-note span,
+    .draft-badge, .policy-hero dt, .scope-note span, .policy-index a span, .next-policy span
+  ) {
+    font-size: 12px !important;
+  }
+
+  /* Language switch: at least 32 × 32 to tap. */
+  html body #root .header .header-tools button[aria-pressed] {
+    min-width: 32px;
+    min-height: 32px;
+    display: inline-grid;
+    place-items: center;
+  }
+  /* Footer links and stand-alone text links get a full-height row to tap. */
+  html body #root :is(.footer nav button, .footer-bottom button) {
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+  }
+  html body #root main :is(.pt-source, .ct-text-link, .index-other, .policy-sources a, .next-policy) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+  }
+}
+
+/* ---------- Hover pauses while the page scrolls (see devicePolish.ts) ---------- */
+html.is-scrolling body #root main { pointer-events: none; }
+
+/* ---------- Large screens: the page scales up as a whole (devicePolish.ts sets zoom and --z) ----------
+   Inside the scaled page, viewport units still measure the real screen, so anything sized from
+   vw/vh is divided by --z to keep the same proportions it has at 1440px. */
+html.sv-zoomed {
+  --sv-gutter: max(clamp(20px, calc(4vw / var(--z)), 56px), calc((100vw / var(--z) - var(--sv-content-max)) / 2));
+}
+html.sv-zoomed body #root .story-hero { --sh-stage-h: calc(100svh / var(--z)); }
+html.sv-zoomed body #root .story-hero.is-live { height: calc(var(--sh-stage-h) + 3 * 60svh / var(--z)); }
+html.sv-zoomed body #root .header .extra-menu { height: calc(100dvh / var(--z)); }
+html.sv-zoomed body #root .sv-support-panel {
+  max-width: calc(100vw / var(--z) - 32px);
+  height: calc(100dvh / var(--z) - 32px);
+  max-height: min(1000px, calc(100dvh / var(--z) - 32px));
+}
+html.sv-zoomed body #root :is(.ct-dialog, .np-dialog) { max-height: calc(85vh / var(--z)); }
+html.sv-zoomed body #root .site-cursor-sparkle { width: calc(100vw / var(--z)); height: calc(100vh / var(--z)); }

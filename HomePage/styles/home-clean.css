@@ -182,7 +182,7 @@ html.sv-home-active body #root .capabilities .number { color: var(--pillar); }
 html.sv-home-active body #root .capabilities .capability h3 { color: var(--text-heading); }
 html.sv-home-active body #root .capabilities .capability p { color: var(--text-muted); }
 html.sv-home-active body #root .capabilities .short-line { background: var(--pillar); }
-html.sv-home-active body #root .capabilities .line-label::after { background: var(--gradient-pillars); }
+html.sv-home-active body #root .capabilities .line-label::after { display: none; }
 
 /* ---------- Experience: the bold sapphire band ---------- */
 html.sv-home-active body #root .experience {

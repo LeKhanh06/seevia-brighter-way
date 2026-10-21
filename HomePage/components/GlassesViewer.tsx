@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type * as THREE from "three";
 import { buildGlasses } from "./glassesModel";
+import { getPageZoom } from "../../src/support/devicePolish";
 
 /*
  * Khung xem 3D cho mô hình kính SeeVia (hình học nằm ở glassesModel.ts).
@@ -8,9 +9,66 @@ import { buildGlasses } from "./glassesModel";
  * Thả tay 5 giây thì kính tự về góc nhìn ban đầu (giảm chuyển động: về ngay, không chạy hiệu ứng).
  */
 
+/** Bốn phiên bản màu, cùng tên với phần Màu sắc ở trang Sản phẩm. Chỉ thân kính và viền camera đổi màu. */
+type Finish = { color: number; metalness: number; roughness: number; clearcoat: number };
+const COLORS: { id: string; label: string; model: string; swatch: string; body: Finish; bezel: Finish }[] = [
+  {
+    id: "silver",
+    label: "Bạc ánh ngọc trai",
+    model: "Mô hình 3D kính SeeVia màu bạc, kéo hoặc dùng phím mũi tên trái phải để xoay",
+    swatch: "#dee2e8",
+    body: { color: 0xc9c9c5, metalness: 0.8, roughness: 0.27, clearcoat: 0.5 },
+    bezel: { color: 0xe2e2df, metalness: 0.9, roughness: 0.18, clearcoat: 1 },
+  },
+  {
+    id: "graphite",
+    label: "Đen than chì",
+    model: "Mô hình 3D kính SeeVia màu đen than chì, kéo hoặc dùng phím mũi tên trái phải để xoay",
+    swatch: "#383a41",
+    body: { color: 0x3a3c43, metalness: 0.55, roughness: 0.32, clearcoat: 0.6 },
+    bezel: { color: 0x5a5d66, metalness: 0.8, roughness: 0.24, clearcoat: 1 },
+  },
+  {
+    id: "crimson",
+    label: "Đỏ rượu trầm",
+    model: "Mô hình 3D kính SeeVia màu đỏ rượu trầm, kéo hoặc dùng phím mũi tên trái phải để xoay",
+    swatch: "#a52c48",
+    body: { color: 0x6e1a2d, metalness: 0.3, roughness: 0.34, clearcoat: 0.6 },
+    bezel: { color: 0x8c2a42, metalness: 0.6, roughness: 0.26, clearcoat: 1 },
+  },
+  {
+    id: "mist",
+    label: "Xanh lam nhạt",
+    model: "Mô hình 3D kính SeeVia màu xanh lam nhạt, kéo hoặc dùng phím mũi tên trái phải để xoay",
+    swatch: "#8fc7f4",
+    body: { color: 0x8cc3ef, metalness: 0.3, roughness: 0.3, clearcoat: 0.6 },
+    bezel: { color: 0xb7dbf7, metalness: 0.6, roughness: 0.22, clearcoat: 1 },
+  },
+];
+type Paint = { body: THREE.MeshPhysicalMaterial; bezel: THREE.MeshPhysicalMaterial };
+const applyFinish = (m: THREE.MeshPhysicalMaterial, f: Finish) => {
+  m.color.setHex(f.color);
+  m.metalness = f.metalness;
+  m.roughness = f.roughness;
+  m.clearcoat = f.clearcoat;
+};
+
 export default function GlassesViewer() {
   const hostRef = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(false);
+  const [colorIndex, setColorIndex] = useState(0);
+  const paintRef = useRef<Paint | null>(null);
+  const colorRef = useRef(0);
+  colorRef.current = colorIndex;
+  const color = COLORS[colorIndex];
+
+  // Đổi màu ngay trên vật liệu; vòng render đang chạy sẽ vẽ lại ở khung hình kế tiếp.
+  useEffect(() => {
+    const paint = paintRef.current;
+    if (!paint) return;
+    applyFinish(paint.body, COLORS[colorIndex].body);
+    applyFinish(paint.bezel, COLORS[colorIndex].bezel);
+  }, [colorIndex]);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -26,7 +84,6 @@ export default function GlassesViewer() {
         if (disposed) return;
 
         const renderer = new T.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
         renderer.toneMapping = T.ACESFilmicToneMapping;
         host.appendChild(renderer.domElement);
 
@@ -41,6 +98,9 @@ export default function GlassesViewer() {
 
         const model = buildGlasses(T);
         scene.add(model);
+        paintRef.current = model.userData.paint as Paint;
+        applyFinish(paintRef.current.body, COLORS[colorRef.current].body);
+        applyFinish(paintRef.current.bezel, COLORS[colorRef.current].bezel);
 
         const camera = new T.PerspectiveCamera(26, 1, 0.01, 10);
         // Góc nhìn ban đầu: 3/4 hơi từ trên xuống, camera gần nằm bên phải như ảnh sản phẩm.
@@ -114,6 +174,8 @@ export default function GlassesViewer() {
         const fit = () => {
           const w = host.clientWidth, h = host.clientHeight;
           if (!w || !h) return;
+          // The page may be scaled up on large screens (devicePolish.ts): render enough pixels to stay sharp.
+          renderer.setPixelRatio(Math.min(devicePixelRatio * getPageZoom(), 3));
           renderer.setSize(w, h, false);
           camera.aspect = w / h;
           const tanV = Math.tan((camera.fov * Math.PI) / 360);
@@ -123,6 +185,7 @@ export default function GlassesViewer() {
         };
         const ro = new ResizeObserver(fit);
         ro.observe(host);
+        addEventListener("seevia:zoom", fit);
         fit();
 
         let visible = false;
@@ -153,6 +216,7 @@ export default function GlassesViewer() {
           clearTimeout(idleTimer);
           io.disconnect();
           ro.disconnect();
+          removeEventListener("seevia:zoom", fit);
           reduce.removeEventListener("change", syncMotion);
           host.removeEventListener("keydown", onKey);
           controls.dispose();
@@ -187,8 +251,24 @@ export default function GlassesViewer() {
         className="product-3d"
         tabIndex={0}
         role="img"
-        aria-label="Mô hình 3D kính SeeVia màu bạc, kéo hoặc dùng phím mũi tên trái phải để xoay"
+        aria-label={color.model}
       />
+      <div className="glasses-colors" role="group" aria-label="Chọn màu kính">
+        {COLORS.map((c, i) => (
+          <button
+            key={c.id}
+            type="button"
+            className="glasses-color"
+            aria-pressed={i === colorIndex}
+            aria-label={c.label}
+            title={c.label}
+            onClick={() => setColorIndex(i)}
+          >
+            <span className="glasses-swatch" style={{ "--swatch": c.swatch } as React.CSSProperties} />
+          </button>
+        ))}
+        <span className="glasses-color-name" aria-hidden="true">{color.label}</span>
+      </div>
       <span>{failed ? "Trình duyệt không hiển thị được mô hình 3D" : "Kéo để xoay 360°"}</span>
     </>
   );
