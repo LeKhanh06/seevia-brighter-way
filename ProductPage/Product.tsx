@@ -95,7 +95,7 @@ export default function Product() {
       } else if (!interval) {
         interval = setInterval(() => {
           setAngle((current) => (current + 1) % glassesAngles.length);
-        }, 3800);
+        }, 2000);
       }
     };
     const observer = new IntersectionObserver(([entry]) => {
