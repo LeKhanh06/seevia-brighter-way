@@ -1,4 +1,5 @@
 import { navigate, type Destination } from "../navigation";
+import { ContactChannels } from "./Facebook";
 const groups: { title: string; links: [string, Destination?][] }[] = [
   {
     title: "KHÁM PHÁ SEEVIA",
@@ -46,6 +47,8 @@ export default function Footer() {
             Hướng đến trải nghiệm dễ tiếp cận, sự tự chủ và kết nối trong cuộc
             sống.
           </p>
+          <ContactChannels className="footer-channels" />
+          <p className="footer-channels-note">Sắp có thêm nền tảng khác.</p>
         </div>
         {groups.map((g) => (
           <nav key={g.title} aria-label={g.title}>

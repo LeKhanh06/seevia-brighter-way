@@ -78,3 +78,113 @@ html.sv-zoomed body #root .sv-support-panel {
 }
 html.sv-zoomed body #root :is(.ct-dialog, .np-dialog) { max-height: calc(85vh / var(--z)); }
 html.sv-zoomed body #root .site-cursor-sparkle { width: calc(100vw / var(--z)); height: calc(100vh / var(--z)); }
+
+/* ---------- Contact channels (src/components/Facebook.tsx) ---------- */
+html body #root .footer-channels,
+html body #root .ct-channel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+html body #root :is(.footer-channels, .ct-channel-list) a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  text-decoration: none;
+  color: inherit;
+}
+html body #root :is(.footer-channels, .ct-channel-list) .channel-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background-color .2s, color .2s, transform .2s;
+}
+html body #root :is(.footer-channels, .ct-channel-list) .channel-icon svg { width: 18px; height: 18px; }
+html body #root :is(.footer-channels, .ct-channel-list) .channel-copy { display: grid; line-height: 1.3; min-width: 0; }
+html body #root :is(.footer-channels, .ct-channel-list) .channel-copy small {
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+html body #root :is(.footer-channels, .ct-channel-list) .channel-copy span { font-size: 14px; overflow-wrap: anywhere; }
+html body #root :is(.footer-channels, .ct-channel-list) a:hover .channel-icon { transform: translateY(-2px); }
+html body #root :is(.footer-channels, .ct-channel-list) a:focus-visible { outline: 2px solid var(--brand-cyan, #09bbc8); outline-offset: 4px; border-radius: 8px; }
+
+/* Footer: on the dark band, frosted circles that light up cyan. */
+/* One channel per row: icon, small label and the value beside it. */
+html body #root .footer-channels { margin-top: 20px; gap: 8px; }
+html body #root .footer-channels .channel-icon { width: 34px; height: 34px; background: rgb(255 255 255 / .1); color: #fff; }
+html body #root .footer-channels a:hover .channel-icon { background: var(--brand-cyan, #09bbc8); color: var(--ink-900, #1b1937); }
+html body #root .footer-channels a:hover .channel-copy span { color: var(--brand-cyan, #09bbc8); }
+html body #root .footer-channels-note { margin-top: 12px; font-size: 12px; opacity: .65; }
+
+/* Contact: a card in the intro column that balances the taller form beside it. */
+html body #root .ct-channels {
+  margin-top: 28px;
+  padding: 22px 24px;
+  border: 1px solid rgb(64 95 250 / .18);
+  border-radius: 20px;
+  background: rgb(255 255 255 / .7);
+  max-width: 440px;
+}
+html body #root .ct-channels-title {
+  margin: 0 0 14px;
+  font: 600 12px/1.4 var(--sans);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-600, #514e75);
+}
+html body #root .ct-channel-list .channel-icon { background: var(--sapphire-50, #eff1ff); color: var(--brand-sapphire, #405ffa); }
+html body #root .ct-channel-list a:hover .channel-icon { background: var(--brand-sapphire, #405ffa); color: #fff; }
+html body #root .ct-channel-list .channel-copy span { color: var(--ink-800, #292650); font-weight: 500; }
+html body #root .ct-channels-note {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px dashed rgb(27 25 55 / .15);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-600, #514e75);
+}
+
+/* ---------- Capabilities: each column's content sits centred in its column ----------
+   The content block (number, icon, title, text) is about 196px wide; the free space in each
+   column is split evenly left and right, the same for all five columns. */
+/* :nth-child(n) matches every card with the same weight as the per-position rules it replaces. */
+html.sv-home-active body #root .capabilities .capability:nth-child(n) {
+  padding-inline: max(14px, calc((100% - 196px) / 2));
+}
+/* Phones: the fifth card is a half-width card centred on its own row; % padding would read the full row. */
+@media (max-width: 760px) {
+  html.sv-home-active body #root .capabilities .capability:nth-child(5) { padding-inline: 14px; }
+}
+
+/* ---------- Footer balance ----------
+   Link columns start level with the logo's top edge (they began ~30px lower), and the contact
+   rows tighten so the brand column ends near where the longest link column ends. */
+html body #root .footer nav h2 { margin-top: 28px; margin-bottom: 18px; }
+html body #root .footer-brand img { width: 176px; }
+html body #root .footer-brand > p { margin-top: 12px; font-size: 15px; max-width: 360px; }
+html body #root .footer-channels { margin-top: 18px; gap: 6px; }
+html body #root .footer-channels a { min-height: 36px; gap: 10px; }
+html body #root .footer-channels .channel-icon { width: 30px; height: 30px; }
+html body #root .footer-channels .channel-icon svg { width: 15px; height: 15px; }
+html body #root .footer-channels .channel-copy { flex-direction: row; display: flex; align-items: baseline; gap: 10px; }
+html body #root .footer-channels .channel-copy small { min-width: 74px; }
+html body #root .footer-channels-note { margin-top: 10px; }
+@media (max-width: 640px) {
+  html body #root .footer nav h2 { margin-top: 24px; }
+  html body #root .footer-channels .channel-copy { flex-direction: column; gap: 0; }
+}
+
+/* Footer, wide layout: the column headings line up with the first line of the brand tagline
+   . Below the breakpoint the brand column spans its own row, so the old offset stays. */
+@media (min-width: 1001px) {
+  html body #root .footer nav h2 { margin-top: 88px; }
+}

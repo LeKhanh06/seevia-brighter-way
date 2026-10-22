@@ -42,7 +42,8 @@ html body #root .product-page section.product-colors .color-option.selected > sp
 
 /* Hero: an immersive night band with a large headline and a cyan italic turn. */
 html body #root .technology-page section.technology-hero {
-  min-height: min(78svh, 720px);
+  /* In line with the other subpage heroes (~500px); --z is the large-screen page scale. */
+  min-height: min(calc(60svh / var(--z, 1)), 540px);
   display: grid;
   align-items: center;
   color: #fff;

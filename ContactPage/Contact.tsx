@@ -5,6 +5,7 @@ import HeroGlows from "../src/components/HeroGlows";
 import "./Contact.css";
 import { translate } from "../src/i18n/language";
 import { contactApi } from "./contactApi";
+import { ContactChannels } from "../src/components/Facebook";
 
 const topics = [
   "Góp ý trải nghiệm",
@@ -154,9 +155,6 @@ export default function Contact() {
               <br />
               hoặc điều chúng ta có thể cùng làm.
             </p>
-            <a className="ct-action" href="#letter">
-              Viết cho SeeVia <Arrow />
-            </a>
           </div>
         </section>
         <section className="ct-letter" id="letter">
@@ -183,6 +181,11 @@ export default function Contact() {
                   : "Trang hiện chưa tiếp nhận lời nhắn trực tuyến. Bạn có thể xem lại, sao chép hoặc tải bản nháp; nội dung chưa được gửi đến SeeVia."}
               </p>
               <a href="/chinh-sach-bao-mat">Chính sách bảo mật</a>
+            </div>
+            <div className="ct-channels">
+              <p className="ct-channels-title">Hoặc tìm SeeVia tại</p>
+              <ContactChannels className="ct-channel-list" />
+              <p className="ct-channels-note">SeeVia đang mở thêm các nền tảng khác để bạn dễ kết nối hơn — kênh mới sẽ được cập nhật tại đây.</p>
             </div>
             <a className="ct-text-link" href="/doi-tac">
               Tìm hiểu hướng hợp tác <Arrow />
@@ -271,7 +274,7 @@ export default function Contact() {
               <span>{message.length} / 3000</span>
             </div>
             <button className="ct-action ct-primary" type="submit">
-              Xem lại lời nhắn <Arrow />
+              {available ? "Gửi lời nhắn" : "Xem lại lời nhắn"} <Arrow />
             </button>
           </form>
         </section>
@@ -295,13 +298,13 @@ export default function Contact() {
         <button
           className="ct-close"
           type="button"
-          aria-label={sent ? "Đóng thông báo" : "Đóng bản nháp"}
+          aria-label={sent ? "Đóng thông báo" : available ? "Đóng cửa sổ xác nhận" : "Đóng bản nháp"}
           onClick={() => preview.current?.close()}
         >
           ×
         </button>
         <p className="ct-eyebrow">
-          {sent ? "LỜI NHẮN ĐÃ GỬI" : "BẢN NHÁP CỦA BẠN"}
+          {sent ? "LỜI NHẮN ĐÃ GỬI" : available ? "XÁC NHẬN TRƯỚC KHI GỬI" : "BẢN NHÁP CỦA BẠN"}
         </p>
         <h2>{topic}</h2>
         {name.trim() && <p translate="no">{name.trim()}</p>}
@@ -319,7 +322,7 @@ export default function Contact() {
         ) : (
           <p className="ct-dialog-note">
             {available
-              ? "Nội dung chỉ được gửi khi bạn chọn Gửi lời nhắn."
+              ? "Kiểm tra lại nội dung, rồi chọn Gửi lời nhắn để gửi đến nhóm SeeVia."
               : "Bản nháp chưa được gửi đến SeeVia."}
           </p>
         )}

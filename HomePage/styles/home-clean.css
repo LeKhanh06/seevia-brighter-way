@@ -172,8 +172,9 @@ html.sv-home-active body #root .capabilities .capability:nth-child(3) { --pillar
 html.sv-home-active body #root .capabilities .capability:nth-child(4) { --pillar: var(--pillar-go); }
 html.sv-home-active body #root .capabilities .capability:nth-child(5) { --pillar: var(--pillar-community); }
 html.sv-home-active body #root .capabilities .icon-bubble {
-  /* Number, icon and text share one left edge in every column. */
-  margin: 14px 0 18px;
+  /* The icon steps in from the number and text (as in the original design), so the five
+     circles sit inside their columns instead of hugging the dividers. */
+  margin: 14px 0 18px clamp(14px, 2.4vw, 34px);
   color: var(--pillar);
   background: color-mix(in srgb, var(--pillar) 12%, var(--white));
   box-shadow: none;
