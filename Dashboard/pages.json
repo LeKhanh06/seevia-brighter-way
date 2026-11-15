@@ -1,0 +1,19 @@
+[
+  {"route":"overview","file":"pages/AdminOverview.html","title":"Tổng quan"},
+  {"route":"login","file":"pages/AdminLogin.html","title":"Đăng nhập"},
+  {"route":"see-read","file":"pages/AdminSeeRead.html","title":"See & Read"},
+  {"route":"find","file":"pages/AdminFind.html","title":"Find & Understand"},
+  {"route":"connect","file":"pages/AdminConnect.html","title":"Connect"},
+  {"route":"go","file":"pages/AdminGo.html","title":"Go"},
+  {"route":"community","file":"pages/AdminCommunity.html","title":"Community & Ecosystem"},
+  {"route":"time","file":"pages/AdminTime.html","title":"Thời điểm"},
+  {"route":"quality","file":"pages/AdminQuality.html","title":"Chất lượng & tốc độ"},
+  {"route":"engagement","file":"pages/AdminEngage.html","title":"Gắn bó"},
+  {"route":"safety","file":"pages/AdminSafety.html","title":"An toàn"},
+  {"route":"accounts","file":"pages/AdminAccounts.html","title":"Tài khoản"},
+  {"route":"account-detail","file":"pages/AdminAccountDetail.html","title":"Chi tiết tài khoản"},
+  {"route":"devices","file":"pages/AdminDevices.html","title":"Thiết bị"},
+  {"route":"device-detail","file":"pages/AdminDeviceDetail.html","title":"Chi tiết thiết bị"},
+  {"route":"errors","file":"pages/AdminErrors.html","title":"Lỗi hệ thống"},
+  {"route":"config","file":"pages/AdminConfig.html","title":"Cấu hình"}
+]

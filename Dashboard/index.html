@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>SeeVia · Admin</title>
+  <link rel="icon" href="data:,">
+  <!-- Mọi đường dẫn tài nguyên là tương đối: đặt dashboard dưới đường dẫn con (base path) vẫn chạy. -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/motion.css">
+</head>
+<body class="is-login">
+  <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+  <header class="topbar" id="topbar" hidden></header>
+  <div class="app-body">
+    <aside class="sidebar" id="sidebar" hidden></aside>
+    <div class="scrim" id="scrim" hidden></div>
+    <main class="main-content" id="main" tabindex="-1"></main>
+  </div>
+  <noscript><p style="padding:24px">SeeVia Admin cần bật JavaScript.</p></noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

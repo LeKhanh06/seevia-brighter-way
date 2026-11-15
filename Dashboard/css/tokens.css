@@ -1,0 +1,132 @@
+/*
+ * SeeVia Admin — design tokens. ĐÂY LÀ NƠI DUY NHẤT định nghĩa màu.
+ * Mọi CSS/JS khác (kể cả biểu đồ) chỉ tham chiếu biến var(--…), không viết mã màu cứng.
+ */
+:root {
+  color-scheme: light;
+
+  /* Chữ & khoảng cách */
+  --font-sans: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-md: 1rem; --fs-lg: 1.125rem; --fs-xl: 1.25rem;
+  --fs-title: clamp(1.5rem, 1.2rem + 1vw, 1.875rem); --fs-value: clamp(1.625rem, 1.3rem + 0.9vw, 2.125rem);
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px; --radius-pill: 999px;
+  --topbar-h: 68px; --sidebar-w: 256px; --content-max: 1280px;
+  --focus-ring: 2px;
+
+  /* Nền & bề mặt */
+  --bg: #F6F8FF;
+  --bg-gradient: linear-gradient(165deg, #DDF9EF 0%, #F6F8FF 30%, #E9E6FF 100%);
+  --card: #FFFFFF;
+  --sidebar-bg: #FFFFFF;          /* theo ảnh mẫu Sáng: sidebar nền trắng */
+  --topbar-bg: #FFFFFF;
+  --line: #DEE2F2;
+  --line-card: #E6E9F6;
+  --card-raised: #FFFFFF;         /* thẻ nổi, menu thả */
+  --th-bg: #F6F8FF;               /* tiêu đề cột bảng */
+  --row-hover: #EEF1FC;
+  --input-bg: #FFFFFF;
+  --ink-dim: #6E6A91;
+  --chip-muted-bg: rgba(110, 106, 145, 0.12);
+  --skeleton-a: #EEF1FC; --skeleton-b: #E8EDFF;
+  --nav-active-bg: #E8EDFF; --nav-active-ink: #2A55EC;
+  --avatar-bg: linear-gradient(115deg, #6A5CF2 0%, #305FFA 100%);
+  --shadow-card: 0 8px 24px rgba(48, 50, 120, 0.07);
+  --scrim: rgba(27, 25, 55, 0.45);
+  --tooltip-bg: #1B1937;
+  --tooltip-text: #FFFFFF;
+  --tooltip-border: #1B1937;
+
+  /* Chữ */
+  --ink: #3B3664;
+  --deep: #1B1937;
+  --sub: #6E6A91;
+  --sidebar-ink: var(--ink);
+  --sidebar-sub: var(--sub);
+
+  /* Nhấn */
+  --accent: #305FFA;
+  --accent-text: #2A55EC;         /* chữ/link nhấn: đậm hơn --accent một chút để đạt 4.5:1 trên nền nhãn */
+  --soft: #EEF1FC;
+  --tag: #E8EDFF;                 /* nền nhãn xanh, mục sidebar active */
+  --tab-active: #E8E0FF;          /* tab đang chọn */
+  --on-accent: #FFFFFF;
+  --btn-gradient: linear-gradient(115deg, #6A5CF2 0%, #305FFA 100%);
+  --progress-gradient: linear-gradient(90deg, #22C7DD 0%, #6A5CF2 100%);
+
+  /* Trạng thái (chữ) và nền cùng màu */
+  --good: #1E7A4A; --bad: #B3333E; --warn: #9A520C; --neutral: var(--sub);
+  --good-bg: rgba(30, 122, 74, 0.10);
+  --bad-bg: rgba(179, 51, 62, 0.10);
+  --warn-bg: rgba(154, 82, 12, 0.12);
+  --neutral-bg: rgba(110, 106, 145, 0.12);
+  --warn-border: rgba(154, 82, 12, 0.45);
+  --sos-border: rgba(205, 60, 70, 0.5);
+
+  /* Mức cảnh báo vật cản 0–3 */
+  --lvl-0: #1E965A; --lvl-1: #E8BE28; --lvl-2: #D67818; --lvl-3: #CD3C46;
+
+  /* Biểu đồ: 5 nhóm chức năng theo thứ tự, và chữ đậm tương ứng trên nền nhạt */
+  --cat-1: #0FA3B1; --cat-2: #2F86EA; --cat-3: #405FFA; --cat-4: #6A5CF2; --cat-5: #9461E6;
+  --cat-1-ink: #0A7480; --cat-2-ink: #5240C8; --cat-3-ink: #5240C8; --cat-4-ink: #5240C8; --cat-5-ink: #6E3FC4;
+  --chart-main: #305FFA; --chart-light: #C9D4FB; --chart-grid: var(--line-card);
+  --chart-prev: var(--sub);
+  --chart-heat: 48 95 250;           /* rgb dùng với alpha: rgb(var(--chart-heat) / a) */
+}
+
+/* Giao diện tối: ba lớp nền rõ ràng — nền trang < thẻ < thẻ nổi (ô chọn, menu, tooltip); không đổ bóng, tách thẻ bằng viền mảnh. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #1D1B4A;
+  --bg-gradient: linear-gradient(165deg, #1D1B4A 0%, #1D1B4A 60%, #232058 100%);
+  --card: #2A2866;
+  --card-raised: #38357F;
+  --sidebar-bg: #1A1846;
+  --topbar-bg: #1A1846;
+  --line: #48449A;                /* đường kẻ bảng, viền ô nhập */
+  --line-card: #3F3B90;           /* viền thẻ */
+  --th-bg: #2F2C72;
+  --row-hover: #343080;
+  --input-bg: #232155;
+  --skeleton-a: #2A2866; --skeleton-b: #38357F;
+  --shadow-card: none;
+  --scrim: rgba(8, 6, 30, 0.6);
+  --tooltip-bg: #38357F;
+  --tooltip-text: #E6E9FB;
+  --tooltip-border: #48449A;
+
+  --ink: #E6E9FB;
+  --deep: #FFFFFF;                /* chỉ cho tiêu đề và số lớn */
+  --sub: #B7BAE0;
+  --chip-muted-bg: rgba(166, 169, 204, 0.14);
+  --ink-dim: #8E92C0;             /* chữ mờ: chỉ dùng cho phần vô hiệu hóa/trang trí */
+  --sidebar-ink: #E6E9FB;
+  --sidebar-sub: #A6A9CC;
+
+  --accent: #5B7CFF;
+  --accent-text: #8BA6FF;
+  --soft: rgba(139, 166, 255, 0.12);
+  --tag: rgba(139, 166, 255, 0.22);
+  --tab-active: rgba(139, 166, 255, 0.22);
+  --on-accent: #14123A;           /* chữ trên nền nhấn #5B7CFF (trắng chỉ đạt 3,8:1, tối này đạt 4,9:1) */
+  --btn-gradient: linear-gradient(var(--accent), var(--accent));
+  --avatar-bg: var(--accent);
+  --nav-active-bg: #5B7CFF; --nav-active-ink: #14123A;
+  --progress-gradient: linear-gradient(90deg, #35C9D6 0%, #9A8CFF 100%);
+
+  --good: #4FD99A; --bad: #FF7A86; --warn: #FFB366;
+  --good-bg: rgba(79, 217, 154, 0.16);
+  --bad-bg: rgba(255, 122, 134, 0.16);
+  --warn-bg: rgba(255, 179, 102, 0.16);
+  --neutral-bg: rgba(183, 186, 224, 0.16);
+  --warn-border: rgba(255, 179, 102, 0.5);
+  --sos-border: rgba(240, 96, 106, 0.55);
+
+  --lvl-0: #3ED07E; --lvl-1: #F0CC4A; --lvl-2: #F09A3C; --lvl-3: #F0606A;
+  --cat-1: #35C9D6; --cat-2: #5AA6FF; --cat-3: #7C93FF; --cat-4: #9A8CFF; --cat-5: #B58CFF;
+  --cat-1-ink: #5ED6E0; --cat-2-ink: #A99CFF; --cat-3-ink: #A99CFF; --cat-4-ink: #A99CFF; --cat-5-ink: #C3A0FF;
+  --chart-main: #7C9BFF; --chart-light: #3B4BB5;
+  --chart-grid: rgba(72, 68, 154, 0.6);
+  --chart-heat: 124 155 255;
+}

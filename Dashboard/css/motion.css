@@ -1,0 +1,57 @@
+/*
+ * Hiệu ứng chuyển động — nhẹ, nhanh, chỉ animate transform và opacity (trừ đổi màu 150 ms của nút/chip/mục).
+ * Chỉnh thời gian và đường cong tại bốn biến dưới đây.
+ */
+:root {
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 700ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes enter { from { opacity: 0; transform: translateY(8px); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes rise { from { transform: scaleY(0); } }
+@keyframes spin-in { from { opacity: 0; transform: rotate(-70deg) scale(0.9); } }
+
+/* Vào trang */
+.enter-item { animation: enter var(--dur-base) var(--ease) both; animation-delay: calc(var(--i, 0) * 40ms); }
+.page-body > .state { animation: fade var(--dur-base) var(--ease) both; }
+
+/* Biểu đồ (chỉ lần vẽ đầu, không chạy lại khi đổi kích thước) */
+.is-entering .chart-line { stroke-dasharray: 1; animation: draw var(--dur-slow) var(--ease) both; }
+.is-entering .chart-area, .is-entering .chart-line-prev, .is-entering .chart-dot { animation: fade var(--dur-slow) var(--ease) both; animation-delay: 150ms; }
+.is-entering .chart-bar { transform-box: fill-box; transform-origin: bottom; animation: rise var(--dur-slow) var(--ease) both; animation-delay: calc(var(--i, 0) * 30ms); }
+.is-entering .bar-value { animation: fade var(--dur-slow) var(--ease) both; animation-delay: 250ms; }
+.donut-svg { animation: spin-in var(--dur-slow) var(--ease) both; }
+.heatmap { animation: fade var(--dur-slow) var(--ease) both; }
+.tooltip { animation: fade 120ms var(--ease); }
+
+/* Hover, focus, chuyển màu */
+.kpi-card, .detail-card { transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+@media (hover: hover) { .kpi-card:hover, .detail-card:hover { transform: translateY(-2px); border-color: var(--accent-text); } }
+.button, .icon-button, .nav-link, .badge, .tag, .tab-metric, .info-tip, .sort-button, .menu-item, .avatar-button {
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.data-table td { transition: background-color var(--dur-fast) var(--ease); }
+
+/* Thanh chỉ báo mục sidebar trượt tới vị trí mới */
+.nav-indicator[data-ready] { transition: transform var(--dur-base) var(--ease), height var(--dur-base) var(--ease), opacity var(--dur-fast); }
+
+/* Menu avatar: mờ + scale 0.98 → 1 */
+.menu { opacity: 0; transform: scale(0.98); transform-origin: top right; transition: opacity 140ms var(--ease), transform 140ms var(--ease); }
+.menu.is-open { opacity: 1; transform: none; }
+
+/* Đổi sáng/tối: chỉ chạy khi người dùng bấm (class được JS gắn tạm thời) */
+html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color 250ms var(--ease), color 250ms var(--ease), border-color 250ms var(--ease), fill 250ms var(--ease), stroke 250ms var(--ease) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-item, .page-body > .state, .donut-svg, .heatmap, .tooltip, .is-entering * { animation: none !important; }
+  .is-entering .chart-line { stroke-dasharray: none; }
+  .kpi-card:hover, .detail-card:hover { transform: none; }
+  .menu { transform: none; transition: none; }
+  html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after { transition: none !important; }
+}
